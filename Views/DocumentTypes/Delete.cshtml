@@ -1,0 +1,37 @@
+@model Doctrack.Models.DocumentType
+
+@{
+  ViewData["Title"] = "Delete Document Type";
+}
+
+<h2>Delete</h2>
+<h3>Document Type</h3>
+<hr />
+
+<div>
+  <dl class="row">
+    <dt class="col-sm-2">
+      <p>Title</p>
+    </dt>
+    <dd class="col-sm-10">
+      <p>@Model.Title</p>
+    </dd>
+    <dt class="col-sm-2">
+      <p>Period(Day)</p>
+    </dt>
+    <dd class="col-sm-10">
+      <p>@Model.Period</p>
+    </dd>
+  </dl>
+
+</div>
+
+<form asp-action="Delete">
+  <div class="form-group">
+    <input type="submit" value="Delete" class="btn btn-danger" />
+  </div>
+</form>
+
+<div>
+  <a asp-action="Index">Back to List</a>
+</div>
