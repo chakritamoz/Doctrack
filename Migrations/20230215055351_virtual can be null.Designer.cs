@@ -3,6 +3,7 @@ using System;
 using Doctrack.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Doctrack.Migrations
 {
     [DbContext(typeof(DoctrackContext))]
-    partial class DoctrackContextModelSnapshot : ModelSnapshot
+    [Migration("20230215055351_virtual can be null")]
+    partial class virtualcanbenull
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.2");
@@ -52,31 +55,6 @@ namespace Doctrack.Migrations
                     b.HasIndex("DocType_Id");
 
                     b.ToTable("Documents");
-                });
-
-            modelBuilder.Entity("Doctrack.Models.DocumentDetail", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Doc_Id")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("Emp_Id")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Remark")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Doc_Id");
-
-                    b.HasIndex("Emp_Id");
-
-                    b.ToTable("DocumentDetails");
                 });
 
             modelBuilder.Entity("Doctrack.Models.DocumentType", b =>
@@ -171,25 +149,6 @@ namespace Doctrack.Migrations
                     b.Navigation("DocumentType");
                 });
 
-            modelBuilder.Entity("Doctrack.Models.DocumentDetail", b =>
-                {
-                    b.HasOne("Doctrack.Models.Document", "Document")
-                        .WithMany("DocumentDetails")
-                        .HasForeignKey("Doc_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Doctrack.Models.Employee", "Employee")
-                        .WithMany("DocumentDetails")
-                        .HasForeignKey("Emp_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Document");
-
-                    b.Navigation("Employee");
-                });
-
             modelBuilder.Entity("Doctrack.Models.Employee", b =>
                 {
                     b.HasOne("Doctrack.Models.Job", "Job")
@@ -209,19 +168,9 @@ namespace Doctrack.Migrations
                     b.Navigation("Rank");
                 });
 
-            modelBuilder.Entity("Doctrack.Models.Document", b =>
-                {
-                    b.Navigation("DocumentDetails");
-                });
-
             modelBuilder.Entity("Doctrack.Models.DocumentType", b =>
                 {
                     b.Navigation("Documents");
-                });
-
-            modelBuilder.Entity("Doctrack.Models.Employee", b =>
-                {
-                    b.Navigation("DocumentDetails");
                 });
 
             modelBuilder.Entity("Doctrack.Models.Job", b =>

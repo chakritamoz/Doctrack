@@ -13,10 +13,14 @@ namespace Doctrack.Controllers
       _context = context;
     }
 
-    //GET: Documents/Index
     public async Task<IActionResult> Index()
     {
-      return View(await _context.DocumentTypes.ToListAsync());
+      var documents = await _context.DocumentDetails
+        .Include(dd => dd.Document)
+        .Include(dd => dd.Employee)
+        .ToListAsync();
+        
+      return View(documents);
     }
   }
 }

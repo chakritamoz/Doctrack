@@ -1,0 +1,57 @@
+@model IEnumerable<Doctrack.Models.DocumentDetail>
+
+@{
+  ViewData["Title"] = "Documents List";
+}
+
+<h2>Documents</h2>
+<hr />
+
+<p class="btn btn-primary">
+  <a asp-action="Create" style="color:white;">Create Documents</a>
+</p>
+
+<table class="table">
+  <thead>
+    <tr>
+      <td>Receipt Date</td>
+      <td>Documents No.</td>
+      <td>Doc.Title</td>
+      <td>Job</td>
+      <td>Title</td>
+      <td>First Name</td>
+      <td>Last Name</td>
+      <td>Operation</td>
+      <td>Op.Date</td>
+      <td>Command Order</td>
+      <td>Remark</td>
+      <td>Remarks</td>
+      <td>End Date</td>
+      <td>Actions</td>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach (var item in Model)
+    {
+      <tr>
+        <td>@item.Document.ReceiptDate</td>
+        <td>@item.Document.Id</td>
+        <td>@item.Document.DocumentType.Title</td>
+        <td>@item.Employee.Job.Title</td>
+        <td>@item.Employee.Rank.Title</td>
+        <td>@item.Employee.FirstName</td>
+        <td>@item.Employee.LastName</td>
+        <td>@item.Document.Operation</td>
+        <td>@item.Document.OperationDate</td>
+        <td>@item.Document.CommandOrder</td>
+        <td>@item.Remark</td>
+        <td>@item.Document.RemarkAll</td>
+        <td>@item.Document.EndDate</td>
+        <td>
+          <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+          <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>

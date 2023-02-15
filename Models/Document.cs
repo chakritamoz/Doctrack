@@ -10,7 +10,7 @@ namespace Doctrack.Models
     public string Id {get; set;} 
     public int DocType_Id {get; set;}
     [ForeignKey("DocType_Id")]
-    public virtual DocumentType DocumentType {get; set;}
+    public virtual DocumentType? DocumentType {get; set;}
     [Required(ErrorMessage = "Please enter receipt date.")]
     [DataType(DataType.Date)]
     public DateTime ReceiptDate {get; set;} = DateTime.Now;
@@ -22,5 +22,6 @@ namespace Doctrack.Models
     public string? CommandOrder {get; set;}
     public string? RemarkAll {get; set;}
     public string User {get; set;}
+    public virtual ICollection<DocumentDetail>? DocumentDetails {get; set;}
   }
 }

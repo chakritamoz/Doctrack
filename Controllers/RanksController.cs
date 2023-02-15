@@ -92,7 +92,16 @@ namespace Doctrack.Controllers
         }
       }
 
+      var errors = ModelState
+        .Where(er => er.Value.Errors.Count > 0)
+        .Select(er => new { er.Key, er.Value.Errors })
+        .ToArray();
+      foreach ( var item in errors )
+      {
+        Console.WriteLine($"key: {item.Key}\nvalue: {item.Errors}");
+      }
       return View(rank);
+      
     }
 
     //GET: Ranks/Delete/5
