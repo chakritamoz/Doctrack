@@ -18735,6 +18735,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "c:\\Doctrack\\Views\\Documents\\Create.cshtml",
+      "TargetPath": "Views\\Documents\\Create.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Doctrack\\Views\\Employees\\Index.cshtml",
       "TargetPath": "Views\\Employees\\Index.cshtml",
       "FileKind": "mvc"
