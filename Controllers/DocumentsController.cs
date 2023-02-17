@@ -17,9 +17,9 @@ namespace Doctrack.Controllers
     //GET: Documents/Index
     public async Task<IActionResult> Index()
     {
-      var documents = await _context.DocumentDetails
-        .Include(dd => dd.Document)
-        .Include(dd => dd.Employee)
+      var documents = await _context.Documents
+        .Include(d => d.DocumentType)
+        .Include(d => d.DocumentDetails)
         .ToListAsync();
 
       return View(documents);
@@ -28,64 +28,71 @@ namespace Doctrack.Controllers
     //GET: Documents/Create
     public IActionResult Create()
     {
-      var viewModel = new DocumentViewModel
-      {
-        Employee = new Employee(),
-        Document = new Document(),
-        DocumentDetail = new DocumentDetail()
-      };
-
-      ViewBag.JobsTitle = GetJobSelectList();
-      ViewBag.RanksTitle = GetRankSelectList();
       ViewBag.DocTypesTitle = GetDocTypeSelectList();
-      ViewBag.ReceiptDate = DateTime.Now.ToString("dd/MM/yyyy");
+      ViewBag.User = GetMachineName();
+      ViewBag.Today = DateTime.Now.ToString("dd/MM/yyyy");
       
-      return View(viewModel);
+      return View();
     }
 
     //POST: Documents/Create
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create(DocumentViewModel viewModel)
+    public async Task<IActionResult> Create(Document document, string receiptDate, string? operationDate)
     {
+      if (document.DocType_Id == 0)
+      {
+        ModelState.AddModelError("DocType_Id", "Please select document title");
+      }
 
+      if (!string.IsNullOrEmpty(receiptDate))
+      {
+        document.ReceiptDate = ConvertDateTime(receiptDate);
+      }
+
+      if (!string.IsNullOrEmpty(operationDate))
+      {
+        document.OperationDate = ConvertDateTime(operationDate);
+      }
 
       if (ModelState.IsValid)
       {
-        Console.WriteLine($"doc title: {viewModel.Document.DocType_Id}");
-        Console.WriteLine($"job title: {viewModel.Employee.Job_Id}");
-        Console.WriteLine($"your title: {viewModel.Employee.Rank_Id}");
-        Console.WriteLine($"first name: {viewModel.Employee.FirstName}");
-        Console.WriteLine($"last name: {viewModel.Employee.LastName}");
-        Console.WriteLine($"receipt date: {viewModel.Document.ReceiptDate}");
-      }else
-      {
-        ViewBag.JobsTitle = GetJobSelectList();
-        ViewBag.RanksTitle = GetRankSelectList();
-        ViewBag.DocTypesTitle = GetDocTypeSelectList();
-        ViewBag.ReceiptDate = DateTime.Now.ToString("dd/MM/yyyy");
-        foreach (var model in ModelState)
-        {
-          Console.WriteLine($"key: {model.Key}\nerror: {model.Value.Errors}");
-        }
+        _context.Add(document);
+        await _context.SaveChangesAsync();
+        return RedirectToAction(nameof(Index));
       }
-      return View(viewModel);
+
+      ViewBag.DocTypesTitle = GetDocTypeSelectList();
+      ViewBag.User = GetMachineName();
+      ViewBag.Today = DateTime.Now.ToString("dd/MM/yyyy");
+      return View(document);
     }
 
     public SelectList GetDocTypeSelectList() {
-      var docTypeSelectList = new SelectList(_context.DocumentTypes, "Id", "Title");
-      
-      return docTypeSelectList;
+      return (new SelectList(_context.DocumentTypes, "Id", "Title"));
     }
+
     public SelectList GetJobSelectList() {
-      var jobSelectList = new SelectList(_context.DocumentTypes, "Id", "Title");
-      
-      return jobSelectList;
+      return (new SelectList(_context.DocumentTypes, "Id", "Title"));
     }
-    public SelectList GetRankSelectList() {
-      var rankSelectList = new SelectList(_context.DocumentTypes, "Id", "Title");
-      
-      return rankSelectList;
+
+    public SelectList GetRankSelectList() {      
+      return (new SelectList(_context.DocumentTypes, "Id", "Title"));
+    }
+
+    public string GetMachineName() {
+      return Environment.MachineName;
+    }
+
+    public DateTime ConvertDateTime(string dateString)
+    {
+      return (
+          System.DateTime.ParseExact(
+            dateString,
+            "dd/MM/yyyy",
+            System.Globalization.CultureInfo.InstalledUICulture
+          )
+      );
     }
   }
 }

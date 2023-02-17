@@ -11,13 +11,19 @@ namespace Doctrack.Models
     public int DocType_Id {get; set;}
     [ForeignKey("DocType_Id")]
     public virtual DocumentType? DocumentType {get; set;}
+
     [Required(ErrorMessage = "Please enter receipt date.")]
     [DataType(DataType.Date)]
-    public DateTime ReceiptDate {get; set;} = DateTime.Now;
+    [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+    public DateTime? ReceiptDate {get; set;}
+
     [DataType(DataType.Date)]
+    [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
     public DateTime? EndDate {get; set;}
     public string? Operation {get; set;}
+    
     [DataType(DataType.Date)]
+    [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
     public DateTime? OperationDate {get; set;}
     public string? CommandOrder {get; set;}
     public string? RemarkAll {get; set;}
