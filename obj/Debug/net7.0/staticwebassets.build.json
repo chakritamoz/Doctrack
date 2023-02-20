@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "KKny9Eip5ejp+Z5zvjX1bTTjaaH8exFI84aU0vP0TOo=",
+  "Hash": "OfkZlH21LwtP0xMgGjLE13qziMtsGv4l2CxbdaAJAU8=",
   "Source": "Doctrack",
   "BasePath": "_content/Doctrack",
   "Mode": "Default",
@@ -49,6 +49,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Doctrack\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\Doctrack.bundle.scp.css"
+    },
+    {
+      "Identity": "C:\\Doctrack\\wwwroot\\content\\tableStyle.css",
+      "SourceId": "Doctrack",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "BasePath": "_content/Doctrack",
+      "RelativePath": "content/tableStyle.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\content\\tableStyle.css"
     },
     {
       "Identity": "C:\\Doctrack\\wwwroot\\css\\site.css",

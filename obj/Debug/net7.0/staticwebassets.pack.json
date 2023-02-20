@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets\\Doctrack.bundle.scp.css"
     },
     {
+      "Id": "C:\\Doctrack\\wwwroot\\content\\tableStyle.css",
+      "PackagePath": "staticwebassets\\content\\tableStyle.css"
+    },
+    {
       "Id": "C:\\Doctrack\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },

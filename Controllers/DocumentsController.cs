@@ -22,7 +22,20 @@ namespace Doctrack.Controllers
         .Include(d => d.DocumentDetails)
         .ToListAsync();
 
-      return View(documents);
+      var documentsDetail = await _context.DocumentDetails
+        .Include(dd => dd.Document)
+        .Include(dd => dd.Employee)
+        .Include(dd => dd.Employee.Job)
+        .Include(dd => dd.Employee.Rank)
+        .ToListAsync();
+
+      var viewModel = new DocumentViewModel
+      {
+        Documents = documents,
+        DocumentsDetail = documentsDetail
+      };
+
+      return View(viewModel);
     }
 
     //GET: Documents/Create

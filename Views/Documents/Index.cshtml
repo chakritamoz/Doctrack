@@ -1,4 +1,4 @@
-@model IEnumerable<Doctrack.Models.Document>
+@model Doctrack.Models.DocumentViewModel
 
 @{
   ViewData["Title"] = "Documents List";
@@ -11,77 +11,66 @@
   <a asp-action="Create" style="color:white;">Create Document</a>
 </p>
 
-<table class="table table-striped table-hover">
-  <thead class="table-dark">
-    <tr>
-      <th>Receipt Date</th>
-      <th>Documents No.</th>
-      <th>Doc.Title</th>
-      <th>Operation</th>
-      <th>Op.Date</th>
-      <th>Command Order</th>
-      <th>Remarks</th>
-      <th>End Date</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    @foreach (var item in Model)
+<div class="flex-container">
+  <div class="flex-header">
+    <div class="cell-header">Receipt Date</div>
+    <div class="cell-header">Documents No.</div>
+    <div class="cell-header">Doc.Title</div>
+    <div class="cell-header">Operation</div>
+    <div class="cell-header">Op.Date</div>
+    <div class="cell-header">Command Order</div>
+    <div class="cell-header">Remarks</div>
+    <div class="cell-header">End Date</div>
+    <div class="cell-header">Actions</div>
+  </div>
+  @foreach (var doc in Model.Documents)
+  {
+    <div class="flex-row" onclick="displayTable('@doc.Id')">
+      <div class="cell">@doc.ReceiptDate?.ToString("dd/MM/yyyy")</div>
+      <div class="cell">@doc.Id</div>
+      <div class="cell">@doc.DocumentType?.Title</div>
+      <div class="cell">@doc.Operation</div>
+      <div class="cell">@doc.OperationDate?.ToString("dd/MM/yyyy")</div>
+      <div class="cell">@doc.CommandOrder</div>
+      <div class="cell">@doc.RemarkAll</div>
+      <div class="cell">@doc.EndDate?.ToString("dd/MM/yyyy")</div>
+      <div class="cell">
+        <a asp-action="Add" asp-route-id="@doc.Id">Add</a>
+        <a asp-action="Edit" asp-route-id="@doc.Id">Edit</a>
+        <a asp-action="Delete" asp-route-id="@doc.Id">Delete</a>
+      </div>
+    </div>
+    var currentDD = Model.DocumentsDetail
+      .Where(dd => dd.Doc_Id == doc.Id);
+    @if (currentDD.Count() > 0)
     {
-      <tr onclick="displayTable('@item.Id')">
-        <td>@item.ReceiptDate?.ToString("dd/MM/yyyy")</td>
-        <td>@item.Id</td>
-        <td>@item.DocumentType.Title</td>
-        <td>@item.Operation</td>
-        <td>@item.OperationDate?.ToString("dd/MM/yyyy")</td>
-        <td>@item.CommandOrder</td>
-        <td>@item.RemarkAll</td>
-        <td>@item.EndDate?.ToString("dd/MM/yyyy")</td>
-        <td>
-          <a asp-action="Add" asp-route-id="@item.Id">Add</a>
-          <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-          <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-        </td>
-      </tr>
-      <tr id=@item.Id class="d-none">
-        <td colspan="9">
-          <table class="table table-light mb-20 table-bordered table-hover">
-            <thead>
-              <tr>
-                <th>Job</th>
-                <th>Title</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Remark</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>หมอ</td>
-                <td>นาย</td>
-                <td>ชาคริต</td>
-                <td>โภคสวัสดิ์</td>
-                <td>ทดสอบ</td>
-              </tr>
-            </tbody>
-          </table>
-        </td>
-      </tr>
+      <div id="@doc.Id" class="flex-container sub-content">
+        <div class="flex-header">
+          <div class="cell-header sub-header">Job</div>
+          <div class="cell-header sub-header">Title</div>
+          <div class="cell-header sub-header">First Name</div>
+          <div class="cell-header sub-header">Last Name</div>
+          <div class="cell-header sub-header">Remark</div>
+        </div>
+      
+        @foreach (var docd in currentDD)
+        {
+          <div class="flex-row sub-container">
+            <div class="cell sub-header">@docd.Employee?.Job?.Title</div>
+            <div class="cell sub-header">@docd.Employee?.Rank?.Title</div>
+            <div class="cell sub-header">@docd.Employee?.FirstName</div>
+            <div class="cell sub-header">@docd.Employee?.LastName</div>
+            <div class="cell sub-header">@docd.Remark</div>
+          </div>
+        }
+      </div>
     }
-  </tbody>
-</table>
+  }
+</div>
 
 <script>
-
   function displayTable(id) {
-    var dNone = document.getElementById(id).classList.contains("d-none");
-    if(dNone)
-    {
-      document.getElementById(id).classList.remove("d-none");
-    }
-    else
-    {
-      document.getElementById(id).classList.add("d-none");
-    }
+    var row = document.getElementById(id);
+    row.classList.toggle("expand");
   }
 </script>

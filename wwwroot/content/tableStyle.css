@@ -1,0 +1,82 @@
+.flex-container {
+  display: flex;
+  flex-direction: column;
+  border: 0px solid black;
+  height: auto;
+}
+
+.flex-header {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid rgb(44, 33, 33);
+  background-color: rgb(44, 33, 33);
+  color: white;
+  font-weight: 900;
+  align-items: center;
+  height: 40px;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  border-style: solid;
+  border-width: 1px 1px 1px 1px;
+  border-color: black;
+  align-items: center;
+  height: 30px;
+}
+
+.flex-row:hover{
+  background-color: rgba(192, 192, 192, 0.3);
+}
+
+.flex-row:first-child,
+.flex-row:last-child {
+  border-width: 0px 1px 1px 1px;
+}
+
+.cell-header {
+  flex: 1;
+  text-align: center;
+}
+
+.cell {
+  flex: 1;
+  text-align: center;
+}
+
+.sub-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .2s ease-in;
+}
+
+.sub-content.expand {
+  margin: 15px;
+  max-height: 1000px;
+  transition: max-height 1s ease-in-out;
+}
+
+.sub-header {
+  border-width: 0px 1px 0px 0px;
+  border-style: solid;
+  border-color: black;
+}
+
+.sub-header:last-child {
+  border: 0px;
+}
+
+
+/*
+.table tbody tr.no-hover{
+  display: none;
+}
+
+.table tbody tr.no-hover.expand{
+  display: table-row;
+}
+
+.table tbody tr.no-hover:hover{
+  background-color: inherit;
+} */

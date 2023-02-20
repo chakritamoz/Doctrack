@@ -4,8 +4,7 @@ namespace Doctrack.Models
 {
   public class DocumentViewModel
   {
-    public Employee Employee {get; set;}
-    public Document Document {get; set;}
-    public DocumentDetail DocumentDetail {get; set;}
+    public List<Document> Documents {get; set;}
+    public List<DocumentDetail> DocumentsDetail {get; set;}
   }
 }
