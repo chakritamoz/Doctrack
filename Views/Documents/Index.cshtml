@@ -23,9 +23,24 @@
     <div class="cell">End Date</div>
     <div class="cell">Actions</div>
   </div>
-  @foreach (var doc in Model.Documents)
+  @foreach (var doc in Model.Documents.OrderBy(d => d.EndDate))
   {
-    <div id="@doc.Id" class="flex-row" onclick="displayTable('@doc.Id')">
+    <div id="@doc.Id" class="flex-row main-row" onclick="displayTable('@doc.Id')" 
+      @if
+      (
+        doc.EndDate != null
+      ) 
+      {@Html.Raw("style=\"background-color: #9b9b9bb8;\"")} 
+      @if
+      (
+        doc.EndDate == null &&
+        (DateTime.Now.Subtract(
+            doc.ReceiptDate??DateTime.MinValue
+            ).TotalDays > doc.DocumentType?.Period
+        )
+      )
+      {@Html.Raw("style=\"background-color: #ff6767cc;\"")}
+    >
       <div class="cell">@doc.ReceiptDate?.ToString("dd/MM/yyyy")</div>
       <div class="cell">@doc.Id</div>
       <div class="cell">@doc.DocumentType?.Title</div>
@@ -33,7 +48,9 @@
       <div class="cell">@doc.OperationDate?.ToString("dd/MM/yyyy")</div>
       <div class="cell">@doc.CommandOrder</div>
       <div class="cell">@doc.RemarkAll</div>
-      <div class="cell">@doc.EndDate?.ToString("dd/MM/yyyy")</div>
+      <div class="cell">
+        @doc.EndDate?.ToString("dd/MM/yyyy")
+      </div>
       <div class="cell">
         <a asp-action="Add" asp-route-id="@doc.Id">Add</a>
         <a asp-action="Edit" asp-route-id="@doc.Id">Edit</a>
@@ -75,25 +92,25 @@
 
 <script>
   function displayTable(docId) {
-    var target = document.getElementById(docId);
-    var subTarget = document.getElementById("sub-"+docId);
+    const target = document.getElementById(docId);
+    const subTarget = document.getElementById("sub-"+docId);
 
     if (subTarget != null && !target.classList.contains('active')){
       disableActive();
-      var nextTarget = subTarget.nextElementSibling;
+      const nextTarget = subTarget.nextElementSibling;
       target.classList.toggle("active");
       subTarget.classList.toggle("expand");
       
-      if (nextTarget != null) nextTarget.classList.toggle("footer");
+      if (nextTarget != null) nextTarget.classList.toggle("row-footer");
     }else {
       disableActive();
     }
   }
 
   function disableActive() {
-    var disableElements = document.querySelectorAll('.active, .expand, .footer');
+    var disableElements = document.querySelectorAll('.active, .expand, .row-footer');
     disableElements.forEach(element => {
-      element.classList.remove('active', 'expand', 'footer');
+      element.classList.remove('active', 'expand', 'row-footer');
     });
   }
 

@@ -27,17 +27,22 @@
   height: 50px;
 }
 
-.flex-row.footer {
+.main-row {
+  background-color: #93df93cc;
+}
+
+.flex-row.row-footer {
   border-width: 1px 0 0 0;
 }
 
+
 .flex-row.active {
-  background-color: rgb(170, 220, 241, .3);
-  border-width: 1px 1px 1px 1px;
+  /* background-color: rgb(170, 220, 241, .3) !important; */
+  border-width: 5px 5px 5px 5px;
 }
 
 .flex-row:hover{
-  background-color: rgba(192, 192, 192, 0.3);
+  background-color: rgba(192, 192, 192, 0.3) !important;
 }
 
 .cell {
@@ -52,7 +57,7 @@
 }
 
 .sub-content.expand {
-  margin: 15px;
+  padding: 15px;
   max-height: 1000px;
   transition: max-height 1s linear;
 }
