@@ -29,8 +29,7 @@
       @if
       (
         doc.EndDate != null
-      ) 
-      {@Html.Raw("style=\"background-color: #9b9b9bb8;\"")} 
+      ){@Html.Raw("style='background-color: #9b9b9bb8;'")} 
       @if
       (
         doc.EndDate == null &&
@@ -38,8 +37,7 @@
             doc.ReceiptDate??DateTime.MinValue
             ).TotalDays > doc.DocumentType?.Period
         )
-      )
-      {@Html.Raw("style=\"background-color: #ff6767cc;\"")}
+      ){@Html.Raw("style='background-color: #ff6767cc;'")}
     >
       <div class="cell">@doc.ReceiptDate?.ToString("dd/MM/yyyy")</div>
       <div class="cell">@doc.Id</div>
@@ -100,7 +98,7 @@
       const nextTarget = subTarget.nextElementSibling;
       target.classList.toggle("active");
       subTarget.classList.toggle("expand");
-      
+
       if (nextTarget != null) nextTarget.classList.toggle("row-footer");
     }else {
       disableActive();

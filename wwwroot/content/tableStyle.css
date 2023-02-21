@@ -37,7 +37,6 @@
 
 
 .flex-row.active {
-  /* background-color: rgb(170, 220, 241, .3) !important; */
   border-width: 5px 5px 5px 5px;
 }
 
@@ -63,6 +62,7 @@
 }
 
 .sub-row {
+  background-color: white;
   border-width: 0 1px 0 1px;
   border-style: solid;
   border-color: black;
