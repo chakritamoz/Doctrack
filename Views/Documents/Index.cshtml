@@ -13,19 +13,19 @@
 
 <div class="flex-container">
   <div class="flex-header">
-    <div class="cell-header">Receipt Date</div>
-    <div class="cell-header">Documents No.</div>
-    <div class="cell-header">Doc.Title</div>
-    <div class="cell-header">Operation</div>
-    <div class="cell-header">Op.Date</div>
-    <div class="cell-header">Command Order</div>
-    <div class="cell-header">Remarks</div>
-    <div class="cell-header">End Date</div>
-    <div class="cell-header">Actions</div>
+    <div class="cell">Receipt Date</div>
+    <div class="cell">Documents No.</div>
+    <div class="cell">Doc.Title</div>
+    <div class="cell">Operation</div>
+    <div class="cell">Op.Date</div>
+    <div class="cell">Command Order</div>
+    <div class="cell">Remarks</div>
+    <div class="cell">End Date</div>
+    <div class="cell">Actions</div>
   </div>
   @foreach (var doc in Model.Documents)
   {
-    <div class="flex-row" onclick="displayTable('@doc.Id')">
+    <div id="@doc.Id" class="flex-row" onclick="displayTable('@doc.Id')">
       <div class="cell">@doc.ReceiptDate?.ToString("dd/MM/yyyy")</div>
       <div class="cell">@doc.Id</div>
       <div class="cell">@doc.DocumentType?.Title</div>
@@ -44,23 +44,28 @@
       .Where(dd => dd.Doc_Id == doc.Id);
     @if (currentDD.Count() > 0)
     {
-      <div id="@doc.Id" class="flex-container sub-content">
-        <div class="flex-header">
-          <div class="cell-header sub-header">Job</div>
-          <div class="cell-header sub-header">Title</div>
-          <div class="cell-header sub-header">First Name</div>
-          <div class="cell-header sub-header">Last Name</div>
-          <div class="cell-header sub-header">Remark</div>
+      <div id="sub-@doc.Id" class="flex-container sub-content">
+        <div class="flex-header sub-header">
+          <div class="cell">Job</div>
+          <div class="cell">Title</div>
+          <div class="cell">First Name</div>
+          <div class="cell">Last Name</div>
+          <div class="cell">Remark</div>
+          <div class="cell">Actions</div>
         </div>
       
         @foreach (var docd in currentDD)
         {
-          <div class="flex-row sub-container">
-            <div class="cell sub-header">@docd.Employee?.Job?.Title</div>
-            <div class="cell sub-header">@docd.Employee?.Rank?.Title</div>
-            <div class="cell sub-header">@docd.Employee?.FirstName</div>
-            <div class="cell sub-header">@docd.Employee?.LastName</div>
-            <div class="cell sub-header">@docd.Remark</div>
+          <div class="flex-row sub-row">
+            <div class="cell">@docd.Employee?.Job?.Title</div>
+            <div class="cell">@docd.Employee?.Rank?.Title</div>
+            <div class="cell">@docd.Employee?.FirstName</div>
+            <div class="cell">@docd.Employee?.LastName</div>
+            <div class="cell">@docd.Remark</div>
+            <div class="cell">
+              <a asp-action="Edit" asp-route-id="@doc.Id">Edit</a>
+              <a asp-action="Delete" asp-route-id="@doc.Id">Delete</a>
+            </div>
           </div>
         }
       </div>
@@ -69,8 +74,27 @@
 </div>
 
 <script>
-  function displayTable(id) {
-    var row = document.getElementById(id);
-    row.classList.toggle("expand");
+  function displayTable(docId) {
+    var target = document.getElementById(docId);
+    var subTarget = document.getElementById("sub-"+docId);
+
+    if (subTarget != null && !target.classList.contains('active')){
+      disableActive();
+      var nextTarget = subTarget.nextElementSibling;
+      target.classList.toggle("active");
+      subTarget.classList.toggle("expand");
+      
+      if (nextTarget != null) nextTarget.classList.toggle("footer");
+    }else {
+      disableActive();
+    }
   }
+
+  function disableActive() {
+    var disableElements = document.querySelectorAll('.active, .expand, .footer');
+    disableElements.forEach(element => {
+      element.classList.remove('active', 'expand', 'footer');
+    });
+  }
+
 </script>

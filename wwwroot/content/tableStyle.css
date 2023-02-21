@@ -1,7 +1,6 @@
 .flex-container {
   display: flex;
   flex-direction: column;
-  border: 0px solid black;
   height: auto;
 }
 
@@ -13,31 +12,32 @@
   color: white;
   font-weight: 900;
   align-items: center;
-  height: 40px;
+  height: 60px;
+}
+
+.sub-header {
+  height: 45px;
 }
 
 .flex-row {
   display: flex;
   flex-direction: row;
-  border-style: solid;
-  border-width: 1px 1px 1px 1px;
-  border-color: black;
   align-items: center;
-  height: 30px;
+  border: 0 solid black;
+  height: 50px;
+}
+
+.flex-row.footer {
+  border-width: 1px 0 0 0;
+}
+
+.flex-row.active {
+  background-color: rgb(170, 220, 241, .3);
+  border-width: 1px 1px 1px 1px;
 }
 
 .flex-row:hover{
   background-color: rgba(192, 192, 192, 0.3);
-}
-
-.flex-row:first-child,
-.flex-row:last-child {
-  border-width: 0px 1px 1px 1px;
-}
-
-.cell-header {
-  flex: 1;
-  text-align: center;
 }
 
 .cell {
@@ -48,35 +48,22 @@
 .sub-content {
   max-height: 0;
   overflow: hidden;
-  transition: max-height .2s ease-in;
+  transition: max-height 0s ease-in;
 }
 
 .sub-content.expand {
   margin: 15px;
   max-height: 1000px;
-  transition: max-height 1s ease-in-out;
+  transition: max-height 1s linear;
 }
 
-.sub-header {
-  border-width: 0px 1px 0px 0px;
+.sub-row {
+  border-width: 0 1px 0 1px;
   border-style: solid;
   border-color: black;
+  height: 40px;
 }
 
-.sub-header:last-child {
-  border: 0px;
+.sub-row:last-child {
+  border-width: 0 1px 1px 1px;
 }
-
-
-/*
-.table tbody tr.no-hover{
-  display: none;
-}
-
-.table tbody tr.no-hover.expand{
-  display: table-row;
-}
-
-.table tbody tr.no-hover:hover{
-  background-color: inherit;
-} */
