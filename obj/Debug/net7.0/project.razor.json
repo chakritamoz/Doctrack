@@ -18768,6 +18768,11 @@
       "FilePath": "c:\\Doctrack\\Views\\Jobs\\Index.cshtml",
       "TargetPath": "Views\\Jobs\\Index.cshtml",
       "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Doctrack\\Views\\Documents\\Edit.cshtml",
+      "TargetPath": "Views\\Documents\\Edit.cshtml",
+      "FileKind": "mvc"
     }
   ],
   "SerializationFormat": "0.3"

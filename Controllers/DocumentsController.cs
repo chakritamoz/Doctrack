@@ -51,21 +51,11 @@ namespace Doctrack.Controllers
     //POST: Documents/Create
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create(Document document, string receiptDate, string? operationDate)
+    public async Task<IActionResult> Create(Document document)
     {
       if (document.DocType_Id == 0)
       {
         ModelState.AddModelError("DocType_Id", "Please select document title");
-      }
-
-      if (!string.IsNullOrEmpty(receiptDate))
-      {
-        document.ReceiptDate = ConvertDateTime(receiptDate);
-      }
-
-      if (!string.IsNullOrEmpty(operationDate))
-      {
-        document.OperationDate = ConvertDateTime(operationDate);
       }
 
       if (ModelState.IsValid)
@@ -79,6 +69,112 @@ namespace Doctrack.Controllers
       ViewBag.User = GetMachineName();
       ViewBag.Today = DateTime.Now.ToString("dd/MM/yyyy");
       return View(document);
+    }
+
+    //GET: Documents/Edit/5
+    public async Task<IActionResult> Edit(string? id)
+    {
+      if (id == null || _context.Documents == null)
+      {
+        return NotFound();
+      }
+      
+      var document = await _context.Documents.FindAsync(id);
+      if (document == null)
+      {
+        return NotFound();
+      }
+
+      ViewBag.DocTypesTitle = GetDocTypeSelectList();
+      ViewBag.Today = DateTime.Now.ToString("dd/MM/yyyy");
+      ViewBag.User = GetMachineName();
+      return View(document);
+    }
+
+    //POST: Documents/Edit/5
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Edit(string id, string newId, Document document)
+    {
+      if (_context.Documents == null)
+      {
+        return NotFound();
+      }
+
+      if (ModelState.IsValid)
+      {
+        try
+        {
+          Console.WriteLine("start try");
+          var existsDocument = await _context.Documents.FindAsync(id);
+          Console.WriteLine($"id: {id}");
+          if (existsDocument == null)
+          {
+            return NotFound();
+          }
+          Console.WriteLine("found existsDocument");
+          var documentsDetails = await _context.DocumentDetails
+            .Where(dd => dd.Doc_Id == id)
+            .ToListAsync();
+
+          Console.WriteLine("retrieve all docd match foreign key");
+          foreach (var docd in documentsDetails)
+          {
+            docd.Doc_Id = document.Id;
+            _context.Update(docd);
+          }
+          Console.WriteLine("update foreign key");
+            
+          _context.Remove(existsDocument);
+          Console.WriteLine("remove existsDoc");
+
+          _context.Update(document);
+          Console.WriteLine("update document");
+          await _context.SaveChangesAsync();
+          return RedirectToAction(nameof(Index));
+        }
+        catch(DbUpdateException)
+        {
+          if (!DocumentExists(document.Id))
+          {
+            return NotFound();
+          }
+          else
+          {
+            throw;
+          }
+        }
+
+      }
+
+      ViewBag.DocTypesTitle = GetDocTypeSelectList();
+      ViewBag.User = GetMachineName();
+      ViewBag.Today = DateTime.Now.ToString("dd/MM/yyyy");
+      return View(document);
+    }
+
+    //POST: Documents/Delete/5
+    public async Task<IActionResult> Delete(string id)
+    {
+      if (_context.Documents == null)
+      {
+        return Problem("Enitity set 'DoctrackContext.Documents' is null.");
+      }
+      
+      var document = await _context.Documents.FindAsync(id);
+      if (document == null)
+      {
+        return NotFound();
+      }
+
+      _context.Remove(document);
+      await _context.SaveChangesAsync();
+      return RedirectToAction(nameof(Index));
+    }
+
+    public bool DocumentExists(string id)
+    {
+      return (_context.Documents?.Any(doc => doc.Id == id)).GetValueOrDefault();
     }
 
     public SelectList GetDocTypeSelectList() {
@@ -95,17 +191,6 @@ namespace Doctrack.Controllers
 
     public string GetMachineName() {
       return Environment.MachineName;
-    }
-
-    public DateTime ConvertDateTime(string dateString)
-    {
-      return (
-          System.DateTime.ParseExact(
-            dateString,
-            "dd/MM/yyyy",
-            System.Globalization.CultureInfo.InstalledUICulture
-          )
-      );
     }
   }
 }

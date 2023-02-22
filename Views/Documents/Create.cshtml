@@ -10,11 +10,10 @@
 
 <form asp-action="Create">
   <div class="form-group">
-    <label for="receiptDate" class="control-label">Receipt Date</label>
+    <label asp-for="ReceiptDate" class="control-label">Receipt Date</label>
     <input
       type="text"
-      id="receiptDate"
-      name="receiptDate"
+      asp-for="ReceiptDate"
       class="form-control"
       pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}"
       placeholder="@ViewBag.Today"

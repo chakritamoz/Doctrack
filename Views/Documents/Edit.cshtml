@@ -1,0 +1,155 @@
+@model Doctrack.Models.Document
+
+@{
+  ViewData["Title"] = "Document Edit";
+}
+
+<h2>Edit</h2>
+<h3>Document</h3>
+<hr />
+
+<form asp-action="Edit">
+  <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+  <input type="hidden" asp-for="Id"/>
+
+  <div class="form-group">
+    <label for="newId" class="control-label">Document No.</label>
+    <input 
+      id="newId"
+      name="newId"
+      class="form-control"
+      autocomplete="off"
+      placeholder="@Model.Id"
+      readonly
+    />
+    <span asp-validation-for="Id" class="text-danger"></span>
+  </div>
+
+  <div class="form-group">
+    <label asp-for="ReceiptDate" class="control-label">Receipt Date</label>
+    <input
+      type="text"
+      asp-for="ReceiptDate"
+      class="form-control"
+      pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}"
+      placeholder="@ViewBag.Today"
+    />
+    <span asp-validation-for="ReceiptDate" class="text-danger"></span>
+  </div>
+
+  <div class="form-group">
+    <label asp-for="DocType_Id" class="control-label">Document Title</label>
+    <select asp-for="DocType_Id" class="form-control">
+      @foreach (var item in @ViewBag.DocTypesTitle)
+      {
+        <option value="@item.Value">@item.Text</option>
+      }
+    </select>
+    <span asp-validation-for="DocType_Id" class="text-danger"></span>
+  </div>
+
+  <div class="form-group">
+    <label asp-for="Operation" class="control-label">Operation</label>
+    <input asp-for="Operation" class="form-control" autocomplete="off"/>
+    <span asp-validation-for="Operation" class="text-danger"></span>
+  </div>
+
+  <div class="form-group">
+    <label asp-for="OperationDate" class="control-label">Operation Date</label>
+    <input
+      type="text"
+      asp-for="OperationDate"
+      class="form-control"
+      pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}"
+      placeholder="@ViewBag.Today"
+    />
+    <span asp-validation-for="OperationDate" class="text-danger"></span>
+  </div>
+
+  <div class="form-group">
+    <label asp-for="CommandOrder" class="control-label">Command Order</label>
+    <input asp-for="CommandOrder" class="form-control" autocomplete="off"/>
+    <span asp-validation-for="CommandOrder" class="text-danger"></span>
+  </div>
+
+  <div class="form-group">
+    <label asp-for="RemarkAll" class="control-label">Document Remark</label>
+    <input asp-for="RemarkAll" class="form-control" autocomplete="off"/>
+    <span asp-validation-for="RemarkAll" class="text-danger"></span>
+  </div>
+
+  <div class="form-group">
+    <label asp-for="EndDate" class="control-label">End Date</label>
+    <input
+      type="text"
+      asp-for="EndDate"
+      class="form-control"
+      pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}"
+      placeholder="@ViewBag.Today"
+    />
+  </div>
+
+  <input type="hidden" asp-for="User"/>
+
+  <div class="form-group">
+    <input type="submit" value="Save" class="btn btn-primary"/>
+  </div>
+</form>
+
+<div>
+  <a asp-action="Index">Back to List</a>
+</div>
+
+<!-- Modal -->
+<div id="writableModal" class="modal-container">
+  <div class="modal-content">
+    <div class="modal-title">
+      <div>MODAL TITLE</div>
+      <div><span class="close">&times;</span></div>
+    </div>
+    <hr />
+    <div class="modal-body">
+      <p>Do you want to edit Document No.?</p>
+    </div>
+    <div class="modal-footer">
+      <div id="modal-close-button" class="button button-danger">Close</div>
+      <div id="modal-accept-button" class="button button-primary">Accept</div>
+    </div>
+  </div>
+</div>
+
+<script>
+  var modal = document.getElementById("writableModal");
+  var modalCloseBtn = document.getElementById("modal-close-button");
+  var modalAcceptBtn = document.getElementById("modal-accept-button");
+  var spanClose = document.getElementsByClassName("close")[0];
+  var docId = document.getElementById("newId");
+
+  docId.onfocus = function() {
+    if (docId.readOnly == true)
+    {
+      modal.classList.toggle("display")
+    }
+  }
+
+  spanClose.onclick = function() {
+    modal.classList.toggle("display");
+  }
+
+  modalAcceptBtn.onclick = function() {
+    docId.readOnly = false;
+    modal.classList.toggle("display");
+    docId.focus();
+  }
+
+  modalCloseBtn.onclick = function() {
+    modal.classList.toggle("display");
+  }
+
+  window.onclick = function(event) {
+    if (event.target == modal)
+    {
+      modal.classList.toggle("display");
+    }
+  }
+</script>
