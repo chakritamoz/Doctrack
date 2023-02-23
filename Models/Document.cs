@@ -12,6 +12,8 @@ namespace Doctrack.Models
     [ForeignKey("DocType_Id")]
     public virtual DocumentType? DocumentType {get; set;}
 
+    public string? Doc_Title {get; set;}
+
     [Required(ErrorMessage = "Please enter receipt date.")]
     [DataType(DataType.Date)]
     [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]

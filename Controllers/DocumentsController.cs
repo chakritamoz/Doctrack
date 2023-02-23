@@ -29,9 +29,13 @@ namespace Doctrack.Controllers
         .Include(dd => dd.Employee.Rank)
         .ToListAsync();
 
+      var orderDocument = documents
+        .OrderBy(d => d.EndDate)
+        .ThenBy(d => d.DocType_Id).ToList();
+
       var viewModel = new DocumentViewModel
       {
-        Documents = documents,
+        Documents = orderDocument,
         DocumentsDetail = documentsDetail
       };
 

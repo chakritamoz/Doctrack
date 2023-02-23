@@ -74,3 +74,21 @@ namespace Doctrack.Data
   }
 }
 ```
+
+***Redirect To Controller Action***
+```javascript
+<div asp-controller="Documents" asp-action="Create" id="create-document-button" class="button button-primary"
+     data-url="@Url.Action("Create", "Documents")">
+    Create Document
+</div>
+
+<script>
+    $(document).ready(function() {
+        $("#create-document-button").click(function() {
+            var url = $(this).data("url");
+            window.location.href = url;
+        });
+    });
+</script>
+
+```

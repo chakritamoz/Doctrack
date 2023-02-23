@@ -29,7 +29,7 @@
   </div>
 
   <div class="form-group">
-    <label asp-for="DocType_Id" class="control-label">Document Title</label>
+    <label asp-for="DocType_Id" class="control-label">Document Type</label>
     <select asp-for="DocType_Id" class="form-control">
       <option value=0>Select Dcoument Title</option>
       @foreach (var item in @ViewBag.DocTypesTitle)
@@ -40,13 +40,15 @@
     <span asp-validation-for="DocType_Id" class="text-danger"></span>
   </div>
 
-  @* <div class="form-group">
-    <label asp-for="Operation" class="control-label">Operation</label>
-    <input asp-for="Operation" class="form-control" autocomplete="off" />
-    <span asp-validation-for="Operation" class="text-danger"></span>
+  <div class="form-group">
+    <label asp-for="Doc_Title" class="control-label">Document Title</label>
+    <input asp-for="Doc_Title" class="form-control" autocomplete="off"/>
+    <span asp-validation-for="Doc_Title" class="text-danger"></span>
   </div>
 
-  <div class="form-group">
+  <input type="hidden" asp-for="Operation" class="form-control" value="กรมแพทย์ทหารบก"/>
+
+  @* <div class="form-group">
     <label for="operationDate" class="control-label">Operation Date</label>
     <input
       type="text"

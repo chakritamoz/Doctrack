@@ -300,3 +300,4 @@ C:\Doctrack\obj\Debug\net7.0\refint\Doctrack.dll
 C:\Doctrack\obj\Debug\net7.0\Doctrack.pdb
 C:\Doctrack\obj\Debug\net7.0\Doctrack.genruntimeconfig.cache
 C:\Doctrack\obj\Debug\net7.0\ref\Doctrack.dll
+C:\Doctrack\bin\Debug\net7.0\package-lock.json

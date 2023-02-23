@@ -7,29 +7,35 @@
 <h2>Documents</h2>
 <hr />
 
-<p class="btn btn-primary">
-  <a asp-action="Create" style="color:white;">Create Document</a>
-</p>
+<div class="button button-primary">
+  <a 
+    asp-action="Create"
+    class="text-decoration-none"
+    style="color:white;"
+  >
+    Create Document
+  </a>
+</div>
 
 <div class="flex-container">
   <div class="flex-header">
     <div class="cell">Receipt Date</div>
     <div class="cell">Documents No.</div>
-    <div class="cell">Doc.Title</div>
+    <div class="cell">Doc.Type</div>
+    <div class="cell cell-title">Doc.Title</div>
     <div class="cell">Operation</div>
     <div class="cell">Op.Date</div>
     <div class="cell">Command Order</div>
     <div class="cell">Remarks</div>
     <div class="cell">End Date</div>
-    <div class="cell">Actions</div>
   </div>
-  @foreach (var doc in Model.Documents.OrderBy(d => d.EndDate))
+  @foreach (var doc in Model.Documents)
   {
     <div id="@doc.Id" class="flex-row main-row" onclick="displayTable('@doc.Id')" 
       @if
       (
         doc.EndDate != null
-      ){@Html.Raw("style='background-color: #A1A18C;'")} 
+      ){@Html.Raw("style='background-color: #FAE8E0;'")} 
       @if
       (
         doc.EndDate == null &&
@@ -37,11 +43,12 @@
             doc.ReceiptDate??DateTime.MinValue
             ).TotalDays > doc.DocumentType?.Period
         )
-      ){@Html.Raw("style='background-color: #F09391;'")}
+      ){@Html.Raw("style='background-color: #D8A7B1;'")}
     >
       <div class="cell">@doc.ReceiptDate?.ToString("dd/MM/yyyy")</div>
       <div class="cell">@doc.Id</div>
       <div class="cell">@doc.DocumentType?.Title</div>
+      <div class="cell cell-title">@doc.Doc_Title</div>
       <div class="cell">@doc.Operation</div>
       <div class="cell">@doc.OperationDate?.ToString("dd/MM/yyyy")</div>
       <div class="cell">@doc.CommandOrder</div>
@@ -49,28 +56,18 @@
       <div class="cell">
         @doc.EndDate?.ToString("dd/MM/yyyy")
       </div>
-      <div class="cell">
-        <a asp-action="Add" asp-route-id="@doc.Id">Add</a>
-        <a asp-action="Edit" asp-route-id="@doc.Id">Edit</a>
-        <a asp-action="Delete" asp-route-id="@doc.Id">Delete</a>
-      </div>
     </div>
     var currentDD = Model.DocumentsDetail
       .Where(dd => dd.Doc_Id == doc.Id);
     @if (currentDD.Count() > 0)
     {
       <div id="sub-@doc.Id" class="flex-container sub-content">
-        <div class="flex-button">
-          <div class="button button-primary">Operation</div>
-          <div class="button button-success">Submit Report</div>
-        </div>
         <div class="flex-header sub-header">
           <div class="cell">Job</div>
           <div class="cell">Title</div>
           <div class="cell">First Name</div>
           <div class="cell">Last Name</div>
           <div class="cell">Remark</div>
-          <div class="cell">Actions</div>
         </div>
       
         @foreach (var docd in currentDD)
@@ -81,15 +78,29 @@
             <div class="cell">@docd.Employee?.FirstName</div>
             <div class="cell">@docd.Employee?.LastName</div>
             <div class="cell">@docd.Remark</div>
-            <div class="cell">
-              <a asp-action="Edit" asp-route-id="@doc.Id">Edit</a>
-              <a asp-action="Delete" asp-route-id="@doc.Id">Delete</a>
-            </div>
           </div>
         }
       </div>
     }
   }
+</div>
+
+<div class="add-btn floating-btn">
+  <a asp-action="AddEmployee">
+    @* todo add emp icon *@A
+  </a>
+  <a asp-action="Edit">
+    @* todo edit icon *@E
+  </a>
+  <a asp-action="Delete">
+    @* todo delete icon *@D
+  </a>
+  <a asp-action="SendOperation">
+    @* todo send icon *@SO
+  </a>
+  @* <a asp-action="SubmitOperation">
+    todo sumbit icon SMO
+  </a> *@
 </div>
 
 <script>
@@ -115,5 +126,4 @@
       element.classList.remove('active', 'expand', 'row-footer');
     });
   }
-
 </script>
