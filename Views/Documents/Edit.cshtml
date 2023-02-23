@@ -17,7 +17,7 @@
     <input 
       id="newId"
       name="newId"
-      class="form-control"
+      class="form-control unable-write"
       autocomplete="off"
       placeholder="@Model.Id"
       readonly
@@ -138,6 +138,7 @@
 
   modalAcceptBtn.onclick = function() {
     docId.readOnly = false;
+    docId.classList.toggle("unable-write");
     modal.classList.toggle("display");
     docId.focus();
   }

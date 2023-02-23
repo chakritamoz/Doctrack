@@ -94,7 +94,7 @@ namespace Doctrack.Controllers
     //POST: Documents/Edit/5
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(string id, string newId, Document document)
+    public async Task<IActionResult> Edit(string id, string? newId, Document document)
     {
       if (_context.Documents == null)
       {
@@ -105,31 +105,44 @@ namespace Doctrack.Controllers
       {
         try
         {
-          Console.WriteLine("start try");
-          var existsDocument = await _context.Documents.FindAsync(id);
-          Console.WriteLine($"id: {id}");
+          if (newId == null)
+          {
+            _context.Update(document);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+          }
+
+          var existsDocument = await _context.Documents
+            .Include(doc => doc.DocumentDetails)
+            .FirstOrDefaultAsync(doc => doc.Id == id);
           if (existsDocument == null)
           {
             return NotFound();
           }
-          Console.WriteLine("found existsDocument");
-          var documentsDetails = await _context.DocumentDetails
-            .Where(dd => dd.Doc_Id == id)
-            .ToListAsync();
 
-          Console.WriteLine("retrieve all docd match foreign key");
-          foreach (var docd in documentsDetails)
+          var newDocument = new Document()
           {
-            docd.Doc_Id = document.Id;
-            _context.Update(docd);
+            Id = newId,
+            DocType_Id = document.DocType_Id,
+            ReceiptDate = document.ReceiptDate,
+            EndDate = document.EndDate,
+            Operation = document.Operation,
+            OperationDate = document.OperationDate,
+            CommandOrder = document.CommandOrder,
+            RemarkAll = document.RemarkAll,
+            User = document.User,
+            DocumentDetails = new List<DocumentDetail>()
+          };
+
+          foreach (var docd in existsDocument.DocumentDetails)
+          {
+            docd.Doc_Id = newId;
+            newDocument.DocumentDetails.Add(docd);
           }
-          Console.WriteLine("update foreign key");
             
           _context.Remove(existsDocument);
-          Console.WriteLine("remove existsDoc");
 
-          _context.Update(document);
-          Console.WriteLine("update document");
+          _context.Add(newDocument);
           await _context.SaveChangesAsync();
           return RedirectToAction(nameof(Index));
         }
@@ -154,6 +167,8 @@ namespace Doctrack.Controllers
     }
 
     //POST: Documents/Delete/5
+    [HttpPost]
+    [ValidateAntiForgeryToken]
     public async Task<IActionResult> Delete(string id)
     {
       if (_context.Documents == null)

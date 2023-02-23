@@ -1,7 +1,9 @@
 .flex-container {
   display: flex;
   flex-direction: column;
+  width: 100%;
   height: auto;
+  margin: auto;
 }
 
 .flex-header {
@@ -26,10 +28,11 @@
   align-items: center;
   border: 0 solid black;
   height: 50px;
+  transition: transform .3s, box-shadow .3s ease-out;
 }
 
 .main-row {
-  background-color: #93df93cc;
+  background-color: #EDEDE6;
 }
 
 .flex-row.row-footer {
@@ -37,11 +40,14 @@
 }
 
 .flex-row.active {
-  border-width: 5px 5px 5px 5px;
+  transform: scale(1.02);
+  box-shadow: .2px .2px 10px gray, .3px .3px 5px 
 }
 
 .flex-row:hover {
-  background-color: rgba(192, 192, 192, 0.3) !important;
+  transform: scale(1.02);
+  box-shadow: .2px .2px 10px gray, .3px .3px 5px black;
+  /* background-color: #CEE0ED !important; */
 }
 
 .flex-row:last-child {
@@ -54,6 +60,8 @@
 }
 
 .sub-content {
+  transform: scale(1.02);
+  border-radius: 0 0 10px 10px;
   max-height: 0;
   overflow: hidden;
   transition: max-height 0s ease-in;
@@ -184,5 +192,9 @@
 .close:focus {
   color: #000;
   text-decoration: none;
+  cursor: pointer;
+}
+
+.unable-write {
   cursor: pointer;
 }
