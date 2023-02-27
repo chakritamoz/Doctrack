@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "OfkZlH21LwtP0xMgGjLE13qziMtsGv4l2CxbdaAJAU8=",
+  "Hash": "oO/ilKgdEwTc6FUonO9CH6f703g1C1A+ICf3nWROctQ=",
   "Source": "Doctrack",
   "BasePath": "_content/Doctrack",
   "Mode": "Default",
@@ -51,12 +51,12 @@
       "OriginalItemSpec": "C:\\Doctrack\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\Doctrack.bundle.scp.css"
     },
     {
-      "Identity": "C:\\Doctrack\\wwwroot\\content\\tableStyle.css",
+      "Identity": "C:\\Doctrack\\wwwroot\\content\\floatingAction.css",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
-      "RelativePath": "content/tableStyle.css",
+      "RelativePath": "content/floatingAction.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -65,7 +65,24 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\content\\tableStyle.css"
+      "OriginalItemSpec": "wwwroot\\content\\floatingAction.css"
+    },
+    {
+      "Identity": "C:\\Doctrack\\wwwroot\\content\\table.css",
+      "SourceId": "Doctrack",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "BasePath": "_content/Doctrack",
+      "RelativePath": "content/table.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\content\\table.css"
     },
     {
       "Identity": "C:\\Doctrack\\wwwroot\\css\\site.css",
