@@ -1,106 +1,70 @@
-.fab-wrapper {
-  position: fixed;
-  bottom: 10rem;
-  right: 10rem;
-  width: 10rem;
-  height: 10rem;
+.flex-action {
+  display: flex;
+  position: relative;
+  justify-content: space-between;
 }
 
 .fab-checkbox {
   display: none;
 }
 
+.fab-wrapper {
+  position: relative;
+}
+
 .fab {
   position: absolute;
-  bottom: 0;
-  right: -2rem;
+  right: 0;
+  top: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 4rem;
-  height: 4rem;
-  background-color: #0d6efd;
+  width: 3rem;
+  height: 3rem;
   color: white;
+  background-color: #0d6efd;
   border-radius: 50%;
-  font-size: 24px;
-  transition: all .2s ease;
   z-index: 1;
+  transition: all 1s ease;
 }
 
 .fab-checkbox:checked ~ .fab {
   transform: rotate(-135deg);
-  background-color: rgba(0, 0, 0, 0.375);
-}
-
-.fab:hover {
-  background-color: #094eb7;
-}
-
-.fab-wheel {
-  position: absolute;
-  bottom: -2rem;
-  right: -5rem;
-  width: 100%;
-  height: 100%;
-  transform: scale(0);
-  transition: all .3s ease;
-}
-
-.fab-checkbox:checked ~ .fab-wheel {
-  bottom: 0;
-  right: 0;
-  transform: scale(1);
-}
-
-.fab-checkbox:checked ~ .fab:hover {
-  background-color: rgba(0, 0, 0, 0.23);
 }
 
 .fab-action {
   position: absolute;
+  top: 0.5rem;
+  right: 0rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  position: absolute;
-  width: 3rem;
-  height: 3rem;
   border-radius: 50%;
+  width: 2rem;
+  height: 2rem;
   color: white;
-  transition: right 1s top 1s left 1s bottom 1s ease;
   opacity: 0;
+  transition: top 1s right 1s ease;
 }
 
 .fab-checkbox:checked ~ .fab-wheel .fab-action {
-  color: white;
   opacity: 1;
 }
 
-.fab-wheel .fab-action-1 {
-  background-color: rgb(34, 198, 34);
-  right: -1.5rem;
-  top: 0;
+.fab-action-1 {
+  top: 0.5rem;
+  right: 4rem;
+  background-color: green;
 }
 
-.fab-wheel .fab-action-2 {
-  right: 3.5rem;
-  top: 1.5rem;
+.fab-action-2 {
+  top: 0.5rem;
+  right: 8rem;
   background-color: orange;
 }
 
-.fab-wheel .fab-action-3 {
-  left: 1.5rem;
-  bottom: .5rem;
-  background-color: rgb(248, 64, 64);
-}
-
-.fab-wheel .fab-action-1:hover {
-  background-color: rgb(22, 156, 22);
-}
-
-.fab-wheel .fab-action-2:hover {
-  background-color: rgb(171, 115, 11);
-}
-
-.fab-wheel .fab-action-3:hover {
-  background-color: rgb(186, 37, 37);
+.fab-action-3 {
+  top: 0.5rem;
+  right: 12rem;
+  background-color: red;
 }

@@ -1,11 +1,14 @@
+.container-wrapper {
+  border-radius: 15px;
+  box-shadow: 5px 5px 10px gray, 2px 2px 8px black;
+}
+
 .flex-container {
   display: flex;
   flex-direction: column;
   width: 100%;
   height: auto;
   margin: auto;
-  border-radius: 15px;
-  box-shadow: 5px 5px 10px gray, 2px 2px 8px black;
 }
 
 .flex-header {
@@ -21,6 +24,7 @@
 
 .sub-header {
   height: 45px;
+  border: 1px solid black;
 }
 
 .flex-row {
@@ -30,24 +34,22 @@
   height: 50px;
   transition: transform .3s, box-shadow .3s ease-out;
 }
+
 .main-row {
   background-color: #B6E2D3;
 }
 
 .flex-row.row-footer {
-  /* border-width: 1px 0 0 0; */
   margin-top: 4px;
 }
 
 .flex-row:hover {
-  transform: scale(1.02);
+  z-index: 1;
   box-shadow: .2px .2px 10px gray, .3px .3px 5px black;
   transition: transform .1s ease-out;
-  /* background-color: #CEE0ED !important; */
 }
 
 .flex-row.active {
-  transform: scale(1.04);
   box-shadow: .2px .2px 10px gray, .3px .3px 5px 
 }
 
@@ -65,7 +67,6 @@
 }
 
 .sub-content {
-  transform: scale(1.02);
   border-radius: 0 0 10px 10px;
   max-height: 0;
   overflow: hidden;
@@ -76,7 +77,6 @@
   padding: 15px;
   max-height: 1000px;
   transition: transform .1s, max-height 1s linear;
-  transform: scale(1.04);
   box-shadow: 0 5px 5px gray, 0 3px 3px black;
   background-color: #f5f1f1;
 }
@@ -100,10 +100,14 @@
 }
 
 .button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 5px;
   color: white;
   padding: 10px;
   width: max-content;
+  height: 3rem;
 }
 
 div.button {
@@ -211,7 +215,26 @@ div.button {
 }
 
 @media screen and (max-width: 1000px){
+  .container-wrapper {
+    overflow-x: scroll;
+    overflow-y: hidden;
+  }
+
   .flex-container {
-    width: 936px;
+    width: 1000px;
+  }
+}
+
+@media screen and (min-width: 1001px){
+  .flex-row:hover {
+    transform: scale(1.02);;
+  }
+
+  .flex-row.active {
+    transform: scale(1.04);
+  }
+
+  .sub-content.expand {
+    transform: scale(1.04);
   }
 }
