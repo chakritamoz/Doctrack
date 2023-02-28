@@ -91,7 +91,7 @@
 </div>
 
 <div class="fab-wrapper">
-  <input id="fabCheckbox" type="checkbox" class="fab-checkbox" />
+  <input id="fabCheckbox" type="checkbox" class="fab-checkbox" disabled/>
   <label class="fab" for="fabCheckbox">
     <i class="bi bi-plus-lg"></i>
   </label>
@@ -102,7 +102,7 @@
     <a class="fab-action fab-action-2">
       <i class="bi bi-pencil-fill"></i>
     </a>
-    <a class="fab-action fab-action-3">
+    <a asp-action="Delete" id="delete-doc-icon" class="fab-action fab-action-3">
       <i class="bi bi-trash-fill"></i>
     </a>
     <a class="fab-action fab-action-4">
@@ -115,6 +115,13 @@
 </div>
 
 <script>
+  const addEmpIcon = document.getElementById("add-emp-icon");
+  const editDocIcon = document.getElementById("edit-doc-icon");
+  const delDocIcon = document.getElementById("del-doc-icon");
+  const sendOpIcon = document.getElementById("sned-doc-icon");
+  const submitIcon = document.getElementById("sub-doc-icon");
+  const floatingBtn = document.getElementById("fabCheckbox");
+
   function displayTable(docId) {
     const target = document.getElementById(docId);
     const subTarget = document.getElementById("sub-"+docId);
@@ -125,6 +132,7 @@
       target.classList.toggle("active");
       subTarget.classList.toggle("expand");
       nextTarget.classList.toggle("row-footer");
+      floatingBtn.toggleAttribute("disabled");
     }else {
       disableActive();
     }
@@ -135,5 +143,10 @@
     disableElements.forEach(element => {
       element.classList.remove('active', 'expand', 'row-footer');
     });
+    floatingBtn.removeAttribute("disabled");
+  }
+
+  function setAttrId(docId) {
+    delDocIcon.setAttribute("asp-route-id",docId)
   }
 </script>

@@ -19,16 +19,24 @@
   color: white;
   z-index: 999;
   background-color: pink;
-  transition: all .7s ease;
+  font-size: 24px;
+  transition: box-shadow .7s, transform .7s, font-size .7s ease;
 }
+
+.fab-checkbox:disabled ~ .fab {
+  background-color: rgb(180, 174, 174);
+}
+
+.fab:hover {
+  background-color: rgb(224, 161, 171);
+}
+
+
 
 .fab-checkbox:checked ~ .fab {
   box-shadow: 2px 2px 5px rgb(93, 91, 91);
   transform: rotate(-225deg);
-}
-
-.bi-plus-lg {
-  font-size: 24px;
+  font-size: 32px;
 }
 
 .fab-wheel {
@@ -55,7 +63,8 @@
 }
 
 .fab-action:hover {
-  text-shadow: -1px 0 #D8A7B1, 0 1px #D8A7B1, 1px 0 #D8A7B1, 0 -1px #D8A7B1;
+  text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+  color: rgb(107, 105, 105);
 }
 
 .fab-checkbox:checked ~ .fab-wheel {
@@ -70,46 +79,32 @@
   left: 0;
 }
 
-.fab-wheel .fab-action-1:hover {
-  color: rgba(46, 192, 46, 0.809);
-  
-}
-
 .fab-wheel .fab-action-2 {
   left: 3.5rem;
-}
-
-.fab-wheel .fab-action-2:hover {
-  color: rgb(255, 166, 2);
 }
 
 .fab-wheel .fab-action-3 {
   left: 7rem;
 }
 
-.fab-wheel .fab-action-3:hover {
-  color: red;
-}
-
 .fab-wheel .fab-action-4 {
   left: 10.5rem;
-}
-
-.fab-wheel .fab-action-4:hover {
-  color: rgb(234, 234, 64);
 }
 
 .fab-wheel .fab-action-5 {
   left: 14rem;
 }
 
-.fab-wheel .fab-action-5:hover {
-  color: #0d6dfd;
-}
-
 @media screen and (min-width: 389px) {
   .fab-wrapper {
     bottom: 8rem;
     right: 2rem;
+  }
+}
+
+@media screen and (min-width: 1900px) {
+  .fab-wrapper {
+    bottom: 8rem;
+    right: 10rem;
   }
 }
