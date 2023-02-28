@@ -1,70 +1,115 @@
-.flex-action {
-  display: flex;
-  position: relative;
-  justify-content: space-between;
+.fab-wrapper {
+  position: fixed;
+  bottom: 6rem;
+  right: 2rem;
 }
 
 .fab-checkbox {
   display: none;
 }
 
-.fab-wrapper {
-  position: relative;
-}
-
 .fab {
-  position: absolute;
-  right: 0;
-  top: 0;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 3rem;
-  height: 3rem;
-  color: white;
-  background-color: #0d6efd;
+  width: 3.5rem;
+  height: 3.5rem;
   border-radius: 50%;
-  z-index: 1;
-  transition: all 1s ease;
+  color: white;
+  z-index: 999;
+  background-color: pink;
+  transition: all .7s ease;
 }
 
 .fab-checkbox:checked ~ .fab {
-  transform: rotate(-135deg);
+  box-shadow: 2px 2px 5px rgb(93, 91, 91);
+  transform: rotate(-225deg);
+}
+
+.bi-plus-lg {
+  font-size: 24px;
+}
+
+.fab-wheel {
+  position: absolute;
+  overflow: hidden;
+  width: 3.5rem;
+  height: 3.5rem;
+  top: 0;
+  right: 0;
+  border-radius: 3.5rem;
+  background-color: pink;
+  transition: all .7s ease;
 }
 
 .fab-action {
   position: absolute;
-  top: 0.5rem;
-  right: 0rem;
   display: flex;
-  align-items: center;
   justify-content: center;
-  border-radius: 50%;
-  width: 2rem;
-  height: 2rem;
+  align-items: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  font-size: 24px;
   color: white;
-  opacity: 0;
-  transition: top 1s right 1s ease;
+}
+
+.fab-action:hover {
+  text-shadow: -1px 0 #D8A7B1, 0 1px #D8A7B1, 1px 0 #D8A7B1, 0 -1px #D8A7B1;
+}
+
+.fab-checkbox:checked ~ .fab-wheel {
+  width: 21rem;
 }
 
 .fab-checkbox:checked ~ .fab-wheel .fab-action {
   opacity: 1;
 }
 
-.fab-action-1 {
-  top: 0.5rem;
-  right: 4rem;
-  background-color: green;
+.fab-wheel .fab-action-1 {
+  left: 0;
 }
 
-.fab-action-2 {
-  top: 0.5rem;
-  right: 8rem;
-  background-color: orange;
+.fab-wheel .fab-action-1:hover {
+  color: rgba(46, 192, 46, 0.809);
+  
 }
 
-.fab-action-3 {
-  top: 0.5rem;
-  right: 12rem;
-  background-color: red;
+.fab-wheel .fab-action-2 {
+  left: 3.5rem;
+}
+
+.fab-wheel .fab-action-2:hover {
+  color: rgb(255, 166, 2);
+}
+
+.fab-wheel .fab-action-3 {
+  left: 7rem;
+}
+
+.fab-wheel .fab-action-3:hover {
+  color: red;
+}
+
+.fab-wheel .fab-action-4 {
+  left: 10.5rem;
+}
+
+.fab-wheel .fab-action-4:hover {
+  color: rgb(234, 234, 64);
+}
+
+.fab-wheel .fab-action-5 {
+  left: 14rem;
+}
+
+.fab-wheel .fab-action-5:hover {
+  color: #0d6dfd;
+}
+
+@media screen and (min-width: 389px) {
+  .fab-wrapper {
+    bottom: 8rem;
+    right: 2rem;
+  }
 }

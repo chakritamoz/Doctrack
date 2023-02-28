@@ -1,3 +1,10 @@
+.flex-action {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
 .container-wrapper {
   border-radius: 15px;
   box-shadow: 5px 5px 10px gray, 2px 2px 8px black;
@@ -12,6 +19,8 @@
 }
 
 .flex-header {
+  position: sticky;
+  top: 0;
   display: flex;
   flex-direction: row;
   background-color: #EF7C8E;
@@ -19,10 +28,12 @@
   font-weight: 900;
   align-items: center;
   height: 60px;
+  z-index: 999;
   border-radius: 15px 15px 0 0;
 }
 
 .sub-header {
+  z-index: 0;
   height: 45px;
   border: 1px solid black;
 }
@@ -44,13 +55,13 @@
 }
 
 .flex-row:hover {
-  z-index: 1;
   box-shadow: .2px .2px 10px gray, .3px .3px 5px black;
   transition: transform .1s ease-out;
 }
 
 .flex-row.active {
-  box-shadow: .2px .2px 10px gray, .3px .3px 5px 
+  z-index: 1;
+  box-shadow: .2px .2px 10px gray;
 }
 
 .flex-row:last-child {
@@ -77,7 +88,7 @@
   padding: 15px;
   max-height: 1000px;
   transition: transform .1s, max-height 1s linear;
-  box-shadow: 0 5px 5px gray, 0 3px 3px black;
+  box-shadow: 0 5px 5px gray, 5px 5px 15px black;
   background-color: #f5f1f1;
 }
 
@@ -108,10 +119,6 @@
   padding: 10px;
   width: max-content;
   height: 3rem;
-}
-
-div.button {
-  margin-bottom: 16px;
 }
 
 .button:last-child {
@@ -214,17 +221,6 @@ div.button {
   cursor: pointer;
 }
 
-@media screen and (max-width: 1000px){
-  .container-wrapper {
-    overflow-x: scroll;
-    overflow-y: hidden;
-  }
-
-  .flex-container {
-    width: 1000px;
-  }
-}
-
 @media screen and (min-width: 1001px){
   .flex-row:hover {
     transform: scale(1.02);;
@@ -236,5 +232,31 @@ div.button {
 
   .sub-content.expand {
     transform: scale(1.04);
+  }
+}
+
+@media screen and (max-width: 1000px){
+  .container-wrapper {
+    overflow: scroll;
+    max-height: 500px;
+  }
+
+  .flex-container {
+    width: 1000px;
+  }
+}
+
+@media screen and (max-width: 400px){
+  .container-wrapper {
+    overflow: scroll;
+    max-height: 450px;
+  }
+}
+
+
+@media screen and (max-width: 375px){
+  .container-wrapper {
+    overflow: scroll;
+    height: 300px;
   }
 }
