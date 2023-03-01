@@ -61,92 +61,76 @@
           @doc.EndDate?.ToString("dd/MM/yyyy")
         </div>
       </div>
-      var currentDD = Model.DocumentsDetail
-        .Where(dd => dd.Doc_Id == doc.Id);
-      @if (currentDD.Count() > 0)
-      {
-        <div id="sub-@doc.Id" class="flex-container sub-content">
-          <div class="flex-header sub-header">
-            <div class="cell">Job</div>
-            <div class="cell">Title</div>
-            <div class="cell">First Name</div>
-            <div class="cell">Last Name</div>
-            <div class="cell">Remark</div>
-          </div>
-
-          @foreach (var docd in currentDD)
-          {
-            <div class="flex-row sub-row">
-              <div class="cell">@docd.Employee?.Job?.Title</div>
-              <div class="cell">@docd.Employee?.Rank?.Title</div>
-              <div class="cell">@docd.Employee?.FirstName</div>
-              <div class="cell">@docd.Employee?.LastName</div>
-              <div class="cell">@docd.Remark</div>
-            </div>
-          }
+      <div id="sub-@doc.Id" class="flex-container sub-content">
+        <div class="flex-header sub-header">
+          <div class="cell">Job</div>
+          <div class="cell">Title</div>
+          <div class="cell">First Name</div>
+          <div class="cell">Last Name</div>
+          <div class="cell">Remark</div>
         </div>
-      }
-    }
+        @{ var currentDD = Model.DocumentsDetail
+            .Where(dd => dd.Doc_Id == doc.Id);
+          @if (currentDD.Count() > 0)
+          {
+            @foreach (var docd in currentDD)
+            {
+              <div class="flex-row sub-row">
+                <div class="cell">@docd.Employee?.Job?.Title</div>
+                <div class="cell">@docd.Employee?.Rank?.Title</div>
+                <div class="cell">@docd.Employee?.FirstName</div>
+                <div class="cell">@docd.Employee?.LastName</div>
+                <div class="cell">@docd.Remark</div>
+              </div>
+        }}} @*End razor tag*@
+      </div>
+    } @*End foreach Model.Documents*@
   </div>
 </div>
 
+<!-- Modal Delete-->
+<div id="writableModal" class="modal-container">
+  <div class="modal-content">
+    <div class="modal-title">
+      <div id="modal-title"></div>
+      <div><span class="close">&times;</span></div>
+    </div>
+    <hr />
+    <div class="modal-body">
+      <p id="modal-body"></p>
+      <p id="modal-body-detail"></p>
+    </div>
+    <div class="modal-footer">
+      <div id="modal-close-button" class="button button-danger">Close</div>
+      <div id="modal-accept-button" class="button button-primary">Accept</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Floating Action Button -->
 <div class="fab-wrapper">
   <input id="fabCheckbox" type="checkbox" class="fab-checkbox" disabled/>
   <label class="fab" for="fabCheckbox">
     <i class="bi bi-plus-lg"></i>
   </label>
   <div class="fab-wheel">
-    <a class="fab-action fab-action-1">
+    <a id="add-emp-icon" class="fab-action fab-action-1" disabled>
       <i class="bi bi-person-plus-fill"></i>
     </a>
-    <a class="fab-action fab-action-2">
+    <a id="edit-doc-icon" class="fab-action fab-action-2" disabled>
       <i class="bi bi-pencil-fill"></i>
     </a>
-    <a asp-action="Delete" id="delete-doc-icon" class="fab-action fab-action-3">
+    <a type="POST" id="del-doc-icon" class="fab-action fab-action-3" disabled>
       <i class="bi bi-trash-fill"></i>
     </a>
-    <a class="fab-action fab-action-4">
+    <a id="upop-doc-icon" class="fab-action fab-action-4" disabled>
       <i class="bi bi-send-check-fill"></i>
     </a>
-    <a class="fab-action fab-action-5">
+    <a id="sub-doc-icon" class="fab-action fab-action-5" disabled>
       <i class="bi bi-file-earmark-check-fill"></i>
     </a>
   </div>
 </div>
 
-<script>
-  const addEmpIcon = document.getElementById("add-emp-icon");
-  const editDocIcon = document.getElementById("edit-doc-icon");
-  const delDocIcon = document.getElementById("del-doc-icon");
-  const sendOpIcon = document.getElementById("sned-doc-icon");
-  const submitIcon = document.getElementById("sub-doc-icon");
-  const floatingBtn = document.getElementById("fabCheckbox");
-
-  function displayTable(docId) {
-    const target = document.getElementById(docId);
-    const subTarget = document.getElementById("sub-"+docId);
-
-    if (subTarget != null && !target.classList.contains('active')){
-      disableActive();
-      const nextTarget = subTarget.nextElementSibling;
-      target.classList.toggle("active");
-      subTarget.classList.toggle("expand");
-      nextTarget.classList.toggle("row-footer");
-      floatingBtn.toggleAttribute("disabled");
-    }else {
-      disableActive();
-    }
-  }
-
-  function disableActive() {
-    var disableElements = document.querySelectorAll('.active, .expand, .row-footer');
-    disableElements.forEach(element => {
-      element.classList.remove('active', 'expand', 'row-footer');
-    });
-    floatingBtn.removeAttribute("disabled");
-  }
-
-  function setAttrId(docId) {
-    delDocIcon.setAttribute("asp-route-id",docId)
-  }
-</script>
+<script src="~/js/documentsIndex.js"></script>

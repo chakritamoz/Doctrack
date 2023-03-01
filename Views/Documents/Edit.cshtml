@@ -104,7 +104,7 @@
 <div id="writableModal" class="modal-container">
   <div class="modal-content">
     <div class="modal-title">
-      <div>MODAL TITLE</div>
+      <div>Alert edit document No.</div>
       <div><span class="close">&times;</span></div>
     </div>
     <hr />
@@ -118,39 +118,4 @@
   </div>
 </div>
 
-<script>
-  var modal = document.getElementById("writableModal");
-  var modalCloseBtn = document.getElementById("modal-close-button");
-  var modalAcceptBtn = document.getElementById("modal-accept-button");
-  var spanClose = document.getElementsByClassName("close")[0];
-  var docId = document.getElementById("newId");
-
-  docId.onfocus = function() {
-    if (docId.readOnly == true)
-    {
-      modal.classList.toggle("display")
-    }
-  }
-
-  spanClose.onclick = function() {
-    modal.classList.toggle("display");
-  }
-
-  modalAcceptBtn.onclick = function() {
-    docId.readOnly = false;
-    docId.classList.toggle("unable-write");
-    modal.classList.toggle("display");
-    docId.focus();
-  }
-
-  modalCloseBtn.onclick = function() {
-    modal.classList.toggle("display");
-  }
-
-  window.onclick = function(event) {
-    if (event.target == modal)
-    {
-      modal.classList.toggle("display");
-    }
-  }
-</script>
+<script src="~/js/documentEdit.js"></script>

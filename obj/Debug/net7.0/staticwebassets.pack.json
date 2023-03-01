@@ -21,6 +21,14 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Doctrack\\wwwroot\\js\\documentEdit.js",
+      "PackagePath": "staticwebassets\\js\\documentEdit.js"
+    },
+    {
+      "Id": "C:\\Doctrack\\wwwroot\\js\\documentsIndex.js",
+      "PackagePath": "staticwebassets\\js\\documentsIndex.js"
+    },
+    {
       "Id": "C:\\Doctrack\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

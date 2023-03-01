@@ -59,13 +59,14 @@
   transition: transform .1s ease-out;
 }
 
+.main-row:nth-last-child(2) {
+  border-radius: 0 0 15px 15px;
+}
+
 .flex-row.active {
   z-index: 1;
   box-shadow: .2px .2px 10px gray;
-}
-
-.flex-row:last-child {
-  border-radius: 0 0 15px 15px;
+  border-radius: 0;
 }
 
 .cell {
@@ -102,6 +103,7 @@
 
 .sub-row:last-child {
   border-width: 0 1px 1px 1px;
+  border-radius: 0 0 15px 15px;
 }
 
 .flex-button {
