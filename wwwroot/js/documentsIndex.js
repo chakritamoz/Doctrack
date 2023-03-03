@@ -6,7 +6,7 @@ const subDocIcon = document.getElementById("sub-doc-icon");
 const floatingBtn = document.getElementById("fabCheckbox");
 
 const modal = document.getElementById("writableModal");
-const modalTitle = document.getElementById("modal-title");
+// const modalTitle = document.getElementById("modal-title");
 const modalBody = document.getElementById("modal-body");
 const modalBodyDet = document.getElementById("modal-body-detail");
 const modalCloseBtn = document.getElementById("modal-close-button");
@@ -53,13 +53,13 @@ function setAttrId(docId) {
   subDocIcon.setAttribute('href','Documents/SubmitDocument/' + docId);
 }
 
-delDocIcon.onclick = () => {
-  modal.classList.toggle("display")
-  modalTitle.innerHTML = "Alert delete document";
-  modalBody.innerHTML = "Are you sure you want to delete document?";
-  modalBodyDet.innerHTML = 'Document ID: <span style="color:red">' + currentDocId + '</span>';
-  modalAcceptBtn.id = 'modal-delete-button';
-}
+// delDocIcon.onclick = () => {
+//   modal.classList.toggle("display")
+//   modalTitle.innerHTML = "Alert delete document";
+//   modalBody.innerHTML = "Are you sure you want to delete document?";
+//   modalBodyDet.innerHTML = 'Document ID: <span style="color:red">' + currentDocId + '</span>';
+//   modalAcceptBtn.id = 'modal-delete-button';
+// }
 
 spanClose.onclick = function() {
   modal.classList.toggle("display");
@@ -76,7 +76,15 @@ window.onclick = function(event) {
   }
 }
 
-$(document).on('click', '#modal-delete-button', function() {
+$(document).on('click', '#del-doc-icon', () => {
+  modalAcceptBtn.id = 'modal-delete-button';
+  modal.classList.toggle("display");
+  $('#modal-title').prepend('<div>Confirm delete document<div>');
+  $('#modal-body').html('<p>Are you sure you want to delete document?</p<');
+  $('#modal-body').append('<p>Document ID: <span style="color:red">' + currentDocId + '</span></p>');
+});
+
+$(document).on('click', '#modal-delete-button', () => {
   var docId = $('#del-doc-icon').data('id');
   var token = $('input[name="__RequestVerificationToken"]').val();
   $.ajax({
