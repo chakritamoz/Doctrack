@@ -58,6 +58,7 @@ delDocIcon.onclick = () => {
   modalTitle.innerHTML = "Alert delete document";
   modalBody.innerHTML = "Are you sure you want to delete document?";
   modalBodyDet.innerHTML = 'Document ID: <span style="color:red">' + currentDocId + '</span>';
+  modalAcceptBtn.id = 'modal-delete-button';
 }
 
 spanClose.onclick = function() {
@@ -75,22 +76,20 @@ window.onclick = function(event) {
   }
 }
 
-$(function() {
-  $('#modal-accept-button').click(function() {
-    var docId = $('#del-doc-icon').data('id');
-    var token = $('input[name="__RequestVerificationToken"]').val();
-    $.ajax({
-      url: '/Documents/Delete/' + docId,
-      type: 'POST',
-      headers: { 'RequestVerificationToken': token },
-      data: { '__RequestVerificationToken': token },
-      success: function(result) {
-        if (result.success) {
-          location.reload();
-        } else {
-          alert('An error occurred while deleting the document.');
-        }
+$(document).on('click', '#modal-delete-button', function() {
+  var docId = $('#del-doc-icon').data('id');
+  var token = $('input[name="__RequestVerificationToken"]').val();
+  $.ajax({
+    url: '/Documents/Delete/' + docId,
+    type: 'POST',
+    headers: { 'RequestVerificationToken': token },
+    data: { '__RequestVerificationToken': token },
+    success: function(result) {
+      if (result.success) {
+        location.reload();
+      } else {
+        alert('An error occurred while deleting the document.');
       }
-    });
+    }
   });
 });
