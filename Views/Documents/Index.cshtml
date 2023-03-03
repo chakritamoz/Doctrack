@@ -90,6 +90,7 @@
 
 <!-- Modal Delete-->
 <div id="writableModal" class="modal-container">
+  @Html.AntiForgeryToken();
   <div class="modal-content">
     <div class="modal-title">
       <div id="modal-title"></div>
@@ -102,7 +103,7 @@
     </div>
     <div class="modal-footer">
       <div id="modal-close-button" class="button button-danger">Close</div>
-      <div id="modal-accept-button" class="button button-primary">Accept</div>
+      <div id="modal-accept-button" class="button button-primary">Confirm</div>
     </div>
   </div>
 </div>
@@ -121,7 +122,7 @@
     <a id="edit-doc-icon" class="fab-action fab-action-2" disabled>
       <i class="bi bi-pencil-fill"></i>
     </a>
-    <a type="POST" id="del-doc-icon" class="fab-action fab-action-3" disabled>
+    <a id="del-doc-icon" class="fab-action fab-action-3" disabled>
       <i class="bi bi-trash-fill"></i>
     </a>
     <a id="upop-doc-icon" class="fab-action fab-action-4" disabled>
@@ -132,5 +133,3 @@
     </a>
   </div>
 </div>
-
-<script src="~/js/documentsIndex.js"></script>

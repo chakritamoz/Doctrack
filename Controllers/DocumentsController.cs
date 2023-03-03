@@ -180,7 +180,8 @@ namespace Doctrack.Controllers
         return Problem("Enitity set 'DoctrackContext.Documents' is null.");
       }
       
-      var document = await _context.Documents.FindAsync(id);
+      var document = await _context.Documents
+        .FirstOrDefaultAsync(doc => doc.Id == id);
       if (document == null)
       {
         return NotFound();
@@ -188,7 +189,7 @@ namespace Doctrack.Controllers
 
       _context.Remove(document);
       await _context.SaveChangesAsync();
-      return RedirectToAction(nameof(Index));
+      return Json(new { success = true });
     }
 
     public bool DocumentExists(string id)

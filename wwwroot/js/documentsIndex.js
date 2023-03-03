@@ -12,7 +12,7 @@ const modalBodyDet = document.getElementById("modal-body-detail");
 const modalCloseBtn = document.getElementById("modal-close-button");
 const modalAcceptBtn = document.getElementById("modal-accept-button");
 const spanClose = document.getElementsByClassName("close")[0];
-var currentDocId = "";
+var currentDocId;
 
 function displayTable(docId) {
   currentDocId = docId;
@@ -48,7 +48,7 @@ function disableActive() {
 function setAttrId(docId) {
   addEmpIcon.setAttribute('href','Documents/AddEmployee/' + docId);
   editDocIcon.setAttribute('href','Documents/Edit/' + docId);
-  // delDocIcon.setAttribute('href','Documents/Delete/' + docId);
+  delDocIcon.setAttribute('data-id',docId);
   upOpDocIcon.setAttribute('href','Documents/UpdateOperation/' + docId);
   subDocIcon.setAttribute('href','Documents/SubmitDocument/' + docId);
 }
@@ -74,3 +74,23 @@ window.onclick = function(event) {
     modal.classList.toggle("display");
   }
 }
+
+$(function() {
+  $('#modal-accept-button').click(function() {
+    var docId = $('#del-doc-icon').data('id');
+    var token = $('input[name="__RequestVerificationToken"]').val();
+    $.ajax({
+      url: '/Documents/Delete/' + docId,
+      type: 'POST',
+      headers: { 'RequestVerificationToken': token },
+      data: { '__RequestVerificationToken': token },
+      success: function(result) {
+        if (result.success) {
+          location.reload();
+        } else {
+          alert('An error occurred while deleting the document.');
+        }
+      }
+    });
+  });
+});
