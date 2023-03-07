@@ -170,6 +170,56 @@ namespace Doctrack.Controllers
       return View(document);
     }
 
+    //GET: Documents/UpdateOP/5
+    public async Task<ActionResult> UpdateOP(string? id)
+    {
+      if (id == null || _context.Documents == null)
+      {
+        return NotFound();
+      }
+
+      var document = await _context.Documents.FindAsync(id);
+      if (document == null)
+      {
+        return NotFound();
+      }
+
+      var viewModel = new Document
+      {
+        Id = document.Id,
+        DocType_Id = document.DocType_Id,
+        Doc_Title = document.Doc_Title,
+        ReceiptDate = document.ReceiptDate,
+        EndDate = document.EndDate,
+        Operation = document.Operation,
+        OperationDate = document.OperationDate,
+        CommandOrder = document.CommandOrder,
+        RemarkAll = document.RemarkAll,
+        User = document.User,
+        DocumentDetails = new List<DocumentDetail>()
+      };
+
+      return Json(viewModel);
+    }
+
+    //POST: Documents/UpdateOP/5
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<ActionResult> UpdateOP(string Id, string Operation, DateTime OperationDate)
+    {
+      var existsModel = _context.Documents.Find(Id);
+      if (existsModel == null)
+      {
+        return NotFound();
+      }
+      existsModel.Operation = Operation;
+      existsModel.OperationDate = OperationDate;
+      
+      _context.Update(existsModel);
+      await _context.SaveChangesAsync();
+      return Json(new { success = true });
+    }
+
     //POST: Documents/Delete/5
     [HttpPost]
     [ValidateAntiForgeryToken]

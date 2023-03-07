@@ -31,8 +31,6 @@
   background-color: rgb(224, 161, 171);
 }
 
-
-
 .fab-checkbox:checked ~ .fab {
   box-shadow: 2px 2px 5px rgb(93, 91, 91);
   transform: rotate(-225deg);
