@@ -277,6 +277,8 @@ function validateForm() {
       }
     }
   });
-
   return isValid;
 } // end validate op function
+
+var jsonData = document.getElementById("jsonData").getAttribute("data-json");
+console.log(jsonData);

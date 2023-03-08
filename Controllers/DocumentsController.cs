@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Doctrack.Data;
 using Doctrack.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Newtonsoft.Json;
 
 namespace Doctrack.Controllers
 {
@@ -38,6 +39,11 @@ namespace Doctrack.Controllers
         Documents = orderDocument,
         DocumentsDetail = documentsDetail
       };
+
+      var myData = new SelectList(_context.Jobs, "Id", "Title");
+      var serializedData = JsonConvert.SerializeObject(myData);
+      ViewBag.JobsTitle = serializedData;
+      ViewBag.RanksTitle = new SelectList(_context.Ranks, "Id", "Title");
 
       return View(viewModel);
     }
