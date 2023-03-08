@@ -9,6 +9,10 @@
       "PackagePath": "staticwebassets\\content\\floatingAction.css"
     },
     {
+      "Id": "C:\\Doctrack\\wwwroot\\content\\modal.css",
+      "PackagePath": "staticwebassets\\content\\modal.css"
+    },
+    {
       "Id": "C:\\Doctrack\\wwwroot\\content\\table.css",
       "PackagePath": "staticwebassets\\content\\table.css"
     },
@@ -19,10 +23,6 @@
     {
       "Id": "C:\\Doctrack\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
-    },
-    {
-      "Id": "C:\\Doctrack\\wwwroot\\js\\documentEdit.js",
-      "PackagePath": "staticwebassets\\js\\documentEdit.js"
     },
     {
       "Id": "C:\\Doctrack\\wwwroot\\js\\documentsIndex.js",

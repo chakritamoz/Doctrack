@@ -220,6 +220,23 @@ namespace Doctrack.Controllers
       return Json(new { success = true });
     }
 
+    //POST: Documents/UpdateEndDate/5
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<ActionResult> UpdateEndDate(string Id, DateTime EndDate)
+    {
+      var existsModel = _context.Documents.Find(Id);
+      if (existsModel == null)
+      {
+        return NotFound();
+      }
+      existsModel.EndDate = EndDate;
+      
+      _context.Update(existsModel);
+      await _context.SaveChangesAsync();
+      return Json(new { success = true });
+    }
+
     //POST: Documents/Delete/5
     [HttpPost]
     [ValidateAntiForgeryToken]
