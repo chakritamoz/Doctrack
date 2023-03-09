@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "XCr1kgRHdDTwpmVsDF7NUJ1BU9Q5Xq4S4cZ6WsnQRpA=",
+  "Hash": "JVyRYha5kdO9thba1Gx/PqO9xTF9JkjHKw3zDgYev3g=",
   "Source": "Doctrack",
   "BasePath": "_content/Doctrack",
   "Mode": "Default",
@@ -68,6 +68,23 @@
       "OriginalItemSpec": "wwwroot\\content\\floatingAction.css"
     },
     {
+      "Identity": "C:\\Doctrack\\wwwroot\\content\\index.css",
+      "SourceId": "Doctrack",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "BasePath": "_content/Doctrack",
+      "RelativePath": "content/index.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\content\\index.css"
+    },
+    {
       "Identity": "C:\\Doctrack\\wwwroot\\content\\modal.css",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
@@ -83,23 +100,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\content\\modal.css"
-    },
-    {
-      "Identity": "C:\\Doctrack\\wwwroot\\content\\table.css",
-      "SourceId": "Doctrack",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
-      "BasePath": "_content/Doctrack",
-      "RelativePath": "content/table.css",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\content\\table.css"
     },
     {
       "Identity": "C:\\Doctrack\\wwwroot\\css\\site.css",
@@ -168,6 +168,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\documentsIndex.js"
+    },
+    {
+      "Identity": "C:\\Doctrack\\wwwroot\\js\\documentsModal.js",
+      "SourceId": "Doctrack",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "BasePath": "_content/Doctrack",
+      "RelativePath": "js/documentsModal.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\documentsModal.js"
     },
     {
       "Identity": "C:\\Doctrack\\wwwroot\\js\\site.js",

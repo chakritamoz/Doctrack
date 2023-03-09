@@ -9,12 +9,12 @@
       "PackagePath": "staticwebassets\\content\\floatingAction.css"
     },
     {
-      "Id": "C:\\Doctrack\\wwwroot\\content\\modal.css",
-      "PackagePath": "staticwebassets\\content\\modal.css"
+      "Id": "C:\\Doctrack\\wwwroot\\content\\index.css",
+      "PackagePath": "staticwebassets\\content\\index.css"
     },
     {
-      "Id": "C:\\Doctrack\\wwwroot\\content\\table.css",
-      "PackagePath": "staticwebassets\\content\\table.css"
+      "Id": "C:\\Doctrack\\wwwroot\\content\\modal.css",
+      "PackagePath": "staticwebassets\\content\\modal.css"
     },
     {
       "Id": "C:\\Doctrack\\wwwroot\\css\\site.css",
@@ -31,6 +31,10 @@
     {
       "Id": "C:\\Doctrack\\wwwroot\\js\\documentsIndex.js",
       "PackagePath": "staticwebassets\\js\\documentsIndex.js"
+    },
+    {
+      "Id": "C:\\Doctrack\\wwwroot\\js\\documentsModal.js",
+      "PackagePath": "staticwebassets\\js\\documentsModal.js"
     },
     {
       "Id": "C:\\Doctrack\\wwwroot\\js\\site.js",

@@ -11,4 +11,6 @@ $(document).on('click', '#newId', () => {
 $(document).on('click', '#modal-accept-button', () => {
   modal.classList.toggle('display');
   $('#newId').attr('readonly', false);
+  $('#newId').toggleClass('unable-write');
+  $('#newId').focus();
 })

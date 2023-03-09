@@ -40,10 +40,12 @@ namespace Doctrack.Controllers
         DocumentsDetail = documentsDetail
       };
 
-      var myData = new SelectList(_context.Jobs, "Id", "Title");
-      var serializedData = JsonConvert.SerializeObject(myData);
-      ViewBag.JobsTitle = serializedData;
-      ViewBag.RanksTitle = new SelectList(_context.Ranks, "Id", "Title");
+      var selectListJobs = new SelectList(_context.Jobs, "Id", "Title");
+      var serializedJobs = JsonConvert.SerializeObject(selectListJobs);
+      ViewBag.JobsTitle = serializedJobs;
+      var selectListRanks =new SelectList(_context.Ranks, "Id", "Title");
+      var serializedRanks = JsonConvert.SerializeObject(selectListRanks);
+      ViewBag.RanksTitle = serializedRanks;
 
       return View(viewModel);
     }
@@ -174,6 +176,62 @@ namespace Doctrack.Controllers
       ViewBag.User = GetMachineName();
       ViewBag.Today = DateTime.Now.ToString("dd/MM/yyyy");
       return View(document);
+    }
+
+    //POST: Documents/AddEmployee/5
+    public async Task<ActionResult> AddEmployee(string id, int jobId, int rankId, string firstName, string lastName, string? remark)
+    {
+      if (_context.DocumentDetails == null)
+      {
+        return NotFound();
+      }
+
+      var document = await _context.Documents.FindAsync(id);
+      if (document == null)
+      {
+        return NotFound();
+      }
+
+      var employee = await _context.Employees
+        .FirstOrDefaultAsync(emp => 
+          emp.FirstName == firstName &&
+          emp.LastName == lastName
+        );
+      if (employee == null)
+      {
+        var newEmployee = new Employee {
+          Rank_Id = rankId,
+          Job_Id = jobId,
+          FirstName = firstName,
+          LastName = lastName,
+          PhoneNumber = null,
+          DocumentDetails = new List<DocumentDetail>()
+        };
+        _context.Employees.Add(newEmployee);
+        await _context.SaveChangesAsync();
+
+        employee = await _context.Employees
+        .FirstOrDefaultAsync(emp => 
+          emp.FirstName == firstName &&
+          emp.LastName == lastName
+        );
+        Console.WriteLine("after first");
+        if (employee == null)
+        {
+          return NotFound();
+        }
+      }
+
+      Console.WriteLine(employee.Id);
+      var documentDetail = new DocumentDetail {
+        Doc_Id = id,
+        Emp_Id = employee.Id,
+        Remark = remark
+      };
+
+      _context.DocumentDetails.Add(documentDetail);
+      await _context.SaveChangesAsync();
+      return Json(new { success = true });
     }
 
     //GET: Documents/UpdateOP/5

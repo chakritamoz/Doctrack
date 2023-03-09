@@ -52,19 +52,22 @@
   display: block;
 }
 
-.modal-body > span {
+#modal-form span {
   display: block;
 }
 
-.modal-body > input {
+#modal-form input,
+#modal-form select {
   height: 36px;
   border-radius: 15px;
   padding-left: 10px;
 }
 
-.modal-body > input,
-.modal-body > label,
-.modal-body > span {
+#modal-form input,
+#modal-form label,
+#modal-form select,
+#modal-form p,
+#modal-form span {
   position: relative;
   width: 50%;
   left: 50%;
@@ -80,7 +83,7 @@
 
 .close:hover,
 .close:focus {
-  color: #000;
+  color: #000000;
   text-decoration: none;
   cursor: pointer;
 }

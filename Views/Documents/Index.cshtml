@@ -87,7 +87,8 @@
     } @*End foreach Model.Documents*@
   </div>
 </div>
-<div id="jsonData" data-json="@ViewBag.JobsTitle"></div>
+<div id="jobsData" data-json="@ViewBag.JobsTitle"></div>
+<div id="ranksData" data-json="@ViewBag.RanksTitle"></div>
 
 <!-- Modal -->
 <div id="writableModal" class="modal-container">
@@ -118,17 +119,22 @@
     <a id="add-emp-icon" class="fab-action fab-action-1" disabled>
       <i class="bi bi-person-plus-fill"></i>
     </a>
-    <a id="edit-doc-icon" class="fab-action fab-action-2" disabled>
+    <a id="del-emp-icon" class="fab-action fab-action-2" disabled>
+      <i class="bi bi-person-dash-fill"></i>
+    </a>
+    <a id="edit-doc-icon" class="fab-action fab-action-3" disabled>
       <i class="bi bi-pencil-fill"></i>
     </a>
-    <a id="del-doc-icon" class="fab-action fab-action-3" disabled>
+    <a id="del-doc-icon" class="fab-action fab-action-4" disabled>
       <i class="bi bi-trash-fill"></i>
     </a>
-    <a id="upop-doc-icon" class="fab-action fab-action-4" disabled>
+    <a id="upop-doc-icon" class="fab-action fab-action-5" disabled>
       <i class="bi bi-send-check-fill"></i>
     </a>
-    <a id="sub-doc-icon" class="fab-action fab-action-5" disabled>
+    <a id="sub-doc-icon" class="fab-action fab-action-6" disabled>
       <i class="bi bi-file-earmark-check-fill"></i>
     </a>
   </div>
 </div>
+
+<script src="~/js/documentsIndex.js"></script>

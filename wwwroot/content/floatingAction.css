@@ -67,7 +67,7 @@
 }
 
 .fab-checkbox:checked ~ .fab-wheel {
-  width: 21rem;
+  width: 26rem;
 }
 
 .fab-checkbox:checked ~ .fab-wheel .fab-action {
@@ -75,23 +75,27 @@
 }
 
 .fab-wheel .fab-action-1 {
-  left: 0;
+  left: 1rem;
 }
 
 .fab-wheel .fab-action-2 {
-  left: 3.5rem;
+  left: 4.5rem;
 }
 
 .fab-wheel .fab-action-3 {
-  left: 7rem;
+  left: 8rem;
 }
 
 .fab-wheel .fab-action-4 {
-  left: 10.5rem;
+  left: 11.5rem;
 }
 
 .fab-wheel .fab-action-5 {
-  left: 14rem;
+  left: 15rem;
+}
+
+.fab-wheel .fab-action-6 {
+  left: 18.5rem;
 }
 
 @media screen and (min-width: 389px) {
