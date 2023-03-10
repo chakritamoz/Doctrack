@@ -75,6 +75,14 @@
   margin-bottom: 5px;
 }
 
+#modal-form-del {
+  position: relative;
+  width: 80%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 5px;
+}
+
 .close {
   color: #aaaaaa;
   font-size: 28px;

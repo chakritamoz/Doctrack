@@ -67,13 +67,14 @@ function setAttrId(docId) {
 // set modal title and modal body
 // set modal accept btn id
 $(document).on('click', '#del-doc-icon', () => {
+  cancelDeleteEmp();
   modalAcceptBtn.id = 'modal-delete-button';
   modal.classList.toggle("display");
-  const modalBody = $('<div id="modal-form"></div>');
+  const modalBody = $('<div id="modal-form-del"></div>');
   $('#modal-title').html('<div>Confirm delete document<div>');
   $('#modal-body').html(modalBody);
-  $('#modal-form').html('<p>Are you sure you want to delete document?</p>');
-  $('#modal-form').append('<p>Document ID: <span style="color:red">' + currentDocId + '</span></p>');
+  $('#modal-form-del').html('<p>Are you sure you want to delete document?</p>');
+  $('#modal-form-del').append('<p>Document ID: <span style="color:red;display:inline">' + currentDocId + '</span></p>');
 }); // end click del-doc-icon
 
 // when click update operation icon
@@ -81,6 +82,7 @@ $(document).on('click', '#del-doc-icon', () => {
 // set modal title and modal body
 // set modal accept btn id
 $(document).on('click', '#upop-doc-icon', () => {
+  cancelDeleteEmp();
   modalAcceptBtn.id = 'modal-upop-button';
   modal.classList.toggle('display');
   const modalBody = $('<div id="modal-form"></div>');
@@ -123,6 +125,7 @@ $('#edit-doc-icon').on('click', function(){
 // set modal title and modal body
 // set modal accept btn id
 $(document).on('click', '#sub-doc-icon', () => {
+  cancelDeleteEmp();
   modalAcceptBtn.id = 'modal-sub-button';
   modal.classList.toggle('display');
   const modalBody = $('<div id="modal-form"></div>');
@@ -154,6 +157,7 @@ $(document).on('click', '#sub-doc-icon', () => {
 // set modal title and modal body
 // set modal accept btn id
 $(document).on('click', '#add-emp-icon', () => {
+  cancelDeleteEmp();
   modalAcceptBtn.id = 'modal-addEmp-button';
   $('#modal-close-button').addClass('modal-closeAddEmp-button');
   $('.close').addClass('modal-closeAddEmp-button');
@@ -174,17 +178,19 @@ $(document).on('click', '#add-emp-icon', () => {
   $('#modal-form').append('<span class="text-danger"></span>');
 }); // end click sub-doc-icon
 
-$(document).on('click', '#del-emp-icon', () => {
-  triggerDelEmp = true;
-  $('#del-emp-icon').addClass('select');
-  $('.sub-row').css('cursor', 'pointer');
-});
-
 $(document).on('keyup', function(e) {
   if (e.keyCode === 27) {
-    triggerDelEmp = false;
-    $('#del-emp-icon').removeClass('select');
-    $('.sub-row').css('cursor', 'default');
+    cancelDeleteEmp();
+  }
+});
+
+$(document).on('click', '#del-emp-icon', () => {
+  if (!triggerDelEmp) {
+    triggerDelEmp = true;
+    $('#del-emp-icon').addClass('select');
+    $('.sub-row').css('cursor', 'pointer');
+  }else {
+    cancelDeleteEmp();
   }
 });
 
@@ -245,6 +251,7 @@ $(document).on('click', '#modal-addEmp-button', () => {
 });
 
 $(document).on('click', '.modal-closeAddEmp-button', () => {
+  localStorage.setItem('docId',currentDocId);
   triggerReload ? location.reload() : null;
 });
 
@@ -252,6 +259,7 @@ $(document).on('click', '.modal-closeAddEmp-button', () => {
 // send method post to update data
 $(document).on('click', '#modal-upop-button', () => {
   if (validateForm()){
+    localStorage.setItem('docId',currentDocId);
     var token = $('input[name="__RequestVerificationToken"]').val();
     $.ajax({
       url: 'Documents/UpdateOP/',
@@ -278,6 +286,7 @@ $(document).on('click', '#modal-upop-button', () => {
 // send method post to update data
 $(document).on('click', '#modal-sub-button', () => {
   if(validateForm()){
+    localStorage.setItem('docId',currentDocId);
     var token = $('input[name="__RequestVerificationToken"]').val();
     $.ajax({
       url: 'Documents/UpdateEndDate/',
@@ -303,6 +312,7 @@ $(document).on('click', '#modal-sub-button', () => {
 // when click confirm delete button on modal
 // send method post to update data
 $(document).on('click', '#modal-delete-button', () => {
+  localStorage.setItem('docId',currentDocId);
   var token = $('input[name="__RequestVerificationToken"]').val();
   $.ajax({
     url: '/Documents/Delete/',
@@ -378,4 +388,10 @@ function setSelectTitle() {
   $('#modal-form').append(labelRank);
   $('#modal-form').append(selectRank);
   $('#modal-form').append('<br />');
+}
+
+function cancelDeleteEmp() {
+  triggerDelEmp = false;
+  $('#del-emp-icon').removeClass('select');
+  $('.sub-row').css('cursor', 'default');
 }
