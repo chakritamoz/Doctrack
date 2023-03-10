@@ -8,6 +8,20 @@ const floatingBtn = document.getElementById("fabCheckbox");
 const jobsData = document.getElementById("jobsData").getAttribute("data-json");
 const ranksData = document.getElementById("ranksData").getAttribute("data-json");
 var currentDocId;
+var triggerReload = false;
+var triggerDelEmp = false;
+
+var docActive = localStorage.getItem('docId');
+if (docActive) {
+  currentDocId = docActive;
+  $('#' + docActive).addClass('active');
+  $('#sub-' + docActive).addClass('expand');
+  $('#sub-' + docActive).next().addClass('row-footer');
+  $('#fabCheckbox').attr('disabled', false);
+  $('#fabCheckbox').prop('checked', true);
+  setAttrId(currentDocId);
+  localStorage.clear();
+}
 
 function displayTable(docId) {
   currentDocId = docId;
@@ -141,6 +155,8 @@ $(document).on('click', '#sub-doc-icon', () => {
 // set modal accept btn id
 $(document).on('click', '#add-emp-icon', () => {
   modalAcceptBtn.id = 'modal-addEmp-button';
+  $('#modal-close-button').addClass('modal-closeAddEmp-button');
+  $('.close').addClass('modal-closeAddEmp-button');
   modal.classList.toggle('display');
   const modalBody = $('<div id="modal-form"></div>');
   $('#modal-title').html('<div>Add employee to document</div>');
@@ -158,17 +174,52 @@ $(document).on('click', '#add-emp-icon', () => {
   $('#modal-form').append('<span class="text-danger"></span>');
 }); // end click sub-doc-icon
 
+$(document).on('click', '#del-emp-icon', () => {
+  triggerDelEmp = true;
+  $('#del-emp-icon').addClass('select');
+  $('.sub-row').css('cursor', 'pointer');
+});
+
+$(document).on('keyup', function(e) {
+  if (e.keyCode === 27) {
+    triggerDelEmp = false;
+    $('#del-emp-icon').removeClass('select');
+    $('.sub-row').css('cursor', 'default');
+  }
+});
+
+$(document).on('click', '.main-row', () => {
+  localStorage.clear();
+});
+
+$(document).on('click', '.sub-row', function() {
+  if (triggerDelEmp) {
+    var docdId = $(this).attr('id');
+    localStorage.setItem('docId',currentDocId);
+    var token = $('input[name="__RequestVerificationToken"]').val();
+    $.ajax({
+      url: 'Documents/DeleteEmployee/',
+      type: 'POST',
+      headers: { 'RequestVerificationToken': token },
+      data: {
+        'id': docdId,
+        '__RequestVerificationToken': token
+      },
+      success: function(result) {
+        if (result.success) {
+          location.reload();
+        } else {
+          alert('An error occurred while deleting the employee from document.');
+        }
+      }
+    })
+  }
+})
 
 /*----------- Click confirm button on Modal -----------*/
 // when click confirm add employee button on modal
 // send method post to update data
 $(document).on('click', '#modal-addEmp-button', () => {
-  console.log(currentDocId);
-  console.log($('#selectJob').val());
-  console.log($('#selectRank').val());
-  console.log($('#firstName').val());
-  console.log($('#lastName').val());
-  console.log($('#remark').val());
   if (validateForm()) {
     var token = $('input[name="__RequestVerificationToken"]').val();
     $.ajax({
@@ -181,13 +232,20 @@ $(document).on('click', '#modal-addEmp-button', () => {
         'rankId': $('#selectRank').val(),
         'firstName': $('#firstName').val(),
         'lastName': $('#lastName').val(),
-        'remark': $('#remark').val()
+        'remark': $('#remark').val(),
+        '__RequestVerificationToken': token
       },
       success: function(result) {
-
+        $('#modal-form').append('<span class="text-success">Successfully added employees</span>');
+        $('#modal-form input').val("");
+        triggerReload = true;
       }
     })
   }
+});
+
+$(document).on('click', '.modal-closeAddEmp-button', () => {
+  triggerReload ? location.reload() : null;
 });
 
 // when click confirm update op button on modal
@@ -242,7 +300,7 @@ $(document).on('click', '#modal-sub-button', () => {
 }); // end click modal-upop-button
 
 
-// when click confirm button on modal
+// when click confirm delete button on modal
 // send method post to update data
 $(document).on('click', '#modal-delete-button', () => {
   var token = $('input[name="__RequestVerificationToken"]').val();
@@ -264,7 +322,6 @@ $(document).on('click', '#modal-delete-button', () => {
   });
 }); // end click #modal-delete-button
 
-
 // validate Operation edit form
 function validateForm() {
   var datePattern = /^(0?[1-9]|[12][0-9]|3[01])[\/](0?[1-9]|[1][012])[\/]\d{4}$/;
@@ -273,7 +330,7 @@ function validateForm() {
   $('#modal-form input').each(function() {
     var spanElement = $(this).next().next();
 
-    if ($(this).val() == '') {
+    if ($(this).val() == '' && !$(this).has("#remark")) {
       if (spanElement.length && spanElement.prop('tagName').toLowerCase() === 'span') {
         spanElement.html('Please enter data.<br />');
       }

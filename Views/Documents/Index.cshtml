@@ -15,7 +15,7 @@
       style="color:white;"
     >
       <i class="bi bi-file-earmark-plus-fill"></i>
-      New Document
+      Document
     </a>
   </div>
 </div>
@@ -75,7 +75,7 @@
           {
             @foreach (var docd in currentDD)
             {
-              <div class="flex-row sub-row">
+              <div id="@docd.Id" class="flex-row sub-row">
                 <div class="cell">@docd.Employee?.Job?.Title</div>
                 <div class="cell">@docd.Employee?.Rank?.Title</div>
                 <div class="cell">@docd.Employee?.FirstName</div>

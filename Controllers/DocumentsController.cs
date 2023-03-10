@@ -215,14 +215,20 @@ namespace Doctrack.Controllers
           emp.FirstName == firstName &&
           emp.LastName == lastName
         );
-        Console.WriteLine("after first");
         if (employee == null)
         {
           return NotFound();
         }
       }
+      else if (employee.Rank_Id != rankId || employee.Job_Id != jobId)
+      {
+        if (employee.Job_Id != jobId) employee.Job_Id = jobId;
+        if (employee.Rank_Id != rankId) employee.Rank_Id = rankId;
 
-      Console.WriteLine(employee.Id);
+        _context.Employees.Update(employee);
+        await _context.SaveChangesAsync();
+      }
+
       var documentDetail = new DocumentDetail {
         Doc_Id = id,
         Emp_Id = employee.Id,
@@ -266,12 +272,33 @@ namespace Doctrack.Controllers
       return Json(viewModel);
     }
 
+    //POST: Document/DeleteEmployee/5
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<ActionResult> DeleteEmployee(int id)
+    {
+      if (_context.DocumentDetails == null)
+      {
+        return Problem("Enitity set 'DoctrackContext.DocumentDetails' is null.");
+      }
+      
+      var documentDetail =  await _context.DocumentDetails.FindAsync(id);
+      if (documentDetail == null)
+      {
+        return NotFound();
+      }
+
+      _context.DocumentDetails.Remove(documentDetail);
+      await _context.SaveChangesAsync();
+      return Json( new { success = true });
+    }
+
     //POST: Documents/UpdateOP/5
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<ActionResult> UpdateOP(string Id, string Operation, DateTime OperationDate)
+    public async Task<ActionResult> UpdateOP(string id, string Operation, DateTime OperationDate)
     {
-      var existsModel = _context.Documents.Find(Id);
+      var existsModel = _context.Documents.Find(id);
       if (existsModel == null)
       {
         return NotFound();
@@ -287,9 +314,9 @@ namespace Doctrack.Controllers
     //POST: Documents/UpdateEndDate/5
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<ActionResult> UpdateEndDate(string Id, DateTime EndDate)
+    public async Task<ActionResult> UpdateEndDate(string id, DateTime EndDate)
     {
-      var existsModel = _context.Documents.Find(Id);
+      var existsModel = _context.Documents.Find(id);
       if (existsModel == null)
       {
         return NotFound();
