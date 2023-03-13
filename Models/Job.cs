@@ -8,6 +8,7 @@ namespace Doctrack.Models
     public int Id {get; set;}
     [Required(ErrorMessage = "Please enter job title.")]
     public string Title {get; set;}
-    public virtual ICollection<Employee>? Employees {get; set;}
+    public virtual ICollection<JobRankDetial> JobRankDetials {get; set;}
+    public virtual ICollection<DocumentDetail> DocumentDetails {get; set;}
   }
 }

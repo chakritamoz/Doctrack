@@ -5,8 +5,8 @@ const upOpDocIcon = document.getElementById("upop-doc-icon");
 const subDocIcon = document.getElementById("sub-doc-icon");
 const floatingBtn = document.getElementById("fabCheckbox");
 
-const jobsData = document.getElementById("jobsData").getAttribute("data-json");
-const ranksData = document.getElementById("ranksData").getAttribute("data-json");
+// const jobsData = document.getElementById("jobsData").getAttribute("data-json");
+// const ranksData = document.getElementById("ranksData").getAttribute("data-json");
 var currentDocId;
 var triggerReload = false;
 var triggerDelEmp = false;
@@ -363,6 +363,13 @@ function validateForm() {
 } // end validate op function
 
 function setSelectJob() {
+  $.ajax({
+    url: 'Document/GetAllJob',
+    type: 'GET',
+    success: function(result) {
+      
+    }
+  })
   const jobsParse = JSON.parse(jobsData);
   const labelJob = $('<label for="selectJob">Job</label><br />');
   const selectJob = $('<select id="selectJob"></select>');

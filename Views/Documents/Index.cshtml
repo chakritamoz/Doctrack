@@ -76,8 +76,8 @@
             @foreach (var docd in currentDD)
             {
               <div id="@docd.Id" class="flex-row sub-row">
-                <div class="cell">@docd.Employee?.Job?.Title</div>
-                <div class="cell">@docd.Employee?.Rank?.Title</div>
+                <div class="cell">@docd.Job?.Title</div>
+                <div class="cell">@docd.Rank?.Title</div>
                 <div class="cell">@docd.Employee?.FirstName</div>
                 <div class="cell">@docd.Employee?.LastName</div>
                 <div class="cell">@docd.Remark</div>

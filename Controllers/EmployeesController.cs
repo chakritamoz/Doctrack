@@ -18,8 +18,6 @@ namespace Doctrack.Controllers
     public async Task<IActionResult> Index()
     {
       var employees = await _context.Employees
-        .Include(e => e.Job)
-        .Include(e => e.Rank)
         .ToListAsync();
 
       return View(employees);
@@ -38,14 +36,6 @@ namespace Doctrack.Controllers
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create([Bind("Id, Rank_Id, Job_Id, FirstName, LastName, PhoneNumber")] Employee employee)
     {
-      if(employee.Job_Id == 0)
-      {
-        ModelState.AddModelError("Job_Id", "Please select a job.");
-      }
-      if(employee.Rank_Id == 0)
-      {
-        ModelState.AddModelError("Rank_Id", "Please select a rank.");
-      }
       if (ModelState.IsValid)
       {
         _context.Add(employee);
@@ -72,9 +62,6 @@ namespace Doctrack.Controllers
       {
         return NotFound();
       }
-
-      ViewBag.JobsTitle = new SelectList(_context.Jobs, "Id", "Title", employee.Job_Id);
-      ViewBag.RanksTitle = new SelectList(_context.Ranks, "Id", "Title", employee.Rank_Id);
 
       return View(employee);
     }
@@ -121,8 +108,6 @@ namespace Doctrack.Controllers
       }
 
       var employee = await _context.Employees
-        .Include(e => e.Job)
-        .Include(e => e.Rank)
         .FirstOrDefaultAsync(e => e.Id == id);
       if (employee == null)
       {
