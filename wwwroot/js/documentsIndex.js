@@ -364,37 +364,44 @@ function validateForm() {
 
 function setSelectJob() {
   $.ajax({
-    url: 'Document/GetAllJob',
+    url: 'Documents/GetAllJobs',
     type: 'GET',
+    async:  false,
+    dataType: 'json',
     success: function(result) {
-      
+      const labelJob = $('<label for="selectJob">Job</label><br />');
+      const selectJob = $('<select id="selectJob"></select>');
+      result.forEach(job => {
+        const optionJob = '<option value="' + job.id + '">' + job.title + '</option>';
+        selectJob.append(optionJob);
+      });
+    
+      $('#modal-form').append(labelJob);
+      $('#modal-form').append(selectJob);
+      $('#modal-form').append('<br />');
     }
-  })
-  const jobsParse = JSON.parse(jobsData);
-  const labelJob = $('<label for="selectJob">Job</label><br />');
-  const selectJob = $('<select id="selectJob"></select>');
-  jobsParse.forEach(job => {
-    const optionJob = '<option value="' + job.Value + '">' + job.Text + '</option>';
-    selectJob.append(optionJob);
   });
-
-  $('#modal-form').append(labelJob);
-  $('#modal-form').append(selectJob);
-  $('#modal-form').append('<br />');
 }
 
 function setSelectTitle() {
-  const ranksParse = JSON.parse(ranksData);
-  const labelRank = $('<label for="selectRank">Title</label><br />');
-  const selectRank = $('<select id="selectRank"></select>');
-  ranksParse.forEach(rank => {
-    const optionRank =  '<option value="' + rank.Value + '">' + rank.Text + '</option>';
-    selectRank.append(optionRank);
-  })
-
-  $('#modal-form').append(labelRank);
-  $('#modal-form').append(selectRank);
-  $('#modal-form').append('<br />');
+  $.ajax({
+    url: 'Documents/GetAllRanks',
+    type: 'GET',
+    async:  false,
+    dataType: 'json',
+    success: function (result) {
+      const labelRank = $('<label for="selectRank">Title</label><br />');
+      const selectRank = $('<select id="selectRank"></select>');
+      result.forEach(rank => {
+        const optionRank =  '<option value="' + rank.id + '">' + rank.title + '</option>';
+        selectRank.append(optionRank);
+      })
+    
+      $('#modal-form').append(labelRank);
+      $('#modal-form').append(selectRank);
+      $('#modal-form').append('<br />');
+    }
+  });
 }
 
 function cancelDeleteEmp() {

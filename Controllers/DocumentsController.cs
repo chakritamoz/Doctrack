@@ -278,8 +278,8 @@ namespace Doctrack.Controllers
       return Json(new { success = true });
     }
 
-    //GET: Document/GetAllJob
-    public async Task<ActionResult> GetAllJob()
+    //GET: Document/GetAllJobs
+    public async Task<ActionResult> GetAllJobs()
     {
       if (_context.Jobs == null)
       {
@@ -292,6 +292,22 @@ namespace Doctrack.Controllers
         return NotFound();
       }
       return Json(jobs);
+    }
+
+    //GET: Document/GetAllRanks
+        public async Task<ActionResult> GetAllRanks()
+    {
+      if (_context.Ranks == null)
+      {
+        return NotFound();
+      }
+      var ranks = await _context.Ranks.ToListAsync();
+
+      if (ranks == null)
+      {
+        return NotFound();
+      }
+      return Json(ranks);
     }
 
     //POST: Document/DeleteEmployee/5
