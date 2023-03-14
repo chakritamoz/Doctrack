@@ -50,9 +50,22 @@ hr {
   transition: transform .3s, box-shadow .3s ease-out;
 }
 
-.main-row {
+.main-row.normal {
   background-color: #B6E2D3;
 }
+
+.main-row.warning {
+  background-color: #fff999;
+}
+
+.main-row.late {
+  background-color: #D8A7B1;
+}
+
+.main-row.succuss {
+  background-color: #FAE8E0;
+}
+
 
 .flex-row.row-footer {
   margin-top: 4px;

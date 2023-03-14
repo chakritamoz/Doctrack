@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "uGROik+onYK4hjgyPEo1Md7SqveBxPJmjU5A0YSxSqo=",
+  "Hash": "TIGA/gpEY3yvR+tq4lwBXOwuTXJJytTA8NUYKX6fxsI=",
   "Source": "Doctrack",
   "BasePath": "_content/Doctrack",
   "Mode": "Default",
@@ -51,12 +51,12 @@
       "OriginalItemSpec": "D:\\Doctrack\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\Doctrack.bundle.scp.css"
     },
     {
-      "Identity": "D:\\Doctrack\\wwwroot\\content\\floatingAction.css",
+      "Identity": "D:\\Doctrack\\wwwroot\\css\\floatingAction.css",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
-      "RelativePath": "content/floatingAction.css",
+      "RelativePath": "css/floatingAction.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -65,15 +65,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\content\\floatingAction.css"
+      "OriginalItemSpec": "wwwroot\\css\\floatingAction.css"
     },
     {
-      "Identity": "D:\\Doctrack\\wwwroot\\content\\index.css",
+      "Identity": "D:\\Doctrack\\wwwroot\\css\\index.css",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
-      "RelativePath": "content/index.css",
+      "RelativePath": "css/index.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -82,15 +82,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\content\\index.css"
+      "OriginalItemSpec": "wwwroot\\css\\index.css"
     },
     {
-      "Identity": "D:\\Doctrack\\wwwroot\\content\\modal.css",
+      "Identity": "D:\\Doctrack\\wwwroot\\css\\modal.css",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
-      "RelativePath": "content/modal.css",
+      "RelativePath": "css/modal.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -99,7 +99,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\content\\modal.css"
+      "OriginalItemSpec": "wwwroot\\css\\modal.css"
     },
     {
       "Identity": "D:\\Doctrack\\wwwroot\\css\\site.css",

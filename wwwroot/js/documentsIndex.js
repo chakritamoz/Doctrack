@@ -5,8 +5,6 @@ const upOpDocIcon = document.getElementById("upop-doc-icon");
 const subDocIcon = document.getElementById("sub-doc-icon");
 const floatingBtn = document.getElementById("fabCheckbox");
 
-// const jobsData = document.getElementById("jobsData").getAttribute("data-json");
-// const ranksData = document.getElementById("ranksData").getAttribute("data-json");
 var currentDocId;
 var triggerReload = false;
 var triggerDelEmp = false;
@@ -22,6 +20,29 @@ if (docActive) {
   setAttrId(currentDocId);
   localStorage.clear();
 }
+
+$(document).ready(function() {
+  $.ajax({
+    url: 'Documents/GetDocPeriod',
+    type: 'GET',
+    dataType: 'json',
+    success: function(result) {
+      
+    }
+  })
+  var opDateElements = document.querySelectorAll('.main-row .cell-opDate');
+  opDateElements.forEach(element => {
+    console.log(element.textContent);
+    const date = element.textContent.split("/");
+    const day = date[0];
+    const month = date[1];
+    const year = date[2];
+    const opDate = new Date(month+"/"+day+"/"+year);
+    const nowDate = new Date();
+    const diffDate = ((nowDate-opDate)/86400000).toFixed(0);
+    console.log(diffDate);
+  })
+});
 
 function displayTable(docId) {
   currentDocId = docId;
@@ -332,6 +353,25 @@ $(document).on('click', '#modal-delete-button', () => {
   });
 }); // end click #modal-delete-button
 
+//When select new Job on modal
+$(document).on('change', '#selectJob', function() {
+  $('#selectRank').empty();
+  $.ajax({
+    url: 'Documents/GetAllRanks/',
+    type: 'GET',
+    async:  false,
+    dataType: 'json',
+    data: { 'id': $('#selectJob').val() },
+    success: function (result) {
+      console.log(result);
+      result.forEach(rank => {
+        const optionRank =  '<option value="' + rank.id + '">' + rank.title + '</option>';
+        $('#selectRank').append(optionRank);
+      })
+    } // End success
+  }); // End ajax
+});
+
 // validate Operation edit form
 function validateForm() {
   var datePattern = /^(0?[1-9]|[12][0-9]|3[01])[\/](0?[1-9]|[1][012])[\/]\d{4}$/;
@@ -363,45 +403,44 @@ function validateForm() {
 } // end validate op function
 
 function setSelectJob() {
+  const labelJob = $('<label for="selectJob">Job</label><br />');
+  const selectJob = $('<select id="selectJob"></select>');
   $.ajax({
     url: 'Documents/GetAllJobs',
     type: 'GET',
     async:  false,
     dataType: 'json',
     success: function(result) {
-      const labelJob = $('<label for="selectJob">Job</label><br />');
-      const selectJob = $('<select id="selectJob"></select>');
       result.forEach(job => {
         const optionJob = '<option value="' + job.id + '">' + job.title + '</option>';
         selectJob.append(optionJob);
       });
-    
-      $('#modal-form').append(labelJob);
-      $('#modal-form').append(selectJob);
-      $('#modal-form').append('<br />');
-    }
-  });
+    } // End success
+  }); // End ajax
+  $('#modal-form').append(labelJob);
+  $('#modal-form').append(selectJob);
+  $('#modal-form').append('<br />');
 }
 
 function setSelectTitle() {
+  const labelRank = $('<label for="selectRank">Title</label><br />');
+  const selectRank = $('<select id="selectRank"></select>');
   $.ajax({
-    url: 'Documents/GetAllRanks',
+    url: 'Documents/GetAllRanks/',
     type: 'GET',
     async:  false,
     dataType: 'json',
+    data: { 'id': $('#selectJob').val() },
     success: function (result) {
-      const labelRank = $('<label for="selectRank">Title</label><br />');
-      const selectRank = $('<select id="selectRank"></select>');
       result.forEach(rank => {
         const optionRank =  '<option value="' + rank.id + '">' + rank.title + '</option>';
         selectRank.append(optionRank);
       })
-    
-      $('#modal-form').append(labelRank);
-      $('#modal-form').append(selectRank);
-      $('#modal-form').append('<br />');
-    }
-  });
+    } // End success
+  }); // End ajax
+  $('#modal-form').append(labelRank);
+  $('#modal-form').append(selectRank);
+  $('#modal-form').append('<br />');
 }
 
 function cancelDeleteEmp() {

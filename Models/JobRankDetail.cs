@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Doctrack.Models
 {
-  public class JobRankDetial
+  public class JobRankDetail
   {
     [Key]
     public int Id {get; set;}

@@ -5,16 +5,16 @@
       "PackagePath": "staticwebassets\\Doctrack.bundle.scp.css"
     },
     {
-      "Id": "D:\\Doctrack\\wwwroot\\content\\floatingAction.css",
-      "PackagePath": "staticwebassets\\content\\floatingAction.css"
+      "Id": "D:\\Doctrack\\wwwroot\\css\\floatingAction.css",
+      "PackagePath": "staticwebassets\\css\\floatingAction.css"
     },
     {
-      "Id": "D:\\Doctrack\\wwwroot\\content\\index.css",
-      "PackagePath": "staticwebassets\\content\\index.css"
+      "Id": "D:\\Doctrack\\wwwroot\\css\\index.css",
+      "PackagePath": "staticwebassets\\css\\index.css"
     },
     {
-      "Id": "D:\\Doctrack\\wwwroot\\content\\modal.css",
-      "PackagePath": "staticwebassets\\content\\modal.css"
+      "Id": "D:\\Doctrack\\wwwroot\\css\\modal.css",
+      "PackagePath": "staticwebassets\\css\\modal.css"
     },
     {
       "Id": "D:\\Doctrack\\wwwroot\\css\\site.css",

@@ -25,6 +25,8 @@ namespace Doctrack.Controllers
 
       var documentsDetail = await _context.DocumentDetails
         .Include(dd => dd.Document)
+        .Include(dd => dd.Job)
+        .Include(dd => dd.Rank)
         .Include(dd => dd.Employee)
         .ToListAsync();
 
@@ -37,13 +39,6 @@ namespace Doctrack.Controllers
         Documents = orderDocument,
         DocumentsDetail = documentsDetail
       };
-
-      // var selectListJobs = new SelectList(_context.Jobs, "Id", "Title");
-      // var serializedJobs = JsonConvert.SerializeObject(selectListJobs);
-      // ViewBag.JobsTitle = serializedJobs;
-      // var selectListRanks =new SelectList(_context.Ranks, "Id", "Title");
-      // var serializedRanks = JsonConvert.SerializeObject(selectListRanks);
-      // ViewBag.RanksTitle = serializedRanks;
 
       return View(viewModel);
     }
@@ -219,6 +214,8 @@ namespace Doctrack.Controllers
 
       var documentDetail = new DocumentDetail {
         Doc_Id = id,
+        Job_Id = jobId,
+        Rank_Id = rankId,
         Emp_Id = employee.Id,
         Remark = remark
       };
@@ -294,19 +291,28 @@ namespace Doctrack.Controllers
       return Json(jobs);
     }
 
-    //GET: Document/GetAllRanks
-        public async Task<ActionResult> GetAllRanks()
+    //GET: Document/GetAllRanks/5
+    public async Task<ActionResult> GetAllRanks(int? id)
     {
-      if (_context.Ranks == null)
+      if (id == null || _context.JobRankDetails == null)
       {
         return NotFound();
       }
-      var ranks = await _context.Ranks.ToListAsync();
+      var jobRankDet = await _context.JobRankDetails
+        .Include(rankd => rankd.Rank)
+        .Where(rankd => rankd.Job_Id == id)
+        .ToListAsync();
 
-      if (ranks == null)
+      if (jobRankDet == null)
       {
         return NotFound();
       }
+      
+      var ranks = jobRankDet.Select(rankd => new {
+        id = rankd.Rank?.Id,
+        title = rankd.Rank?.Title
+      });
+
       return Json(ranks);
     }
 
@@ -369,6 +375,17 @@ namespace Doctrack.Controllers
       _context.Remove(document);
       await _context.SaveChangesAsync();
       return Json(new { success = true });
+    }
+
+    //GET: Documents/GetDocPeriod
+    public async Task<ActionResult> GetDocPeriod()
+    {
+      if (_context.DocumentTypes == null)
+      {
+        return NotFound();
+      }
+      var docTypes = await _context.DocumentTypes
+        .ToListAsync();
     }
 
     public bool DocumentExists(string id)

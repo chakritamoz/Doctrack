@@ -8,8 +8,8 @@ namespace Doctrack.Models
     public int Id {get; set;}
     [Required(ErrorMessage = "Please enter document title.")]
     public string Title {get; set;}
-    [Required(ErrorMessage = "Please enter document period(day).")]
-    public int? Period {get; set;} = 7;
+    public int? PeriodWarning {get; set;}
+    public int? PeriodEnd {get; set;} = 7;
     public virtual ICollection<Document>? Documents {get; set;}
   }
 }
