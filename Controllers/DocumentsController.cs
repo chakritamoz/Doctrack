@@ -377,17 +377,6 @@ namespace Doctrack.Controllers
       return Json(new { success = true });
     }
 
-    //GET: Documents/GetDocPeriod
-    public async Task<ActionResult> GetDocPeriod()
-    {
-      if (_context.DocumentTypes == null)
-      {
-        return NotFound();
-      }
-      var docTypes = await _context.DocumentTypes
-        .ToListAsync();
-    }
-
     public bool DocumentExists(string id)
     {
       return (_context.Documents?.Any(doc => doc.Id == id)).GetValueOrDefault();

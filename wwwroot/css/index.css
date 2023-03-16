@@ -55,15 +55,16 @@ hr {
 }
 
 .main-row.warning {
-  background-color: #fff999;
+  background-color: #f9b544;
 }
 
 .main-row.late {
   background-color: #D8A7B1;
 }
 
-.main-row.succuss {
-  background-color: #FAE8E0;
+.main-row.success {
+  background-color: #9f9c9c;
+  /* background-color: #FAE8E0; */
 }
 
 

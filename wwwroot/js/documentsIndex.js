@@ -21,31 +21,9 @@ if (docActive) {
   localStorage.clear();
 }
 
-$(document).ready(function() {
-  $.ajax({
-    url: 'Documents/GetDocPeriod',
-    type: 'GET',
-    dataType: 'json',
-    success: function(result) {
-      
-    }
-  })
-  var opDateElements = document.querySelectorAll('.main-row .cell-opDate');
-  opDateElements.forEach(element => {
-    console.log(element.textContent);
-    const date = element.textContent.split("/");
-    const day = date[0];
-    const month = date[1];
-    const year = date[2];
-    const opDate = new Date(month+"/"+day+"/"+year);
-    const nowDate = new Date();
-    const diffDate = ((nowDate-opDate)/86400000).toFixed(0);
-    console.log(diffDate);
-  })
-});
 
-function displayTable(docId) {
-  currentDocId = docId;
+$('.main-row').click(function(){
+  currentDocId = $(this).attr('id');
   const target = document.getElementById(currentDocId);
   const subTarget = document.getElementById("sub-"+currentDocId);
 
@@ -66,7 +44,7 @@ function displayTable(docId) {
     floatingBtn.removeAttribute('disabled');
     setAttrId(currentDocId);
   }
-}
+});
 
 function disableActive() {
   const disableElements = document.querySelectorAll('.active, .expand, .row-footer');
