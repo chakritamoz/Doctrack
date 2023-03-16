@@ -3,6 +3,7 @@ using System;
 using Doctrack.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Doctrack.Migrations
 {
     [DbContext(typeof(DoctrackContext))]
-    partial class DoctrackContextModelSnapshot : ModelSnapshot
+    [Migration("20230313082118_Update relation Job and Rank")]
+    partial class UpdaterelationJobandRank
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.2");
@@ -99,10 +102,8 @@ namespace Doctrack.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("PeriodEnd")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("PeriodWarning")
+                    b.Property<int?>("Period")
+                        .IsRequired()
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Title")
@@ -151,7 +152,7 @@ namespace Doctrack.Migrations
                     b.ToTable("Jobs");
                 });
 
-            modelBuilder.Entity("Doctrack.Models.JobRankDetail", b =>
+            modelBuilder.Entity("Doctrack.Models.JobRankDetial", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -169,7 +170,7 @@ namespace Doctrack.Migrations
 
                     b.HasIndex("Rank_Id");
 
-                    b.ToTable("JobRankDetails");
+                    b.ToTable("JobRankDetial");
                 });
 
             modelBuilder.Entity("Doctrack.Models.Rank", b =>
@@ -233,16 +234,16 @@ namespace Doctrack.Migrations
                     b.Navigation("Rank");
                 });
 
-            modelBuilder.Entity("Doctrack.Models.JobRankDetail", b =>
+            modelBuilder.Entity("Doctrack.Models.JobRankDetial", b =>
                 {
                     b.HasOne("Doctrack.Models.Job", "Job")
-                        .WithMany("JobRankDetails")
+                        .WithMany("JobRankDetials")
                         .HasForeignKey("Job_Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Doctrack.Models.Rank", "Rank")
-                        .WithMany("JobRankDetails")
+                        .WithMany("JobRankDetials")
                         .HasForeignKey("Rank_Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -271,14 +272,14 @@ namespace Doctrack.Migrations
                 {
                     b.Navigation("DocumentDetails");
 
-                    b.Navigation("JobRankDetails");
+                    b.Navigation("JobRankDetials");
                 });
 
             modelBuilder.Entity("Doctrack.Models.Rank", b =>
                 {
                     b.Navigation("DocumentDetails");
 
-                    b.Navigation("JobRankDetails");
+                    b.Navigation("JobRankDetials");
                 });
 #pragma warning restore 612, 618
         }

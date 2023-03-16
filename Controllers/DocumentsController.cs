@@ -25,9 +25,9 @@ namespace Doctrack.Controllers
 
       var documentsDetail = await _context.DocumentDetails
         .Include(dd => dd.Document)
+        .Include(dd => dd.Job)
+        .Include(dd => dd.Rank)
         .Include(dd => dd.Employee)
-        .Include(dd => dd.Employee.Job)
-        .Include(dd => dd.Employee.Rank)
         .ToListAsync();
 
       var orderDocument = documents
@@ -39,13 +39,6 @@ namespace Doctrack.Controllers
         Documents = orderDocument,
         DocumentsDetail = documentsDetail
       };
-
-      var selectListJobs = new SelectList(_context.Jobs, "Id", "Title");
-      var serializedJobs = JsonConvert.SerializeObject(selectListJobs);
-      ViewBag.JobsTitle = serializedJobs;
-      var selectListRanks =new SelectList(_context.Ranks, "Id", "Title");
-      var serializedRanks = JsonConvert.SerializeObject(selectListRanks);
-      ViewBag.RanksTitle = serializedRanks;
 
       return View(viewModel);
     }
@@ -200,8 +193,6 @@ namespace Doctrack.Controllers
       if (employee == null)
       {
         var newEmployee = new Employee {
-          Rank_Id = rankId,
-          Job_Id = jobId,
           FirstName = firstName,
           LastName = lastName,
           PhoneNumber = null,
@@ -220,17 +211,11 @@ namespace Doctrack.Controllers
           return NotFound();
         }
       }
-      else if (employee.Rank_Id != rankId || employee.Job_Id != jobId)
-      {
-        if (employee.Job_Id != jobId) employee.Job_Id = jobId;
-        if (employee.Rank_Id != rankId) employee.Rank_Id = rankId;
-
-        _context.Employees.Update(employee);
-        await _context.SaveChangesAsync();
-      }
 
       var documentDetail = new DocumentDetail {
         Doc_Id = id,
+        Job_Id = jobId,
+        Rank_Id = rankId,
         Emp_Id = employee.Id,
         Remark = remark
       };
@@ -272,6 +257,65 @@ namespace Doctrack.Controllers
       return Json(viewModel);
     }
 
+    //POST: Documents/UpdateOP/5
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<ActionResult> UpdateOP(string id, string Operation, DateTime OperationDate)
+    {
+      var existsModel = _context.Documents.Find(id);
+      if (existsModel == null)
+      {
+        return NotFound();
+      }
+      existsModel.Operation = Operation;
+      existsModel.OperationDate = OperationDate;
+      
+      _context.Update(existsModel);
+      await _context.SaveChangesAsync();
+      return Json(new { success = true });
+    }
+
+    //GET: Document/GetAllJobs
+    public async Task<ActionResult> GetAllJobs()
+    {
+      if (_context.Jobs == null)
+      {
+        return NotFound();
+      }
+      var jobs = await _context.Jobs.ToListAsync();
+
+      if (jobs == null)
+      {
+        return NotFound();
+      }
+      return Json(jobs);
+    }
+
+    //GET: Document/GetAllRanks/5
+    public async Task<ActionResult> GetAllRanks(int? id)
+    {
+      if (id == null || _context.JobRankDetails == null)
+      {
+        return NotFound();
+      }
+      var jobRankDet = await _context.JobRankDetails
+        .Include(rankd => rankd.Rank)
+        .Where(rankd => rankd.Job_Id == id)
+        .ToListAsync();
+
+      if (jobRankDet == null)
+      {
+        return NotFound();
+      }
+      
+      var ranks = jobRankDet.Select(rankd => new {
+        id = rankd.Rank?.Id,
+        title = rankd.Rank?.Title
+      });
+
+      return Json(ranks);
+    }
+
     //POST: Document/DeleteEmployee/5
     [HttpPost]
     [ValidateAntiForgeryToken]
@@ -293,23 +337,6 @@ namespace Doctrack.Controllers
       return Json( new { success = true });
     }
 
-    //POST: Documents/UpdateOP/5
-    [HttpPost]
-    [ValidateAntiForgeryToken]
-    public async Task<ActionResult> UpdateOP(string id, string Operation, DateTime OperationDate)
-    {
-      var existsModel = _context.Documents.Find(id);
-      if (existsModel == null)
-      {
-        return NotFound();
-      }
-      existsModel.Operation = Operation;
-      existsModel.OperationDate = OperationDate;
-      
-      _context.Update(existsModel);
-      await _context.SaveChangesAsync();
-      return Json(new { success = true });
-    }
 
     //POST: Documents/UpdateEndDate/5
     [HttpPost]

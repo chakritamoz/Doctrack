@@ -5,8 +5,6 @@ const upOpDocIcon = document.getElementById("upop-doc-icon");
 const subDocIcon = document.getElementById("sub-doc-icon");
 const floatingBtn = document.getElementById("fabCheckbox");
 
-const jobsData = document.getElementById("jobsData").getAttribute("data-json");
-const ranksData = document.getElementById("ranksData").getAttribute("data-json");
 var currentDocId;
 var triggerReload = false;
 var triggerDelEmp = false;
@@ -23,8 +21,9 @@ if (docActive) {
   localStorage.clear();
 }
 
-function displayTable(docId) {
-  currentDocId = docId;
+
+$('.main-row').click(function(){
+  currentDocId = $(this).attr('id');
   const target = document.getElementById(currentDocId);
   const subTarget = document.getElementById("sub-"+currentDocId);
 
@@ -45,7 +44,7 @@ function displayTable(docId) {
     floatingBtn.removeAttribute('disabled');
     setAttrId(currentDocId);
   }
-}
+});
 
 function disableActive() {
   const disableElements = document.querySelectorAll('.active, .expand, .row-footer');
@@ -332,6 +331,25 @@ $(document).on('click', '#modal-delete-button', () => {
   });
 }); // end click #modal-delete-button
 
+//When select new Job on modal
+$(document).on('change', '#selectJob', function() {
+  $('#selectRank').empty();
+  $.ajax({
+    url: 'Documents/GetAllRanks/',
+    type: 'GET',
+    async:  false,
+    dataType: 'json',
+    data: { 'id': $('#selectJob').val() },
+    success: function (result) {
+      console.log(result);
+      result.forEach(rank => {
+        const optionRank =  '<option value="' + rank.id + '">' + rank.title + '</option>';
+        $('#selectRank').append(optionRank);
+      })
+    } // End success
+  }); // End ajax
+});
+
 // validate Operation edit form
 function validateForm() {
   var datePattern = /^(0?[1-9]|[12][0-9]|3[01])[\/](0?[1-9]|[1][012])[\/]\d{4}$/;
@@ -363,28 +381,41 @@ function validateForm() {
 } // end validate op function
 
 function setSelectJob() {
-  const jobsParse = JSON.parse(jobsData);
   const labelJob = $('<label for="selectJob">Job</label><br />');
   const selectJob = $('<select id="selectJob"></select>');
-  jobsParse.forEach(job => {
-    const optionJob = '<option value="' + job.Value + '">' + job.Text + '</option>';
-    selectJob.append(optionJob);
-  });
-
+  $.ajax({
+    url: 'Documents/GetAllJobs',
+    type: 'GET',
+    async:  false,
+    dataType: 'json',
+    success: function(result) {
+      result.forEach(job => {
+        const optionJob = '<option value="' + job.id + '">' + job.title + '</option>';
+        selectJob.append(optionJob);
+      });
+    } // End success
+  }); // End ajax
   $('#modal-form').append(labelJob);
   $('#modal-form').append(selectJob);
   $('#modal-form').append('<br />');
 }
 
 function setSelectTitle() {
-  const ranksParse = JSON.parse(ranksData);
   const labelRank = $('<label for="selectRank">Title</label><br />');
   const selectRank = $('<select id="selectRank"></select>');
-  ranksParse.forEach(rank => {
-    const optionRank =  '<option value="' + rank.Value + '">' + rank.Text + '</option>';
-    selectRank.append(optionRank);
-  })
-
+  $.ajax({
+    url: 'Documents/GetAllRanks/',
+    type: 'GET',
+    async:  false,
+    dataType: 'json',
+    data: { 'id': $('#selectJob').val() },
+    success: function (result) {
+      result.forEach(rank => {
+        const optionRank =  '<option value="' + rank.id + '">' + rank.title + '</option>';
+        selectRank.append(optionRank);
+      })
+    } // End success
+  }); // End ajax
   $('#modal-form').append(labelRank);
   $('#modal-form').append(selectRank);
   $('#modal-form').append('<br />');

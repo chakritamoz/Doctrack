@@ -3,6 +3,7 @@ using System;
 using Doctrack.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Doctrack.Migrations
 {
     [DbContext(typeof(DoctrackContext))]
-    partial class DoctrackContextModelSnapshot : ModelSnapshot
+    [Migration("20230314091921_Document type add period warning")]
+    partial class Documenttypeaddperiodwarning
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.2");

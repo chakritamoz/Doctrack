@@ -35,31 +35,30 @@
     </div>
     @foreach (var doc in Model.Documents)
     {
-      <div id="@doc.Id" class="flex-row main-row" onclick="displayTable('@doc.Id')" 
-        @if
-        (
-          doc.EndDate != null
-        ){@Html.Raw("style='background-color: #FAE8E0;'")} 
-        @if
-        (
-          doc.EndDate == null &&
-          (DateTime.Now.Subtract(
-              doc.ReceiptDate??DateTime.MinValue
-              ).TotalDays > doc.DocumentType?.Period
-          )
-        ){@Html.Raw("style='background-color: #D8A7B1;'")}
-      >
-        <div class="cell">@doc.ReceiptDate?.ToString("dd/MM/yyyy")</div>
+      <div id="@doc.Id" class='flex-row main-row
+        @(doc.EndDate != null ?
+          "success" :
+          doc.OperationDate == null ?
+          "normal" :
+          DateTime.Now.Subtract(
+            doc.OperationDate??DateTime.MinValue
+          ).TotalDays >= doc.DocumentType?.PeriodEnd ?
+          "late" :
+          DateTime.Now.Subtract(
+            doc.OperationDate??DateTime.MinValue
+          ).TotalDays >= doc.DocumentType?.PeriodWarning ?
+          "warning" :
+          "normal"
+        )'>
+        <div class="cell receipt-date" data-receiptDate='@doc.ReceiptDate?.ToString("dd/MM/yyyy")'></div>
         <div class="cell">@doc.Id</div>
         <div class="cell">@doc.DocumentType?.Title</div>
         <div class="cell cell-title">@doc.Doc_Title</div>
         <div class="cell">@doc.Operation</div>
-        <div class="cell">@doc.OperationDate?.ToString("dd/MM/yyyy")</div>
+        <div class="cell operation-date" data-operationDate='@doc.OperationDate?.ToString("dd/MM/yyyy")'></div>
         <div class="cell">@doc.CommandOrder</div>
         <div class="cell">@doc.RemarkAll</div>
-        <div class="cell">
-          @doc.EndDate?.ToString("dd/MM/yyyy")
-        </div>
+        <div class="cell end-date" data-endDate='@doc.EndDate?.ToString("dd/MM/yyyy")'></div>
       </div>
       <div id="sub-@doc.Id" class="flex-container sub-content">
         <div class="flex-header sub-header">
@@ -69,20 +68,18 @@
           <div class="cell">Last Name</div>
           <div class="cell">Remark</div>
         </div>
-        @{ var currentDD = Model.DocumentsDetail
-            .Where(dd => dd.Doc_Id == doc.Id);
-          @if (currentDD.Count() > 0)
+        @if (doc.DocumentDetails?.Count() > 0)
           {
-            @foreach (var docd in currentDD)
+            @foreach (var docd in doc.DocumentDetails)
             {
               <div id="@docd.Id" class="flex-row sub-row">
-                <div class="cell">@docd.Employee?.Job?.Title</div>
-                <div class="cell">@docd.Employee?.Rank?.Title</div>
+                <div class="cell">@docd.Job?.Title</div>
+                <div class="cell">@docd.Rank?.Title</div>
                 <div class="cell">@docd.Employee?.FirstName</div>
                 <div class="cell">@docd.Employee?.LastName</div>
                 <div class="cell">@docd.Remark</div>
               </div>
-        }}} @*End razor tag*@
+        }} @*End razor tag*@
       </div>
     } @*End foreach Model.Documents*@
   </div>
@@ -138,3 +135,46 @@
 </div>
 
 <script src="~/js/documentsIndex.js"></script>
+<script>
+
+  //Convert format year to Buddhist
+  $(document).ready(function(event) {
+    const receiptDates = document.querySelectorAll('.receipt-date');
+    const operationDates = document.querySelectorAll('.operation-date');
+    const endDates = document.querySelectorAll('.end-date');
+
+    const buddhistOptions = {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      calendar: 'buddhist',
+      @* numberingSystem: 'thai' *@
+    };
+
+    const thaiBuddhistFormat = new Intl.DateTimeFormat('th-TH-u-ca-buddhist', buddhistOptions);
+
+    receiptDates.forEach(div => {
+      const receiptDate = div.getAttribute('data-receiptDate');
+      const [day, month, year] = receiptDate.split('/').map(Number);
+      const date = new Date(year, month-1, day);
+      div.textContent = thaiBuddhistFormat.format(date);
+    });
+  
+    operationDates.forEach(div => {
+      const operationDate = div.getAttribute('data-operationDate');
+      if (operationDate == "") return;
+      const [day, month, year] = operationDate.split('/').map(Number);
+      const date = new Date(year, month-1, day);
+      div.textContent = thaiBuddhistFormat.format(date);
+    });
+
+    endDates.forEach(div => {
+      const endDate = div.getAttribute('data-endDate');
+      if (endDate == "") return;
+      const [day, month, year] = endDate.split('/').map(Number);
+      const date = new Date(year, month-1, day);
+      div.textContent = thaiBuddhistFormat.format(date);
+    });
+  });
+  
+</script>

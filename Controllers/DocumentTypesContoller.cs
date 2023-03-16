@@ -63,7 +63,7 @@ namespace Doctrack.Controllers
     //POST: DocumentTypes/Edit/5
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(int id, [Bind("Id, Title, Period")] DocumentType documentType)
+    public async Task<IActionResult> Edit(int id, [Bind("Id, Title, PeriodWarning, PeriodEnd")] DocumentType documentType)
     {
       if (_context.DocumentTypes == null)
       {

@@ -9,113 +9,113 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Doctrack
 build_property.RootNamespace = Doctrack
-build_property.ProjectDir = C:\Doctrack\
+build_property.ProjectDir = D:\Doctrack\
 build_property.RazorLangVersion = 7.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Doctrack
+build_property.MSBuildProjectDirectory = D:\Doctrack
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Doctrack/Views/Documents/Create.cshtml]
+[D:/Doctrack/Views/Documents/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdW1lbnRzXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Doctrack/Views/Documents/Edit.cshtml]
+[D:/Doctrack/Views/Documents/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdW1lbnRzXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Doctrack/Views/Documents/Index.cshtml]
+[D:/Doctrack/Views/Documents/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdW1lbnRzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Doctrack/Views/DocumentTypes/Create.cshtml]
+[D:/Doctrack/Views/DocumentTypes/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdW1lbnRUeXBlc1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Doctrack/Views/DocumentTypes/Delete.cshtml]
+[D:/Doctrack/Views/DocumentTypes/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdW1lbnRUeXBlc1xEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Doctrack/Views/DocumentTypes/Edit.cshtml]
+[D:/Doctrack/Views/DocumentTypes/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdW1lbnRUeXBlc1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Doctrack/Views/DocumentTypes/Index.cshtml]
+[D:/Doctrack/Views/DocumentTypes/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdW1lbnRUeXBlc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Doctrack/Views/Employees/Create.cshtml]
+[D:/Doctrack/Views/Employees/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1wbG95ZWVzXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Doctrack/Views/Employees/Delete.cshtml]
+[D:/Doctrack/Views/Employees/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1wbG95ZWVzXERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Doctrack/Views/Employees/Edit.cshtml]
+[D:/Doctrack/Views/Employees/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1wbG95ZWVzXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Doctrack/Views/Employees/Index.cshtml]
+[D:/Doctrack/Views/Employees/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1wbG95ZWVzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Doctrack/Views/Home/Index.cshtml]
+[D:/Doctrack/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Doctrack/Views/Home/Privacy.cshtml]
+[D:/Doctrack/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Doctrack/Views/Jobs/Create.cshtml]
+[D:/Doctrack/Views/Jobs/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSm9ic1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Doctrack/Views/Jobs/Delete.cshtml]
+[D:/Doctrack/Views/Jobs/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSm9ic1xEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Doctrack/Views/Jobs/Edit.cshtml]
+[D:/Doctrack/Views/Jobs/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSm9ic1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Doctrack/Views/Jobs/Index.cshtml]
+[D:/Doctrack/Views/Jobs/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSm9ic1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Doctrack/Views/Ranks/Create.cshtml]
+[D:/Doctrack/Views/Ranks/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmFua3NcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Doctrack/Views/Ranks/Delete.cshtml]
+[D:/Doctrack/Views/Ranks/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmFua3NcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Doctrack/Views/Ranks/Edit.cshtml]
+[D:/Doctrack/Views/Ranks/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmFua3NcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Doctrack/Views/Ranks/Index.cshtml]
+[D:/Doctrack/Views/Ranks/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmFua3NcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Doctrack/Views/Shared/Error.cshtml]
+[D:/Doctrack/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Doctrack/Views/Shared/_ValidationScriptsPartial.cshtml]
+[D:/Doctrack/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Doctrack/Views/_ViewImports.cshtml]
+[D:/Doctrack/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Doctrack/Views/_ViewStart.cshtml]
+[D:/Doctrack/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Doctrack/Views/Shared/_Layout.cshtml]
+[D:/Doctrack/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-hegxyw3eo3
