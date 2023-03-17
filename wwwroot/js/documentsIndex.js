@@ -22,55 +22,51 @@ if (docActive) {
   localStorage.clear();
 }
 
-
-$('.main-row').click(function(){
-  if (triggerExpand) return;
-  currentDocId = $(this).attr('id');
-  const target = document.getElementById(currentDocId);
-  const subTarget = document.getElementById("sub-"+currentDocId);
-
-  if (target.classList.contains('active')) {
-    disableActive();
-    floatingBtn.setAttribute('disabled', true);
-    floatingBtn.checked = false;
-  }else if (subTarget == null) {
-    disableActive();
-    floatingBtn.removeAttribute('disabled');
-    setAttrId(currentDocId);
-  }else {
-    disableActive();
-    const nextTarget = subTarget.nextElementSibling;
-    target.classList.toggle('active');
-    subTarget.classList.toggle('expand');
-    if (nextTarget != null) nextTarget.classList.toggle('row-footer');
-    floatingBtn.removeAttribute('disabled');
-    setAttrId(currentDocId);
-  }
-});
-
 $('.main-row').swipe({
-  swipeLeft: function() {
-    $('.container-wrapper').css('overflow', 'hidden');
-    triggerExpand = true;
-    $(this).animate({
-      marginLeft: "-10%"
-    }, 500, function() {
-
-      console.log('ohh godd its good.');
-    })
-    // Handle left swipe event
+  click: function() {
+    currentDocId = $(this).attr('id');
+    const target = document.getElementById(currentDocId);
+    const subTarget = document.getElementById("sub-"+currentDocId);
+  
+    if (target.classList.contains('active')) {
+      disableActive();
+      floatingBtn.setAttribute('disabled', true);
+      floatingBtn.checked = false;
+    }else if (subTarget == null) {
+      disableActive();
+      floatingBtn.removeAttribute('disabled');
+      setAttrId(currentDocId);
+    }else {
+      disableActive();
+      const nextTarget = subTarget.nextElementSibling;
+      target.classList.toggle('active');
+      subTarget.classList.toggle('expand');
+      if (nextTarget != null) nextTarget.classList.toggle('row-footer');
+      floatingBtn.removeAttribute('disabled');
+      setAttrId(currentDocId);
+    }
   },
-  swipeRight: function() {
-    $(this).animate({
-      marginLeft: "0%"
-    }, 500, function() {
+  swipeStatus: function(event, phase, direction, distance, duration, fingers, fingerData, currentDirection){
+    // console.log(`Phase: ${phase}`);
+    // console.log(`Direction: ${direction}`);
+    // console.log(`Distance: ${distance}`);
+    // console.log(`Duration: ${duration}`);
+    // console.log(`Finger: ${fingers}`);
+    // console.log(`FingerData: ${fingerData}`);
+    // console.log(`CurrentDirection: ${currentDirection}`);
+    if (phase != 'cancel' && phase != 'end'){
+      $('.container-wrapper').css('overflow', 'hidden');
+      $(this).css('transform', `translate(-${distance}px,0px)`)
+    }
+    if (phase == 'end') {
+      $(this).css('transform', 'translate(-100px,0px)');
+    }
+    if (phase == 'cancel'){
       $('.container-wrapper').css('overflow', 'visible');
-      console.log('ohh fuck its very good.');
-    triggerExpand = false;
-
-    })
-    // Handle right swipe event
-  }
+      $(this).css('transform', `translate(0px,0px)`);
+    }
+  },
+  threshold: 100,
 });
 
 function disableActive() {
