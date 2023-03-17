@@ -6,6 +6,7 @@ const subDocIcon = document.getElementById("sub-doc-icon");
 const floatingBtn = document.getElementById("fabCheckbox");
 
 var currentDocId;
+var triggerExpand = false;
 var triggerReload = false;
 var triggerDelEmp = false;
 
@@ -23,6 +24,7 @@ if (docActive) {
 
 
 $('.main-row').click(function(){
+  if (triggerExpand) return;
   currentDocId = $(this).attr('id');
   const target = document.getElementById(currentDocId);
   const subTarget = document.getElementById("sub-"+currentDocId);
@@ -43,6 +45,31 @@ $('.main-row').click(function(){
     if (nextTarget != null) nextTarget.classList.toggle('row-footer');
     floatingBtn.removeAttribute('disabled');
     setAttrId(currentDocId);
+  }
+});
+
+$('.main-row').swipe({
+  swipeLeft: function() {
+    $('.container-wrapper').css('overflow', 'hidden');
+    triggerExpand = true;
+    $(this).animate({
+      marginLeft: "-10%"
+    }, 500, function() {
+
+      console.log('ohh godd its good.');
+    })
+    // Handle left swipe event
+  },
+  swipeRight: function() {
+    $(this).animate({
+      marginLeft: "0%"
+    }, 500, function() {
+      $('.container-wrapper').css('overflow', 'visible');
+      console.log('ohh fuck its very good.');
+    triggerExpand = false;
+
+    })
+    // Handle right swipe event
   }
 });
 
