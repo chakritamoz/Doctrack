@@ -35,31 +35,50 @@
     </div>
     @foreach (var doc in Model.Documents)
     {
-      <div id="@doc.Id" class='flex-row main-row
-        @(doc.EndDate != null ?
-          "success" :
-          doc.OperationDate == null ?
-          "normal" :
-          DateTime.Now.Subtract(
-            doc.OperationDate??DateTime.MinValue
-          ).TotalDays >= doc.DocumentType?.PeriodEnd ?
-          "late" :
-          DateTime.Now.Subtract(
-            doc.OperationDate??DateTime.MinValue
-          ).TotalDays >= doc.DocumentType?.PeriodWarning ?
-          "warning" :
-          "normal"
-        )'>
-        <div class="cell receipt-date" data-receiptDate='@doc.ReceiptDate?.ToString("dd/MM/yyyy")'></div>
-        <div class="cell">@doc.Id</div>
-        <div class="cell">@doc.DocumentType?.Title</div>
-        <div class="cell cell-title">@doc.Doc_Title</div>
-        <div class="cell">@doc.Operation</div>
-        <div class="cell operation-date" data-operationDate='@doc.OperationDate?.ToString("dd/MM/yyyy")'></div>
-        <div class="cell">@doc.CommandOrder</div>
-        <div class="cell">@doc.RemarkAll</div>
-        <div class="cell end-date" data-endDate='@doc.EndDate?.ToString("dd/MM/yyyy")'></div>
+      <div class="container-main-row">
+        <div id="btnSubmit-@doc.Id" class="container-btn submit">
+          <a class="upop-doc-icon main-btn submit">
+            <i class="bi bi-send-check-fill"></i>
+          </a>
+          <a class="sub-doc-icon main-btn submit">
+            <i class="bi bi-file-earmark-check-fill"></i>
+          </a>
+        </div>
+        <div id="@doc.Id" class='flex-row main-row
+          @(doc.EndDate != null ?
+            "success" :
+            doc.OperationDate == null ?
+            "normal" :
+            DateTime.Now.Subtract(
+              doc.OperationDate??DateTime.MinValue
+            ).TotalDays >= doc.DocumentType?.PeriodEnd ?
+            "late" :
+            DateTime.Now.Subtract(
+              doc.OperationDate??DateTime.MinValue
+            ).TotalDays >= doc.DocumentType?.PeriodWarning ?
+            "warning" :
+            "normal"
+          )'>
+          <div class="cell receipt-date" data-receiptDate='@doc.ReceiptDate?.ToString("dd/MM/yyyy")'></div>
+          <div class="cell">@doc.Id</div>
+          <div class="cell">@doc.DocumentType?.Title</div>
+          <div class="cell cell-title">@doc.Doc_Title</div>
+          <div class="cell">@doc.Operation</div>
+          <div class="cell operation-date" data-operationDate='@doc.OperationDate?.ToString("dd/MM/yyyy")'></div>
+          <div class="cell">@doc.CommandOrder</div>
+          <div class="cell">@doc.RemarkAll</div>
+          <div class="cell end-date" data-endDate='@doc.EndDate?.ToString("dd/MM/yyyy")'></div>
+        </div>
+        <div id="btnDelete-@doc.Id" class="container-btn delete">
+          <a class="edit-doc-icon main-btn delete">
+            <i class="bi bi-pencil-fill"></i>
+          </a>
+          <a class="del-doc-icon main-btn delete">
+            <i class="bi bi-trash-fill"></i>
+          </a>
+        </div>
       </div>
+
       <div id="sub-@doc.Id" class="flex-container sub-content">
         <div class="flex-header sub-header">
           <div class="cell">Job</div>
@@ -114,23 +133,14 @@
   </label>
   <div class="fab-wheel">
     <a id="add-emp-icon" class="fab-action fab-action-1" disabled>
-      <i class="bi bi-person-plus-fill"></i>
+      <i class="bi bi-person-fill-add"></i>
     </a>
     <a id="del-emp-icon" class="fab-action fab-action-2" disabled>
-      <i class="bi bi-person-dash-fill"></i>
+      <i class="bi bi-person-fill-dash"></i>
     </a>
+    <a id="edit-emp-icon" class="fab-action fab-action-3" disabled>
+      <i class="bi bi-person-fill-gear"></i>
     </a>
-    <a id="edit-doc-icon" class="fab-action fab-action-3" disabled>
-      <i class="bi bi-pencil-fill"></i>
-    </a>
-    <a id="del-doc-icon" class="fab-action fab-action-4" disabled>
-      <i class="bi bi-trash-fill"></i>
-    </a>
-    <a id="upop-doc-icon" class="fab-action fab-action-5" disabled>
-      <i class="bi bi-send-check-fill"></i>
-    </a>
-    <a id="sub-doc-icon" class="fab-action fab-action-6" disabled>
-      <i class="bi bi-file-earmark-check-fill"></i>
   </div>
 </div>
 

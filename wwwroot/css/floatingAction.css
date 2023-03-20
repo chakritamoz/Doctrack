@@ -56,7 +56,7 @@
   align-items: center;
   width: 3.5rem;
   height: 3.5rem;
-  font-size: 24px;
+  font-size: 32px;
   color: white;
   pointer-events: none;
 }
@@ -67,7 +67,7 @@
 }
 
 .fab-checkbox:checked ~ .fab-wheel {
-  width: 26rem;
+  width: 18rem;
 }
 
 .fab-checkbox:checked ~ .fab-wheel .fab-action {
@@ -75,31 +75,23 @@
 }
 
 .fab-wheel .fab-action-1 {
-  left: 1rem;
+  left: 2rem;
 }
 
 .fab-wheel .fab-action-2 {
-  left: 4.5rem;
+  left: 6rem;
 }
 
 .fab-wheel .fab-action-3 {
-  left: 8rem;
-}
-
-.fab-wheel .fab-action-4 {
-  left: 11.5rem;
-}
-
-.fab-wheel .fab-action-5 {
-  left: 15rem;
-}
-
-.fab-wheel .fab-action-6 {
-  left: 18.5rem;
+  left: 10rem;
 }
 
 #del-emp-icon.select {
-  color: red;
+  color: #ea3f28;
+}
+
+#edit-emp-icon.select {
+  color: #f68a42;
 }
 
 @media screen and (min-width: 375px) {

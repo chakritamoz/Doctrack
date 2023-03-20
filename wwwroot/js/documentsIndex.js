@@ -1,19 +1,16 @@
-const addEmpIcon = document.getElementById("add-emp-icon");
-const editDocIcon = document.getElementById("edit-doc-icon");
-const delDocIcon = document.getElementById("del-doc-icon");
-const upOpDocIcon = document.getElementById("upop-doc-icon");
-const subDocIcon = document.getElementById("sub-doc-icon");
 const floatingBtn = document.getElementById("fabCheckbox");
 
 var currentDocId;
-var triggerExpand = false;
+var isMove = false;
 var triggerReload = false;
 var triggerDelEmp = false;
+var triggerEditEmp = false;
 
 var docActive = localStorage.getItem('docId');
 if (docActive) {
   currentDocId = docActive;
-  $('#' + docActive).addClass('active');
+  // $('#' + docActive).addClass('active');
+  $('#' + docActive).parent().addClass('active');
   $('#sub-' + docActive).addClass('expand');
   $('#sub-' + docActive).next().addClass('row-footer');
   $('#fabCheckbox').attr('disabled', false);
@@ -23,51 +20,56 @@ if (docActive) {
 }
 
 $('.main-row').swipe({
-  click: function() {
+  swipeLeft: function(){
+    disableSwipe(currentDocId);
     currentDocId = $(this).attr('id');
-    const target = document.getElementById(currentDocId);
-    const subTarget = document.getElementById("sub-"+currentDocId);
-  
-    if (target.classList.contains('active')) {
-      disableActive();
-      floatingBtn.setAttribute('disabled', true);
-      floatingBtn.checked = false;
-    }else if (subTarget == null) {
-      disableActive();
-      floatingBtn.removeAttribute('disabled');
-      setAttrId(currentDocId);
-    }else {
-      disableActive();
-      const nextTarget = subTarget.nextElementSibling;
-      target.classList.toggle('active');
-      subTarget.classList.toggle('expand');
-      if (nextTarget != null) nextTarget.classList.toggle('row-footer');
-      floatingBtn.removeAttribute('disabled');
-      setAttrId(currentDocId);
-    }
+    $(this).css('transform', 'translate(-200px,0px)');
+    $(`#btnDelete-${currentDocId}`).addClass('swipe');
+    isMove = true;
   },
-  swipeStatus: function(event, phase, direction, distance, duration, fingers, fingerData, currentDirection){
-    // console.log(`Phase: ${phase}`);
-    // console.log(`Direction: ${direction}`);
-    // console.log(`Distance: ${distance}`);
-    // console.log(`Duration: ${duration}`);
-    // console.log(`Finger: ${fingers}`);
-    // console.log(`FingerData: ${fingerData}`);
-    // console.log(`CurrentDirection: ${currentDirection}`);
-    if (phase != 'cancel' && phase != 'end'){
-      $('.container-wrapper').css('overflow', 'hidden');
-      $(this).css('transform', `translate(-${distance}px,0px)`)
-    }
-    if (phase == 'end') {
-      $(this).css('transform', 'translate(-100px,0px)');
-    }
-    if (phase == 'cancel'){
-      $('.container-wrapper').css('overflow', 'visible');
-      $(this).css('transform', `translate(0px,0px)`);
-    }
+  swipeRight: function(){
+    disableSwipe(currentDocId);
+    currentDocId = $(this).attr('id');
+    $(this).css('transform', 'translate(200px,0px)');
+    $(`#btnSubmit-${currentDocId}`).addClass('swipe');
+    isMove = true;
   },
-  threshold: 100,
+  swipeStatus: function(event,phase, direction, distance) {
+    if (phase == 'cancel')
+    {
+      disableSwipe(currentDocId);
+      if (distance < 5 && !isMove){
+        currentDocId = $(this).attr('id');
+        const target = $(`#${currentDocId}`).parent();
+        const subTarget = $(`#sub-${currentDocId}`);
+        if (target.hasClass('active')) {
+          disableActive();
+          floatingBtn.setAttribute('disabled', true);
+          floatingBtn.checked = false;
+        }else {
+          disableActive();
+          const nextTarget = subTarget.next();
+          target.toggleClass('active');
+          subTarget.toggleClass('expand');
+          nextTarget.toggleClass('row-footer');
+          floatingBtn.removeAttribute('disabled');
+          setAttrId(currentDocId);
+        }
+      }
+      $(`#btn-${currentDocId}`).removeClass('swipe');
+      $(this).removeAttr('style');
+      isMove = false;
+    }
+  }
 });
+
+function disableSwipe(docId) {
+  const disableElements = document.querySelectorAll('.swipe');
+  disableElements.forEach(element => {
+    element.classList.remove('swipe');
+    $(`#${docId}`).removeAttr('style');
+  })
+}
 
 function disableActive() {
   const disableElements = document.querySelectorAll('.active, .expand, .row-footer');
@@ -77,18 +79,18 @@ function disableActive() {
 }
 
 function setAttrId(docId) {
-  addEmpIcon.setAttribute('data-id',docId);
-  editDocIcon.setAttribute('data-id',docId);
-  delDocIcon.setAttribute('data-id',docId);
-  upOpDocIcon.setAttribute('data-id',docId);
-  subDocIcon.setAttribute('data-id',docId);
+  $('#add-emp-icon').attr('data-id',docId);
+  $('.edit-doc-icon').attr('data-id',docId);
+  $('.del-doc-icon').attr('data-id',docId);
+  $('.upop-doc-icon').attr('data-id',docId);
+  $('.sub-doc-icon').attr('data-id',docId);
 }
 
 // when click delete icon
 // toggle modal
 // set modal title and modal body
 // set modal accept btn id
-$(document).on('click', '#del-doc-icon', () => {
+$(document).on('click', '.del-doc-icon', () => {
   cancelDeleteEmp();
   modalAcceptBtn.id = 'modal-delete-button';
   modal.classList.toggle("display");
@@ -103,7 +105,7 @@ $(document).on('click', '#del-doc-icon', () => {
 // toggle modal
 // set modal title and modal body
 // set modal accept btn id
-$(document).on('click', '#upop-doc-icon', () => {
+$(document).on('click', '.upop-doc-icon', () => {
   cancelDeleteEmp();
   modalAcceptBtn.id = 'modal-upop-button';
   modal.classList.toggle('display');
@@ -137,7 +139,7 @@ $(document).on('click', '#upop-doc-icon', () => {
 
 // when click edit icon
 // redirect to documents/edit/?id=5
-$('#edit-doc-icon').on('click', function(){
+$('.edit-doc-icon').on('click', function(){
   var id = $(this).attr('data-id');
   window.location.href = '/Documents/Edit/' + id;
 }); // end click edit-doc-icon
@@ -146,7 +148,7 @@ $('#edit-doc-icon').on('click', function(){
 // toggle modal
 // set modal title and modal body
 // set modal accept btn id
-$(document).on('click', '#sub-doc-icon', () => {
+$(document).on('click', '.sub-doc-icon', () => {
   cancelDeleteEmp();
   modalAcceptBtn.id = 'modal-sub-button';
   modal.classList.toggle('display');
@@ -202,25 +204,37 @@ $(document).on('click', '#add-emp-icon', () => {
 
 $(document).on('keyup', function(e) {
   if (e.keyCode === 27) {
-    cancelDeleteEmp();
+    cancelTrigger();
   }
 });
 
-$(document).on('click', '#del-emp-icon', () => {
+$('#del-emp-icon').click(() => {
   if (!triggerDelEmp) {
+    cancelTrigger();
     triggerDelEmp = true;
     $('#del-emp-icon').addClass('select');
     $('.sub-row').css('cursor', 'pointer');
   }else {
-    cancelDeleteEmp();
+    cancelTrigger();
   }
 });
 
-$(document).on('click', '.main-row', () => {
+$('#edit-emp-icon').click(() => {
+  if (!triggerEditEmp) {
+    cancelTrigger();
+    triggerEditEmp = true;
+    $('#edit-emp-icon').addClass('select');
+    $('.sub-row').css('cursor', 'pointer');
+  }else {
+    cancelTrigger();
+  }
+});
+
+$('.main-row').click(() => {
   localStorage.clear();
 });
 
-$(document).on('click', '.sub-row', function() {
+$('.sub-row').click(function() {
   if (triggerDelEmp) {
     var docdId = $(this).attr('id');
     localStorage.setItem('docId',currentDocId);
@@ -240,9 +254,30 @@ $(document).on('click', '.sub-row', function() {
           alert('An error occurred while deleting the employee from document.');
         }
       }
-    })
+    });
   }
-})
+  if (triggerEditEmp) {
+    var docdId = $(this).attr('id');
+    localStorage.setItem('docId',currentDocId);
+    var token = $('input[name="__RequestVerificationToken"]').val();
+    $.ajax({
+      url: 'Documents/EditEmployee/',
+      type: 'POST',
+      headers: { 'RequestVerificationToken': token },
+      data: {
+        'id': docdId,
+        '__RequestVerificationToken': token
+      },
+      success: function(result) {
+        if (result.success) {
+          location.reload();
+        } else {
+          alert('An error occurred while deleting the employee from document.');
+        }
+      }
+    });
+  }
+});
 
 /*----------- Click confirm button on Modal -----------*/
 // when click confirm add employee button on modal
@@ -444,8 +479,10 @@ function setSelectTitle() {
   $('#modal-form').append('<br />');
 }
 
-function cancelDeleteEmp() {
+function cancelTrigger() {
   triggerDelEmp = false;
+  triggerEditEmp = false;
   $('#del-emp-icon').removeClass('select');
+  $('#edit-emp-icon').removeClass('select');
   $('.sub-row').css('cursor', 'default');
 }
