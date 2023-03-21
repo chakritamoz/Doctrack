@@ -316,7 +316,7 @@ namespace Doctrack.Controllers
       return Json(ranks);
     }
 
-    //POST: Document/DeleteEmployee/5
+    //POST: Documents/DeleteEmployee/5
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<ActionResult> DeleteEmployee(int id)
@@ -337,6 +337,26 @@ namespace Doctrack.Controllers
       return Json( new { success = true });
     }
 
+    //POST: Documents/EditEmployee/5
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<ActionResult> EditEmployee(int id)
+    {
+      if (_context.DocumentDetails == null)
+      {
+        return NotFound();
+      }
+
+      var documentDetail = await _context.DocumentDetails.FindAsync(id);
+      if (documentDetail == null)
+      {
+        return NotFound();
+      }
+
+      _context.DocumentDetails.Update(documentDetail);
+      await _context.SaveChangesAsync();
+      return Json( new { success = true });
+    }
 
     //POST: Documents/UpdateEndDate/5
     [HttpPost]
