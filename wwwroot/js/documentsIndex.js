@@ -52,7 +52,7 @@ $('.main-row').swipe({
         const subRowElement = $(`#sub-${currentDocId}`);
         const rowFooterElement = subRowElement.next();
         if (mainRowElement.hasClass('active')) {
-          disableActive;
+          disableActive();
           floatingBtn.setAttribute('disabled', true);
           floatingBtn.checked = false;
         }else {
