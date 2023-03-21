@@ -91,7 +91,7 @@ function setAttrId(docId) {
 // set modal title and modal body
 // set modal accept btn id
 $(document).on('click', '.del-doc-icon', () => {
-  cancelDeleteEmp();
+  cancelTrigger();
   modalAcceptBtn.id = 'modal-delete-button';
   modal.classList.toggle("display");
   const modalBody = $('<div id="modal-form-del"></div>');
@@ -106,7 +106,7 @@ $(document).on('click', '.del-doc-icon', () => {
 // set modal title and modal body
 // set modal accept btn id
 $(document).on('click', '.upop-doc-icon', () => {
-  cancelDeleteEmp();
+  cancelTrigger();
   modalAcceptBtn.id = 'modal-upop-button';
   modal.classList.toggle('display');
   const modalBody = $('<div id="modal-form"></div>');
@@ -149,7 +149,7 @@ $('.edit-doc-icon').on('click', function(){
 // set modal title and modal body
 // set modal accept btn id
 $(document).on('click', '.sub-doc-icon', () => {
-  cancelDeleteEmp();
+  cancelTrigger();
   modalAcceptBtn.id = 'modal-sub-button';
   modal.classList.toggle('display');
   const modalBody = $('<div id="modal-form"></div>');
@@ -181,7 +181,7 @@ $(document).on('click', '.sub-doc-icon', () => {
 // set modal title and modal body
 // set modal accept btn id
 $(document).on('click', '#add-emp-icon', () => {
-  cancelDeleteEmp();
+  cancelTrigger();
   modalAcceptBtn.id = 'modal-addEmp-button';
   $('#modal-close-button').addClass('modal-closeAddEmp-button');
   $('.close').addClass('modal-closeAddEmp-button');
