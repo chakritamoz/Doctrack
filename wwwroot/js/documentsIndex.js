@@ -1,4 +1,7 @@
 const floatingBtn = document.getElementById("fabCheckbox");
+var activeElement;
+var expandElement;
+var footerElement;
 
 var currentDocId;
 var isMove = false;
@@ -9,29 +12,34 @@ var triggerEditEmp = false;
 var docActive = localStorage.getItem('docId');
 if (docActive) {
   currentDocId = docActive;
-  // $('#' + docActive).addClass('active');
-  $('#' + docActive).parent().addClass('active');
-  $('#sub-' + docActive).addClass('expand');
-  $('#sub-' + docActive).next().addClass('row-footer');
+  activeElement = $('#' + docActive).parent().addClass('active');
+  expandElement = $('#sub-' + docActive).addClass('expand');
+  footerElement = $('#sub-' + docActive).next().addClass('row-footer');
   $('#fabCheckbox').attr('disabled', false);
   $('#fabCheckbox').prop('checked', true);
-  setAttrId(currentDocId);
+  $('#' + docActive)
+    .animate({"opacity": ".9"}, 300)
+    .animate({"opacity": "1"}, 300)
+    .animate({"opacity": ".9"}, 300)
+    .animate({"opacity": "1"}, 300);
   localStorage.clear();
 }
 
 $('.main-row').swipe({
   swipeLeft: function(){
     disableSwipe(currentDocId);
+    $(this).parent().hasClass('active')? null: disableActive();
     currentDocId = $(this).attr('id');
     $(this).css('transform', 'translate(-200px,0px)');
-    $(`#btnDelete-${currentDocId}`).addClass('swipe');
+    $(`#btnBehide-${currentDocId}`).addClass('swipe');
     isMove = true;
   },
   swipeRight: function(){
     disableSwipe(currentDocId);
+    $(this).parent().hasClass('active')? null: disableActive();
     currentDocId = $(this).attr('id');
     $(this).css('transform', 'translate(200px,0px)');
-    $(`#btnSubmit-${currentDocId}`).addClass('swipe');
+    $(`#btnFront-${currentDocId}`).addClass('swipe');
     isMove = true;
   },
   swipeStatus: function(event,phase, direction, distance) {
@@ -40,50 +48,41 @@ $('.main-row').swipe({
       disableSwipe(currentDocId);
       if (distance < 5 && !isMove){
         currentDocId = $(this).attr('id');
-        const target = $(`#${currentDocId}`).parent();
-        const subTarget = $(`#sub-${currentDocId}`);
-        if (target.hasClass('active')) {
-          disableActive();
+        const mainRowElement = $(`#${currentDocId}`).parent();
+        const subRowElement = $(`#sub-${currentDocId}`);
+        const rowFooterElement = subRowElement.next();
+        if (mainRowElement.hasClass('active')) {
+          disableActive;
           floatingBtn.setAttribute('disabled', true);
           floatingBtn.checked = false;
         }else {
           disableActive();
-          const nextTarget = subTarget.next();
-          target.toggleClass('active');
-          subTarget.toggleClass('expand');
-          nextTarget.toggleClass('row-footer');
+          activeElement = mainRowElement.addClass('active');
+          expandElement = subRowElement.addClass('expand');
+          footerElement = rowFooterElement.addClass('row-footer');
           floatingBtn.removeAttribute('disabled');
-          setAttrId(currentDocId);
         }
       }
       $(`#btn-${currentDocId}`).removeClass('swipe');
       $(this).removeAttr('style');
       isMove = false;
     }
-  }
+  },
+  threshold:30,
 });
 
 function disableSwipe(docId) {
-  const disableElements = document.querySelectorAll('.swipe');
-  disableElements.forEach(element => {
-    element.classList.remove('swipe');
-    $(`#${docId}`).removeAttr('style');
-  })
+  $(`#btnBehide-${docId}`).removeClass('swipe');
+  $(`#btnFront-${docId}`).removeClass('swipe');
+  $(`#${docId}`).removeAttr('style');
 }
 
 function disableActive() {
-  const disableElements = document.querySelectorAll('.active, .expand, .row-footer');
-  disableElements.forEach(element => {
-    element.classList.remove('active', 'expand', 'row-footer');
-  });
-}
-
-function setAttrId(docId) {
-  $('#add-emp-icon').attr('data-id',docId);
-  $('.edit-doc-icon').attr('data-id',docId);
-  $('.del-doc-icon').attr('data-id',docId);
-  $('.upop-doc-icon').attr('data-id',docId);
-  $('.sub-doc-icon').attr('data-id',docId);
+  if (activeElement || expandElement || footerElement){
+    activeElement.removeClass('active');
+    expandElement.removeClass('expand');
+    footerElement.removeClass('row-footer');
+  }
 }
 
 // when click delete icon
@@ -94,7 +93,7 @@ $(document).on('click', '.del-doc-icon', () => {
   cancelTrigger();
   modalAcceptBtn.id = 'modal-delete-button';
   modal.classList.toggle("display");
-  const modalBody = $('<div id="modal-form-del"></div>');
+  const modalBody = $('<form id="modal-form-del" autocomplete="off"></form>');
   $('#modal-title').html('<div>Confirm delete document<div>');
   $('#modal-body').html(modalBody);
   $('#modal-form-del').html('<p>Are you sure you want to delete document?</p>');
@@ -109,7 +108,7 @@ $(document).on('click', '.upop-doc-icon', () => {
   cancelTrigger();
   modalAcceptBtn.id = 'modal-upop-button';
   modal.classList.toggle('display');
-  const modalBody = $('<div id="modal-form"></div>');
+  const modalBody = $('<form id="modal-form" autocomplete="off"></form>');
   $.ajax({
     url: 'Documents/UpdateOP/',
     type: 'GET',
@@ -123,7 +122,6 @@ $(document).on('click', '.upop-doc-icon', () => {
       $('#modal-form').append('<label for="opdate">Operation Date</label><br />');
       $('#modal-form').append('<input id="opdate" /><br />')
       $('#modal-form').append('<span class="text-danger dateError"></span>')
-      
       $('#oplocate').val(result.operation);
       var date = result.operationDate != null
         ?new Date(result.operationDate)
@@ -140,8 +138,7 @@ $(document).on('click', '.upop-doc-icon', () => {
 // when click edit icon
 // redirect to documents/edit/?id=5
 $('.edit-doc-icon').on('click', function(){
-  var id = $(this).attr('data-id');
-  window.location.href = '/Documents/Edit/' + id;
+  window.location.href = '/Documents/Edit/' + currentDocId;
 }); // end click edit-doc-icon
 
 // when click submit icon
@@ -152,7 +149,7 @@ $(document).on('click', '.sub-doc-icon', () => {
   cancelTrigger();
   modalAcceptBtn.id = 'modal-sub-button';
   modal.classList.toggle('display');
-  const modalBody = $('<div id="modal-form"></div>');
+  const modalBody = $('<form id="modal-form" autocomplete="off"></form>');
   $.ajax({
     url: 'Documents/UpdateOP/',
     type: 'GET',
@@ -163,7 +160,6 @@ $(document).on('click', '.sub-doc-icon', () => {
       $('#modal-form').append('<label for="endDoc">End date</label><br />');
       $('#modal-form').append('<input id="endDoc"/><br />');
       $('#modal-form').append('<span class="text-danger dateError"></span>');
-    
       var date = result.endDate != null
         ?new Date(result.endDate)
         :new Date(Date.now());
@@ -186,7 +182,7 @@ $(document).on('click', '#add-emp-icon', () => {
   $('#modal-close-button').addClass('modal-closeAddEmp-button');
   $('.close').addClass('modal-closeAddEmp-button');
   modal.classList.toggle('display');
-  const modalBody = $('<div id="modal-form"></div>');
+  const modalBody = $('<form id="modal-form" autocomplete="off"></form>');
   $('#modal-title').html('<div>Add employee to document</div>');
   $('#modal-body').html(modalBody);
   setSelectJob();
@@ -200,6 +196,7 @@ $(document).on('click', '#add-emp-icon', () => {
   $('#modal-form').append('<label for="remark">Remark</label><br />');
   $('#modal-form').append('<input id="remark"/><br />');
   $('#modal-form').append('<span class="text-danger"></span>');
+  $('#modal-form').append('<span id="disp-alert" class="text-success"></span>');
 }); // end click sub-doc-icon
 
 $(document).on('keyup', function(e) {
@@ -237,7 +234,6 @@ $('.main-row').click(() => {
 $('.sub-row').click(function() {
   if (triggerDelEmp) {
     var docdId = $(this).attr('id');
-    localStorage.setItem('docId',currentDocId);
     var token = $('input[name="__RequestVerificationToken"]').val();
     $.ajax({
       url: 'Documents/DeleteEmployee/',
@@ -249,6 +245,7 @@ $('.sub-row').click(function() {
       },
       success: function(result) {
         if (result.success) {
+          localStorage.setItem('docId',currentDocId);
           location.reload();
         } else {
           alert('An error occurred while deleting the employee from document.');
@@ -258,22 +255,32 @@ $('.sub-row').click(function() {
   }
   if (triggerEditEmp) {
     var docdId = $(this).attr('id');
-    localStorage.setItem('docId',currentDocId);
-    var token = $('input[name="__RequestVerificationToken"]').val();
+    modalAcceptBtn.id = 'modal-editEmp-button';
+    modal.classList.toggle('display');
+    const modalBody = $('<form id="modal-form" autocomplete="off"></form>');
+    $('#modal-title').html('<div>Edit employee in document</div>');
+    $('#modal-body').html(modalBody);
+    $('#modal-body').append(`<input type="hidden" id=docdId value="${docdId}"/>`)
+    setSelectJob();
+    setSelectTitle();
+    $('#modal-form').append('<label for="firstName">First Name</label><br />');
+    $('#modal-form').append('<input id="firstName" disabled/><br />');
+    $('#modal-form').append('<label for="lastName">Last Name</label><br />');
+    $('#modal-form').append('<input id="lastName" disabled/><br />');
+    $('#modal-form').append('<label for="remark">Remark</label><br />');
+    $('#modal-form').append('<input id="remark"/><br />');
+    $('#modal-form').append('<span class="text-danger"></span>');
+    $('#modal-form').append('<span id="disp-alert" class="text-success"></span>');
     $.ajax({
-      url: 'Documents/EditEmployee/',
-      type: 'POST',
-      headers: { 'RequestVerificationToken': token },
-      data: {
-        'id': docdId,
-        '__RequestVerificationToken': token
-      },
+      url: 'Documents/UpdateEmployee/',
+      type: 'GET',
+      data: { 'id': docdId },
       success: function(result) {
-        if (result.success) {
-          location.reload();
-        } else {
-          alert('An error occurred while deleting the employee from document.');
-        }
+        $('#selectJob').val(result.documentDetail.Job_Id);
+        $('#selectRank').val(result.documentDetail.Rank_Id);
+        $('#firstName').val(result.documentDetail.Employee.LastName);
+        $('#lastName').val(result.documentDetail.Employee.FirstName);
+        $('#remark').val(result.documentDetail.Remark);
       }
     });
   }
@@ -299,11 +306,11 @@ $(document).on('click', '#modal-addEmp-button', () => {
         '__RequestVerificationToken': token
       },
       success: function(result) {
-        $('#modal-form').append('<span class="text-success">Successfully added employees</span>');
+        $('#disp-alert').html('Successfully added employees');
         $('#modal-form input').val("");
         triggerReload = true;
       }
-    })
+    });
   }
 });
 
@@ -316,7 +323,6 @@ $(document).on('click', '.modal-closeAddEmp-button', () => {
 // send method post to update data
 $(document).on('click', '#modal-upop-button', () => {
   if (validateForm()){
-    localStorage.setItem('docId',currentDocId);
     var token = $('input[name="__RequestVerificationToken"]').val();
     $.ajax({
       url: 'Documents/UpdateOP/',
@@ -330,6 +336,7 @@ $(document).on('click', '#modal-upop-button', () => {
       },
       success: function(result) {
         if (result.success) {
+          localStorage.setItem('docId',currentDocId);
           location.reload();
         } else {
           alert('An error occurred while deleting the document.');
@@ -339,11 +346,35 @@ $(document).on('click', '#modal-upop-button', () => {
   }
 }); // end click modal-upop-button
 
+$(document).on('click', '#modal-editEmp-button', () => {
+  if (validateForm()) {
+    var token = $('input[name="__RequestVerificationToken"]').val();
+    $.ajax({
+      url: 'Documents/UpdateEmployee/',
+      type: 'POST',
+      headers: { 'RequestVerificationToken': token },
+      data: {
+        'id': $('#docdId').val(),
+        'jobId': $('#selectJob').val(),
+        'rankId': $('#selectRank').val(),
+        'remark': $('#remark').val(),
+        '__RequestVerificationToken': token
+      },
+      success: function(result) {
+        if (result.success) {
+          localStorage.setItem('docId',currentDocId);
+          location.reload();
+        } else {
+          alert('An error occurred while deleting the document.');
+        }
+      }
+    });
+  }
+});
 // when click confirm submit button on modal
 // send method post to update data
 $(document).on('click', '#modal-sub-button', () => {
   if(validateForm()){
-    localStorage.setItem('docId',currentDocId);
     var token = $('input[name="__RequestVerificationToken"]').val();
     $.ajax({
       url: 'Documents/UpdateEndDate/',
@@ -356,6 +387,7 @@ $(document).on('click', '#modal-sub-button', () => {
       },
       success: function(result) {
         if (result.success) {
+          localStorage.setItem('docId',currentDocId);
           location.reload();
         } else {
           alert('An error occurred while deleting the document.');
@@ -369,7 +401,6 @@ $(document).on('click', '#modal-sub-button', () => {
 // when click confirm delete button on modal
 // send method post to update data
 $(document).on('click', '#modal-delete-button', () => {
-  localStorage.setItem('docId',currentDocId);
   var token = $('input[name="__RequestVerificationToken"]').val();
   $.ajax({
     url: '/Documents/Delete/',
@@ -381,6 +412,7 @@ $(document).on('click', '#modal-delete-button', () => {
     },
     success: function(result) {
       if (result.success) {
+        localStorage.setItem('docId',currentDocId);
         location.reload();
       } else {
         alert('An error occurred while deleting the document.');

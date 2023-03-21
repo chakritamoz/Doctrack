@@ -36,11 +36,11 @@
     @foreach (var doc in Model.Documents)
     {
       <div class="container-main-row">
-        <div id="btnSubmit-@doc.Id" class="container-btn submit">
-          <a class="upop-doc-icon main-btn submit">
+        <div id="btnFront-@doc.Id" class="container-btn front">
+          <a class="upop-doc-icon main-btn button-primary">
             <i class="bi bi-send-check-fill"></i>
           </a>
-          <a class="sub-doc-icon main-btn submit">
+          <a class="sub-doc-icon main-btn button-success">
             <i class="bi bi-file-earmark-check-fill"></i>
           </a>
         </div>
@@ -69,11 +69,11 @@
           <div class="cell">@doc.RemarkAll</div>
           <div class="cell end-date" data-endDate='@doc.EndDate?.ToString("dd/MM/yyyy")'></div>
         </div>
-        <div id="btnDelete-@doc.Id" class="container-btn delete">
-          <a class="edit-doc-icon main-btn delete">
+        <div id="btnBehide-@doc.Id" class="container-btn behide">
+          <a class="edit-doc-icon main-btn button-warning">
             <i class="bi bi-pencil-fill"></i>
           </a>
-          <a class="del-doc-icon main-btn delete">
+          <a class="del-doc-icon main-btn button-danger">
             <i class="bi bi-trash-fill"></i>
           </a>
         </div>

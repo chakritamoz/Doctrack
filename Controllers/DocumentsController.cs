@@ -4,6 +4,7 @@ using Doctrack.Data;
 using Doctrack.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
+using System.Text.Json;
 
 namespace Doctrack.Controllers
 {
@@ -337,10 +338,32 @@ namespace Doctrack.Controllers
       return Json( new { success = true });
     }
 
-    //POST: Documents/EditEmployee/5
+    //GET: Documents/UpdateEmployee/5
+    public async Task<ActionResult> UpdateEmployee(int? id)
+    {
+      if (id == null || _context.DocumentDetails == null)
+      {
+        return NotFound();
+      }
+
+      var documentDetail = await _context.DocumentDetails
+        .Include(docd => docd.Employee)
+        .FirstOrDefaultAsync(docd => docd.Id == id);
+      if (documentDetail == null)
+      {
+        return NotFound();
+      }
+
+      return Json(
+          new {documentDetail},
+          new JsonSerializerOptions { ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve}
+        );
+    }
+
+    //POST: Documents/UpdateEmployee/5
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<ActionResult> EditEmployee(int id)
+    public async Task<ActionResult> UpdateEmployee(int id, int jobId, int rankId, string? remark)
     {
       if (_context.DocumentDetails == null)
       {
@@ -352,6 +375,10 @@ namespace Doctrack.Controllers
       {
         return NotFound();
       }
+      Console.WriteLine("retrieve docd");
+      documentDetail.Job_Id = jobId;
+      documentDetail.Rank_Id = rankId;
+      documentDetail.Remark = remark;
 
       _context.DocumentDetails.Update(documentDetail);
       await _context.SaveChangesAsync();

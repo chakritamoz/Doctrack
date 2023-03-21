@@ -94,7 +94,7 @@ hr {
 } */
 
 .container-main-row.active {
-  z-index: 1;
+  z-index: 3;
   box-shadow: .2px .2px 10px gray;
   border-radius: 0;
 }
@@ -120,6 +120,7 @@ hr {
 }
 
 .sub-content.expand {
+  overflow: auto;
   z-index: 2;
   padding: 15px;
   max-height: 1000px;
@@ -162,8 +163,18 @@ hr {
   margin-left: 3px;
 }
 
+.button-danger {
+  background-color: #e96a59;
+  transition: background-color .1s linear;
+}
+
+.button-danger:hover {
+  background-color: #d1230c;
+  cursor: pointer;
+}
+
 .button-primary {
-  background-color: #0d6efd;
+  background-color: #558fe5;
   transition: background-color .1s linear;
 }
 
@@ -173,7 +184,7 @@ hr {
 }
 
 .button-success {
-  background-color: #329b32e3;
+  background-color: #82bf82;
   transition: background-color .1s linear;
 }
 
@@ -182,13 +193,23 @@ hr {
   cursor: pointer;
 }
 
+.button-warning {
+  background-color: #f3aa79;
+  transition: background-color .1s linear;
+}
+
+.button-warning:hover {
+  background-color: #e7782e;
+  cursor: pointer;
+}
+
 .button-danger {
-  background-color: #ea3f28;
+  background-color: #e96a59;
   transition: background-color .1s linear;
 }
 
 .button-danger:hover {
-  background-color: #c93723bb;
+  background-color: #d1230c;
   cursor: pointer;
 }
 
@@ -209,20 +230,20 @@ hr {
   transition: width .3s;
 }
 
-.container-btn.submit {
+.container-btn.front {
   left: 0;
 }
 
-.container-btn.delete {
+.container-btn.behide {
   right: 0;
 }
 
-.container-btn.submit.swipe {
+.container-btn.front.swipe {
   width: 200px;
   transition: width .25s;
 }
 
-.container-btn.delete.swipe {
+.container-btn.behide.swipe {
   width: 200px;
   transition: width .25s;
 }
@@ -242,38 +263,6 @@ hr {
   cursor: pointer;
   transition: transform .1s ease-out;
   color: white;
-}
-
-.upop-doc-icon {
-  background-color: #558fe5;
-}
-
-.upop-doc-icon:hover {
-  background-color: #094eb7;
-}
-
-.sub-doc-icon {
-  background-color: #82bf82;
-}
-
-.sub-doc-icon:hover {
-  background-color: #197919;
-}
-
-.edit-doc-icon {
-  background-color: #f3aa79;
-}
-
-.edit-doc-icon:hover {
-  background-color: #e7782e;
-}
-
-.del-doc-icon {
-  background-color: #e96a59;
-}
-
-.del-doc-icon:hover {
-  background-color: #d1230c;
 }
 
 .container-main-row {

@@ -23,6 +23,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   width: 50%;
+  border-radius: 20px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
   -webkit-animation-name: animatetop;
   -webkit-animation-duration: 0.4s;
@@ -94,4 +95,21 @@
   color: #000000;
   text-decoration: none;
   cursor: pointer;
+}
+
+@media screen and (max-width: 1000px){
+  .modal-content {
+    width: 90%;
+    border-radius: 20px;
+  }
+  .modal-body {
+    padding: 0;
+  }
+  #modal-form input,
+  #modal-form label,
+  #modal-form select,
+  #modal-form p,
+  #modal-form span  {
+    width: 80%;
+  }
 }
