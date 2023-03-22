@@ -1,0 +1,18 @@
+.table {
+  color: white;
+}
+
+.btn {
+  margin-top: 10px;
+  margin-bottom: 16px;
+}
+
+a {
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #094eb7;
+}

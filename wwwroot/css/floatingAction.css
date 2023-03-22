@@ -2,6 +2,7 @@
   position: fixed;
   bottom: 6rem;
   right: 2rem;
+  z-index: 999;
 }
 
 .fab-checkbox {
@@ -18,21 +19,25 @@
   border-radius: 50%;
   color: white;
   z-index: 999;
-  background-color: pink;
+  background-color: #245953;
   font-size: 24px;
-  transition: box-shadow .7s, transform .7s, font-size .7s ease;
+  transition: box-shadow .2s, transform .7s, font-size .7s ease;
 }
 
 .fab-checkbox:disabled ~ .fab {
-  background-color: rgb(180, 174, 174);
+  background-color: #D8D8D8;
+}
+
+.fab-checkbox:disabled ~ .fab-wheel {
+  background-color: #D8D8D8
 }
 
 .fab:hover {
-  background-color: rgb(224, 161, 171);
+  background-color: #2e6962;
 }
 
 .fab-checkbox:checked ~ .fab {
-  box-shadow: 2px 2px 5px rgb(93, 91, 91);
+  box-shadow: 2px 2px 5px rgb(0, 0, 0);
   transform: rotate(-225deg);
   font-size: 32px;
 }
@@ -45,8 +50,8 @@
   top: 0;
   right: 0;
   border-radius: 3.5rem;
-  background-color: pink;
   transition: all .7s ease;
+  background-color: #245953;
 }
 
 .fab-action {
@@ -63,7 +68,7 @@
 
 .fab-action:hover {
   text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
-  color: rgb(107, 105, 105);
+  color: #245953;
 }
 
 .fab-checkbox:checked ~ .fab-wheel {

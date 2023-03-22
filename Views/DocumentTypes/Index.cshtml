@@ -8,7 +8,7 @@
 <hr />
 
 <p class="btn btn-primary">
-  <a asp-action="Create" style="color:white">Create Document Type</a>
+  <a asp-action="Create" style="color:white">New Document</a>
 </p>
 
 <table class="table">
@@ -30,7 +30,7 @@
         <td>@item.PeriodWarning</td>
         <td>@item.PeriodEnd</td>
         <td>
-          <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+          <a asp-action="Edit" asp-route-id="@item.Id">Edit</a><span> |</span>
           <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
         </td>
       </tr>

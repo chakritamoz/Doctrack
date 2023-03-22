@@ -17,6 +17,19 @@ html {
   min-height: 100%;
 }
 
+nav {
+  background-color: #245953;
+}
+
+nav .navbar-brand {
+  font-weight: bold !important;
+}
+
 body {
   margin-bottom: 60px;
+  background-color: #408E91 ;
+}
+
+.container-fluid  a {
+  color: white !important;
 }
