@@ -7,9 +7,15 @@
 <h2>Jobs</h2>
 <hr />
 
-<p class="btn btn-primary">
-  <a asp-action="Create" style="color:white">New Job</a>
-</p>
+<div class="flex-action">
+  <div class="button button-primary">
+    <a asp-action="Create" style="color:white">New Job</a>
+  </div>
+  <div class="search-box">
+    <input id="search-box" placeholder="Search Title..." />
+    <div id="search-btn"><i class="bi bi-search"></i></div>
+  </div>
+</div>
 
 <table class="table">
   <thead>

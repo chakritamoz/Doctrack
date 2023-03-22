@@ -431,7 +431,6 @@ $(document).on('change', '#selectJob', function() {
     dataType: 'json',
     data: { 'id': $('#selectJob').val() },
     success: function (result) {
-      console.log(result);
       result.forEach(rank => {
         const optionRank =  '<option value="' + rank.id + '">' + rank.title + '</option>';
         $('#selectRank').append(optionRank);

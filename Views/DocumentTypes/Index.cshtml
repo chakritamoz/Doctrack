@@ -7,17 +7,23 @@
 <h2>Document Types</h2>
 <hr />
 
-<p class="btn btn-primary">
-  <a asp-action="Create" style="color:white">New Document</a>
-</p>
+<div class="flex-action">
+  <div class="button button-primary">
+    <a asp-action="Create" style="color:white">New Document</a>
+  </div>
+  <div class="search-box">
+    <input id="search-box" placeholder="Search Title..." />
+    <div id="search-btn"><i class="bi bi-search"></i></div>
+  </div>
+</div>
 
 <table class="table">
   <thead>
     <tr>
       <th>Id</th>
       <th>Title</th>
-      <th>Period Warning(Day)</th>
-      <th>Period End(Day)</th>
+      <th>Warning (Day)</th>
+      <th>Deadline (Day)</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -37,3 +43,5 @@
     }
   </tbody>
 </table>
+
+<script src="~/js/documentTypes.js" asp-append-version="true"></script>

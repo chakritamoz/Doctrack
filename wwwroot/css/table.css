@@ -1,5 +1,34 @@
 .table {
   color: white;
+  overflow: hidden;
+  border-radius: .5rem;
+}
+
+thead > tr {
+  background-color: #245953;
+}
+
+tr:nth-child(even) {
+  background-color: #2e6962;
+}
+
+tbody > tr:hover {
+  background-color: #398c82bd;
+}
+
+th {
+  font-size: 18px ;
+  text-transform: uppercase;
+  padding: 1rem !important;
+}
+
+td {
+  padding: 0.7rem !important;
+}
+
+th:first-child,
+td:first-child {
+  padding-left: 2rem !important;
 }
 
 .btn {
