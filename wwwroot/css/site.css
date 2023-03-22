@@ -102,4 +102,5 @@ body {
 
 #search-btn:hover {
   background-color: #2e6962;
+  cursor: pointer;
 }

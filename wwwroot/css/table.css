@@ -2,6 +2,11 @@
   color: white;
   overflow: hidden;
   border-radius: .5rem;
+  margin-top: 2rem;
+}
+
+.table.not-found tr{
+  text-align: center;
 }
 
 thead > tr {
