@@ -15,15 +15,30 @@ namespace Doctrack.Controllers
     }
 
     //GET: DocumentTypes/Index
-    public async Task<IActionResult> Index(string? queryStr)
-    {
-      if (queryStr != null) {
-        var documentTypes = _context.DocumentTypes
-          .Where(docType => docType.Title.Contains(queryStr));
+    public async Task<IActionResult> Index()
+    {      
+      var documentTypes = await _context.DocumentTypes.ToListAsync();
 
-        return View(await documentTypes.AsNoTracking().ToListAsync());
+      return View(documentTypes);
+    }
+
+    public async Task<IActionResult> SearchDocType(string queryStr)
+    {
+      if (_context.DocumentTypes == null)
+      {
+        return NotFound();
       }
-      return View(await _context.DocumentTypes.ToListAsync());
+      var documentTypes = await _context.DocumentTypes.ToListAsync();
+
+      if (!String.IsNullOrEmpty(queryStr))
+      {
+        documentTypes = documentTypes
+        .Where(docType => docType.Title.Contains(queryStr))
+        .ToList();
+      }
+
+
+      return PartialView("_DocumentTypesTable", documentTypes);
     }
 
     //GET: DocumentTypes/Create

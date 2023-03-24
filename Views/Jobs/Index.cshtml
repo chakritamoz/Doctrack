@@ -17,26 +17,22 @@
   </div>
 </div>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Id</th>
-      <th>Title</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    @foreach (var item in Model)
-    {
-      <tr>
-        <td>@item.Id</td>
-        <td>@item.Title</td>
-        <td>
-          <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-          <span> |</span>
-          <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-        </td>
-      </tr>
-    }
-  </tbody>
-</table>
+<div id="document-table">
+  @Html.Partial("_JobsTable", Model);
+</div>
+
+<script>
+  $('#search-btn').click(function() {
+    const queryStr = $('#search-box').val();
+    $.ajax({
+      url: 'Jobs/SearchJob',
+      type: 'GET',
+      data: {
+        'queryStr': queryStr
+      },
+      success: function(data) {
+        $('#document-table').html(data);
+      }
+    })
+  })
+</script>

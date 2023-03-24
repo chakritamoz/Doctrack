@@ -17,7 +17,26 @@ namespace Doctrack.Controllers
     //GET: Ranks/Index
     public async Task<IActionResult> Index()
     {
-      return View(await _context.Ranks.ToListAsync());
+      var ranks = await _context.Ranks.ToListAsync();
+      return View(ranks);
+    }
+
+    public async Task<IActionResult> SearchRank(string queryStr)
+    {
+      if (_context.Ranks == null)
+      {
+        return NotFound();
+      }
+
+      var ranks = await _context.Ranks.ToListAsync();
+      if (!String.IsNullOrEmpty(queryStr))
+      {
+        ranks = ranks
+          .Where(rank => rank.Title.Contains(queryStr))
+          .ToList();
+      }
+
+      return PartialView("_RanksTable", ranks);
     }
 
     //GET: Ranks/Create

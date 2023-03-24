@@ -15,6 +15,11 @@ html {
 html {
   position: relative;
   min-height: 100%;
+  caret-color: transparent;
+}
+
+input {
+  caret-color: auto;
 }
 
 nav {

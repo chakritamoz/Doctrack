@@ -1,7 +1,8 @@
 .table {
   color: white;
   overflow: hidden;
-  border-radius: .5rem;
+  border-top-left-radius: .5rem;
+  border-top-right-radius: .5rem;
   margin-top: 2rem;
 }
 

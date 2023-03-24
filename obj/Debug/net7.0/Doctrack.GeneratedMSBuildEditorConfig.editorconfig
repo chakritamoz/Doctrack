@@ -44,6 +44,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdW1lbnRUeXBlc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/Doctrack/Views/DocumentTypes/_DocumentTypesTable.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdW1lbnRUeXBlc1xfRG9jdW1lbnRUeXBlc1RhYmxlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Doctrack/Views/Employees/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1wbG95ZWVzXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -58,6 +62,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/Doctrack/Views/Employees/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1wbG95ZWVzXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Doctrack/Views/Employees/_EmployeeTable.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1wbG95ZWVzXF9FbXBsb3llZVRhYmxlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Doctrack/Views/Home/Index.cshtml]
@@ -84,6 +92,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSm9ic1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/Doctrack/Views/Jobs/_JobsTable.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSm9ic1xfSm9ic1RhYmxlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Doctrack/Views/Ranks/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmFua3NcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -98,6 +110,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/Doctrack/Views/Ranks/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmFua3NcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Doctrack/Views/Ranks/_RanksTable.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmFua3NcX1JhbmtzVGFibGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Doctrack/Views/Shared/Error.cshtml]

@@ -1,0 +1,53 @@
+@model IEnumerable<Employee>
+
+@if(Model != null)
+{
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Phone Number</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      @foreach (var item in Model)
+      {
+        <tr>
+          <td>@item.Id</td>
+          <td>@item.FirstName</td>
+          <td>@item.LastName</td>
+          @{
+            if (item.PhoneNumber != null)
+            {
+              var n0_2 = item.PhoneNumber.Substring(0,3);
+              var n3_5 = item.PhoneNumber.Substring(3,3);
+              var n6_9 = item.PhoneNumber.Substring(6,4);
+              <td>@(n0_2)-@(n3_5)-@(n6_9)</td>
+            }
+            else
+            {
+              <td>@item.PhoneNumber</td>
+            }
+          }
+          
+          <td>
+            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+            <span> |</span>
+            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+}else{
+  <table class="table not-fpund ">
+    <thead>
+      <tr>
+        <th>Search Not Found</th>
+      </tr>
+    </thead>
+  </table>
+}

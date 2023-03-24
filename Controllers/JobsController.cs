@@ -16,7 +16,25 @@ namespace Doctrack.Controllers
     //GET: Jobs/Index
     public async Task<IActionResult> Index()
     {
-      return View(await _context.Jobs.ToListAsync());
+      var jobs = await _context.Jobs.ToListAsync();
+
+      return View(jobs);
+    }
+
+    public async Task<IActionResult> SearchJob(string queryStr)
+    {
+      if (_context.Jobs == null)
+      {
+        return NotFound();
+      }
+
+      var jobs = await _context.Jobs.ToListAsync();
+      if (!String.IsNullOrEmpty(queryStr))
+      {
+        jobs = jobs.Where(job => job.Title.Contains(queryStr)).ToList();
+      }
+
+      return PartialView("_JobsTable", jobs);
     }
 
     //GET: Jobs/Create
