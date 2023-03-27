@@ -15,6 +15,11 @@ html {
 html {
   position: relative;
   min-height: 100%;
+  caret-color: transparent;
+}
+
+input {
+  caret-color: auto;
 }
 
 nav {
@@ -32,4 +37,75 @@ body {
 
 .container-fluid  a {
   color: white !important;
+}
+
+.button-primary {
+  background-color: #558fe5;
+  transition: background-color .1s linear;
+}
+
+.button-primary:hover {
+  background-color: #094eb7;
+  cursor: pointer;
+}
+
+.button-success {
+  background-color: #82bf82;
+  transition: background-color .1s linear;
+}
+
+.button-success:hover {
+  background-color: #197919;
+  cursor: pointer;
+}
+
+.button-warning {
+  background-color: #f3aa79;
+  transition: background-color .1s linear;
+}
+
+.button-warning:hover {
+  background-color: #e7782e;
+  cursor: pointer;
+}
+
+.button-danger {
+  background-color: #e96a59;
+  transition: background-color .1s linear;
+}
+
+.button-danger:hover {
+  background-color: #d1230c;
+  cursor: pointer;
+}
+
+.search-box {
+  display: flex;
+  position: relative;
+}
+
+#search-box {
+  border-start-start-radius: 2.5rem;
+  border-bottom-left-radius: 2.5rem;
+  padding-left: 1rem;
+  border: none;
+  height: 2.5rem;
+}
+
+#search-btn {
+  background-color: #245953;
+  color: white;
+  display: flex;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-start-end-radius: 2.5rem;
+  border-end-end-radius: 2.5rem;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+
+#search-btn:hover {
+  background-color: #2e6962;
+  cursor: pointer;
 }

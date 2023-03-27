@@ -45,12 +45,13 @@
 .fab-wheel {
   position: absolute;
   overflow: hidden;
-  width: 3.5rem;
+  width: 0;
   height: 3.5rem;
   top: 0;
-  right: 0;
-  border-radius: 3.5rem;
-  transition: all .7s ease;
+  right: 1.75rem;
+  border-start-start-radius: 3.5rem;
+  border-end-start-radius: 3.5rem;
+  transition: width .7s ease;
   background-color: #245953;
 }
 
@@ -84,11 +85,11 @@
 }
 
 .fab-wheel .fab-action-2 {
-  left: 6rem;
+  left: 6.5rem;
 }
 
 .fab-wheel .fab-action-3 {
-  left: 10rem;
+  left: 11rem;
 }
 
 #del-emp-icon.select {

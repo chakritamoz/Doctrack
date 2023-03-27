@@ -23,6 +23,24 @@ namespace Doctrack.Controllers
       return View(employees);
     }
 
+    public async Task<IActionResult> SearchEmployee(string queryStr)
+    {
+      if (_context.Employees == null)
+      {
+        return NotFound();
+      }
+
+      var employees = await _context.Employees.ToListAsync();
+      if (!String.IsNullOrEmpty(queryStr))
+      {
+        employees = employees
+          .Where(emp => $"{emp.FirstName} {emp.LastName}".Contains(queryStr))
+          .ToList();
+      }
+      
+      return PartialView("_EmployeeTable", employees);
+    }
+
     //GET: Employees/Create
     public IActionResult Create()
     {

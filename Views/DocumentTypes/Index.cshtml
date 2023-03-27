@@ -7,33 +7,32 @@
 <h2>Document Types</h2>
 <hr />
 
-<p class="btn btn-primary">
-  <a asp-action="Create" style="color:white">New Document</a>
-</p>
+<div class="flex-action">
+  <div class="button button-primary">
+    <a asp-action="Create" style="color:white">New Document</a>
+  </div>
+  <div class="search-box">
+    <input id="search-box" placeholder="Search Title..." />
+    <div id="search-btn"><i class="bi bi-search"></i></div>
+  </div>
+</div>
+<div id="document-table">
+  @Html.Partial("_DocumentTypesTable", Model);
+</div>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Id</th>
-      <th>Title</th>
-      <th>Period Warning(Day)</th>
-      <th>Period End(Day)</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    @foreach (var item in Model)
-    {
-      <tr>
-        <td>@item.Id</td>
-        <td>@item.Title</td>
-        <td>@item.PeriodWarning</td>
-        <td>@item.PeriodEnd</td>
-        <td>
-          <a asp-action="Edit" asp-route-id="@item.Id">Edit</a><span> |</span>
-          <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-        </td>
-      </tr>
+
+<script>
+  $('#search-btn').click(function() {
+  const queryStr = $('#search-box').val();
+  $.ajax({
+    url: '/DocumentTypes/SearchDocType/',
+    type: 'GET',
+    data: {
+      'queryStr': queryStr
+    },
+    success: function (data) { 
+      $('#document-table').html(data);
     }
-  </tbody>
-</table>
+  })
+})
+</script>

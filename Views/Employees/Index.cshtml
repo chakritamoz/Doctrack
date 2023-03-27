@@ -7,47 +7,31 @@
 <h2>Employees</h2>
 <hr />
 
-<p class="btn btn-primary">
-  <a asp-action="Create" style="color:white;">New Employee</a>
-</p>
+<div class="flex-action">
+  <div class="button button-primary">
+    <a asp-action="Create" style="color:white;">New Employee</a>
+  </div>
+  <div class="search-box">
+    <input id="search-box" placeholder="Search Title..." />
+    <div id="search-btn"><i class="bi bi-search"></i></div>
+  </div>
+</div>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Id</th>
-      <th>First Name</th>
-      <th>Last Name</th>
-      <th>Phone Number</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    @foreach (var item in Model)
-    {
-      <tr>
-        <td>@item.Id</td>
-        <td>@item.FirstName</td>
-        <td>@item.LastName</td>
-        @{
-          if (item.PhoneNumber != null)
-          {
-            var n0_2 = item.PhoneNumber.Substring(0,3);
-            var n3_5 = item.PhoneNumber.Substring(3,3);
-            var n6_9 = item.PhoneNumber.Substring(6,4);
-            <td>@(n0_2)-@(n3_5)-@(n6_9)</td>
-          }
-          else
-          {
-            <td>@item.PhoneNumber</td>
-          }
-        }
-        
-        <td>
-          <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-          <span> |</span>
-          <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-        </td>
-      </tr>
-    }
-  </tbody>
-</table>
+<div id="document-table">
+  @Html.Partial("_EmployeeTable", Model)
+</div>
+
+<script>
+  $('#search-btn').click(function() {
+    var queryStr = $('#search-box').val();
+    $.ajax({
+      url: 'Employees/SearchEmployee',
+      type: 'GET',
+      data: { 'queryStr': queryStr },
+      success: function(data)
+      {
+        $('#document-table').html(data);
+      }
+    })
+  })
+</script>
