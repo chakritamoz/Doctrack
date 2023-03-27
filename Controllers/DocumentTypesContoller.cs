@@ -37,7 +37,6 @@ namespace Doctrack.Controllers
         .ToList();
       }
 
-
       return PartialView("_DocumentTypesTable", documentTypes);
     }
 

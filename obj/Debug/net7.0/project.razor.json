@@ -18740,6 +18740,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "d:\\Doctrack\\Views\\Documents\\_DocumentTable.cshtml",
+      "TargetPath": "Views\\Documents\\_DocumentTable.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "d:\\Doctrack\\Views\\Home\\Index.cshtml",
       "TargetPath": "Views\\Home\\Index.cshtml",
       "FileKind": "mvc"

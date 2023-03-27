@@ -1,4 +1,4 @@
-@model Doctrack.Models.DocumentViewModel
+@model IEnumerable<Document>
 
 @{
   ViewData["Title"] = "Documents List";
@@ -18,97 +18,33 @@
       Document
     </a>
   </div>
-  <div class="search-box">
-    <input id="search-box" placeholder="Search Title..." />
-    <div id="search-btn"><i class="bi bi-search"></i></div>
-  </div>
-</div>
-
-<div class="container-wrapper">
-  <div class="flex-container">
-    <div class="flex-header">
-      <div class="cell">Receipt Date</div>
-      <div class="cell">Documents No.</div>
-      <div class="cell">Doc.Type</div>
-      <div class="cell cell-title">Doc.Title</div>
-      <div class="cell">Operation</div>
-      <div class="cell">Op.Date</div>
-      <div class="cell">Command Order</div>
-      <div class="cell">Remarks</div>
-      <div class="cell">End Date</div>
+  <div class="search-box-container">
+    <div class="search-box-document" style="display: flex; flex-direction: column;">
+      <label for="search-docNo">Document No.</label>
+      <input id="search-docNo" class="search-input" placeholder="Document No..." />
     </div>
-    @foreach (var doc in Model.Documents)
-    {
-      <div class="container-main-row">
-        <div id="btnFront-@doc.Id" class="container-btn front">
-          <a class="upop-doc-icon main-btn button-primary">
-            <i class="bi bi-send-check-fill"></i>
-          </a>
-          <a class="sub-doc-icon main-btn button-success">
-            <i class="bi bi-file-earmark-check-fill"></i>
-          </a>
-        </div>
-        <div id="@doc.Id" class='flex-row main-row
-          @(doc.EndDate != null ?
-            "success" :
-            doc.OperationDate == null ?
-            "normal" :
-            DateTime.Now.Subtract(
-              doc.OperationDate??DateTime.MinValue
-            ).TotalDays >= doc.DocumentType?.PeriodEnd ?
-            "late" :
-            DateTime.Now.Subtract(
-              doc.OperationDate??DateTime.MinValue
-            ).TotalDays >= doc.DocumentType?.PeriodWarning ?
-            "warning" :
-            "normal"
-          )'>
-          <div class="cell receipt-date" data-receiptDate='@doc.ReceiptDate?.ToString("dd/MM/yyyy")'></div>
-          <div class="cell">@doc.Id</div>
-          <div class="cell">@doc.DocumentType?.Title</div>
-          <div class="cell cell-title">@doc.Doc_Title</div>
-          <div class="cell">@doc.Operation</div>
-          <div class="cell operation-date" data-operationDate='@doc.OperationDate?.ToString("dd/MM/yyyy")'></div>
-          <div class="cell">@doc.CommandOrder</div>
-          <div class="cell">@doc.RemarkAll</div>
-          <div class="cell end-date" data-endDate='@doc.EndDate?.ToString("dd/MM/yyyy")'></div>
-        </div>
-        <div id="btnBehide-@doc.Id" class="container-btn behide">
-          <a class="edit-doc-icon main-btn button-warning">
-            <i class="bi bi-pencil-fill"></i>
-          </a>
-          <a class="del-doc-icon main-btn button-danger">
-            <i class="bi bi-trash-fill"></i>
-          </a>
-        </div>
-      </div>
-
-      <div id="sub-@doc.Id" class="flex-container sub-content">
-        <div class="flex-header sub-header">
-          <div class="cell">Job</div>
-          <div class="cell">Title</div>
-          <div class="cell">First Name</div>
-          <div class="cell">Last Name</div>
-          <div class="cell">Remark</div>
-        </div>
-        @if (doc.DocumentDetails?.Count() > 0)
-          {
-            @foreach (var docd in doc.DocumentDetails)
-            {
-              <div id="@docd.Id" class="flex-row sub-row">
-                <div class="cell">@docd.Job?.Title</div>
-                <div class="cell">@docd.Rank?.Title</div>
-                <div class="cell">@docd.Employee?.FirstName</div>
-                <div class="cell">@docd.Employee?.LastName</div>
-                <div class="cell">@docd.Remark</div>
-              </div>
-        }} @*End razor tag*@
-      </div>
-    } @*End foreach Model.Documents*@
+    <div class="search-box-document">
+      <label for="search-docType">Document Type</label>
+      <input id="search-docType" class="search-input" placeholder="Document Type..." />
+    </div>
+    <div class="search-box-document">
+      <label for="search-docTitle">Document Title</label>
+      <input id="search-docTitle" class="search-input" placeholder="Document Title..." />
+    </div>
+    <div class="search-box-document">
+      <label for="search-employee">Employee Name</label>
+      <input id="search-employee" class="search-input" placeholder="Employee Name..." />
+    </div>
+    <div id="search-btn-document"><i class="bi bi-search"></i></div>
   </div>
 </div>
-<div id="jobsData" data-json="@ViewBag.JobsTitle"></div>
-<div id="ranksData" data-json="@ViewBag.RanksTitle"></div>
+
+<hr />
+
+<!-- Render document table -->
+<div id="document-table">
+  @Html.Partial("_DocumentTable", Model);
+</div>
 
 <!-- Modal -->
 <div id="writableModal" class="modal-container">
@@ -127,7 +63,6 @@
     </div>
   </div>
 </div>
-
 
 <!-- Floating Action Button -->
 <div class="fab-wrapper">
@@ -149,48 +84,39 @@
 </div>
 
 <script src="~/node_modules/jquery-touchswipe/jquery.touchSwipe.min.js" type="text/javascript"></script>
-<script src="~/js/documentsModal.js" asp-append-version="true"></script>
 <script src="~/js/documentsIndex.js"></script>
+<script src="~/js/documentsModal.js"></script>
 <script>
-
-  //Convert format year to Buddhist
-  $(document).ready(function(event) {
-    const receiptDates = document.querySelectorAll('.receipt-date');
-    const operationDates = document.querySelectorAll('.operation-date');
-    const endDates = document.querySelectorAll('.end-date');
-
-    const buddhistOptions = {
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit',
-      calendar: 'buddhist',
-      @* numberingSystem: 'thai' *@
-    };
-
-    const thaiBuddhistFormat = new Intl.DateTimeFormat('th-TH-u-ca-buddhist', buddhistOptions);
-
-    receiptDates.forEach(div => {
-      const receiptDate = div.getAttribute('data-receiptDate');
-      const [day, month, year] = receiptDate.split('/').map(Number);
-      const date = new Date(year, month-1, day);
-      div.textContent = thaiBuddhistFormat.format(date);
-    });
-  
-    operationDates.forEach(div => {
-      const operationDate = div.getAttribute('data-operationDate');
-      if (operationDate == "") return;
-      const [day, month, year] = operationDate.split('/').map(Number);
-      const date = new Date(year, month-1, day);
-      div.textContent = thaiBuddhistFormat.format(date);
-    });
-
-    endDates.forEach(div => {
-      const endDate = div.getAttribute('data-endDate');
-      if (endDate == "") return;
-      const [day, month, year] = endDate.split('/').map(Number);
-      const date = new Date(year, month-1, day);
-      div.textContent = thaiBuddhistFormat.format(date);
-    });
+  //Search function
+  $('#search-docNo, #search-docType, #search-docTitle, #search-employee').keypress(function(event) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      document.getElementById('search-btn-document').click();
+    }
   });
   
+  $('#search-btn-document').click(function() {
+    var queryDocNo = $('#search-docNo').val();
+    var queryDocType = $('#search-docType').val();
+    var queryDocTitle = $('#search-docTitle').val();
+    var queryEmployee = $('#search-employee').val();
+    $.ajax({
+      url: 'Documents/SearchDocument',
+      type: 'GET',
+      data: { 
+        'queryDocNo': queryDocNo,
+        'queryDocType': queryDocType,
+        'queryDocTitle': queryDocTitle,
+        'queryEmployee': queryEmployee
+      },
+      success: function(data)
+      {
+        $('#document-table').html(data);
+        $.getScript('./js/documentsIndex.js', function() {
+          // Script loaded successfully
+        })
+        console.log(data);
+      }
+    });
+  })
 </script>

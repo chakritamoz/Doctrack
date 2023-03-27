@@ -397,7 +397,6 @@ $(document).on('click', '#modal-sub-button', () => {
   }
 }); // end click modal-upop-button
 
-
 // when click confirm delete button on modal
 // send method post to update data
 $(document).on('click', '#modal-delete-button', () => {
@@ -517,3 +516,36 @@ function cancelTrigger() {
   $('#edit-emp-icon').removeClass('select');
   $('.sub-row').css('cursor', 'default');
 }
+
+const receiptDates = document.querySelectorAll('.receipt-date');
+const operationDates = document.querySelectorAll('.operation-date');
+const endDates = document.querySelectorAll('.end-date');
+const buddhistOptions = {
+  year: 'numeric',
+  month: '2-digit',
+  day: '2-digit',
+  calendar: 'buddhist',
+  // numberingSystem: 'thai'
+};
+const thaiBuddhistFormat = new Intl.DateTimeFormat('th-TH-u-ca-buddhist', buddhistOptions);
+receiptDates.forEach(div => {
+  const receiptDate = div.getAttribute('data-receiptDate');
+  const [day, month, year] = receiptDate.split('/').map(Number);
+  const date = new Date(year, month-1, day);
+  div.textContent = thaiBuddhistFormat.format(date);
+});
+
+operationDates.forEach(div => {
+  const operationDate = div.getAttribute('data-operationDate');
+  if (operationDate == "") return;
+  const [day, month, year] = operationDate.split('/').map(Number);
+  const date = new Date(year, month-1, day);
+  div.textContent = thaiBuddhistFormat.format(date);
+});
+endDates.forEach(div => {
+  const endDate = div.getAttribute('data-endDate');
+  if (endDate == "") return;
+  const [day, month, year] = endDate.split('/').map(Number);
+  const date = new Date(year, month-1, day);
+  div.textContent = thaiBuddhistFormat.format(date);
+});

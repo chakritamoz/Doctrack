@@ -41,6 +41,10 @@
       "PackagePath": "staticwebassets\\js\\documentsModal.js"
     },
     {
+      "Id": "D:\\Doctrack\\wwwroot\\js\\partialViewDocument.js",
+      "PackagePath": "staticwebassets\\js\\partialViewDocument.js"
+    },
+    {
       "Id": "D:\\Doctrack\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

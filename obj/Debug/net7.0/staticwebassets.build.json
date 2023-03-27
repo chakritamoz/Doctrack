@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "8jL787MhPp+gNgXik94YZCipPqoTdSdo90gXLMY6BdA=",
+  "Hash": "HLKvakWNrpHVb8mMECZkSNUx8jiJCXXDcTR7mJWVAuQ=",
   "Source": "Doctrack",
   "BasePath": "_content/Doctrack",
   "Mode": "Default",
@@ -202,6 +202,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\documentsModal.js"
+    },
+    {
+      "Identity": "D:\\Doctrack\\wwwroot\\js\\partialViewDocument.js",
+      "SourceId": "Doctrack",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
+      "BasePath": "_content/Doctrack",
+      "RelativePath": "js/partialViewDocument.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\partialViewDocument.js"
     },
     {
       "Identity": "D:\\Doctrack\\wwwroot\\js\\site.js",
