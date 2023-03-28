@@ -1,6 +1,6 @@
 @model IEnumerable<Document>
 
-@if(Model != null) {
+@if(Model.Count() > 0) {
   <div class="container-wrapper">
     <div class="flex-container">
       <div class="flex-header">
@@ -40,15 +40,15 @@
               "warning" :
               "normal"
             )'>
-            <div class="cell receipt-date" data-receiptDate='@doc.ReceiptDate?.ToString("dd/MM/yyyy")'></div>
+            <div class="cell receipt-date" data-receiptDate='@doc.ReceiptDate?.ToString("dd/MM/yyyy")'>@doc.ReceiptDate?.ToString("dd/MM/yyyy")</div>
             <div class="cell">@doc.Id</div>
             <div class="cell">@doc.DocumentType?.Title</div>
             <div class="cell cell-title">@doc.Doc_Title</div>
             <div class="cell">@doc.Operation</div>
-            <div class="cell operation-date" data-operationDate='@doc.OperationDate?.ToString("dd/MM/yyyy")'></div>
+            <div class="cell operation-date" data-operationDate='@doc.OperationDate?.ToString("dd/MM/yyyy")'>@doc.OperationDate?.ToString("dd/MM/yyyy")</div>
             <div class="cell">@doc.CommandOrder</div>
             <div class="cell">@doc.RemarkAll</div>
-            <div class="cell end-date" data-endDate='@doc.EndDate?.ToString("dd/MM/yyyy")'></div>
+            <div class="cell end-date" data-endDate='@doc.EndDate?.ToString("dd/MM/yyyy")'>@doc.EndDate?.ToString("dd/MM/yyyy")</div>
           </div>
           <div id="btnBehide-@doc.Id" class="container-btn behide">
             <a class="edit-doc-icon main-btn button-warning">

@@ -43,7 +43,7 @@
 
 <!-- Render document table -->
 <div id="document-table">
-  @Html.Partial("_DocumentTable", Model);
+  @Html.Partial("_DocumentTable", Model)
 </div>
 
 <!-- Modal -->
@@ -84,6 +84,7 @@
 </div>
 
 <script src="~/node_modules/jquery-touchswipe/jquery.touchSwipe.min.js" type="text/javascript"></script>
+<script src="~/js/partialDocument.js"></script>
 <script src="~/js/documentsIndex.js"></script>
 <script src="~/js/documentsModal.js"></script>
 <script>
@@ -112,10 +113,9 @@
       success: function(data)
       {
         $('#document-table').html(data);
-        $.getScript('./js/documentsIndex.js', function() {
-          // Script loaded successfully
-        })
-        console.log(data);
+        $.getScript('~/js/partialDocument.js', function(){
+          // Add script
+        });
       }
     });
   })

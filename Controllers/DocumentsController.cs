@@ -19,12 +19,7 @@ namespace Doctrack.Controllers
 
     //GET: Documents/Index
     public async Task<IActionResult> Index()
-    {
-      // Set the culture to en-US (English - United States)
-      CultureInfo culture = new CultureInfo("en-US");
-      Thread.CurrentThread.CurrentCulture = culture;
-      Thread.CurrentThread.CurrentUICulture = culture;
-      
+    {      
       var documents = await _context.Documents
         .Include(d => d.DocumentType)
         .Include(d => d.DocumentDetails)
@@ -57,10 +52,17 @@ namespace Doctrack.Controllers
           .ThenInclude(dd => dd.Job)
         .Include(d => d.DocumentDetails)
           .ThenInclude(dd => dd.Rank)
-        .Where(d => string.IsNullOrEmpty(queryDocNo) || d.Id.Contains(queryDocNo))
-        .Where(d => string.IsNullOrEmpty(queryDocType) || d.DocumentType.Title.Contains(queryDocType))
-        .Where(d => string.IsNullOrEmpty(queryDocTitle) || d.Doc_Title.Contains(queryDocTitle))
-        .Where(d => string.IsNullOrEmpty(queryEmployee) || d.DocumentDetails
+        .Where(d => string.IsNullOrEmpty(queryDocNo) 
+          || d.Id.Contains(queryDocNo)
+        )
+        .Where(d => string.IsNullOrEmpty(queryDocType)
+          || d.DocumentType.Title.Contains(queryDocType)
+        )
+        .Where(d => string.IsNullOrEmpty(queryDocTitle)
+          || d.Doc_Title.Contains(queryDocTitle)
+        )
+        .Where(d => string.IsNullOrEmpty(queryEmployee)
+          || d.DocumentDetails
           .Any(dd => (dd.Employee.FirstName + dd.Employee.LastName)
             .Contains(queryEmployee)
           )

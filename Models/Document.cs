@@ -16,16 +16,13 @@ namespace Doctrack.Models
 
     [Required(ErrorMessage = "Please enter receipt date.")]
     [DataType(DataType.Date)]
-    [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
     public DateTime? ReceiptDate {get; set;}
 
     [DataType(DataType.Date)]
-    [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
     public DateTime? EndDate {get; set;}
     public string? Operation {get; set;}
     
     [DataType(DataType.Date)]
-    [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
     public DateTime? OperationDate {get; set;}
     public string? CommandOrder {get; set;}
     public string? RemarkAll {get; set;}

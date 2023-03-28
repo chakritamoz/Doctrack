@@ -1,5 +1,10 @@
 using Doctrack.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Globalization;
+
+var cultureInfo = new CultureInfo("en-US");
+CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,7 +13,6 @@ builder.Services.AddDbContext<DoctrackContext>(options =>
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
 
 var app = builder.Build();
 
