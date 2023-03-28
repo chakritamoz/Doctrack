@@ -125,6 +125,7 @@ $(document).on('click', '.sub-doc-icon', () => {
 // set modal title and modal body
 // set modal accept btn id
 $(document).on('click', '#add-emp-icon', () => {
+  console.log(currentDocId);
   cancelTrigger();
   modalAcceptBtn.id = 'modal-addEmp-button';
   $('#modal-close-button').addClass('modal-closeAddEmp-button');
