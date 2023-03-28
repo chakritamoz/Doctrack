@@ -25,58 +25,6 @@ if (docActive) {
   localStorage.clear();
 }
 
-$('.main-row').swipe({
-  swipeLeft: function(){
-    disableSwipe(currentDocId);
-    $(this).parent().hasClass('active')? null: disableActive();
-    currentDocId = $(this).attr('id');
-    $(this).css('transform', 'translate(-200px,0px)');
-    $(`#btnBehide-${currentDocId}`).addClass('swipe');
-    isMove = true;
-  },
-  swipeRight: function(){
-    disableSwipe(currentDocId);
-    $(this).parent().hasClass('active')? null: disableActive();
-    currentDocId = $(this).attr('id');
-    $(this).css('transform', 'translate(200px,0px)');
-    $(`#btnFront-${currentDocId}`).addClass('swipe');
-    isMove = true;
-  },
-  swipeStatus: function(event,phase, direction, distance) {
-    if (phase == 'cancel')
-    {
-      disableSwipe(currentDocId);
-      if (distance < 5 && !isMove){
-        currentDocId = $(this).attr('id');
-        const mainRowElement = $(`#${currentDocId}`).parent();
-        const subRowElement = $(`#sub-${currentDocId}`);
-        const rowFooterElement = subRowElement.next();
-        if (mainRowElement.hasClass('active')) {
-          disableActive();
-          floatingBtn.setAttribute('disabled', true);
-          floatingBtn.checked = false;
-        }else {
-          disableActive();
-          activeElement = mainRowElement.addClass('active');
-          expandElement = subRowElement.addClass('expand');
-          footerElement = rowFooterElement.addClass('row-footer');
-          floatingBtn.removeAttribute('disabled');
-        }
-      }
-      $(`#btn-${currentDocId}`).removeClass('swipe');
-      $(this).removeAttr('style');
-      isMove = false;
-    }
-  },
-  threshold:30,
-});
-
-function disableSwipe(docId) {
-  $(`#btnBehide-${docId}`).removeClass('swipe');
-  $(`#btnFront-${docId}`).removeClass('swipe');
-  $(`#${docId}`).removeAttr('style');
-}
-
 function disableActive() {
   if (activeElement || expandElement || footerElement){
     activeElement.removeClass('active');
@@ -137,7 +85,7 @@ $(document).on('click', '.upop-doc-icon', () => {
 
 // when click edit icon
 // redirect to documents/edit/?id=5
-$('.edit-doc-icon').on('click', function(){
+$(document).on('click', '.edit-doc-icon', function(){
   window.location.href = '/Documents/Edit/' + currentDocId;
 }); // end click edit-doc-icon
 
@@ -205,7 +153,7 @@ $(document).on('keyup', function(e) {
   }
 });
 
-$('#del-emp-icon').click(() => {
+$(document).on('click', '#del-emp-icon', function() {
   if (!triggerDelEmp) {
     cancelTrigger();
     triggerDelEmp = true;
@@ -216,7 +164,7 @@ $('#del-emp-icon').click(() => {
   }
 });
 
-$('#edit-emp-icon').click(() => {
+$(document).on("click", '#edit-emp-icon', function() {
   if (!triggerEditEmp) {
     cancelTrigger();
     triggerEditEmp = true;
@@ -231,7 +179,7 @@ $('.main-row').click(() => {
   localStorage.clear();
 });
 
-$('.sub-row').click(function() {
+$(document).on("click", '.sub-row',function() {
   if (triggerDelEmp) {
     var docdId = $(this).attr('id');
     var token = $('input[name="__RequestVerificationToken"]').val();
@@ -397,7 +345,6 @@ $(document).on('click', '#modal-sub-button', () => {
   }
 }); // end click modal-upop-button
 
-
 // when click confirm delete button on modal
 // send method post to update data
 $(document).on('click', '#modal-delete-button', () => {
@@ -516,4 +463,46 @@ function cancelTrigger() {
   $('#del-emp-icon').removeClass('select');
   $('#edit-emp-icon').removeClass('select');
   $('.sub-row').css('cursor', 'default');
+}
+
+const receiptDates = document.querySelectorAll('.receipt-date');
+const operationDates = document.querySelectorAll('.operation-date');
+const endDates = document.querySelectorAll('.end-date');
+const buddhistOptions = {
+  year: 'numeric',
+  month: '2-digit',
+  day: '2-digit',
+  calendar: 'buddhist',
+  // numberingSystem: 'thai'
+};
+receiptDates.forEach(element =>
+  console.log(element.getAttribute('data-receiptDate'))
+);
+const thaiBuddhistFormat = new Intl.DateTimeFormat('th-TH-u-ca-buddhist', buddhistOptions);
+receiptDates.forEach(div => {
+  const receiptDate = div.getAttribute('data-receiptDate');
+  const [day, month, year] = receiptDate.split('/').map(Number);
+  const date = new Date(year, month-1, day);
+  div.textContent = thaiBuddhistFormat.format(date);
+});
+
+operationDates.forEach(div => {
+  const operationDate = div.getAttribute('data-operationDate');
+  if (operationDate == "") return;
+  const [day, month, year] = operationDate.split('/').map(Number);
+  const date = new Date(year, month-1, day);
+  div.textContent = thaiBuddhistFormat.format(date);
+});
+endDates.forEach(div => {
+  const endDate = div.getAttribute('data-endDate');
+  if (endDate == "") return;
+  const [day, month, year] = endDate.split('/').map(Number);
+  const date = new Date(year, month-1, day);
+  div.textContent = thaiBuddhistFormat.format(date);
+});
+
+function disableSwipe(docId) {
+  $(`#btnBehide-${docId}`).removeClass('swipe');
+  $(`#btnFront-${docId}`).removeClass('swipe');
+  $(`#${docId}`).removeAttr('style');
 }

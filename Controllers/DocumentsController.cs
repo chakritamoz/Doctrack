@@ -5,6 +5,7 @@ using Doctrack.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 using System.Text.Json;
+using System.Globalization;
 
 namespace Doctrack.Controllers
 {
@@ -18,30 +19,62 @@ namespace Doctrack.Controllers
 
     //GET: Documents/Index
     public async Task<IActionResult> Index()
-    {
+    {      
       var documents = await _context.Documents
         .Include(d => d.DocumentType)
         .Include(d => d.DocumentDetails)
-        .ToListAsync();
-
-      var documentsDetail = await _context.DocumentDetails
-        .Include(dd => dd.Document)
-        .Include(dd => dd.Job)
-        .Include(dd => dd.Rank)
-        .Include(dd => dd.Employee)
+          .ThenInclude(dd => dd.Employee)
+        .Include(d => d.DocumentDetails)
+          .ThenInclude(dd => dd.Job)
+        .Include(d => d.DocumentDetails)
+          .ThenInclude(dd => dd.Rank)
         .ToListAsync();
 
       var orderDocument = documents
         .OrderBy(d => d.EndDate)
         .ThenBy(d => d.DocType_Id).ToList();
 
-      var viewModel = new DocumentViewModel
-      {
-        Documents = orderDocument,
-        DocumentsDetail = documentsDetail
-      };
+      return View(orderDocument);
+    }
 
-      return View(viewModel);
+    public async Task<IActionResult> SearchDocument(string queryDocNo, string queryDocType, string queryDocTitle, string queryEmployee)
+    {
+      if (_context.Documents == null)
+      {
+        return NotFound();
+      }
+
+      var documents = await _context.Documents
+        .Include(d => d.DocumentType)
+        .Include(d => d.DocumentDetails)
+          .ThenInclude(dd => dd.Employee)
+        .Include(d => d.DocumentDetails)
+          .ThenInclude(dd => dd.Job)
+        .Include(d => d.DocumentDetails)
+          .ThenInclude(dd => dd.Rank)
+        .Where(d => string.IsNullOrEmpty(queryDocNo) 
+          || d.Id.Contains(queryDocNo)
+        )
+        .Where(d => string.IsNullOrEmpty(queryDocType)
+          || d.DocumentType.Title.Contains(queryDocType)
+        )
+        .Where(d => string.IsNullOrEmpty(queryDocTitle)
+          || d.Doc_Title.Contains(queryDocTitle)
+        )
+        .Where(d => string.IsNullOrEmpty(queryEmployee)
+          || d.DocumentDetails
+          .Any(dd => (dd.Employee.FirstName + dd.Employee.LastName)
+            .Contains(queryEmployee)
+          )
+        )
+        .ToListAsync();
+
+      var orderDocument = documents
+        .OrderBy(d => d.EndDate)
+        .ThenBy(d => d.DocType_Id).ToList();
+
+
+      return PartialView("_DocumentTable", documents);
     }
 
     //GET: Documents/Create
