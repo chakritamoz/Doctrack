@@ -30,6 +30,7 @@ th {
 
 td {
   padding: 0.7rem !important;
+  vertical-align: middle;
 }
 
 th:first-child,
@@ -50,4 +51,15 @@ a {
 
 a:hover {
   color: #094eb7;
+}
+
+@media screen and (max-width: 1000px){
+  th {
+    font-size: 12px;
+    vertical-align: middle;
+  }
+
+  td {
+    font-size: 11px;
+  }
 }
