@@ -89,14 +89,14 @@
 <script src="~/js/documentsModal.js"></script>
 <script>
   //Search function
-  $('#search-docNo, #search-docType, #search-docTitle, #search-employee').keypress(function(event) {
+  $(document).on('keypress', '#search-docNo, #search-docType, #search-docTitle, #search-employee', function(event) {
     if (event.key === "Enter") {
       event.preventDefault();
       document.getElementById('search-btn-document').click();
     }
   });
   
-  $('#search-btn-document').click(function() {
+  $(document).on('click', '#search-btn-document', function() {
     var queryDocNo = $('#search-docNo').val();
     var queryDocType = $('#search-docType').val();
     var queryDocTitle = $('#search-docTitle').val();
@@ -113,8 +113,10 @@
       success: function(data)
       {
         $('#document-table').html(data);
-        $.getScript('~/js/partialDocument.js', function(){
-          // Add script
+        $.getScript('./js/partialDocument.js', function(){
+          floatingBtn.setAttribute('disabled', true);
+          floatingBtn.checked = false;
+          currentDocId = null;
         });
       }
     });
