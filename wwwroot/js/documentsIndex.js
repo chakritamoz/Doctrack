@@ -507,3 +507,42 @@ function disableSwipe(docId) {
   $(`#btnFront-${docId}`).removeClass('swipe');
   $(`#${docId}`).removeAttr('style');
 }
+
+//Search function
+$(document).on('keypress', '#search-docNo, #search-docType, #search-docTitle, #search-employee', function(event) {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    document.getElementById('search-document-btn').click();
+  }
+});
+
+$(document).on('click', '#search-document-btn', function() {
+  var queryDocNo = $('#search-docNo').val();
+  var queryDocType = $('#search-docType').val();
+  var queryDocTitle = $('#search-docTitle').val();
+  var queryEmployee = $('#search-employee').val();
+  $.ajax({
+    url: 'Documents/SearchDocument',
+    type: 'GET',
+    data: { 
+      'queryDocNo': queryDocNo,
+      'queryDocType': queryDocType,
+      'queryDocTitle': queryDocTitle,
+      'queryEmployee': queryEmployee
+    },
+    success: function(data)
+    {
+      $('.search-contrainer').toggleClass('expand');
+      $('#document-table').html(data);
+      $.getScript('./js/partialDocument.js', function(){
+        floatingBtn.setAttribute('disabled', true);
+        floatingBtn.checked = false;
+        currentDocId = null;
+      });
+    }
+  });
+})
+
+$(document).on('click', '.search-expand-btn', function() {
+  $('.search-contrainer').toggleClass('expand');
+});

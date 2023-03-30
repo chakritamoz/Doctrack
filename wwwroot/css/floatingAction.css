@@ -100,7 +100,7 @@
   color: #f68a42;
 }
 
-@media screen and (min-width: 375px) {
+/* @media screen and (min-width: 375px) {
   .fab-wrapper {
     bottom: 8rem;
     right: .4rem;
@@ -118,4 +118,4 @@
     bottom: 8rem;
     right: 8rem;
   }
-}
+} */

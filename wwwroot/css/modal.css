@@ -97,7 +97,7 @@
   cursor: pointer;
 }
 
-@media screen and (max-width: 1000px){
+/* @media screen and (max-width: 1000px){
   .modal-content {
     width: 90%;
     border-radius: 20px;
@@ -112,4 +112,4 @@
   #modal-form span  {
     width: 80%;
   }
-}
+} */

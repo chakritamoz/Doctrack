@@ -18,8 +18,8 @@
       Document
     </a>
   </div>
-  <div class="search-box-container">
-    <div class="search-box-document" style="display: flex; flex-direction: column;">
+  <div class="search-contrainer">
+    <div class="search-box-document">
       <label for="search-docNo">Document No.</label>
       <input id="search-docNo" class="search-input" placeholder="Document No..." />
     </div>
@@ -35,11 +35,14 @@
       <label for="search-employee">Employee Name</label>
       <input id="search-employee" class="search-input" placeholder="Employee Name..." />
     </div>
-    <div id="search-btn-document"><i class="bi bi-search"></i></div>
+    <div id="search-document-btn"><i class="bi bi-search"></i>&nbsp;Search</div>
+  </div>
+  <div class="search-expand-btn">
+    <div class="line-separate"></div>
+    <i class="bi bi-list"></i>
+    <div class="line-separate"></div>
   </div>
 </div>
-
-<hr />
 
 <!-- Render document table -->
 <div id="document-table">
@@ -88,37 +91,5 @@
 <script src="~/js/documentsIndex.js"></script>
 <script src="~/js/documentsModal.js"></script>
 <script>
-  //Search function
-  $(document).on('keypress', '#search-docNo, #search-docType, #search-docTitle, #search-employee', function(event) {
-    if (event.key === "Enter") {
-      event.preventDefault();
-      document.getElementById('search-btn-document').click();
-    }
-  });
-  
-  $(document).on('click', '#search-btn-document', function() {
-    var queryDocNo = $('#search-docNo').val();
-    var queryDocType = $('#search-docType').val();
-    var queryDocTitle = $('#search-docTitle').val();
-    var queryEmployee = $('#search-employee').val();
-    $.ajax({
-      url: 'Documents/SearchDocument',
-      type: 'GET',
-      data: { 
-        'queryDocNo': queryDocNo,
-        'queryDocType': queryDocType,
-        'queryDocTitle': queryDocTitle,
-        'queryEmployee': queryEmployee
-      },
-      success: function(data)
-      {
-        $('#document-table').html(data);
-        $.getScript('./js/partialDocument.js', function(){
-          floatingBtn.setAttribute('disabled', true);
-          floatingBtn.checked = false;
-          currentDocId = null;
-        });
-      }
-    });
-  })
+
 </script>

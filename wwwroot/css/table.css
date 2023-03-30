@@ -23,7 +23,8 @@ tbody > tr:hover {
 }
 
 th {
-  font-size: 18px ;
+  font-size: 12px ;
+  vertical-align: middle;
   text-transform: uppercase;
   padding: 1rem !important;
 }
@@ -51,15 +52,4 @@ a {
 
 a:hover {
   color: #094eb7;
-}
-
-@media screen and (max-width: 1000px){
-  th {
-    font-size: 12px;
-    vertical-align: middle;
-  }
-
-  td {
-    font-size: 11px;
-  }
 }
