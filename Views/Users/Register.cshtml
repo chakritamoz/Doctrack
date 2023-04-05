@@ -1,0 +1,28 @@
+@model Doctrack.Models.User
+
+@{
+  ViewData["Title"] = "Register";
+}
+
+<h2>Register</h2>
+
+<form asp-action="Register">
+  <div class="form-group">
+    <label for="username">Username</label>
+    <input id="username" name="username" value='@ViewData["username"]' class="form-control" autocomplete="off" autofocus/>
+    <span id="username-error" class="text-danger">@ViewData["ErrorUser"]</span>
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" class="form-control" autocomplete="off" autofocus/>
+    <span id="password-error" class="text-danger">@ViewData["ErrorPass"]</span>
+  </div>
+  <div class="form-group">
+    <label for="confirm-password">Confirm Password</label>
+    <input type="password" id="confirm-password" name="confirmPassword" class="form-control" autocomplete="off" autofocus/>
+    <span id="password-error" class="text-danger">@ViewData["ErrorConPass"]</span>
+  </div>
+  <div class="form-group">
+    <input type="submit" value="Login" class="btn btn-primary" />
+  </div>
+</form>

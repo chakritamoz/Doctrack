@@ -17,5 +17,6 @@ namespace Doctrack.Data
     public DbSet<Employee> Employees {get; set;}
     public DbSet<DocumentDetail> DocumentDetails {get; set;}
     public DbSet<JobRankDetail> JobRankDetails {get; set;}
+    public DbSet<User> Users {get; set;}
   }
 }

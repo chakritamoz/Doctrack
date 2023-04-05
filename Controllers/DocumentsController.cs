@@ -3,9 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using Doctrack.Data;
 using Doctrack.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Newtonsoft.Json;
 using System.Text.Json;
-using System.Globalization;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Doctrack.Controllers
 {
@@ -18,6 +17,7 @@ namespace Doctrack.Controllers
     }
 
     //GET: Documents/Index
+    // [Authorize]
     public async Task<IActionResult> Index()
     {      
       var documents = await _context.Documents

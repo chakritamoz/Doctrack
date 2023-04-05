@@ -247,4 +247,8 @@ h2 {
   .container-main-row.active {
     transform: scale(1.04);
   }
+
+  .container-main-row.row-footer {
+    margin-top: 4px;
+  }
 }

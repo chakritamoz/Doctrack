@@ -41,5 +41,6 @@ $('.main-row').swipe({
       isMove = false;
     }
   },
-  threshold:30,
+  threshold: 30,
+  allowPageScroll: "vertical"
   });
