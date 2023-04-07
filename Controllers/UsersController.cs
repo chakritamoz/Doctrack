@@ -4,6 +4,7 @@ using Doctrack.Data;
 using Doctrack.Models;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Doctrack.Controllers
 {
@@ -25,30 +26,8 @@ namespace Doctrack.Controllers
     [HttpPost]
     public async Task<IActionResult> Register(string username, string password, string confirmPassword)
     {
-      ViewData.Clear();
-      if (string.IsNullOrEmpty(username))
+      if (!InputFormIsValid(username, password, confirmPassword))
       {
-        ViewData["ErrorUser"] = "Please enter username.";
-      }
-
-      if (string.IsNullOrEmpty(password))
-      {
-        ViewData["ErrorPass"] = "Please enter password.";
-      }
-
-      if (string.IsNullOrEmpty(confirmPassword))
-      {
-        ViewData["ErrorConPass"] = "Please enter confirm password.";
-      }
-
-      if (password != confirmPassword)
-      {
-        ViewData["ErrorConPass"]= "Confirm password doesn't match password.";
-      }
-      Console.WriteLine("real: "+ ViewData == null);
-      if (ViewData != null)
-      {
-        Console.WriteLine("null");
         ViewData["username"] = username;
         return View();
       }
@@ -72,7 +51,7 @@ Console.WriteLine($"Password Hash: {Convert.ToBase64String(passwordHash)}");
 Console.WriteLine($"Password Salt: {Convert.ToBase64String(passwordSalt)}");
       // _context.Users.Add(user);
       // await _context.SaveChangesAsync();
-      return RedirectToAction(nameof(DocumentsController.Index));
+      return RedirectToAction("Index", "Documents");
     }
 
     private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
@@ -82,6 +61,41 @@ Console.WriteLine($"Password Salt: {Convert.ToBase64String(passwordSalt)}");
         passwordSalt = hmac.Key;
         passwordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
       }
+    }
+
+    public bool InputFormIsValid(string username, string password, string confirmPassword)
+    {
+      bool result = true;
+      string pattern = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,}$";
+      bool isMatch = Regex.IsMatch(password, $"^{pattern}");
+
+      if (string.IsNullOrEmpty(username))
+      {
+        ViewData["ErrorUser"] = "Please enter username.";
+        result = false;
+      }
+
+      if (string.IsNullOrEmpty(password) || password.Length < 8)
+      {
+        ViewData["ErrorPass"] = "Please enter a password between 8 and 30 characters long and it must be alphanumeric.";
+        result = false;
+      }else if (!isMatch)
+      {
+        ViewData["ErrorPass"] = "Please enter a password much be contain Upercase and Lowercase (a, Z), Numeric (0-9), Special character (!, %, @, #, etc.).";
+      }
+
+      if (string.IsNullOrEmpty(confirmPassword))
+      {
+        ViewData["ErrorConPass"] = "Please enter confirm password.";
+        result = false;
+      }
+
+      if (password != confirmPassword)
+      {
+        ViewData["ErrorConPass"]= "Passwords don't match!.";
+        result = false;
+      }
+      return result;
     }
   }
 }
