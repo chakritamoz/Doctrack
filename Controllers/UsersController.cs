@@ -66,23 +66,37 @@ namespace Doctrack.Controllers
     public bool InputFormIsValid(string username, string password, string confirmPassword)
     {
       bool result = true;
-      string pattern = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z])([^\s]){8,16}$";
-      bool isMatch = Regex.IsMatch(password, $"^{pattern}");
+      string patternUser = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d){8,16}$";
+      string patternPass = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z])([^\s]){8,16}$";
 
       if (string.IsNullOrEmpty(username))
       {
         ViewData["ErrorUser"] = "Please enter username.";
         result = false;
       }
+      else
+      {
+        bool isUserMatch = Regex.IsMatch(username, $"^{patternUser}");
+        if (!isUserMatch)
+        {
+          ViewData["ErrorUser"] = "Please enter a username between 8 and 16 characters long and it must be alphanumeric.";
+          result = false;
+        }
+      }
 
       if (string.IsNullOrEmpty(password) || password.Length < 8 || password.Length > 16)
       {
         ViewData["ErrorPass"] = "Please enter a password between 8 and 16 characters long and it must be alphanumeric.";
         result = false;
-      }else if (!isMatch)
+      }
+      else
       {
-        ViewData["ErrorPass"] = "Please enter a password much be contain Upercase and Lowercase (a, Z), Numeric (0-9), Special character (!, %, @, #, etc.).";
-        result = false;
+        bool isPassMatch = Regex.IsMatch(password, $"^{patternPass}");
+        if (!isPassMatch)
+        {
+          ViewData["ErrorPass"] = "Please enter a password much be contain Upercase and Lowercase (a, Z), Numeric (0-9), Special character (!, %, @, #, etc.).";
+          result = false;
+        }
       }
 
       if (string.IsNullOrEmpty(confirmPassword))

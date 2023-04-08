@@ -2,10 +2,10 @@
   background-color: white;
   overflow: hidden;
   border-radius: 1rem;
-  width: 50%;
-  display: flex;
+  width: 80%;
+  max-height: 480px;
   position: absolute;
-  top: 40%;
+  top: 45%;
   left: 50%;
   transform: translate(-50%, -50%);
   box-shadow: 10px 10px 10px rgb(53, 53, 53), 14px 14px 14px rgb(73, 71, 71);
@@ -21,7 +21,6 @@
   align-items: center;
   padding-left: 10px;
   height: 100%;
-  caret-color: transparent;
 }
 
 .icon-inside .icon-postfix {
@@ -42,28 +41,32 @@
 }
 
 .container-register {
-  padding: 50px;
-  width: 40%;
+  padding: 10px 30px;
+  width: 100%;
 }
 
 .container-greeting {
+  overflow: hidden;
   position: relative;
   padding: 50px;
-  width: 60%;
-  background-image: url(../asset/greeting-bg2.jpg);
-  background-repeat: no-repeat;
-  background-size: cover;
+  width: 0;
 }
 
 .content-greeting {
+  overflow: hidden;
   position: absolute;
   text-align: center;
+  width: 0;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
 
-.container-register h2,
+.container-register h2 {
+  margin-bottom: 20px;
+  color: black;
+}
+
 .container-greeting h2 {
   margin-bottom: 20px;
   color: black;
@@ -115,4 +118,75 @@
   width: 70%;
   margin-top: 10px;
   margin-left: 3px;
+}
+
+@media screen and (min-width: 700px) {
+  .container-card {
+    width: 60%;
+    top: 45%;
+    max-height: max-content;
+  }
+
+  .container-register {
+    padding: 50px;
+    width: 100%;
+  }
+
+  .container-register h2 {
+    margin-bottom: 50px;
+  }
+
+  .container-greeting {
+    overflow: hidden;
+    width: 0;
+  }
+
+  .content-greeting {
+    width: 0;
+  }
+}
+
+@media screen and (min-width: 1100px) {
+  .container-card {
+    width: 65%;
+    display: flex;
+  }
+
+  .container-register {
+    width: 40%;
+  }
+
+  .container-greeting {
+    width: 60%;
+    background-image: url(../asset/greeting-bg2.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .content-greeting {
+    width: 100%;
+  }
+}
+
+@media screen and (min-height: 700px) {
+  .container-card {
+    top: 50%;
+  }
+}
+
+@media screen and (min-width: 1400px) {
+  .container-card {
+    width: 50%;
+    top: 40%;
+  }
+
+  .container-register h2 {
+    font-size: 42px;
+  }
+}
+
+@media screen and (min-height: 900px) {
+  .container-card {
+    top: 40%;
+  }
 }
