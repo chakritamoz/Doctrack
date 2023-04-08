@@ -47,8 +47,8 @@ namespace Doctrack.Controllers
       // user.PasswordSalt = passwordSalt;
 
       Console.WriteLine($"Password: {password}");
-Console.WriteLine($"Password Hash: {Convert.ToBase64String(passwordHash)}");
-Console.WriteLine($"Password Salt: {Convert.ToBase64String(passwordSalt)}");
+      Console.WriteLine($"Password Hash: {Convert.ToBase64String(passwordHash)}");
+      Console.WriteLine($"Password Salt: {Convert.ToBase64String(passwordSalt)}");
       // _context.Users.Add(user);
       // await _context.SaveChangesAsync();
       return RedirectToAction("Index", "Documents");
@@ -66,7 +66,7 @@ Console.WriteLine($"Password Salt: {Convert.ToBase64String(passwordSalt)}");
     public bool InputFormIsValid(string username, string password, string confirmPassword)
     {
       bool result = true;
-      string pattern = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,}$";
+      string pattern = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z])([^\s]){8,16}$";
       bool isMatch = Regex.IsMatch(password, $"^{pattern}");
 
       if (string.IsNullOrEmpty(username))
@@ -75,13 +75,14 @@ Console.WriteLine($"Password Salt: {Convert.ToBase64String(passwordSalt)}");
         result = false;
       }
 
-      if (string.IsNullOrEmpty(password) || password.Length < 8)
+      if (string.IsNullOrEmpty(password) || password.Length < 8 || password.Length > 16)
       {
-        ViewData["ErrorPass"] = "Please enter a password between 8 and 30 characters long and it must be alphanumeric.";
+        ViewData["ErrorPass"] = "Please enter a password between 8 and 16 characters long and it must be alphanumeric.";
         result = false;
       }else if (!isMatch)
       {
         ViewData["ErrorPass"] = "Please enter a password much be contain Upercase and Lowercase (a, Z), Numeric (0-9), Special character (!, %, @, #, etc.).";
+        result = false;
       }
 
       if (string.IsNullOrEmpty(confirmPassword))

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "LyLS6RK4VmpGhGOnCHk65+0zbp7iRRK1FMX2QzcGlwE=",
+  "Hash": "aeA6iYMSNI5Lzg8y4AN0JK7Oq36co1FUM775JbBos4c=",
   "Source": "Doctrack",
   "BasePath": "_content/Doctrack",
   "Mode": "Default",
@@ -49,6 +49,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Doctrack\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\Doctrack.bundle.scp.css"
+    },
+    {
+      "Identity": "C:\\Doctrack\\wwwroot\\asset\\greeting-bg1.jpg",
+      "SourceId": "Doctrack",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "BasePath": "_content/Doctrack",
+      "RelativePath": "asset/greeting-bg1.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\asset\\greeting-bg1.jpg"
+    },
+    {
+      "Identity": "C:\\Doctrack\\wwwroot\\asset\\greeting-bg2.jpg",
+      "SourceId": "Doctrack",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "BasePath": "_content/Doctrack",
+      "RelativePath": "asset/greeting-bg2.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\asset\\greeting-bg2.jpg"
     },
     {
       "Identity": "C:\\Doctrack\\wwwroot\\css\\floatingAction.css",
@@ -134,6 +168,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\table.css"
+    },
+    {
+      "Identity": "C:\\Doctrack\\wwwroot\\css\\userCard.css",
+      "SourceId": "Doctrack",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "BasePath": "_content/Doctrack",
+      "RelativePath": "css/userCard.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\userCard.css"
     },
     {
       "Identity": "C:\\Doctrack\\wwwroot\\favicon.ico",

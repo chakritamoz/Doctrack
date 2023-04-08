@@ -5,6 +5,14 @@
       "PackagePath": "staticwebassets\\Doctrack.bundle.scp.css"
     },
     {
+      "Id": "C:\\Doctrack\\wwwroot\\asset\\greeting-bg1.jpg",
+      "PackagePath": "staticwebassets\\asset\\greeting-bg1.jpg"
+    },
+    {
+      "Id": "C:\\Doctrack\\wwwroot\\asset\\greeting-bg2.jpg",
+      "PackagePath": "staticwebassets\\asset\\greeting-bg2.jpg"
+    },
+    {
       "Id": "C:\\Doctrack\\wwwroot\\css\\floatingAction.css",
       "PackagePath": "staticwebassets\\css\\floatingAction.css"
     },
@@ -23,6 +31,10 @@
     {
       "Id": "C:\\Doctrack\\wwwroot\\css\\table.css",
       "PackagePath": "staticwebassets\\css\\table.css"
+    },
+    {
+      "Id": "C:\\Doctrack\\wwwroot\\css\\userCard.css",
+      "PackagePath": "staticwebassets\\css\\userCard.css"
     },
     {
       "Id": "C:\\Doctrack\\wwwroot\\favicon.ico",

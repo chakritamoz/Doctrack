@@ -45,12 +45,12 @@ body {
 }
 
 .button-primary {
-  background-color: #094eb7;
+  background-color: #558fe5;
   transition: background-color .1s linear;
 }
 
 .button-primary:hover {
-  background-color: #558fe5;
+  background-color: #094eb7;
   cursor: pointer;
 }
 

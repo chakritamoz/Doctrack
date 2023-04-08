@@ -1,0 +1,118 @@
+.container-card {
+  background-color: white;
+  overflow: hidden;
+  border-radius: 1rem;
+  width: 50%;
+  display: flex;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 10px 10px 10px rgb(53, 53, 53), 14px 14px 14px rgb(73, 71, 71);
+}
+
+.icon-inside {
+  position: relative;
+}
+
+.icon-inside .icon-prefix {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  height: 100%;
+  caret-color: transparent;
+}
+
+.icon-inside .icon-postfix {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  right: 10px;
+  height: 100%;
+}
+
+.icon-inside > input {
+  padding-left: 30px;
+  border-radius: 2rem;
+}
+
+.icon {
+  min-width: 40px;
+}
+
+.container-register {
+  padding: 50px;
+  width: 40%;
+}
+
+.container-greeting {
+  position: relative;
+  padding: 50px;
+  width: 60%;
+  background-image: url(../asset/greeting-bg2.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.content-greeting {
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.container-register h2,
+.container-greeting h2 {
+  margin-bottom: 20px;
+  color: black;
+}
+
+.container-greeting p {
+  color: black;
+}
+
+.poet {
+  font-size: 11px
+}
+
+.container-register .form-group {
+  margin-bottom: 20px;
+}
+
+.card-title {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.container-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.container-button > p {
+  margin-top: 10px;
+  font-size: 11px;
+}
+
+.container-button > p > a {
+  color: #558fe5;
+}
+
+.container-button > p > a:hover {
+  color: #094eb7;
+}
+
+.container-button .button {
+  text-align: center;
+  border-radius: 2rem;
+  padding: 0;
+  border: 0;
+  width: 70%;
+  margin-top: 10px;
+  margin-left: 3px;
+}
