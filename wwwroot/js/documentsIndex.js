@@ -466,6 +466,7 @@ function cancelTrigger() {
   $('.sub-row').css('cursor', 'default');
 }
 
+// Set date buddhist format
 const receiptDates = document.querySelectorAll('.receipt-date');
 const operationDates = document.querySelectorAll('.operation-date');
 const endDates = document.querySelectorAll('.end-date');

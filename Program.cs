@@ -6,6 +6,7 @@ var cultureInfo = new CultureInfo("en-US");
 CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
 CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
 
+//Add DbContext
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<DoctrackContext>(options => 
