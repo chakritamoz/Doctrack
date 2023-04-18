@@ -24,9 +24,9 @@ namespace Doctrack.Controllers
     }
 
     [HttpPost]
-    public async Task<IActionResult> Register(string username, string password, string confirmPassword)
+    public async Task<IActionResult> Register(string username, string password, string confirmPassword, string email)
     {
-      if (!InputFormIsValid(username, password, confirmPassword))
+      if (!InputFormIsValid(username, password, confirmPassword, email))
       {
         ViewData["username"] = username;
         return View();
@@ -38,13 +38,16 @@ namespace Doctrack.Controllers
       // var user = await _context.Users
       //   .FirstOrDefaultAsync(u => u.Username == username);
       
+      // Set password hash and salt
+      // user.PasswordHash = passwordHash;
+      // user.PasswordSalt = passwordSalt;
+
+      // Add new user to DB
       // if (user == null)
       // {
 
       // }
 
-      // user.PasswordHash = passwordHash;
-      // user.PasswordSalt = passwordSalt;
 
       Console.WriteLine($"Password: {password}");
       Console.WriteLine($"Password Hash: {Convert.ToBase64String(passwordHash)}");
@@ -63,11 +66,12 @@ namespace Doctrack.Controllers
       }
     }
 
-    public bool InputFormIsValid(string username, string password, string confirmPassword)
+    public bool InputFormIsValid(string username, string password, string confirmPassword, string email)
     {
       bool result = true;
       string patternUser = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d){8,16}$";
       string patternPass = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z])([^\s]){8,16}$";
+      string patternEmail = @"^[\w\.-_]+@[\w]+.[\w]+";
 
       if (string.IsNullOrEmpty(username))
       {
@@ -79,14 +83,14 @@ namespace Doctrack.Controllers
         bool isUserMatch = Regex.IsMatch(username, $"^{patternUser}");
         if (!isUserMatch)
         {
-          ViewData["ErrorUser"] = "Please enter a username between 8 and 16 characters long and it must be alphanumeric.";
+          ViewData["ErrorUser"] = "8 or 16 characters long and it must be alphanumeric.";
           result = false;
         }
-      }
+      } // Verify username
 
       if (string.IsNullOrEmpty(password) || password.Length < 8 || password.Length > 16)
       {
-        ViewData["ErrorPass"] = "Please enter a password between 8 and 16 characters long and it must be alphanumeric.";
+        ViewData["ErrorPass"] = "8 or 16 characters long and it must be alphanumeric.";
         result = false;
       }
       else
@@ -94,22 +98,35 @@ namespace Doctrack.Controllers
         bool isPassMatch = Regex.IsMatch(password, $"^{patternPass}");
         if (!isPassMatch)
         {
-          ViewData["ErrorPass"] = "Please enter a password much be contain Upercase and Lowercase (a, Z), Numeric (0-9), Special character (!, %, @, #, etc.).";
+          ViewData["ErrorPass"] = "Password much contain atleast one Uppercase, Numeric and Special character.";
           result = false;
         }
-      }
+      } // Verify password
 
       if (string.IsNullOrEmpty(confirmPassword))
       {
-        ViewData["ErrorConPass"] = "Please enter confirm password.";
+        ViewData["ErrorConPass"] = "8 or 16 characters long and it must be alphanumeric.";
         result = false;
-      }
+      } // Verify confirm password is null
 
       if (password != confirmPassword)
       {
-        ViewData["ErrorConPass"]= "Passwords don't match!.";
+        ViewData["ErrorConPass"]= "The two passwords don't match.";
         result = false;
+      } // Verify pattern confirm password
+
+      if (string.IsNullOrEmpty(email))
+      {
+        ViewData["ErrorEmail"] = "Please enter your email";
       }
+      else {
+        bool isEmailMatch = Regex.IsMatch(email, $"^{patternEmail}");
+        if (!isEmailMatch)
+        {
+          ViewData["ErrorEmail"] = "The email is invalid";
+        }
+      } // Verify email
+      
       return result;
     }
   }
