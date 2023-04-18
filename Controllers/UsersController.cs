@@ -29,29 +29,46 @@ namespace Doctrack.Controllers
       if (!InputFormIsValid(username, password, confirmPassword, email))
       {
         ViewData["username"] = username;
+        ViewData["email"] = email;
         return View();
       }
 
       byte[] passwordHash, passwordSalt;
       CreatePasswordHash(password, out passwordHash, out passwordSalt);
 
-      // var user = await _context.Users
-      //   .FirstOrDefaultAsync(u => u.Username == username);
+      var user = await _context.Users
+        .FirstOrDefaultAsync(u => u.Username == username);
 
       // Add new user to DB
-      // if (user == null)
-      // {
-        // Set password hash and salt
-        // user.PasswordHash = passwordHash;
-        // user.PasswordSalt = passwordSalt;
-      // }
+      if (user != null)
+      {
+        ViewData["ErrorUser"] = "Username is already exists.";
+        ViewData["username"] = username;
+        ViewData["email"] = email;
+        return View();
+      }
 
+      user = new User()
+      {
+        Username = username,
+        PasswordHash = passwordHash,
+        PasswordSalt = passwordSalt,
+        Email = email,
+        Role_Id = 2,
+        IsEmailConfirm = false,
+        IsApproved = false
+      };
+      
+      // Set password hash and salt
+      // user.PasswordHash = passwordHash;
+      // user.PasswordSalt = passwordSalt;
 
-      Console.WriteLine($"Password: {password}");
-      Console.WriteLine($"Password Hash: {Convert.ToBase64String(passwordHash)}");
-      Console.WriteLine($"Password Salt: {Convert.ToBase64String(passwordSalt)}");
-      // _context.Users.Add(user);
-      // await _context.SaveChangesAsync();
+      // Console.WriteLine($"Password: {password}");
+      // Console.WriteLine($"Password Hash: {Convert.ToBase64String(passwordHash)}");
+      // Console.WriteLine($"Password Salt: {Convert.ToBase64String(passwordSalt)}");
+
+      _context.Users.Add(user);
+      await _context.SaveChangesAsync();
       return RedirectToAction("Index", "Documents");
     }
 
@@ -67,7 +84,7 @@ namespace Doctrack.Controllers
     public bool InputFormIsValid(string username, string password, string confirmPassword, string email)
     {
       bool result = true;
-      string patternUser = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d){8,16}$";
+      string patternUser = @"^[\w\d]{7,16}$";
       string patternPass = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z])([^\s]){8,16}$";
       string patternEmail = @"^[\w\.-_]+@[\w]+.[\w]+";
 
@@ -81,7 +98,7 @@ namespace Doctrack.Controllers
         bool isUserMatch = Regex.IsMatch(username, $"^{patternUser}");
         if (!isUserMatch)
         {
-          ViewData["ErrorUser"] = "8 or 16 characters long and it must be alphanumeric.";
+          ViewData["ErrorUser"] = "Username is invlid and it must be 7 or 16 characters long.";
           result = false;
         }
       } // Verify username

@@ -6,14 +6,14 @@ namespace Doctrack.Models
 {
   public class User
   {
-    public int Id { get; set; }
+    [Key]
     [Required]
     public string Username { get; set; }
     public byte[] PasswordHash { get; set; }
     public byte[] PasswordSalt { get; set; }
     [Required]
     public string Email { get; set; }
-    public string Role_Id { get; set; }
+    public int Role_Id { get; set; }
     [ForeignKey("Role_Id")]
     public virtual Role Role { get; set; }
     public bool IsEmailConfirm { get; set; } = false;
