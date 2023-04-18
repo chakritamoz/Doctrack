@@ -37,15 +37,13 @@ namespace Doctrack.Controllers
 
       // var user = await _context.Users
       //   .FirstOrDefaultAsync(u => u.Username == username);
-      
-      // Set password hash and salt
-      // user.PasswordHash = passwordHash;
-      // user.PasswordSalt = passwordSalt;
 
       // Add new user to DB
       // if (user == null)
       // {
-
+        // Set password hash and salt
+        // user.PasswordHash = passwordHash;
+        // user.PasswordSalt = passwordSalt;
       // }
 
 
