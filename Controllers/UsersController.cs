@@ -5,6 +5,7 @@ using Doctrack.Models;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
+using Doctrack.SendGrid;
 
 namespace Doctrack.Controllers
 {
@@ -58,6 +59,9 @@ namespace Doctrack.Controllers
         IsEmailConfirm = false,
         IsApproved = false
       };
+
+      EmailService emailService = new EmailService();
+      emailService.Execute().Wait();
       
       // Set password hash and salt
       // user.PasswordHash = passwordHash;

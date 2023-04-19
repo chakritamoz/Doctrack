@@ -19,7 +19,7 @@ namespace Doctrack.Controllers
     //GET: Documents/Index
     // [Authorize]
     public async Task<IActionResult> Index()
-    {      
+    { 
       var documents = await _context.Documents
         .Include(d => d.DocumentType)
         .Include(d => d.DocumentDetails)
