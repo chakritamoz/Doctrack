@@ -18793,6 +18793,11 @@
       "FilePath": "c:\\Doctrack\\Views\\Documents\\Edit.cshtml",
       "TargetPath": "Views\\Documents\\Edit.cshtml",
       "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Doctrack\\Views\\Users\\Login.cshtml",
+      "TargetPath": "Views\\Users\\Login.cshtml",
+      "FileKind": "mvc"
     }
   ],
   "SerializationFormat": "0.3"

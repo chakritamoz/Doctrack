@@ -37,19 +37,8 @@ namespace Doctrack.Controllers
       byte[] passwordHash, passwordSalt;
       CreatePasswordHash(password, out passwordHash, out passwordSalt);
 
-      var user = await _context.Users
-        .FirstOrDefaultAsync(u => u.Username == username);
 
-      // Add new user to DB
-      if (user != null)
-      {
-        ViewData["ErrorUser"] = "Username is already exists.";
-        ViewData["username"] = username;
-        ViewData["email"] = email;
-        return View();
-      }
-
-      user = new User()
+      var user = new User()
       {
         Username = username,
         PasswordHash = passwordHash,
@@ -60,9 +49,6 @@ namespace Doctrack.Controllers
         IsApproved = false
       };
 
-      EmailService emailService = new EmailService();
-      emailService.Execute().Wait();
-      
       // Set password hash and salt
       // user.PasswordHash = passwordHash;
       // user.PasswordSalt = passwordSalt;
@@ -74,6 +60,11 @@ namespace Doctrack.Controllers
       _context.Users.Add(user);
       await _context.SaveChangesAsync();
       return RedirectToAction("Index", "Documents");
+    }
+
+    public IActionResult Login()
+    {
+      return View();
     }
 
     private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
@@ -137,15 +128,35 @@ namespace Doctrack.Controllers
       if (string.IsNullOrEmpty(email))
       {
         ViewData["ErrorEmail"] = "Please enter your email";
+        result = false;
       }
       else {
         bool isEmailMatch = Regex.IsMatch(email, $"^{patternEmail}");
         if (!isEmailMatch)
         {
           ViewData["ErrorEmail"] = "The email is invalid";
+          result = false;
         }
       } // Verify email
       
+      var user = _context.Users
+        .FirstOrDefault(u => u.Username == username);
+
+      if (user != null)
+      {
+        ViewData["ErrorUser"] = "Username is already exists.";
+        result = false;
+      }
+
+      user = _context.Users
+        .FirstOrDefault(u => u.Email == email);
+
+      if (user != null)
+      {
+        ViewData["ErrorEmail"] = "Email address is already exists.";
+        result = false;
+      }
+
       return result;
     }
   }

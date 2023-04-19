@@ -1,16 +1,16 @@
 @model Doctrack.Models.User
 
 @{
-  ViewData["Title"] = "Register";
+  ViewData["Title"] = "Sign In";
 }
 
 <link rel="stylesheet" href="~/css/userCard.css" asp-append-version="true" />
 
 <div class="container-cover-card">
   <div class="container-card">
-    <div class="container-register">
-      <h2 class="card-title">Register</h2>
-      <form asp-action="Register">
+    <div class="container-login">
+      <h2 class="card-title">Login</h2>
+      <form asp-action="Login">
         <div class="form-group">
           <div class="icon-inside">
             <i class="bi bi-person-fill icon-prefix"></i>
@@ -26,24 +26,9 @@
           </div>
           <span id="password-error" class="text-danger">@ViewData["ErrorPass"]</span>
         </div>
-        <div class="form-group">
-          <div class="icon-inside">
-            <i class="bi bi-key-fill icon-prefix"></i>
-            <i class="bi bi-eye-slash-fill icon-postfix"></i>
-            <input type="password" id="confirm-password"  name="confirmPassword" class="form-control" autocomplete="off" autofocus placeholder="Confirm Password"/>
-          </div>
-          <span id="password-error" class="text-danger">@ViewData["ErrorConPass"]</span>
-        </div>
-        <div class="form-group">
-          <div class="icon-inside">
-            <i class="bi bi-envelope-open-fill icon-prefix"></i>
-            <input type="text" id="email"  name="email" value='@ViewData["email"]' class="form-control" autocomplete="off" autofocus placeholder="Email address"/>
-          </div>
-          <span id="email-error" class="text-danger">@ViewData["ErrorEmail"]</span>
-        </div>
         <div class="form-group container-button">
-          <input type="submit" value="Create Account" class="button button-primary" />
-          <p>Already have an account? <a href="/users/login">Sign in</a></p>
+          <input type="submit" value="Sign in" class="button button-primary" />
+          <p>You don't have an account yet? <a href="/users/register">Sign up</a></p>
         </div>
       </form>
     </div>

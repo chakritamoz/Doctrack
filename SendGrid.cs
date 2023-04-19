@@ -7,13 +7,13 @@ namespace Doctrack.SendGrid
 {
   internal class EmailService
   {
-    public async Task Execute()
+    public async Task Execute(string receipient)
     {
       var apiKey = Environment.GetEnvironmentVariable("SendGridAPIKey", EnvironmentVariableTarget.User);
       var client = new SendGridClient(apiKey);
       var from = new EmailAddress("chakrit.artamoz@gmail.com");
       var subject = "Sending with SendGrid is Fun";
-      var to = new EmailAddress("chakrit.pok@nhkspg.co.th");
+      var to = new EmailAddress(receipient);
       var plainTextContent = "and easy to do anywhere, even with C#";
       var htmlContent = "<strong>and easy to do anywhere, even with C#</strong>";
       var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
