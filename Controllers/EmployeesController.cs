@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Doctrack.Data;
 using Doctrack.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Doctrack.Authentication;
 
 namespace Doctrack.Controllers
 {
@@ -15,6 +16,7 @@ namespace Doctrack.Controllers
     }
 
     //GET: Employees/Index
+    [AuthenticationFilter]
     public async Task<IActionResult> Index()
     {
       var employees = await _context.Employees
@@ -23,6 +25,7 @@ namespace Doctrack.Controllers
       return View(employees);
     }
 
+    [AuthenticationFilter]
     public async Task<IActionResult> SearchEmployee(string queryStr)
     {
       if (_context.Employees == null)
@@ -42,6 +45,7 @@ namespace Doctrack.Controllers
     }
 
     //GET: Employees/Create
+    [AuthenticationFilter]
     public IActionResult Create()
     {
       ViewBag.JobsTitle = new SelectList(_context.Jobs, "Id", "Title");
@@ -52,6 +56,7 @@ namespace Doctrack.Controllers
     //POST: Employees/Create
     [HttpPost]
     [ValidateAntiForgeryToken]
+    [AuthenticationFilter]
     public async Task<IActionResult> Create([Bind("Id, Rank_Id, Job_Id, FirstName, LastName, PhoneNumber")] Employee employee)
     {
       if (ModelState.IsValid)
@@ -68,6 +73,7 @@ namespace Doctrack.Controllers
     }
 
     //GET: Employees/Edit/5
+    [AuthenticationFilter]
     public async Task<IActionResult> Edit(int? id)
     {
       if (id == null || _context.Employees == null)
@@ -87,6 +93,7 @@ namespace Doctrack.Controllers
     //POST: Employees/Edit/5
     [HttpPost]
     [ValidateAntiForgeryToken]
+    [AuthenticationFilter]
     public async Task<IActionResult> Edit(int id, [Bind("Id, Rank_Id, Job_Id, FirstName, LastName", "PhoneNumber")] Employee employee)
     {
       if (_context.Employees == null)
@@ -118,6 +125,7 @@ namespace Doctrack.Controllers
     }
 
     //GET: Employees/Delete/5
+    [AuthenticationFilter]
     public async Task<IActionResult> Delete(int? id)
     {
       if (id == null || _context.Employees == null)
@@ -138,6 +146,7 @@ namespace Doctrack.Controllers
     //POST: Employees/Delete/5
     [HttpPost]
     [ValidateAntiForgeryToken]
+    [AuthenticationFilter]
     public async Task<IActionResult> Delete(int id)
     {
       if (_context.Employees == null)
