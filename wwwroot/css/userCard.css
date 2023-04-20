@@ -10,7 +10,9 @@
 
 .container-card {
   position: relative;
-  background-color: white;
+  background-image: url(../asset/greeting-bg2.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
   overflow: hidden;
   border-radius: 1rem;
   width: 80%;
@@ -198,12 +200,15 @@
     width: 80%;
     height: 100%;
     display: flex;
+    background-color: rgb(251 221 221);
+    background-image: none;
   }
 
   .container-register,
   .container-login {
     width: 40%;
-    padding: 0 30px
+    padding: 0 30px;
+    height: 100%;
   }
 
   .container-register h2 {

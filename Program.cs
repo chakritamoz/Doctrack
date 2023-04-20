@@ -6,11 +6,21 @@ var cultureInfo = new CultureInfo("en-US");
 CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
 CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
 
-//Add DbContext
 var builder = WebApplication.CreateBuilder(args);
 
+//Add DbContext
 builder.Services.AddDbContext<DoctrackContext>(options => 
     options.UseSqlite(builder.Configuration.GetConnectionString("DoctrackContext")));
+
+//Add Session
+builder.Services.AddDistributedMemoryCache();
+
+builder.Services.AddSession(option => 
+{
+    option.IdleTimeout = TimeSpan.FromSeconds(10);
+    option.Cookie.HttpOnly = true;
+    option.Cookie.IsEssential = true;
+});
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -31,6 +41,8 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+
+app.UseSession();
 
 app.MapControllerRoute(
     name: "default",

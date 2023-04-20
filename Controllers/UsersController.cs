@@ -67,12 +67,51 @@ namespace Doctrack.Controllers
       return View();
     }
 
+    [HttpPost]
+    public async Task<IActionResult> Login(string username, string password)
+    {
+      if (_context.Users == null)
+      {
+        return RedirectToAction("Register");
+      }
+
+      var user =  await _context.Users
+        .FirstOrDefaultAsync(u => u.Username == username);
+      if (user == null)
+      {
+        ViewData["username"] = username;
+        ViewData["userError"] = "Username is incorrect.";
+        return View();
+      }
+      byte[] enterPassHash;
+      ReCreatePasswordHash(password, user.PasswordSalt, out enterPassHash);
+
+      if (enterPassHash.SequenceEqual(user.PasswordHash))
+      {
+        return RedirectToAction("Index", "Documents");
+      }
+      else
+      {
+        ViewData["username"] = username;
+        ViewData["passError"] = "Password is incorrect.";
+        return View();
+      }
+    }
+
     private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
     {
       using (var hmac = new HMACSHA512())
       {
         passwordSalt = hmac.Key;
         passwordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
+      }
+    }
+
+    private void ReCreatePasswordHash(string enterPass, byte[] storePassSalt, out byte[] enterPassHash)
+    {
+      using (var hmac = new HMACSHA512(storePassSalt))
+      {
+        enterPassHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(enterPass));
       }
     }
 
@@ -85,7 +124,7 @@ namespace Doctrack.Controllers
 
       if (string.IsNullOrEmpty(username))
       {
-        ViewData["ErrorUser"] = "Please enter username.";
+        ViewData["userError"] = "Please enter username.";
         result = false;
       }
       else
@@ -93,14 +132,14 @@ namespace Doctrack.Controllers
         bool isUserMatch = Regex.IsMatch(username, $"^{patternUser}");
         if (!isUserMatch)
         {
-          ViewData["ErrorUser"] = "Username is invlid and it must be 7 or 16 characters long.";
+          ViewData["userError"] = "Username is invlid and it must be 7 or 16 characters long.";
           result = false;
         }
       } // Verify username
 
       if (string.IsNullOrEmpty(password) || password.Length < 8 || password.Length > 16)
       {
-        ViewData["ErrorPass"] = "8 or 16 characters long and it must be alphanumeric.";
+        ViewData["passError"] = "8 or 16 characters long and it must be alphanumeric.";
         result = false;
       }
       else
@@ -108,33 +147,33 @@ namespace Doctrack.Controllers
         bool isPassMatch = Regex.IsMatch(password, $"^{patternPass}");
         if (!isPassMatch)
         {
-          ViewData["ErrorPass"] = "Password much contain atleast one Uppercase, Numeric and Special character.";
+          ViewData["passError"] = "Password much contain atleast one Uppercase, Numeric and Special character.";
           result = false;
         }
       } // Verify password
 
       if (string.IsNullOrEmpty(confirmPassword))
       {
-        ViewData["ErrorConPass"] = "8 or 16 characters long and it must be alphanumeric.";
+        ViewData["conPassError"] = "8 or 16 characters long and it must be alphanumeric.";
         result = false;
       } // Verify confirm password is null
 
       if (password != confirmPassword)
       {
-        ViewData["ErrorConPass"]= "The two passwords don't match.";
+        ViewData["conPassError"]= "The two passwords don't match.";
         result = false;
       } // Verify pattern confirm password
 
       if (string.IsNullOrEmpty(email))
       {
-        ViewData["ErrorEmail"] = "Please enter your email";
+        ViewData["emailError"] = "Please enter your email";
         result = false;
       }
       else {
         bool isEmailMatch = Regex.IsMatch(email, $"^{patternEmail}");
         if (!isEmailMatch)
         {
-          ViewData["ErrorEmail"] = "The email is invalid";
+          ViewData["emailError"] = "The email is invalid";
           result = false;
         }
       } // Verify email
@@ -144,7 +183,7 @@ namespace Doctrack.Controllers
 
       if (user != null)
       {
-        ViewData["ErrorUser"] = "Username is already exists.";
+        ViewData["userError"] = "Username is already exists.";
         result = false;
       }
 
@@ -153,7 +192,7 @@ namespace Doctrack.Controllers
 
       if (user != null)
       {
-        ViewData["ErrorEmail"] = "Email address is already exists.";
+        ViewData["emailError"] = "Email address is already exists.";
         result = false;
       }
 
