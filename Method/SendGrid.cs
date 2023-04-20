@@ -1,7 +1,5 @@
 using SendGrid;
 using SendGrid.Helpers.Mail;
-using System;
-using System.Threading.Tasks;
 
 namespace Doctrack.SendGrid
 {

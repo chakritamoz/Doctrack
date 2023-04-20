@@ -4,7 +4,8 @@ using Doctrack.Data;
 using Doctrack.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Text.Json;
-using Microsoft.AspNetCore.Authorization;
+using Doctrack.Authentication;
+using Doctrack.SendGrid;
 
 namespace Doctrack.Controllers
 {
@@ -17,10 +18,9 @@ namespace Doctrack.Controllers
     }
 
     //GET: Documents/Index
-    // [Authorize]
+    [AuthenticationFilter]
     public async Task<IActionResult> Index()
     { 
-      
       var documents = await _context.Documents
         .Include(d => d.DocumentType)
         .Include(d => d.DocumentDetails)
@@ -38,6 +38,7 @@ namespace Doctrack.Controllers
       return View(orderDocument);
     }
 
+    [AuthenticationFilter]
     public async Task<IActionResult> SearchDocument(string queryDocNo, string queryDocType, string queryDocTitle, string queryEmployee)
     {
       if (_context.Documents == null)
@@ -79,6 +80,7 @@ namespace Doctrack.Controllers
     }
 
     //GET: Documents/Create
+    [AuthenticationFilter]
     public IActionResult Create()
     {
       ViewBag.DocTypesTitle = GetDocTypeSelectList();
@@ -91,6 +93,7 @@ namespace Doctrack.Controllers
     //POST: Documents/Create
     [HttpPost]
     [ValidateAntiForgeryToken]
+    [AuthenticationFilter]
     public async Task<IActionResult> Create(Document document)
     {
       if (document.DocType_Id == 0)
@@ -112,6 +115,7 @@ namespace Doctrack.Controllers
     }
 
     //GET: Documents/Edit/5
+    [AuthenticationFilter]
     public async Task<IActionResult> Edit(string? id)
     {
       if (id == null || _context.Documents == null)
@@ -134,6 +138,7 @@ namespace Doctrack.Controllers
     //POST: Documents/Edit/5
     [HttpPost]
     [ValidateAntiForgeryToken]
+    [AuthenticationFilter]
     public async Task<IActionResult> Edit(string id, string? newId, Document document)
     {
       if (_context.Documents == null)
@@ -207,6 +212,7 @@ namespace Doctrack.Controllers
     }
 
     //POST: Documents/AddEmployee/5
+    [AuthenticationFilter]
     public async Task<ActionResult> AddEmployee(string id, int jobId, int rankId, string firstName, string lastName, string? remark)
     {
       if (_context.DocumentDetails == null)
@@ -261,6 +267,7 @@ namespace Doctrack.Controllers
     }
 
     //GET: Documents/UpdateOP/5
+    [AuthenticationFilter]
     public async Task<ActionResult> UpdateOP(string? id)
     {
       if (id == null || _context.Documents == null)
@@ -295,6 +302,7 @@ namespace Doctrack.Controllers
     //POST: Documents/UpdateOP/5
     [HttpPost]
     [ValidateAntiForgeryToken]
+    [AuthenticationFilter]
     public async Task<ActionResult> UpdateOP(string id, string Operation, DateTime OperationDate)
     {
       var existsModel = _context.Documents.Find(id);
@@ -311,7 +319,9 @@ namespace Doctrack.Controllers
     }
 
     //GET: Document/GetAllJobs
+    [AuthenticationFilter]
     public async Task<ActionResult> GetAllJobs()
+    
     {
       if (_context.Jobs == null)
       {
@@ -327,6 +337,7 @@ namespace Doctrack.Controllers
     }
 
     //GET: Document/GetAllRanks/5
+    [AuthenticationFilter]
     public async Task<ActionResult> GetAllRanks(int? id)
     {
       if (id == null || _context.JobRankDetails == null)
@@ -354,6 +365,7 @@ namespace Doctrack.Controllers
     //POST: Documents/DeleteEmployee/5
     [HttpPost]
     [ValidateAntiForgeryToken]
+    [AuthenticationFilter]
     public async Task<ActionResult> DeleteEmployee(int id)
     {
       if (_context.DocumentDetails == null)
@@ -373,6 +385,7 @@ namespace Doctrack.Controllers
     }
 
     //GET: Documents/UpdateEmployee/5
+    [AuthenticationFilter]
     public async Task<ActionResult> UpdateEmployee(int? id)
     {
       if (id == null || _context.DocumentDetails == null)
@@ -397,6 +410,7 @@ namespace Doctrack.Controllers
     //POST: Documents/UpdateEmployee/5
     [HttpPost]
     [ValidateAntiForgeryToken]
+    [AuthenticationFilter]
     public async Task<ActionResult> UpdateEmployee(int id, int jobId, int rankId, string? remark)
     {
       if (_context.DocumentDetails == null)
@@ -422,6 +436,7 @@ namespace Doctrack.Controllers
     //POST: Documents/UpdateEndDate/5
     [HttpPost]
     [ValidateAntiForgeryToken]
+    [AuthenticationFilter]
     public async Task<ActionResult> UpdateEndDate(string id, DateTime EndDate)
     {
       var existsModel = _context.Documents.Find(id);
@@ -439,6 +454,7 @@ namespace Doctrack.Controllers
     //POST: Documents/Delete/5
     [HttpPost]
     [ValidateAntiForgeryToken]
+    [AuthenticationFilter]
     public async Task<IActionResult> Delete(string id)
     {
       if (_context.Documents == null)
