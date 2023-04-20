@@ -3,6 +3,7 @@ using System;
 using Doctrack.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Doctrack.Migrations
 {
     [DbContext(typeof(DoctrackContext))]
-    partial class DoctrackContextModelSnapshot : ModelSnapshot
+    [Migration("20230418063652_InitialUserRole")]
+    partial class InitialUserRole
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.2");
@@ -55,7 +58,7 @@ namespace Doctrack.Migrations
 
                     b.HasIndex("DocType_Id");
 
-                    b.ToTable("Documents", (string)null);
+                    b.ToTable("Documents");
                 });
 
             modelBuilder.Entity("Doctrack.Models.DocumentDetail", b =>
@@ -90,7 +93,7 @@ namespace Doctrack.Migrations
 
                     b.HasIndex("Rank_Id");
 
-                    b.ToTable("DocumentDetails", (string)null);
+                    b.ToTable("DocumentDetails");
                 });
 
             modelBuilder.Entity("Doctrack.Models.DocumentType", b =>
@@ -111,7 +114,7 @@ namespace Doctrack.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("DocumentTypes", (string)null);
+                    b.ToTable("DocumentTypes");
                 });
 
             modelBuilder.Entity("Doctrack.Models.Employee", b =>
@@ -133,7 +136,7 @@ namespace Doctrack.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Employees", (string)null);
+                    b.ToTable("Employees");
                 });
 
             modelBuilder.Entity("Doctrack.Models.Job", b =>
@@ -148,7 +151,7 @@ namespace Doctrack.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Jobs", (string)null);
+                    b.ToTable("Jobs");
                 });
 
             modelBuilder.Entity("Doctrack.Models.JobRankDetail", b =>
@@ -169,7 +172,7 @@ namespace Doctrack.Migrations
 
                     b.HasIndex("Rank_Id");
 
-                    b.ToTable("JobRankDetails", (string)null);
+                    b.ToTable("JobRankDetails");
                 });
 
             modelBuilder.Entity("Doctrack.Models.Rank", b =>
@@ -184,7 +187,7 @@ namespace Doctrack.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Ranks", (string)null);
+                    b.ToTable("Ranks");
                 });
 
             modelBuilder.Entity("Doctrack.Models.Role", b =>
@@ -199,7 +202,7 @@ namespace Doctrack.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Roles", (string)null);
+                    b.ToTable("Roles");
                 });
 
             modelBuilder.Entity("Doctrack.Models.User", b =>
@@ -237,7 +240,7 @@ namespace Doctrack.Migrations
 
                     b.HasIndex("Role_Id");
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Doctrack.Models.Document", b =>

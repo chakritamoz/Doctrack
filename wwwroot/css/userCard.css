@@ -5,12 +5,14 @@
   z-index: 999;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.386);
+  background-color: rgba(0, 0, 0, 0.534);
 }
 
 .container-card {
   position: relative;
-  background-color: white;
+  background-image: url(../asset/greeting-bg2.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
   overflow: hidden;
   border-radius: 1rem;
   width: 80%;
@@ -51,7 +53,8 @@
   min-width: 40px;
 }
 
-.container-register {
+.container-register,
+.container-login {
   padding: 10px 30px;
   width: 100%;
 }
@@ -74,10 +77,22 @@
   transform: translate(-50%, -50%);
 }
 
-.container-register h2 {
+.container-register h2,
+.container-login h2 {
   font-size: 2rem;
-  margin: 20px;
   color: black;
+}
+
+.container-register h2 {
+  margin: 20px;
+}
+
+.container-login h2 {
+  margin: 40px;
+}
+
+.container-login .container-button {
+  padding-top: 40px;
 }
 
 .container-greeting h2 {
@@ -93,7 +108,7 @@
   font-size: 11px
 }
 
-.container-register .form-group {
+.form-group {
   margin-bottom: 20px;
 }
 
@@ -147,9 +162,18 @@
     width: 100%;
   }
 
-  .container-register h2 {
+  .container-login {
+    padding: 0 40px;
+    max-height: max-content;
+    height: max-content;
+    width: 100%;
+  }
+
+  .container-register h2,
+  .container-login h2 {
     font-size: 3rem;
   }
+
 }
 
 @media screen and (min-width: 700px) and (min-height: 500px) {
@@ -165,7 +189,8 @@
     width: 70%;
   }
 
-  .container-register {
+  .container-register,
+  .container-login {
     padding: 0 100px;
   }
 }
@@ -175,15 +200,23 @@
     width: 80%;
     height: 100%;
     display: flex;
+    background-color: rgb(251 221 221);
+    background-image: none;
   }
 
-  .container-register {
+  .container-register,
+  .container-login {
     width: 40%;
-    padding: 0 30px
+    padding: 0 30px;
+    height: 100%;
   }
 
   .container-register h2 {
     margin-bottom: 36px;
+  }
+
+  .container-login h2 {
+    margin-bottom: 60px;
   }
 
   .container-greeting {
@@ -216,6 +249,10 @@
 
   .container-register {
     padding: 10px 100px;
+  }
+
+  .container-login {
+    padding: 60px 100px;
   }
 }
 
