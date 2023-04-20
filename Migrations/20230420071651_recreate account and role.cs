@@ -5,7 +5,7 @@
 namespace Doctrack.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialUserRole : Migration
+    public partial class recreateaccountandrole : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -24,7 +24,7 @@ namespace Doctrack.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Users",
+                name: "Accounts",
                 columns: table => new
                 {
                     Username = table.Column<string>(type: "TEXT", nullable: false),
@@ -37,9 +37,9 @@ namespace Doctrack.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Users", x => x.Username);
+                    table.PrimaryKey("PK_Accounts", x => x.Username);
                     table.ForeignKey(
-                        name: "FK_Users_Roles_Role_Id",
+                        name: "FK_Accounts_Roles_Role_Id",
                         column: x => x.RoleId,
                         principalTable: "Roles",
                         principalColumn: "Id",
@@ -47,8 +47,8 @@ namespace Doctrack.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Users_Role_Id",
-                table: "Users",
+                name: "IX_Accounts_Role_Id",
+                table: "Accounts",
                 column: "Role_Id");
         }
 
@@ -56,7 +56,7 @@ namespace Doctrack.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Users");
+                name: "Accounts");
 
             migrationBuilder.DropTable(
                 name: "Roles");

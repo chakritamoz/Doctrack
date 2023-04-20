@@ -11,14 +11,47 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Doctrack.Migrations
 {
     [DbContext(typeof(DoctrackContext))]
-    [Migration("20230418063652_InitialUserRole")]
-    partial class InitialUserRole
+    [Migration("20230420071651_recreate account and role")]
+    partial class recreateaccountandrole
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.2");
+
+            modelBuilder.Entity("Doctrack.Models.Account", b =>
+                {
+                    b.Property<string>("Username")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("IsApproved")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("IsEmailConfirm")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<byte[]>("PasswordHash")
+                        .IsRequired()
+                        .HasColumnType("BLOB");
+
+                    b.Property<byte[]>("PasswordSalt")
+                        .IsRequired()
+                        .HasColumnType("BLOB");
+
+                    b.Property<int>("Role_Id")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Username");
+
+                    b.HasIndex("Role_Id");
+
+                    b.ToTable("Accounts");
+                });
 
             modelBuilder.Entity("Doctrack.Models.Document", b =>
                 {
@@ -205,42 +238,15 @@ namespace Doctrack.Migrations
                     b.ToTable("Roles");
                 });
 
-            modelBuilder.Entity("Doctrack.Models.User", b =>
+            modelBuilder.Entity("Doctrack.Models.Account", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                    b.HasOne("Doctrack.Models.Role", "Role")
+                        .WithMany("Accounts")
+                        .HasForeignKey("Role_Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("IsApproved")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<bool>("IsEmailConfirm")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<byte[]>("PasswordHash")
-                        .IsRequired()
-                        .HasColumnType("BLOB");
-
-                    b.Property<byte[]>("PasswordSalt")
-                        .IsRequired()
-                        .HasColumnType("BLOB");
-
-                    b.Property<int>("Role_Id")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Username")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Role_Id");
-
-                    b.ToTable("Users");
+                    b.Navigation("Role");
                 });
 
             modelBuilder.Entity("Doctrack.Models.Document", b =>
@@ -308,17 +314,6 @@ namespace Doctrack.Migrations
                     b.Navigation("Rank");
                 });
 
-            modelBuilder.Entity("Doctrack.Models.User", b =>
-                {
-                    b.HasOne("Doctrack.Models.Role", "Role")
-                        .WithMany("Users")
-                        .HasForeignKey("Role_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Role");
-                });
-
             modelBuilder.Entity("Doctrack.Models.Document", b =>
                 {
                     b.Navigation("DocumentDetails");
@@ -350,7 +345,7 @@ namespace Doctrack.Migrations
 
             modelBuilder.Entity("Doctrack.Models.Role", b =>
                 {
-                    b.Navigation("Users");
+                    b.Navigation("Accounts");
                 });
 #pragma warning restore 612, 618
         }

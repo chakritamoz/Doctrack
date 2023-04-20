@@ -9,12 +9,11 @@ using Doctrack.SendGrid;
 
 namespace Doctrack.Controllers
 {
-  public class UsersController : Controller
+  public class AccountsController : Controller
   {
     private readonly DoctrackContext _context;
-    // private byte[] passwordSalt;
 
-    public UsersController(DoctrackContext context)
+    public AccountsController(DoctrackContext context)
     {
       _context = context;
     }
@@ -38,7 +37,7 @@ namespace Doctrack.Controllers
       CreatePasswordHash(password, out passwordHash, out passwordSalt);
 
 
-      var user = new User()
+      var user = new Account()
       {
         Username = username,
         PasswordHash = passwordHash,
@@ -57,9 +56,9 @@ namespace Doctrack.Controllers
       // Console.WriteLine($"Password Hash: {Convert.ToBase64String(passwordHash)}");
       // Console.WriteLine($"Password Salt: {Convert.ToBase64String(passwordSalt)}");
 
-      _context.Users.Add(user);
+      _context.Accounts.Add(user);
       await _context.SaveChangesAsync();
-      return RedirectToAction("Index", "Documents");
+      return RedirectToAction("Login");
     }
 
     public IActionResult Login()
@@ -70,12 +69,12 @@ namespace Doctrack.Controllers
     [HttpPost]
     public async Task<IActionResult> Login(string username, string password)
     {
-      if (_context.Users == null)
+      if (_context.Accounts == null)
       {
         return RedirectToAction("Register");
       }
 
-      var user =  await _context.Users
+      var user =  await _context.Accounts
         .FirstOrDefaultAsync(u => u.Username == username);
       if (user == null)
       {
@@ -88,6 +87,7 @@ namespace Doctrack.Controllers
 
       if (enterPassHash.SequenceEqual(user.PasswordHash))
       {
+        HttpContext.Session.SetString("IsAuthenticated", "true");
         return RedirectToAction("Index", "Documents");
       }
       else
@@ -178,7 +178,7 @@ namespace Doctrack.Controllers
         }
       } // Verify email
       
-      var user = _context.Users
+      var user = _context.Accounts
         .FirstOrDefault(u => u.Username == username);
 
       if (user != null)
@@ -187,7 +187,7 @@ namespace Doctrack.Controllers
         result = false;
       }
 
-      user = _context.Users
+      user = _context.Accounts
         .FirstOrDefault(u => u.Email == email);
 
       if (user != null)

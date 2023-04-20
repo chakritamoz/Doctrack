@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Doctrack.Models
 {
-  public class User
+  public class Account
   {
     [Key]
     [Required]

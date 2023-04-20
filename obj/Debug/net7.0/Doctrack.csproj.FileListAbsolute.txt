@@ -606,3 +606,5 @@ D:\Doctrack\obj\Debug\net7.0\Doctrack.genruntimeconfig.cache
 D:\Doctrack\obj\Debug\net7.0\ref\Doctrack.dll
 C:\Doctrack\bin\Debug\net7.0\SendGrid.dll
 C:\Doctrack\bin\Debug\net7.0\StarkbankEcdsa.dll
+D:\Doctrack\bin\Debug\net7.0\SendGrid.dll
+D:\Doctrack\bin\Debug\net7.0\StarkbankEcdsa.dll

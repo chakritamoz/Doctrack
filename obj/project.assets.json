@@ -10961,11 +10961,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Doctrack\\Doctrack.csproj",
+      "projectUniqueName": "D:\\Doctrack\\Doctrack.csproj",
       "projectName": "Doctrack",
-      "projectPath": "C:\\Doctrack\\Doctrack.csproj",
+      "projectPath": "D:\\Doctrack\\Doctrack.csproj",
       "packagesPath": "C:\\Users\\chakrit.pok\\.nuget\\packages\\",
-      "outputPath": "C:\\Doctrack\\obj\\",
+      "outputPath": "D:\\Doctrack\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\chakrit.pok\\AppData\\Roaming\\NuGet\\NuGet.Config"
