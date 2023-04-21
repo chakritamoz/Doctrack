@@ -4,7 +4,7 @@
   ViewData["Title"] = "Register";
 }
 
-<link rel="stylesheet" href="~/css/userCard.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/accountCard.css" asp-append-version="true" />
 
 <div class="container-cover-card">
   <div class="container-card">
@@ -43,16 +43,24 @@
         </div>
         <div class="form-group container-button">
           <input type="submit" value="Create Account" class="button button-primary" />
-          <p>Already have an account? <a href="/users/login">Sign in</a></p>
+          <p>Already have an account? <a href="/accounts/login">Sign in</a></p>
         </div>
       </form>
     </div>
     <div class="container-greeting">
       <div class="content-greeting">
-        <h2>Glad to see You!</h2>
-        <p>The road ahead may be long and tough,<br/>
-  But with perseverance, you'll rise above.</p>
-        <p class="poet"><em>-ChatGPT</em></p>
+        <div class="header-greeting">
+          <h2>Glad to see You!</h2>
+        </div>
+        <div class="body-greeting">
+          <p>
+            So let effort be your constant guide,<br/>
+            You can achieve anything set out to do.
+          </p>
+        </div>
+        <div class="poet-greeting">
+          <p class="poet"><em>-ChatGPT</em></p>
+        </div>
       </div>
     </div>
   </div>

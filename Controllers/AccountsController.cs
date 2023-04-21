@@ -47,14 +47,6 @@ namespace Doctrack.Controllers
         IsApproved = false
       };
 
-      // Set password hash and salt
-      // user.PasswordHash = passwordHash;
-      // user.PasswordSalt = passwordSalt;
-
-      // Console.WriteLine($"Password: {password}");
-      // Console.WriteLine($"Password Hash: {Convert.ToBase64String(passwordHash)}");
-      // Console.WriteLine($"Password Salt: {Convert.ToBase64String(passwordSalt)}");
-
       _context.Accounts.Add(user);
       await _context.SaveChangesAsync();
       return RedirectToAction("Login");
@@ -74,6 +66,7 @@ namespace Doctrack.Controllers
       }
 
       var user =  await _context.Accounts
+        .Include(u => u.Role)
         .FirstOrDefaultAsync(u => u.Username == username);
       if (user == null)
       {
@@ -81,12 +74,24 @@ namespace Doctrack.Controllers
         ViewData["userError"] = "Username is incorrect.";
         return View();
       }
+
+      if (!(user.IsApproved && user.IsEmailConfirm))
+      {
+        ViewData["username"] = username;
+        ViewData["userError"] = "Username is incorrect.";
+        ViewData["passError"] = "Password is incorrect.";
+        return View();
+      }
+      
       byte[] enterPassHash;
       ReCreatePasswordHash(password, user.PasswordSalt, out enterPassHash);
 
       if (enterPassHash.SequenceEqual(user.PasswordHash))
       {
         HttpContext.Session.SetString("IsAuthenticated", "true");
+        HttpContext.Session.SetString("Username", user.Username);
+        HttpContext.Session.SetString("Role", user.Role.Title);
+        Console.WriteLine($"Role: {HttpContext.Session.GetString("Role")}");
         return RedirectToAction("Index", "Documents");
       }
       else

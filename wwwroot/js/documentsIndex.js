@@ -125,7 +125,6 @@ $(document).on('click', '.sub-doc-icon', () => {
 // set modal title and modal body
 // set modal accept btn id
 $(document).on('click', '#add-emp-icon', () => {
-  console.log(currentDocId);
   cancelTrigger();
   modalAcceptBtn.id = 'modal-addEmp-button';
   $('#modal-close-button').addClass('modal-closeAddEmp-button');
@@ -477,9 +476,7 @@ const buddhistOptions = {
   calendar: 'buddhist',
   // numberingSystem: 'thai'
 };
-receiptDates.forEach(element =>
-  console.log(element.getAttribute('data-receiptDate'))
-);
+
 const thaiBuddhistFormat = new Intl.DateTimeFormat('th-TH-u-ca-buddhist', buddhistOptions);
 receiptDates.forEach(div => {
   const receiptDate = div.getAttribute('data-receiptDate');
@@ -495,6 +492,7 @@ operationDates.forEach(div => {
   const date = new Date(year, month-1, day);
   div.textContent = thaiBuddhistFormat.format(date);
 });
+
 endDates.forEach(div => {
   const endDate = div.getAttribute('data-endDate');
   if (endDate == "") return;
