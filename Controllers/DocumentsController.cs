@@ -21,6 +21,7 @@ namespace Doctrack.Controllers
     [AuthenticationFilter]
     public async Task<IActionResult> Index()
     { 
+      ViewBag.Username = HttpContext.Session.GetString("Username");
       var documents = await _context.Documents
         .Include(d => d.DocumentType)
         .Include(d => d.DocumentDetails)

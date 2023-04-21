@@ -60,6 +60,7 @@ namespace Doctrack.Controllers
     [HttpPost]
     public async Task<IActionResult> Login(string username, string password)
     {
+      
       if (_context.Accounts == null)
       {
         return RedirectToAction("Register");
@@ -74,32 +75,32 @@ namespace Doctrack.Controllers
         ViewData["userError"] = "Username is incorrect.";
         return View();
       }
-
-      if (!(user.IsApproved && user.IsEmailConfirm))
-      {
-        ViewData["username"] = username;
-        ViewData["userError"] = "Username is incorrect.";
-        ViewData["passError"] = "Password is incorrect.";
-        return View();
-      }
       
       byte[] enterPassHash;
-      ReCreatePasswordHash(password, user.PasswordSalt, out enterPassHash);
+      ReCreatePasswordHash(password, user.PasswordSalt, out  enterPassHash);
 
-      if (enterPassHash.SequenceEqual(user.PasswordHash))
+      if (enterPassHash.SequenceEqual(user.PasswordHash) && user.IsApproved && user.IsEmailConfirm)
       {
+        Console.WriteLine("True");
         HttpContext.Session.SetString("IsAuthenticated", "true");
         HttpContext.Session.SetString("Username", user.Username);
         HttpContext.Session.SetString("Role", user.Role.Title);
-        Console.WriteLine($"Role: {HttpContext.Session.GetString("Role")}");
         return RedirectToAction("Index", "Documents");
       }
       else
       {
-        ViewData["username"] = username;
+        Console.WriteLine("False");
+        // ViewData["username"] = username;
+        ViewData["userError"] = "Username is incorrect.";
         ViewData["passError"] = "Password is incorrect.";
         return View();
       }
+    }
+
+    public IActionResult Logout()
+    {
+      HttpContext.Session.Clear();
+      return RedirectToAction("Index", "Documents");
     }
 
     private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)

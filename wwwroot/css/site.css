@@ -24,6 +24,19 @@ nav .navbar-brand {
   font-weight: bold !important;
 }
 
+.account-disp {
+  display: flex;
+  width: 100%;
+  justify-content: end;
+  align-items: center;
+  padding-right: 30px;
+}
+
+.account-disp > span {
+  padding-right: 30px;
+  color: white;
+}
+
 body {
   margin-bottom: 60px;
   background-color: #408E91 ;
