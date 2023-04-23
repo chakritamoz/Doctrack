@@ -81,7 +81,6 @@ namespace Doctrack.Controllers
 
       if (enterPassHash.SequenceEqual(user.PasswordHash) && user.IsApproved && user.IsEmailConfirm)
       {
-        Console.WriteLine("True");
         HttpContext.Session.SetString("IsAuthenticated", "true");
         HttpContext.Session.SetString("Username", user.Username);
         HttpContext.Session.SetString("Role", user.Role.Title);
@@ -89,8 +88,7 @@ namespace Doctrack.Controllers
       }
       else
       {
-        Console.WriteLine("False");
-        // ViewData["username"] = username;
+        ViewData["username"] = username;
         ViewData["userError"] = "Username is incorrect.";
         ViewData["passError"] = "Password is incorrect.";
         return View();

@@ -272,6 +272,12 @@ $(document).on('click', '.modal-closeAddEmp-button', () => {
 $(document).on('click', '#modal-upop-button', () => {
   if (validateForm()){
     var token = $('input[name="__RequestVerificationToken"]').val();
+    var dateSplit = $('#opdate').val().split('/');
+    var jsDay = dateSplit[0];
+    var jsMonth = dateSplit[1];
+    var jsYear = dateSplit[2];
+    var conJSDate = jsMonth + "/" + jsDay + "/" + jsYear;
+    console.log(conJSDate);
     $.ajax({
       url: 'Documents/UpdateOP/',
       type: 'POST',
@@ -279,7 +285,7 @@ $(document).on('click', '#modal-upop-button', () => {
       data: {
         'id': currentDocId,
         'operation': $('#oplocate').val(),
-        'operationDate': $('#opdate').val(),
+        'operationDate': conJSDate,
         '__RequestVerificationToken': token
       },
       success: function(result) {

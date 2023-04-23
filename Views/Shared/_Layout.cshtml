@@ -39,9 +39,9 @@
                             <a class="nav-link" asp-area="" asp-controller="Ranks" asp-action="Index">Rank</a>
                         </li>
                         <div class="account-disp">
-                        @if (ViewBag.username != null)
+                        @if (ViewBag.currentUser != null)
                         {
-                          <span>Hello, @ViewBag.username.ToUpper()</span>
+                          <span>Hello, @ViewBag.currentUser.ToUpper()</span>
                           <li>
                           <a asp-area="" asp-controller="Accounts" asp-action="Logout">
                               Logout
