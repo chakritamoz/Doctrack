@@ -217,9 +217,9 @@ body {
     height: auto;
   }
 
-  .button {
+  /* .button {
     width: 20%;
-  }
+  } */
 
   .search-contrainer {
     flex-direction: row;
@@ -258,4 +258,15 @@ body {
   #search-document-btn {
     margin: 0.5rem 0;
   }
+}
+
+.wrapper-privilege {
+  display: block;
+  cursor: no-drop !important; 
+  width: 20%;
+
+}
+
+.wrapper-privilege .disabled-btn {
+  pointer-events: none !important;
 }

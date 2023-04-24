@@ -31,6 +31,7 @@ namespace Doctrack.Controllers
           .ThenInclude(dd => dd.Job)
         .Include(d => d.DocumentDetails)
           .ThenInclude(dd => dd.Rank)
+        .Where(d => d.User == GetUsername())
         .ToListAsync();
 
       var orderDocument = documents
@@ -175,9 +176,6 @@ namespace Doctrack.Controllers
     [AuthenticationFilter]
     public async Task<IActionResult> Edit(string id, string? newId, Document document, string receiptDate, string? opDate, string? endDate)
     {
-      Console.WriteLine($"receip date: {receiptDate}");
-      Console.WriteLine($"operation date: {opDate}");
-      Console.WriteLine($"end date: {endDate}");
       ViewBag.currentUser = GetUsername();
       if (_context.Documents == null)
       {
@@ -501,7 +499,6 @@ namespace Doctrack.Controllers
       {
         return NotFound();
       }
-      Console.WriteLine("retrieve docd");
       documentDetail.Job_Id = jobId;
       documentDetail.Rank_Id = rankId;
       documentDetail.Remark = remark;

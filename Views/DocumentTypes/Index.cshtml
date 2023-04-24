@@ -8,9 +8,26 @@
 <hr />
 
 <div class="flex-action">
-  <div class="button button-primary">
-    <a asp-action="Create" style="color:white">New Document</a>
-  </div>
+  <span class="wrapper-privilege">
+    @if(ViewBag.isAdmin)
+    {
+      <a 
+        asp-action="Create"
+        class="button button-primary"
+        style="color:white"
+      >
+        New Document
+      </a>
+    }else{
+      <a 
+        asp-action="Create"
+        class="button button-primary disabled-btn"
+        style="color:white"
+      >
+        New Document
+      </a>
+    }
+  </span>
   <div class="search-box">
     <input id="search-box" placeholder="Search Title..." />
     <div id="search-btn"><i class="bi bi-search"></i></div>
