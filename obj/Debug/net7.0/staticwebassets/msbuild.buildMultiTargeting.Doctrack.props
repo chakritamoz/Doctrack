@@ -1,3 +1,3 @@
 ﻿<Project>
-  <Import Project="../build/Doctrack.props" />
+  <Import Project="..\build\Doctrack.props" />
 </Project>

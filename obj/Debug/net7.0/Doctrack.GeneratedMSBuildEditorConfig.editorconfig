@@ -9,133 +9,133 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Doctrack
 build_property.RootNamespace = Doctrack
-build_property.ProjectDir = /Users/chakrit/Doctrack/
+build_property.ProjectDir = D:\Doctrack\
 build_property.RazorLangVersion = 7.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = /Users/chakrit/Doctrack
+build_property.MSBuildProjectDirectory = D:\Doctrack
 build_property._RazorSourceGeneratorDebug = 
 
-[/Users/chakrit/Doctrack/Views/Accounts/Login.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWNjb3VudHMvTG9naW4uY3NodG1s
+[D:/Doctrack/Views/Accounts/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudHNcTG9naW4uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/chakrit/Doctrack/Views/Accounts/Register.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWNjb3VudHMvUmVnaXN0ZXIuY3NodG1s
+[D:/Doctrack/Views/Accounts/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudHNcUmVnaXN0ZXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/chakrit/Doctrack/Views/Documents/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRG9jdW1lbnRzL0NyZWF0ZS5jc2h0bWw=
+[D:/Doctrack/Views/Documents/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdW1lbnRzXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/chakrit/Doctrack/Views/Documents/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRG9jdW1lbnRzL0VkaXQuY3NodG1s
+[D:/Doctrack/Views/Documents/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdW1lbnRzXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/chakrit/Doctrack/Views/Documents/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRG9jdW1lbnRzL0luZGV4LmNzaHRtbA==
+[D:/Doctrack/Views/Documents/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdW1lbnRzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/chakrit/Doctrack/Views/Documents/_DocumentTable.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRG9jdW1lbnRzL19Eb2N1bWVudFRhYmxlLmNzaHRtbA==
+[D:/Doctrack/Views/Documents/_DocumentTable.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdW1lbnRzXF9Eb2N1bWVudFRhYmxlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/chakrit/Doctrack/Views/DocumentTypes/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRG9jdW1lbnRUeXBlcy9DcmVhdGUuY3NodG1s
+[D:/Doctrack/Views/DocumentTypes/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdW1lbnRUeXBlc1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/chakrit/Doctrack/Views/DocumentTypes/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRG9jdW1lbnRUeXBlcy9EZWxldGUuY3NodG1s
+[D:/Doctrack/Views/DocumentTypes/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdW1lbnRUeXBlc1xEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/chakrit/Doctrack/Views/DocumentTypes/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRG9jdW1lbnRUeXBlcy9FZGl0LmNzaHRtbA==
+[D:/Doctrack/Views/DocumentTypes/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdW1lbnRUeXBlc1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/chakrit/Doctrack/Views/DocumentTypes/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRG9jdW1lbnRUeXBlcy9JbmRleC5jc2h0bWw=
+[D:/Doctrack/Views/DocumentTypes/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdW1lbnRUeXBlc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/chakrit/Doctrack/Views/DocumentTypes/_DocumentTypesTable.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRG9jdW1lbnRUeXBlcy9fRG9jdW1lbnRUeXBlc1RhYmxlLmNzaHRtbA==
+[D:/Doctrack/Views/DocumentTypes/_DocumentTypesTable.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdW1lbnRUeXBlc1xfRG9jdW1lbnRUeXBlc1RhYmxlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/chakrit/Doctrack/Views/Employees/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRW1wbG95ZWVzL0NyZWF0ZS5jc2h0bWw=
+[D:/Doctrack/Views/Employees/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1wbG95ZWVzXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/chakrit/Doctrack/Views/Employees/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRW1wbG95ZWVzL0RlbGV0ZS5jc2h0bWw=
+[D:/Doctrack/Views/Employees/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1wbG95ZWVzXERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/chakrit/Doctrack/Views/Employees/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRW1wbG95ZWVzL0VkaXQuY3NodG1s
+[D:/Doctrack/Views/Employees/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1wbG95ZWVzXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/chakrit/Doctrack/Views/Employees/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRW1wbG95ZWVzL0luZGV4LmNzaHRtbA==
+[D:/Doctrack/Views/Employees/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1wbG95ZWVzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/chakrit/Doctrack/Views/Employees/_EmployeeTable.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRW1wbG95ZWVzL19FbXBsb3llZVRhYmxlLmNzaHRtbA==
+[D:/Doctrack/Views/Employees/_EmployeeTable.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1wbG95ZWVzXF9FbXBsb3llZVRhYmxlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/chakrit/Doctrack/Views/Jobs/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSm9icy9DcmVhdGUuY3NodG1s
+[D:/Doctrack/Views/Jobs/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSm9ic1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/chakrit/Doctrack/Views/Jobs/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSm9icy9EZWxldGUuY3NodG1s
+[D:/Doctrack/Views/Jobs/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSm9ic1xEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/chakrit/Doctrack/Views/Jobs/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSm9icy9FZGl0LmNzaHRtbA==
+[D:/Doctrack/Views/Jobs/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSm9ic1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/chakrit/Doctrack/Views/Jobs/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSm9icy9JbmRleC5jc2h0bWw=
+[D:/Doctrack/Views/Jobs/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSm9ic1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/chakrit/Doctrack/Views/Jobs/_JobsTable.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSm9icy9fSm9ic1RhYmxlLmNzaHRtbA==
+[D:/Doctrack/Views/Jobs/_JobsTable.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSm9ic1xfSm9ic1RhYmxlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/chakrit/Doctrack/Views/Ranks/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmFua3MvQ3JlYXRlLmNzaHRtbA==
+[D:/Doctrack/Views/Ranks/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmFua3NcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/chakrit/Doctrack/Views/Ranks/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmFua3MvRGVsZXRlLmNzaHRtbA==
+[D:/Doctrack/Views/Ranks/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmFua3NcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/chakrit/Doctrack/Views/Ranks/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmFua3MvRWRpdC5jc2h0bWw=
+[D:/Doctrack/Views/Ranks/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmFua3NcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/chakrit/Doctrack/Views/Ranks/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmFua3MvSW5kZXguY3NodG1s
+[D:/Doctrack/Views/Ranks/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmFua3NcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/chakrit/Doctrack/Views/Ranks/_RanksTable.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmFua3MvX1JhbmtzVGFibGUuY3NodG1s
+[D:/Doctrack/Views/Ranks/_RanksTable.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmFua3NcX1JhbmtzVGFibGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/chakrit/Doctrack/Views/Shared/Error.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0Vycm9yLmNzaHRtbA==
+[D:/Doctrack/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/chakrit/Doctrack/Views/Shared/_ValidationScriptsPartial.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+[D:/Doctrack/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/chakrit/Doctrack/Views/_ViewImports.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+[D:/Doctrack/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/chakrit/Doctrack/Views/_ViewStart.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdTdGFydC5jc2h0bWw=
+[D:/Doctrack/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/chakrit/Doctrack/Views/Shared/_Layout.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19MYXlvdXQuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = b-jukdphroww
+[D:/Doctrack/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-hegxyw3eo3

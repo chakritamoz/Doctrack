@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Text.Json;
 using Doctrack.Authentication;
 using Doctrack.SendGrid;
+using System.Globalization;
 
 namespace Doctrack.Controllers
 {
@@ -97,7 +98,7 @@ namespace Doctrack.Controllers
     [HttpPost]
     [ValidateAntiForgeryToken]
     [AuthenticationFilter]
-    public async Task<IActionResult> Create(Document document)
+    public async Task<IActionResult> Create(Document document,string receiptDate)
     {
       ViewBag.currentUser = GetUsername();
       if (document.DocType_Id == 0)
@@ -105,9 +106,16 @@ namespace Doctrack.Controllers
         ModelState.AddModelError("DocType_Id", "Please select document title");
       }
 
-      Console.WriteLine("Date: " + document.ReceiptDate);
-      Console.WriteLine("Date: " + document.DocType_Id);
-      Console.WriteLine("Date: " + document.Doc_Title);
+      if (receiptDate != null)
+      {
+        var receiptArray = receiptDate.Split("/");
+        var conReceiptDate = $"{receiptArray[2]}-{receiptArray[1]}-{receiptArray[0]}";
+        if (DateTime.TryParseExact(conReceiptDate, "yyyy-MM-dd", CultureInfo.InstalledUICulture,DateTimeStyles.None,out var parsedDate))
+        {
+          document.ReceiptDate = parsedDate;
+          ModelState.Remove("ReceiptDate");
+        }
+      } // End validate receipt date
 
       if (ModelState.IsValid)
       {
