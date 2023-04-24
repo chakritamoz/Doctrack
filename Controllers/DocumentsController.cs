@@ -146,9 +146,26 @@ namespace Doctrack.Controllers
         return NotFound();
       }
 
+      if (document.ReceiptDate != null)
+      {
+        var parsedDate = DateTime.Parse(document.ReceiptDate.ToString());
+        ViewBag.ReceiptDate = parsedDate.ToString("dd/MM/yyyy");
+      }
+
+      if (document.OperationDate != null)
+      {
+        var parsedDate = DateTime.Parse(document.OperationDate.ToString());
+        ViewBag.OpDate = parsedDate.ToString("dd/MM/yyyy");
+      }
+
+      if (document.EndDate != null)
+      {
+        var parsedDate = DateTime.Parse(document.EndDate.ToString());
+        ViewBag.EndDate = parsedDate.ToString("dd/MM/yyyy");
+      }
+
       ViewBag.DocTypesTitle = GetDocTypeSelectList();
       ViewBag.Today = DateTime.Now.ToString("dd/MM/yyyy");
-      ViewBag.User = GetUsername();
       return View(document);
     }
 
@@ -156,13 +173,49 @@ namespace Doctrack.Controllers
     [HttpPost]
     [ValidateAntiForgeryToken]
     [AuthenticationFilter]
-    public async Task<IActionResult> Edit(string id, string? newId, Document document)
+    public async Task<IActionResult> Edit(string id, string? newId, Document document, string receiptDate, string? opDate, string? endDate)
     {
+      Console.WriteLine($"receip date: {receiptDate}");
+      Console.WriteLine($"operation date: {opDate}");
+      Console.WriteLine($"end date: {endDate}");
       ViewBag.currentUser = GetUsername();
       if (_context.Documents == null)
       {
         return NotFound();
       }
+
+      if (receiptDate != null)
+      {
+        var receiptArray = receiptDate.Split("/");
+        var conReceiptDate = $"{receiptArray[2]}-{receiptArray[1]}-{receiptArray[0]}";
+        if (DateTime.TryParseExact(conReceiptDate, "yyyy-MM-dd", CultureInfo.InstalledUICulture,DateTimeStyles.None,out var parsedDate))
+        {
+          document.ReceiptDate = parsedDate;
+          ModelState.Remove("ReceiptDate");
+        }
+      } // End validate receipt date
+
+      ModelState.Remove("OperationDate");
+      if (opDate != null)
+      {
+        var opArray = opDate.Split("/");
+        var conOPDate = $"{opArray[2]}-{opArray[1]}-{opArray[0]}";
+        if (DateTime.TryParseExact(conOPDate, "yyyy-MM-dd", CultureInfo.InstalledUICulture,DateTimeStyles.None,out var parsedDate))
+        {
+          document.OperationDate = parsedDate;
+        }
+      } // End validate operation date
+
+      ModelState.Remove("EndDate");
+      if (endDate != null)
+      {
+        var endArray = endDate.Split("/");
+        var conEndDate = $"{endArray[2]}-{endArray[1]}-{endArray[0]}";
+        if (DateTime.TryParseExact(conEndDate, "yyyy-MM-dd", CultureInfo.InstalledUICulture,DateTimeStyles.None,out var parsedDate))
+        {
+          document.EndDate = parsedDate;
+        }
+      } // End validate operation date
 
       if (ModelState.IsValid)
       {

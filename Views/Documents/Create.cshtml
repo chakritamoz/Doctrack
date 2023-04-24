@@ -20,7 +20,7 @@
       placeholder="@ViewBag.Today"
       value="@ViewBag.Today"
     />
-    <span asp-validation-for="ReceiptDate" class="text-danger">@ViewBag.errorReceiptDate</span>
+    <span asp-validation-for="ReceiptDate" class="text-danger"></span>
   </div>
 
   <div class="form-group">
@@ -76,19 +76,3 @@
 <div>
   <a asp-action="Index">Back to List</a>
 </div>
-
-<script>
-  const form = document.getElementById("create");
-  const receiptDate = document.getElementById("ReceiptDate");
-
-  form.addEventListener('submit', (event) => {
-    event.preventDefault();
-    const receiptValue = receiptDate.value;
-    console.log("receiptValue: " + receiptValue);
-    const receiptSplit = receiptValue.split("/");
-    const receiptFormat = `${receiptSplit[2]}-${receiptSplit[1]}-${receiptSplit[0]}`;
-    console.log(receiptFormat);
-    receiptDate.value = receiptFormat;
-    form.submit();
-  });
-</script>

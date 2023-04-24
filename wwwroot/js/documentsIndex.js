@@ -330,13 +330,18 @@ $(document).on('click', '#modal-editEmp-button', () => {
 $(document).on('click', '#modal-sub-button', () => {
   if(validateForm()){
     var token = $('input[name="__RequestVerificationToken"]').val();
+    var dateSplit = $('#endDoc').val().split('/');
+    var jsDay = dateSplit[0];
+    var jsMonth = dateSplit[1];
+    var jsYear = dateSplit[2];
+    var conJSDate = jsMonth + "/" + jsDay + "/" + jsYear;
     $.ajax({
       url: 'Documents/UpdateEndDate/',
       type: 'POST',
       headers: { 'RequsetVerificationToken': token },
       data: {
         'id': currentDocId,
-        'endDate': $('#endDoc').val(),
+        'endDate': conJSDate,
         '__RequestVerificationToken': token
       },
       success: function(result) {
