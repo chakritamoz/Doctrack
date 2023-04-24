@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Doctrack.Models;
 using Doctrack.Data;
+using Doctrack.Authentication;
 
 namespace Doctrack.Controllers
 {
@@ -14,6 +15,7 @@ namespace Doctrack.Controllers
     }
 
     //GET: Jobs/Index
+    [AuthenticationFilter]
     public async Task<IActionResult> Index()
     {
       var jobs = await _context.Jobs.ToListAsync();
@@ -21,6 +23,7 @@ namespace Doctrack.Controllers
       return View(jobs);
     }
 
+    [AuthenticationFilter]
     public async Task<IActionResult> SearchJob(string queryStr)
     {
       if (_context.Jobs == null)
@@ -38,6 +41,7 @@ namespace Doctrack.Controllers
     }
 
     //GET: Jobs/Create
+    [AuthenticationFilter]
     public ActionResult Create()
     {
       return View();
@@ -46,6 +50,7 @@ namespace Doctrack.Controllers
     //POST: Jobs/Create
     [HttpPost]
     [ValidateAntiForgeryToken]
+    [AuthenticationFilter]
     public async Task<IActionResult> Create([Bind("Id, Title")] Job job)
     {
       if (ModelState.IsValid)
@@ -62,6 +67,7 @@ namespace Doctrack.Controllers
     }
 
     //GET: Jobs/Edit/5
+    [AuthenticationFilter]
     public async Task<IActionResult> Edit(int? id)
     {
       if (id == null || _context.Jobs == null)
@@ -80,6 +86,7 @@ namespace Doctrack.Controllers
     //POST: Jobs/Edit/5
     [HttpPost]
     [ValidateAntiForgeryToken]
+    [AuthenticationFilter]
     public async Task<IActionResult> Edit(int id, [Bind("Id, Title")] Job job)
     {
       if (_context.Jobs == null)
@@ -111,6 +118,7 @@ namespace Doctrack.Controllers
     }
 
     //GET: Jobs/Delete/5
+    [AuthenticationFilter]
     public async Task<IActionResult> Delete(int? id)
     {
       if (id == null || _context.Jobs == null)
@@ -131,6 +139,7 @@ namespace Doctrack.Controllers
     //POST: Jobs/Delete/5
     [HttpPost]
     [ValidateAntiForgeryToken]
+    [AuthenticationFilter]
     public async Task<IActionResult> Delete(int id)
     {
       if (_context.Jobs == null)

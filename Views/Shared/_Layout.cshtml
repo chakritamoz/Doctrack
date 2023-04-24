@@ -38,6 +38,23 @@
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Ranks" asp-action="Index">Rank</a>
                         </li>
+                        <div class="account-disp">
+                        @if (ViewBag.currentUser != null)
+                        {
+                          <span>Hello, @ViewBag.currentUser.ToUpper()</span>
+                          <li>
+                          <a asp-area="" asp-controller="Accounts" asp-action="Logout">
+                              Logout
+                          </a>
+                          </li>
+                        }
+                        else
+                        {
+                          <li class="nav-item">
+                          <a class="nav-link" asp-area="" asp-controller="Accounts" asp-action="Login">Login</a>
+                          </li>
+                        }
+                        </div>
                     </ul>
                 </div>
             </div>

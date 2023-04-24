@@ -71,10 +71,24 @@
   overflow: hidden;
   position: absolute;
   text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   width: 0;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.body-greeting {
+  text-align: left;
+}
+
+.poet-greeting {
+  width: 100%;
+  text-align: right;
+  padding-right: 10%;
 }
 
 .container-register h2,
@@ -228,7 +242,7 @@
   }
 
   .content-greeting {
-    width: 100%;
+    width: 60%;
   }
 }
 

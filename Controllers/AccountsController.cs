@@ -5,7 +5,6 @@ using Doctrack.Models;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
-using Doctrack.SendGrid;
 
 namespace Doctrack.Controllers
 {
@@ -48,14 +47,6 @@ namespace Doctrack.Controllers
         IsApproved = false
       };
 
-      // Set password hash and salt
-      // user.PasswordHash = passwordHash;
-      // user.PasswordSalt = passwordSalt;
-
-      // Console.WriteLine($"Password: {password}");
-      // Console.WriteLine($"Password Hash: {Convert.ToBase64String(passwordHash)}");
-      // Console.WriteLine($"Password Salt: {Convert.ToBase64String(passwordSalt)}");
-
       _context.Accounts.Add(user);
       await _context.SaveChangesAsync();
       return RedirectToAction("Login");
@@ -69,12 +60,14 @@ namespace Doctrack.Controllers
     [HttpPost]
     public async Task<IActionResult> Login(string username, string password)
     {
+      
       if (_context.Accounts == null)
       {
         return RedirectToAction("Register");
       }
 
       var user =  await _context.Accounts
+        .Include(u => u.Role)
         .FirstOrDefaultAsync(u => u.Username == username);
       if (user == null)
       {
@@ -82,20 +75,30 @@ namespace Doctrack.Controllers
         ViewData["userError"] = "Username is incorrect.";
         return View();
       }
+      
       byte[] enterPassHash;
-      ReCreatePasswordHash(password, user.PasswordSalt, out enterPassHash);
+      ReCreatePasswordHash(password, user.PasswordSalt, out  enterPassHash);
 
-      if (enterPassHash.SequenceEqual(user.PasswordHash))
+      if (enterPassHash.SequenceEqual(user.PasswordHash) && user.IsApproved && user.IsEmailConfirm)
       {
         HttpContext.Session.SetString("IsAuthenticated", "true");
+        HttpContext.Session.SetString("Username", user.Username);
+        HttpContext.Session.SetString("Role", user.Role.Title);
         return RedirectToAction("Index", "Documents");
       }
       else
       {
         ViewData["username"] = username;
+        ViewData["userError"] = "Username is incorrect.";
         ViewData["passError"] = "Password is incorrect.";
         return View();
       }
+    }
+
+    public IActionResult Logout()
+    {
+      HttpContext.Session.Clear();
+      return RedirectToAction("Index", "Documents");
     }
 
     private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)

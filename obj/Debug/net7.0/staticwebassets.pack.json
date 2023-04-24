@@ -13,6 +13,10 @@
       "PackagePath": "staticwebassets\\asset\\greeting-bg2.jpg"
     },
     {
+      "Id": "D:\\Doctrack\\wwwroot\\css\\accountCard.css",
+      "PackagePath": "staticwebassets\\css\\accountCard.css"
+    },
+    {
       "Id": "D:\\Doctrack\\wwwroot\\css\\floatingAction.css",
       "PackagePath": "staticwebassets\\css\\floatingAction.css"
     },
@@ -31,10 +35,6 @@
     {
       "Id": "D:\\Doctrack\\wwwroot\\css\\table.css",
       "PackagePath": "staticwebassets\\css\\table.css"
-    },
-    {
-      "Id": "D:\\Doctrack\\wwwroot\\css\\userCard.css",
-      "PackagePath": "staticwebassets\\css\\userCard.css"
     },
     {
       "Id": "D:\\Doctrack\\wwwroot\\favicon.ico",

@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Doctrack.Models;
 using Doctrack.Data;
+using Doctrack.Authentication;
 
 namespace Doctrack.Controllers
 {
@@ -15,12 +16,14 @@ namespace Doctrack.Controllers
     }
 
     //GET: Ranks/Index
+    [AuthenticationFilter]
     public async Task<IActionResult> Index()
     {
       var ranks = await _context.Ranks.ToListAsync();
       return View(ranks);
     }
 
+    [AuthenticationFilter]
     public async Task<IActionResult> SearchRank(string queryStr)
     {
       if (_context.Ranks == null)
@@ -40,6 +43,7 @@ namespace Doctrack.Controllers
     }
 
     //GET: Ranks/Create
+    [AuthenticationFilter]
     public ActionResult Create()
     {
       return View();
@@ -48,6 +52,7 @@ namespace Doctrack.Controllers
     //POST: Ranks/Create
     [HttpPost]
     [ValidateAntiForgeryToken]
+    [AuthenticationFilter]
     public async Task<IActionResult> Create([Bind("Id, Title")] Rank rank)
     {
       if (ModelState.IsValid)
@@ -65,6 +70,7 @@ namespace Doctrack.Controllers
     }
 
     //GET: Ranks/Edit/5
+    [AuthenticationFilter]
     public async Task<IActionResult> Edit(int? id)
     {
       if (id == null || _context.Ranks == null)
@@ -83,6 +89,7 @@ namespace Doctrack.Controllers
     //POST: Ranks/Edit/5
     [HttpPost]
     [ValidateAntiForgeryToken]
+    [AuthenticationFilter]
     public async Task<IActionResult> Edit(int id, [Bind("Id, Title")] Rank rank)
     {
       if (_context.Ranks == null)
@@ -124,6 +131,7 @@ namespace Doctrack.Controllers
     }
 
     //GET: Ranks/Delete/5
+    [AuthenticationFilter]
     public async Task<IActionResult> Delete(int? id)
     {
       if (id == null || _context.Ranks == null)
@@ -144,6 +152,7 @@ namespace Doctrack.Controllers
     //POST: Ranks/Delete/5
     [HttpPost]
     [ValidateAntiForgeryToken]
+    [AuthenticationFilter]
     public async Task<IActionResult> Delete(int id)
     {
       if (_context.Ranks == null)

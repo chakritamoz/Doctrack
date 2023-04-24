@@ -125,7 +125,6 @@ $(document).on('click', '.sub-doc-icon', () => {
 // set modal title and modal body
 // set modal accept btn id
 $(document).on('click', '#add-emp-icon', () => {
-  console.log(currentDocId);
   cancelTrigger();
   modalAcceptBtn.id = 'modal-addEmp-button';
   $('#modal-close-button').addClass('modal-closeAddEmp-button');
@@ -273,6 +272,12 @@ $(document).on('click', '.modal-closeAddEmp-button', () => {
 $(document).on('click', '#modal-upop-button', () => {
   if (validateForm()){
     var token = $('input[name="__RequestVerificationToken"]').val();
+    var dateSplit = $('#opdate').val().split('/');
+    var jsDay = dateSplit[0];
+    var jsMonth = dateSplit[1];
+    var jsYear = dateSplit[2];
+    var conJSDate = jsMonth + "/" + jsDay + "/" + jsYear;
+    console.log(conJSDate);
     $.ajax({
       url: 'Documents/UpdateOP/',
       type: 'POST',
@@ -280,7 +285,7 @@ $(document).on('click', '#modal-upop-button', () => {
       data: {
         'id': currentDocId,
         'operation': $('#oplocate').val(),
-        'operationDate': $('#opdate').val(),
+        'operationDate': conJSDate,
         '__RequestVerificationToken': token
       },
       success: function(result) {
@@ -325,13 +330,18 @@ $(document).on('click', '#modal-editEmp-button', () => {
 $(document).on('click', '#modal-sub-button', () => {
   if(validateForm()){
     var token = $('input[name="__RequestVerificationToken"]').val();
+    var dateSplit = $('#endDoc').val().split('/');
+    var jsDay = dateSplit[0];
+    var jsMonth = dateSplit[1];
+    var jsYear = dateSplit[2];
+    var conJSDate = jsMonth + "/" + jsDay + "/" + jsYear;
     $.ajax({
       url: 'Documents/UpdateEndDate/',
       type: 'POST',
       headers: { 'RequsetVerificationToken': token },
       data: {
         'id': currentDocId,
-        'endDate': $('#endDoc').val(),
+        'endDate': conJSDate,
         '__RequestVerificationToken': token
       },
       success: function(result) {
@@ -477,9 +487,7 @@ const buddhistOptions = {
   calendar: 'buddhist',
   // numberingSystem: 'thai'
 };
-receiptDates.forEach(element =>
-  console.log(element.getAttribute('data-receiptDate'))
-);
+
 const thaiBuddhistFormat = new Intl.DateTimeFormat('th-TH-u-ca-buddhist', buddhistOptions);
 receiptDates.forEach(div => {
   const receiptDate = div.getAttribute('data-receiptDate');
@@ -495,6 +503,7 @@ operationDates.forEach(div => {
   const date = new Date(year, month-1, day);
   div.textContent = thaiBuddhistFormat.format(date);
 });
+
 endDates.forEach(div => {
   const endDate = div.getAttribute('data-endDate');
   if (endDate == "") return;

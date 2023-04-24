@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "yqQPMgBJwob4lIh3iR+y5THG17FVp4fJ9d2J6MB6mDo=",
+  "Hash": "Os4Y6gdZcxoSsIrDDT4SDDmWsocG3bloPBeRc6qNpxI=",
   "Source": "Doctrack",
   "BasePath": "_content/Doctrack",
   "Mode": "Default",
@@ -83,6 +83,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\asset\\greeting-bg2.jpg"
+    },
+    {
+      "Identity": "D:\\Doctrack\\wwwroot\\css\\accountCard.css",
+      "SourceId": "Doctrack",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
+      "BasePath": "_content/Doctrack",
+      "RelativePath": "css/accountCard.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\accountCard.css"
     },
     {
       "Identity": "D:\\Doctrack\\wwwroot\\css\\floatingAction.css",
@@ -168,23 +185,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\table.css"
-    },
-    {
-      "Identity": "D:\\Doctrack\\wwwroot\\css\\userCard.css",
-      "SourceId": "Doctrack",
-      "SourceType": "Discovered",
-      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
-      "BasePath": "_content/Doctrack",
-      "RelativePath": "css/userCard.css",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\userCard.css"
     },
     {
       "Identity": "D:\\Doctrack\\wwwroot\\favicon.ico",
