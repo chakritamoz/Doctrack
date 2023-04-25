@@ -216,7 +216,6 @@ h2 {
   height: 4rem;
   width: 120px;
   font-weight: bold;
-  z-index: 1;
 }
 
 #tab-user,
@@ -226,6 +225,7 @@ h2 {
   border-radius: 1rem;
   width: 50%;
   transform: translateY(20%);
+  cursor: pointer;
   transition: 
     background-color .3s ease-out,
     transform .1s ease-out;

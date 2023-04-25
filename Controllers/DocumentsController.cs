@@ -50,7 +50,6 @@ namespace Doctrack.Controllers
         return NotFound();
       }
 
-      Console.WriteLine($"tab: {tabType}");
       var documents = await _context.Documents
         .Include(d => d.DocumentType)
         .Include(d => d.DocumentDetails)
