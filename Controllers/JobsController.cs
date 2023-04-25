@@ -16,6 +16,7 @@ namespace Doctrack.Controllers
 
     //GET: Jobs/Index
     [AuthenticationFilter]
+    [AuthenticationPrivilege]
     public async Task<IActionResult> Index()
     {
       var jobs = await _context.Jobs.ToListAsync();
@@ -24,6 +25,7 @@ namespace Doctrack.Controllers
     }
 
     [AuthenticationFilter]
+    [AuthenticationPrivilege]
     public async Task<IActionResult> SearchJob(string queryStr)
     {
       if (_context.Jobs == null)
@@ -42,6 +44,8 @@ namespace Doctrack.Controllers
 
     //GET: Jobs/Create
     [AuthenticationFilter]
+    [AuthenticationPrivilege]
+    [AuthenticationProtect]
     public ActionResult Create()
     {
       return View();
@@ -51,6 +55,8 @@ namespace Doctrack.Controllers
     [HttpPost]
     [ValidateAntiForgeryToken]
     [AuthenticationFilter]
+    [AuthenticationPrivilege]
+    [AuthenticationProtect]
     public async Task<IActionResult> Create([Bind("Id, Title")] Job job)
     {
       if (ModelState.IsValid)
@@ -68,6 +74,8 @@ namespace Doctrack.Controllers
 
     //GET: Jobs/Edit/5
     [AuthenticationFilter]
+    [AuthenticationPrivilege]
+    [AuthenticationProtect]
     public async Task<IActionResult> Edit(int? id)
     {
       if (id == null || _context.Jobs == null)
@@ -87,6 +95,8 @@ namespace Doctrack.Controllers
     [HttpPost]
     [ValidateAntiForgeryToken]
     [AuthenticationFilter]
+    [AuthenticationPrivilege]
+    [AuthenticationProtect]
     public async Task<IActionResult> Edit(int id, [Bind("Id, Title")] Job job)
     {
       if (_context.Jobs == null)
@@ -119,6 +129,8 @@ namespace Doctrack.Controllers
 
     //GET: Jobs/Delete/5
     [AuthenticationFilter]
+    [AuthenticationPrivilege]
+    [AuthenticationProtect]
     public async Task<IActionResult> Delete(int? id)
     {
       if (id == null || _context.Jobs == null)
@@ -140,6 +152,8 @@ namespace Doctrack.Controllers
     [HttpPost]
     [ValidateAntiForgeryToken]
     [AuthenticationFilter]
+    [AuthenticationPrivilege]
+    [AuthenticationProtect]
     public async Task<IActionResult> Delete(int id)
     {
       if (_context.Jobs == null)

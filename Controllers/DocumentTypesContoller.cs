@@ -20,16 +20,15 @@ namespace Doctrack.Controllers
     [AuthenticationPrivilege]
     public async Task<IActionResult> Index()
     {      
-      ViewBag.currentUser = GetUsername();
       var documentTypes = await _context.DocumentTypes.ToListAsync();
 
       return View(documentTypes);
     }
 
     [AuthenticationFilter]
+    [AuthenticationPrivilege]
     public async Task<IActionResult> SearchDocType(string queryStr)
     {
-      ViewBag.currentUser = GetUsername();
       if (_context.DocumentTypes == null)
       {
         return NotFound();
@@ -49,18 +48,18 @@ namespace Doctrack.Controllers
     //GET: DocumentTypes/Create
     [AuthenticationFilter]
     [AuthenticationPrivilege]
-    public ActionResult Craete()
+    [AuthenticationProtect]
+    public ActionResult Create()
     {
-      ViewBag.currentUser = GetUsername();
       return View();
     }
 
     //POST: DocumentTypes/Create
     [AuthenticationFilter]
     [AuthenticationPrivilege]
+    [AuthenticationProtect]
     public async Task<IActionResult> Create([Bind("Id, Title, Period")] DocumentType documentType)
     {
-      ViewBag.currentUser = GetUsername();
       if (ModelState.IsValid)
       {
        _context.Add(documentType);
@@ -78,9 +77,9 @@ namespace Doctrack.Controllers
     //GET: DocumentTypes/Edit/5
     [AuthenticationFilter]
     [AuthenticationPrivilege]
+    [AuthenticationProtect]
     public async Task<IActionResult> Edit(int? id)
     {
-      ViewBag.currentUser = GetUsername();
       if (id == null || _context.DocumentTypes == null)
       {
         return NotFound();
@@ -100,9 +99,9 @@ namespace Doctrack.Controllers
     [ValidateAntiForgeryToken]
     [AuthenticationFilter]
     [AuthenticationPrivilege]
+    [AuthenticationProtect]
     public async Task<IActionResult> Edit(int id, [Bind("Id, Title, PeriodWarning, PeriodEnd")] DocumentType documentType)
     {
-      ViewBag.currentUser = GetUsername();
       if (_context.DocumentTypes == null)
       {
         return NotFound();
@@ -134,9 +133,9 @@ namespace Doctrack.Controllers
     //GET: DocumentTypes/Delete/5
     [AuthenticationFilter]
     [AuthenticationPrivilege]
+    [AuthenticationProtect]
     public async Task<IActionResult> Delete(int? id)
     {
-      ViewBag.currentUser = GetUsername();
       if (id == null || _context.DocumentTypes == null)
       {
         return NotFound();
@@ -157,9 +156,9 @@ namespace Doctrack.Controllers
     [ValidateAntiForgeryToken]
     [AuthenticationFilter]
     [AuthenticationPrivilege]
+    [AuthenticationProtect]
     public async Task<IActionResult> Delete(int id)
     {
-      ViewBag.currentUser = GetUsername();
       if (_context.DocumentTypes == null)
       {
         return Problem("Enitity set 'DoctrankContext.DocumentTypes' is null.");
@@ -179,10 +178,6 @@ namespace Doctrack.Controllers
     public bool DocumentTypeExists(int id)
     {
       return (_context.DocumentTypes?.Any(dt => dt.Id == id)).GetValueOrDefault();
-    }
-
-    public string GetUsername() {
-      return HttpContext.Session.GetString("Username");;
     }
   }
 }

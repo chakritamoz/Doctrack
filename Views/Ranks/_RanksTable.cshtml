@@ -17,9 +17,31 @@
           <td>@item.Id</td>
           <td>@item.Title</td>
           <td>
-            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-            <span> |</span>
-            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            <span class="wrapper-privilege-action">
+            @if(ViewBag.isAdmin){
+              <a 
+                asp-action="Edit"
+                asp-route-id="@item.Id"
+              >Edit</a>
+              <span>&nbsp;|&nbsp;</span>
+              <a 
+                asp-action="Delete"
+                asp-route-id="@item.Id"
+              >Delete</a>
+            }else{
+              <a 
+                asp-action="Edit"
+                asp-route-id="@item.Id"
+                class="disabled-btn"
+              >Edit</a>
+              <span>&nbsp;|&nbsp;</span>
+              <a 
+                asp-action="Delete"
+                asp-route-id="@item.Id"
+                class="disabled-btn"
+              >Delete</a>
+            }
+            </span>
           </td>
         </tr>
       }

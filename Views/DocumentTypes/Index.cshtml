@@ -9,22 +9,19 @@
 
 <div class="flex-action">
   <span class="wrapper-privilege">
-    @if(ViewBag.isAdmin)
-    {
+    @if(ViewBag.isAdmin){
       <a 
         asp-action="Create"
         class="button button-primary"
         style="color:white"
-      >
-        New Document
+      >New Document
       </a>
     }else{
       <a 
         asp-action="Create"
         class="button button-primary disabled-btn"
         style="color:white"
-      >
-        New Document
+      >New Document
       </a>
     }
   </span>

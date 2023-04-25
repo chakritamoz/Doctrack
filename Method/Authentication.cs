@@ -11,6 +11,11 @@ namespace Doctrack.Authentication
       {
         context.Result = new RedirectToActionResult("Login", "Accounts", null);
       }
+      else
+      {
+        ((Controller)context.Controller).ViewBag.currentUser = 
+          context.HttpContext.Session.GetString("Username");
+      }
 
       base.OnActionExecuted(context);
     }

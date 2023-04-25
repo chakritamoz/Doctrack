@@ -217,10 +217,6 @@ body {
     height: auto;
   }
 
-  /* .button {
-    width: 20%;
-  } */
-
   .search-contrainer {
     flex-direction: row;
     justify-content: space-between;
@@ -260,13 +256,23 @@ body {
   }
 }
 
-.wrapper-privilege {
-  display: block;
-  cursor: no-drop !important; 
+.wrapper-privilege,
+.wrapper-privilege-action {
+  display: flex;
+  justify-content: start;
   width: 20%;
-
 }
 
-.wrapper-privilege .disabled-btn {
+.wrapper-privilege-action {
+  width: 100%;
+}
+
+.wrapper-privilege:has(.disabled-btn),
+.wrapper-privilege-action:has(.disabled-btn) {
+  cursor: no-drop !important; 
+}
+
+.wrapper-privilege .disabled-btn,
+.wrapper-privilege-action .disabled-btn {
   pointer-events: none !important;
 }
