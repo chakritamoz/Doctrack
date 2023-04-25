@@ -22,6 +22,7 @@ namespace Doctrack.Controllers
     [AuthenticationFilter]
     public async Task<IActionResult> Index()
     { 
+      var currentUser = HttpContext.Session.GetString("Username");
       var documents = await _context.Documents
         .Include(d => d.DocumentType)
         .Include(d => d.DocumentDetails)
@@ -30,6 +31,7 @@ namespace Doctrack.Controllers
           .ThenInclude(dd => dd.Job)
         .Include(d => d.DocumentDetails)
           .ThenInclude(dd => dd.Rank)
+        .Where(d => d.User == currentUser)
         .ToListAsync();
 
       var orderDocument = documents
@@ -40,13 +42,15 @@ namespace Doctrack.Controllers
     }
 
     [AuthenticationFilter]
-    public async Task<IActionResult> SearchDocument(string queryDocNo, string queryDocType, string queryDocTitle, string queryEmployee)
+    public async Task<IActionResult> SearchDocument(string queryDocNo, string queryDocType, string queryDocTitle, string queryEmployee, string tabType)
     {
+      var currentUser = HttpContext.Session.GetString("Username");
       if (_context.Documents == null)
       {
         return NotFound();
       }
 
+      Console.WriteLine($"tab: {tabType}");
       var documents = await _context.Documents
         .Include(d => d.DocumentType)
         .Include(d => d.DocumentDetails)
@@ -69,6 +73,9 @@ namespace Doctrack.Controllers
           .Any(dd => (dd.Employee.FirstName + dd.Employee.LastName)
             .Contains(queryEmployee)
           )
+        )
+        .Where(d => tabType == "all"
+          || d.User == currentUser
         )
         .ToListAsync();
 

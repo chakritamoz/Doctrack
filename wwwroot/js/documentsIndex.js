@@ -531,6 +531,12 @@ $(document).on('click', '#search-document-btn', function() {
   var queryDocType = $('#search-docType').val();
   var queryDocTitle = $('#search-docTitle').val();
   var queryEmployee = $('#search-employee').val();
+  var tabType;
+  if ($('#tab-all').hasClass('active')){
+    tabType = "all";
+  }else{
+    tabType = "user";
+  }
   $.ajax({
     url: 'Documents/SearchDocument',
     type: 'GET',
@@ -538,7 +544,8 @@ $(document).on('click', '#search-document-btn', function() {
       'queryDocNo': queryDocNo,
       'queryDocType': queryDocType,
       'queryDocTitle': queryDocTitle,
-      'queryEmployee': queryEmployee
+      'queryEmployee': queryEmployee,
+      'tabType': tabType
     },
     success: function(data)
     {
@@ -556,3 +563,71 @@ $(document).on('click', '#search-document-btn', function() {
 $(document).on('click', '.search-expand-btn', function() {
   $('.search-contrainer').toggleClass('expand');
 });
+
+$(document).on('click', '#tab-user', function() {
+  if (!$('#tab-user').hasClass('active')){
+    $('#tab-user').toggleClass('active');
+    $('#tab-all').toggleClass('active');
+
+    var queryDocNo = $('#search-docNo').val();
+    var queryDocType = $('#search-docType').val();
+    var queryDocTitle = $('#search-docTitle').val();
+    var queryEmployee = $('#search-employee').val();
+    var tabType = "user";
+    $.ajax({
+      url: 'Documents/SearchDocument',
+      type: 'GET',
+      data: { 
+        'queryDocNo': queryDocNo,
+        'queryDocType': queryDocType,
+        'queryDocTitle': queryDocTitle,
+        'queryEmployee': queryEmployee,
+        'tabType': tabType
+      },
+      success: function(data)
+      {
+        $('.search-contrainer').toggleClass('expand');
+        $('#document-table').html(data);
+        $.getScript('./js/partialDocument.js', function(){
+          floatingBtn.setAttribute('disabled', true);
+          floatingBtn.checked = false;
+          currentDocId = null;
+        });
+      }
+    });
+  }
+})
+
+$(document).on('click', '#tab-all', function() {
+  if (!$('#tab-all').hasClass('active')){
+    $('#tab-all').toggleClass('active');
+    $('#tab-user').toggleClass('active');
+
+    var queryDocNo = $('#search-docNo').val();
+    var queryDocType = $('#search-docType').val();
+    var queryDocTitle = $('#search-docTitle').val();
+    var queryEmployee = $('#search-employee').val();
+    var tabType = "all";
+    $.ajax({
+      url: 'Documents/SearchDocument',
+      type: 'GET',
+      data: { 
+        'queryDocNo': queryDocNo,
+        'queryDocType': queryDocType,
+        'queryDocTitle': queryDocTitle,
+        'queryEmployee': queryEmployee,
+        'tabType': tabType
+      },
+      success: function(data)
+      {
+        $('.search-contrainer').toggleClass('expand');
+        $('#document-table').html(data);
+        $.getScript('./js/partialDocument.js', function(){
+          floatingBtn.setAttribute('disabled', true);
+          floatingBtn.checked = false;
+          currentDocId = null;
+        });
+      }
+    });
+  }
+})

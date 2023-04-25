@@ -48,9 +48,9 @@
 
 <!-- Render document table -->
 <div id="container-document">
-  <div class="container-tag">
-    <div class="tag tag-current active"><p>User</p></div>
-    <div class="tag tag-all"><a>All</a></div>
+  <div class="container-tab">
+    <div id="tab-user" class="active"><p>User</p></div>
+    <div id="tab-all"><a>All</a></div>
   </div>
   <div id="document-table">
     @Html.Partial("_DocumentTable", Model)
