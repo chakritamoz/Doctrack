@@ -102,7 +102,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-bottom: 16px;
+  margin-bottom: 25px;
   width: 100%;
 }
 
@@ -207,6 +207,27 @@ body {
   background-color: white;
 }
 
+.wrapper-privilege,
+.wrapper-privilege-action {
+  display: flex;
+  justify-content: start;
+  width: 100%;
+}
+
+.wrapper-privilege-action {
+  width: 100%;
+}
+
+.wrapper-privilege:has(.disabled-btn),
+.wrapper-privilege-action:has(.disabled-btn) {
+  cursor: no-drop !important; 
+}
+
+.wrapper-privilege .disabled-btn,
+.wrapper-privilege-action .disabled-btn {
+  pointer-events: none !important;
+}
+
 @media screen and (min-width: 800px) {
   .flex-action {
     flex-direction: row;
@@ -238,6 +259,11 @@ body {
   .search-expand-btn {
     display: none;
   }
+
+  .wrapper-privilege,
+  .wrapper-privilege-action {
+    width: 20%;
+}
 }
 
 @media screen and (min-width: 1100px) {
@@ -254,25 +280,4 @@ body {
   #search-document-btn {
     margin: 0.5rem 0;
   }
-}
-
-.wrapper-privilege,
-.wrapper-privilege-action {
-  display: flex;
-  justify-content: start;
-  width: 20%;
-}
-
-.wrapper-privilege-action {
-  width: 100%;
-}
-
-.wrapper-privilege:has(.disabled-btn),
-.wrapper-privilege-action:has(.disabled-btn) {
-  cursor: no-drop !important; 
-}
-
-.wrapper-privilege .disabled-btn,
-.wrapper-privilege-action .disabled-btn {
-  pointer-events: none !important;
 }

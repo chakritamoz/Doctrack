@@ -7,8 +7,17 @@ h2 {
   color: white;
 }
 
+#container-document {
+  position: relative;
+  width: 100%;
+}
+
 #document-table {
   width: 100%;
+}
+
+#document-table th {
+  z-index: 2;
 }
 
 .container-wrapper {
@@ -199,6 +208,51 @@ h2 {
   transition: transform .3s, box-shadow .3s ease-out;
 }
 
+.container-tag {
+  position: absolute;
+  display: flex;
+  top: -30px;
+  color: white;
+  height: 4rem;
+  width: 120px;
+  font-weight: bold;
+  z-index: 1;
+}
+
+.container-tag .tag-current {
+  display: flex;
+  justify-content: center;
+  background-color: #324fae;
+  border-radius: 1rem;
+  width: 50%;
+  transform: translateY(20%);
+}
+
+.container-tag .tag-all {
+  display: flex;
+  justify-content: center;
+  background-color: #cd3931;
+  border-radius: 1rem;
+  width: 50%;
+  transform: translateY(20%);
+}
+
+.container-tag .tag-current:hover {
+  transform: translateY(10%);
+}
+
+.container-tag .tag-all:hover {
+  transform: translateY(10%);
+}
+
+.container-tag .tag-current.active {
+  transform: translateY(0);
+}
+
+.container-tag .tag-all.active {
+  transform: translateY(0);
+}
+
 @media screen and (min-height: 660px){
   .container-wrapper {
     max-height: 310px;
@@ -234,6 +288,15 @@ h2 {
 
   .flex-container {
     width: 100%;
+  }
+
+  .flex-not-found {
+    display: flex;
+    margin-top: 10px;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 24px;
+    color: white;
   }
 
   .sub-content.expand {

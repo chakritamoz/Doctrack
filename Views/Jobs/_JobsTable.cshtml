@@ -1,6 +1,6 @@
 @model IEnumerable<Job>
 
-@if(Model != null){
+
   <table class="table">
     <thead>
       <tr>
@@ -10,6 +10,7 @@
       </tr>
     </thead>
     <tbody>
+    @if(Model.Count() > 0) {
       @foreach (var item in Model)
       {
         <tr>
@@ -44,14 +45,12 @@
           </td>
         </tr>
       }
+    }else {
+      <tr class="not-found">
+        <td colspan="5">
+          Search Not Found...
+        </td>
+      </tr>
+    }
     </tbody>
   </table>
-}else{
-  <table class="table not-found">
-    <thead>
-    <tr>
-      <th>Search Not Found...</th>
-    </tr>
-    </thead>
-  </table>
-}

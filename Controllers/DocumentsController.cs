@@ -40,7 +40,6 @@ namespace Doctrack.Controllers
     }
 
     [AuthenticationFilter]
-    [AuthenticationPrivilege]
     public async Task<IActionResult> SearchDocument(string queryDocNo, string queryDocType, string queryDocTitle, string queryEmployee)
     {
       if (_context.Documents == null)
@@ -73,12 +72,17 @@ namespace Doctrack.Controllers
         )
         .ToListAsync();
 
+      if (documents == null)
+      {
+        return PartialView("_DocumentTable", documents);
+      }
+
       var orderDocument = documents
         .OrderBy(d => d.EndDate)
         .ThenBy(d => d.DocType_Id).ToList();
 
 
-      return PartialView("_DocumentTable", documents);
+      return PartialView("_DocumentTable", orderDocument);
     }
 
     //GET: Documents/Create

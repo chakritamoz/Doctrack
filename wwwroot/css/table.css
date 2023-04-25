@@ -6,8 +6,10 @@
   margin-top: 2rem;
 }
 
-.table.not-found tr{
-  text-align: center;
+.table .not-found{
+  text-align: center !important;
+  font-weight: bold;
+  font-size: 24px;
 }
 
 thead > tr {

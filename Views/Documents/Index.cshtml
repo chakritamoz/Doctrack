@@ -35,7 +35,9 @@
       <label for="search-employee">Employee Name</label>
       <input id="search-employee" class="search-input" placeholder="Employee Name..." />
     </div>
-    <div id="search-document-btn"><i class="bi bi-search"></i>&nbsp;Search</div>
+    <div id="search-document-btn">
+      <i class="bi bi-search"></i>&nbsp;Search
+    </div>
   </div>
   <div class="search-expand-btn">
     <div class="line-separate"></div>
@@ -45,8 +47,14 @@
 </div>
 
 <!-- Render document table -->
-<div id="document-table">
-  @Html.Partial("_DocumentTable", Model)
+<div id="container-document">
+  <div class="container-tag">
+    <div class="tag tag-current active"><p>User</p></div>
+    <div class="tag tag-all"><a>All</a></div>
+  </div>
+  <div id="document-table">
+    @Html.Partial("_DocumentTable", Model)
+  </div>
 </div>
 
 <!-- Modal -->
