@@ -43,4 +43,40 @@ $('.main-row').swipe({
   },
   threshold: 30,
   allowPageScroll: "vertical"
-  });
+});
+
+// Set date buddhist format
+var receiptDates = document.querySelectorAll('.receipt-date');
+var operationDates = document.querySelectorAll('.operation-date');
+var endDates = document.querySelectorAll('.end-date');
+var buddhistOptions = {
+  year: 'numeric',
+  month: '2-digit',
+  day: '2-digit',
+  calendar: 'buddhist',
+  // numberingSystem: 'thai'
+};
+
+var thaiBuddhistFormat = new Intl.DateTimeFormat('th-TH-u-ca-buddhist', buddhistOptions);
+receiptDates.forEach(div => {
+  receiptDate = div.getAttribute('data-receiptDate');
+  var [day, month, year] = receiptDate.split('/').map(Number);
+  date = new Date(year, month-1, day);
+  div.textContent = thaiBuddhistFormat.format(date);
+});
+
+operationDates.forEach(div => {
+  operationDate = div.getAttribute('data-operationDate');
+  if (operationDate == "") return;
+  var [day, month, year] = operationDate.split('/').map(Number);
+  date = new Date(year, month-1, day);
+  div.textContent = thaiBuddhistFormat.format(date);
+});
+
+endDates.forEach(div => {
+  endDate = div.getAttribute('data-endDate');
+  if (endDate == "") return;
+  var [day, month, year] = endDate.split('/').map(Number);
+  date = new Date(year, month-1, day);
+  div.textContent = thaiBuddhistFormat.format(date);
+});

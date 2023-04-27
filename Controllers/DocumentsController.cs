@@ -20,6 +20,7 @@ namespace Doctrack.Controllers
 
     //GET: Documents/Index
     [AuthenticationFilter]
+    [AuthenticationPrivilege]
     public async Task<IActionResult> Index()
     { 
       var currentUser = HttpContext.Session.GetString("Username");
@@ -42,6 +43,7 @@ namespace Doctrack.Controllers
     }
 
     [AuthenticationFilter]
+    [AuthenticationPrivilege]
     public async Task<IActionResult> SearchDocument(string queryDocNo, string queryDocType, string queryDocTitle, string queryEmployee, string tabType)
     {
       var currentUser = HttpContext.Session.GetString("Username");

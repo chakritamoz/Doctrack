@@ -49,7 +49,10 @@
 <div id="container-document">
   <div class="container-tab">
     <div id="tab-user" class="active"><p>User</p></div>
-    <div id="tab-all"><a>All</a></div>
+    @if (ViewBag.isAdmin)
+    {
+      <div id="tab-all"><p>All</p></div>
+    }
   </div>
   <div id="document-table">
     @Html.Partial("_DocumentTable", Model)
