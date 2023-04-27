@@ -1,0 +1,46 @@
+@model IEnumerable<Account>
+
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Username</th>
+      <th>Email</th>
+      <th>Role</th>
+      <th>Email Validation</th>
+      <th>Admin Approval</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+  @if(Model.Count() > 0) {
+    @foreach (var item in Model)
+    {
+      <tr>
+        <td>@item.Username</td>
+        <td>@item.Email</td>
+        <td>@item.Role.Title</td>
+        <td>@item.IsEmailConfirm</td>
+        <td>@item.IsApproved</td>
+        <td>
+          <span class="wrapper-privilege-action">
+            @* <form method="post" asp-action="Approval" asp-route-id="@item.Username"> *@
+              <button class="action-btn action-modal" type="submit">Approve</button>
+            @* </form> *@
+            <span>&nbsp;|&nbsp;</span>
+            @* <form method="post" asp-action="Delete" asp-route-id="@item.Username"> *@
+              <button class="action-btn action-modal" type="submit">Delete</button>
+            @* </form> *@
+          </span>
+        </td>
+      </tr>
+    }
+  }else {
+    <tr class="not-found">
+      <td colspan="6">
+        Search Not Found...
+      </td>
+    </tr>
+  }
+  </tbody>
+</table>

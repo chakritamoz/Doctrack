@@ -5,6 +5,7 @@ using Doctrack.Models;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
+using Doctrack.Authentication;
 
 namespace Doctrack.Controllers
 {
@@ -17,12 +18,14 @@ namespace Doctrack.Controllers
       _context = context;
     }
 
+    [AuthenticationPrivilege]
     public IActionResult Register()
     {
       return View();
     }
 
     [HttpPost]
+    [AuthenticationPrivilege]
     public async Task<IActionResult> Register(string username, string password, string confirmPassword, string email)
     {
       if (!InputFormIsValid(username, password, confirmPassword, email))
@@ -52,12 +55,15 @@ namespace Doctrack.Controllers
       return RedirectToAction("Login");
     }
 
+    [AuthenticationPrivilege]
     public IActionResult Login()
     {
       return View();
     }
 
     [HttpPost]
+    [AuthenticationFilter]
+    [AuthenticationPrivilege]
     public async Task<IActionResult> Login(string username, string password)
     {
       
@@ -95,10 +101,108 @@ namespace Doctrack.Controllers
       }
     }
 
+    [AuthenticationFilter]
+    [AuthenticationPrivilege]
+    [AuthenticationProtect]
     public IActionResult Logout()
     {
       HttpContext.Session.Clear();
       return RedirectToAction("Index", "Documents");
+    }
+
+    [AuthenticationFilter]
+    [AuthenticationPrivilege]
+    [AuthenticationProtect]
+    public async Task<IActionResult> Management()
+    {
+      if (_context.Accounts == null)
+      {
+        return NotFound();
+      }
+
+      var users = await _context.Accounts
+        .Include(acc => acc.Role)
+        .ToListAsync();
+
+      if (users == null)
+      {
+        return NotFound();
+      }
+
+      return View(users);
+    }
+    
+    [AuthenticationFilter]
+    [AuthenticationPrivilege]
+    [AuthenticationProtect]
+    public async Task<IActionResult> SearchManagement(string? queryStr = null)
+    {
+      if (_context.Accounts == null)
+      {
+        return NotFound();
+      }
+
+      var users = await _context.Accounts
+        .Include(acc => acc.Role)
+        .ToListAsync();
+
+      if (users == null)
+      {
+        return NotFound();
+      }
+
+      if (queryStr != null)
+      {
+        users = users.Where(
+          acc => acc.Username.Contains(queryStr)
+        ).ToList();
+      }
+      return PartialView("_ManagementTable", users);
+    }
+
+    [HttpPost]
+    // [AuthenticationFilter]
+    // [AuthenticationPrivilege]
+    // [AuthenticationProtect]
+    public async Task<IActionResult> Approval(string id)
+    {
+      if (_context.Accounts == null)
+      {
+        return NotFound();
+      }
+      var user = await _context.Accounts
+        .FirstOrDefaultAsync(acc => acc.Username == id);
+      if (user == null)
+      {
+        return NotFound();
+      }
+      user.IsApproved = true;
+      _context.Accounts.Update(user);
+      await _context.SaveChangesAsync();
+      return RedirectToAction("Management");
+    }
+
+    [HttpPost]
+    [AuthenticationFilter]
+    [AuthenticationPrivilege]
+    [AuthenticationProtect]
+    public async Task<IActionResult> Delete(string id)
+    {
+      if (_context.Accounts == null || id == null)
+      {
+        return NotFound();
+      }
+
+      var user = await _context.Accounts
+        .FirstOrDefaultAsync(acc => acc.Username == id);
+      if (user == null)
+      {
+        return NotFound();
+      }
+
+      _context.Accounts.Remove(user);
+      await _context.SaveChangesAsync();
+      return RedirectToAction("Management");
     }
 
     private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
