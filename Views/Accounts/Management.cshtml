@@ -25,7 +25,6 @@
       <div id="modal-title"></div>
       <div><span class="close">&times;</span></div>
     </div>
-    <hr />
     <div id="modal-body" class="modal-body">
     </div>
     <div class="modal-footer">
@@ -54,17 +53,7 @@
       }
     });
   });
-
-  $(document).on('click', '.action-modal', () => {
-    modalAcceptBtn.id = 'modal-delete-button';
-    modal.classList.toggle("display");
-    const modalBody = $('<form id="modal-form-del" autocomplete="off"></form>');
-    $('#modal-title').html('<div>Confirm delete document<div>');
-    $('#modal-body').html(modalBody);
-    $('#modal-form-del').html('<p>Are you sure you want to delete document?</p>');
-    $('#modal-form-del').append('<p>Document ID: <span style="color:red;display:inline">' + currentDocId + '</span></p>');
-  }); // end click del-doc-icon
-
 </script>
 
 <script src="~/js/documentsModal.js"></script>
+<script src="~/js/accountManagement.js"></script>

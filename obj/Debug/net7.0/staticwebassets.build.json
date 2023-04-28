@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Os4Y6gdZcxoSsIrDDT4SDDmWsocG3bloPBeRc6qNpxI=",
+  "Hash": "WEgvYg9k5Uqg0xZKlUGe7A/5HYs3xqNZOqjkGsGuyl4=",
   "Source": "Doctrack",
   "BasePath": "_content/Doctrack",
   "Mode": "Default",
@@ -202,6 +202,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "D:\\Doctrack\\wwwroot\\js\\accountManagement.js",
+      "SourceId": "Doctrack",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
+      "BasePath": "_content/Doctrack",
+      "RelativePath": "js/accountManagement.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\accountManagement.js"
     },
     {
       "Identity": "D:\\Doctrack\\wwwroot\\js\\documentsEdit.js",

@@ -25,11 +25,19 @@
         <td>
           <span class="wrapper-privilege-action">
             @* <form method="post" asp-action="Approval" asp-route-id="@item.Username"> *@
-              <button class="action-btn action-modal" type="submit">Approve</button>
+              <button 
+                class="action-btn action-approval"
+                data-id="@item.Username"
+                >Approve
+              </button>
             @* </form> *@
             <span>&nbsp;|&nbsp;</span>
             @* <form method="post" asp-action="Delete" asp-route-id="@item.Username"> *@
-              <button class="action-btn action-modal" type="submit">Delete</button>
+              <button
+                class="action-btn action-delete"
+                data-id="@item.Username"
+                >Delete
+              </button>
             @* </form> *@
           </span>
         </td>

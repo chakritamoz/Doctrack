@@ -161,25 +161,32 @@ namespace Doctrack.Controllers
     }
 
     [HttpPost]
-    // [AuthenticationFilter]
-    // [AuthenticationPrivilege]
-    // [AuthenticationProtect]
+    [AuthenticationFilter]
+    [AuthenticationPrivilege]
+    [AuthenticationProtect]
     public async Task<IActionResult> Approval(string id)
     {
       if (_context.Accounts == null)
       {
         return NotFound();
       }
-      var user = await _context.Accounts
-        .FirstOrDefaultAsync(acc => acc.Username == id);
+
+      var users = await _context.Accounts.ToListAsync();
+      if (users == null)
+      {
+        return NotFound();
+      }
+
+      var user = users.FirstOrDefault(acc => acc.Username == id);
       if (user == null)
       {
         return NotFound();
       }
+
       user.IsApproved = true;
       _context.Accounts.Update(user);
       await _context.SaveChangesAsync();
-      return RedirectToAction("Management");
+      return Json(new { success = true });
     }
 
     [HttpPost]
@@ -193,8 +200,13 @@ namespace Doctrack.Controllers
         return NotFound();
       }
 
-      var user = await _context.Accounts
-        .FirstOrDefaultAsync(acc => acc.Username == id);
+      var users = await _context.Accounts.ToListAsync();
+      if (users == null)
+      {
+        return NotFound();
+      }
+
+      var user = users.FirstOrDefault(acc => acc.Username == id);
       if (user == null)
       {
         return NotFound();
@@ -202,7 +214,7 @@ namespace Doctrack.Controllers
 
       _context.Accounts.Remove(user);
       await _context.SaveChangesAsync();
-      return RedirectToAction("Management");
+      return Json(new { success = true });
     }
 
     private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
