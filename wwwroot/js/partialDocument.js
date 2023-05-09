@@ -4,7 +4,7 @@ $('.main-row').swipe({
     $(this).parent().hasClass('active')? null: disableActive();
     currentDocId = $(this).attr('id');
     $(this).css('transform', 'translate(-200px,0px)');
-    $(`#btnBehide-${currentDocId}`).addClass('swipe');
+    $(`#btnBehide-${currentDocId.replace('/','\\/').replace('.','\\.')}`).addClass('swipe');
     isMove = true;
   },
   swipeRight: function(){
@@ -12,7 +12,7 @@ $('.main-row').swipe({
     $(this).parent().hasClass('active')? null: disableActive();
     currentDocId = $(this).attr('id');
     $(this).css('transform', 'translate(200px,0px)');
-    $(`#btnFront-${currentDocId}`).addClass('swipe');
+    $(`#btnFront-${currentDocId.replace('/','\\/').replace('.','\\.')}`).addClass('swipe');
     isMove = true;
   },
   swipeStatus: function(event,phase, direction, distance) {
@@ -21,8 +21,8 @@ $('.main-row').swipe({
       disableSwipe(currentDocId);
       if (distance < 5 && !isMove){
         currentDocId = $(this).attr('id');
-        const mainRowElement = $(`#${currentDocId}`).parent();
-        const subRowElement = $(`#sub-${currentDocId}`);
+        const mainRowElement = $(`#${currentDocId.replace('/','\\/').replace('.','\\.')}`).parent();
+        const subRowElement = $(`#sub-${currentDocId.replace('/','\\/').replace('.','\\.')}`);
         const rowFooterElement = subRowElement.next();
         if (mainRowElement.hasClass('active')) {
           disableActive();
@@ -36,7 +36,7 @@ $('.main-row').swipe({
           floatingBtn.removeAttribute('disabled');
         }
       }
-      $(`#btn-${currentDocId}`).removeClass('swipe');
+      $(`#btn-${currentDocId.replace('/','\\/').replace('.','\\.')}`).removeClass('swipe');
       $(this).removeAttr('style');
       isMove = false;
     }

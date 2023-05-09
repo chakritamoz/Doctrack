@@ -12,12 +12,12 @@ var triggerEditEmp = false;
 var docActive = localStorage.getItem('docId');
 if (docActive) {
   currentDocId = docActive;
-  activeElement = $('#' + docActive).parent().addClass('active');
-  expandElement = $('#sub-' + docActive).addClass('expand');
-  footerElement = $('#sub-' + docActive).next().addClass('row-footer');
+  activeElement = $('#' + docActive.replace('/','\\/').replace('.','\\.')).parent().addClass('active');
+  expandElement = $('#sub-' + docActive.replace('/','\\/').replace('.','\\.')).addClass('expand');
+  footerElement = $('#sub-' + docActive.replace('/','\\/').replace('.','\\.')).next().addClass('row-footer');
   $('#fabCheckbox').attr('disabled', false);
   $('#fabCheckbox').prop('checked', true);
-  $('#' + docActive)
+  $('#' + docActive.replace('/','\\/').replace('.','\\.'))
     .animate({"opacity": ".9"}, 300)
     .animate({"opacity": "1"}, 300)
     .animate({"opacity": ".9"}, 300)
@@ -477,9 +477,13 @@ function cancelTrigger() {
 }
 
 function disableSwipe(docId) {
-  $(`#btnBehide-${docId}`).removeClass('swipe');
-  $(`#btnFront-${docId}`).removeClass('swipe');
-  $(`#${docId}`).removeAttr('style');
+  console.log("Disable Swipe");
+  if (docId){
+    $(`#btnBehide-${docId.replace('/','\\/').replace('.','\\.')}`).removeClass('swipe');
+    $(`#btnFront-${docId.replace('/','\\/').replace('.','\\.')}`).removeClass('swipe');
+    $(`#${docId.replace('/','\\/').replace('.','\\.')}`).removeAttr('style');
+  }
+  console.log("Complete Disable Swipe");
 }
 
 //Search function
