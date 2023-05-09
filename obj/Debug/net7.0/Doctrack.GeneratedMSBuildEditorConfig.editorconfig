@@ -16,8 +16,8 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = D:\Doctrack
 build_property._RazorSourceGeneratorDebug = 
 
-[D:/Doctrack/Views/Accounts/Forget.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudHNcRm9yZ2V0LmNzaHRtbA==
+[D:/Doctrack/Views/Accounts/ForgetPassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudHNcRm9yZ2V0UGFzc3dvcmQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Doctrack/Views/Accounts/Login.cshtml]

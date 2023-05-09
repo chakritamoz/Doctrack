@@ -28,7 +28,7 @@ namespace Doctrack.Controllers
     [AuthenticationPrivilege]
     public async Task<IActionResult> Register(string username, string password, string confirmPassword, string email)
     {
-      if (!InputFormIsValid(username, password, confirmPassword, email))
+      if (!RegisterFormIsValid(username, password, confirmPassword, email))
       {
         ViewData["username"] = username;
         ViewData["email"] = email;
@@ -62,7 +62,6 @@ namespace Doctrack.Controllers
     }
 
     [HttpPost]
-    [AuthenticationFilter]
     [AuthenticationPrivilege]
     public async Task<IActionResult> Login(string username, string password)
     {
@@ -72,12 +71,13 @@ namespace Doctrack.Controllers
         return RedirectToAction("Register");
       }
 
+      ViewData["username"] = username;
+
       var user =  await _context.Accounts
         .Include(u => u.Role)
         .FirstOrDefaultAsync(u => u.Username == username);
       if (user == null)
       {
-        ViewData["username"] = username;
         ViewData["userError"] = "Username is incorrect.";
         return View();
       }
@@ -94,8 +94,6 @@ namespace Doctrack.Controllers
       }
       else
       {
-        ViewData["username"] = username;
-        ViewData["userError"] = "Username is incorrect.";
         ViewData["passError"] = "Password is incorrect.";
         return View();
       }
@@ -130,6 +128,42 @@ namespace Doctrack.Controllers
       }
 
       return View(users);
+    }
+
+    [AuthenticationPrivilege]
+    public IActionResult ForgetPassword()
+    {
+      return View();
+    }
+
+    [HttpPost]
+    [AuthenticationPrivilege]
+    public async Task<IActionResult> ForgetPassword(string username, string newPassword, string confirmPassword)
+    {
+      ViewData["username"] = username;
+
+      var user = _context.Accounts
+          .FirstOrDefault(u => u.Username == username);
+      if (user == null)
+      {
+        ViewData["userError"] = "Username is incorrect.";
+        return View();
+      }
+
+      if (!ForgetFormIsValid(username, newPassword, confirmPassword))
+      {
+        return View();
+      }
+
+      byte[] passwordHash, passwordSalt;
+      CreatePasswordHash(newPassword, out passwordHash, out passwordSalt);
+
+      user.PasswordHash = passwordHash;
+      user.PasswordSalt = passwordSalt;
+
+      _context.Accounts.Update(user);
+      await _context.SaveChangesAsync();
+      return RedirectToAction("Login");
     }
     
     [AuthenticationFilter]
@@ -234,7 +268,7 @@ namespace Doctrack.Controllers
       }
     }
 
-    public bool InputFormIsValid(string username, string password, string confirmPassword, string email)
+    public bool RegisterFormIsValid(string username, string password, string confirmPassword, string email)
     {
       bool result = true;
       string patternUser = @"^[\w\d]{7,16}$";
@@ -315,6 +349,46 @@ namespace Doctrack.Controllers
         result = false;
       }
 
+      return result;
+    }
+
+    public bool ForgetFormIsValid(string username, string password, string confirmPassword)
+    {
+      bool result = true;
+      string patternPass = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z])([^\s]){8,16}$";
+      if (string.IsNullOrEmpty(username))
+      {
+        ViewData["userError"] = "Please enter username.";
+        result = false;
+      }
+
+      if (string.IsNullOrEmpty(password) || password.Length < 8 || password.Length > 16)
+      {
+        ViewData["passError"] = "8 or 16 characters long and it must be alphanumeric.";
+        result = false;
+      }
+      else
+      {
+        bool isPassMatch = Regex.IsMatch(password, $"^{patternPass}");
+        if (!isPassMatch)
+        {
+          ViewData["passError"] = "Password much contain atleast one Uppercase, Numeric and Special character.";
+          result = false;
+        }
+      } // Verify password
+
+      if (string.IsNullOrEmpty(confirmPassword))
+      {
+        ViewData["conPassError"] = "8 or 16 characters long and it must be alphanumeric.";
+        result = false;
+      } // Verify confirm password is null
+
+      if (password != confirmPassword)
+      {
+        ViewData["conPassError"]= "The two passwords don't match.";
+        result = false;
+      } // Verify pattern confirm password
+      
       return result;
     }
   }
