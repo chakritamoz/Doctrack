@@ -7,6 +7,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using Doctrack.Authentication;
 using Doctrack.SendGrid;
+using Doctrack.Method;
 
 namespace Doctrack.Controllers
 {
@@ -39,7 +40,10 @@ namespace Doctrack.Controllers
       byte[] passwordHash, passwordSalt;
       CreatePasswordHash(password, out passwordHash, out passwordSalt);
 
-      await EmailService.SendVerificationEmailAsync(email);
+      byte[] key;
+      var token = VerificationTokenGenerator.GenerateEmailVerificationToken(out key);
+
+      await EmailService.SendVerificationEmailAsync(email, token);
 
       var user = new Account()
       {
@@ -49,11 +53,35 @@ namespace Doctrack.Controllers
         Email = email,
         Role_Id = 2,
         IsEmailConfirm = false,
-        IsApproved = false
+        IsApproved = false,
+        Token = token,
+        KeyToken = key
       };
 
       _context.Accounts.Add(user);
       await _context.SaveChangesAsync();
+      return RedirectToAction("Login");
+    }
+
+    [AuthenticationPrivilege]
+    public async Task<IActionResult> VerifyEmail(string token)
+    {
+      if (_context.Accounts == null)
+      {
+        return NotFound();
+      }
+
+      var user = await _context.Accounts
+        .FirstOrDefaultAsync(u => u.token = token);
+
+      Console.WriteLine($"token: {token}");
+      if (VerificationTokenGenerator.ValidateToken(token, user.key)){
+        Console.WriteLine("Complete");
+      }
+      else
+      {
+        Console.WriteLine("Error more than 24 hr");
+      }
       return RedirectToAction("Login");
     }
 

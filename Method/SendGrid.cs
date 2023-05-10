@@ -1,18 +1,16 @@
 using SendGrid;
 using SendGrid.Helpers.Mail;
-using Doctrack.Method;
 
 namespace Doctrack.SendGrid
 {
   public class EmailService
   {
-    public static async Task SendVerificationEmailAsync(string receipient)
+    public static async Task SendVerificationEmailAsync(string receipient, string token)
     {
       var apiKey = Environment.GetEnvironmentVariable("SendGridAPIKey", EnvironmentVariableTarget.User);
       var client = new SendGridClient(apiKey);
       var from = new EmailAddress("chakrit.artamoz@gmail.com");
       var to = new EmailAddress(receipient);
-      var token = VerificationTokenGenerator.GenerateEmailVerificationToken();
       var callbackUrl = $"http://localhost:5192/accounts/verifyEmail?token={token}";
       var subject = "Verify your email address";
       var plainTextContent = $"Please click on the following link to verify your email address: {callbackUrl}";
