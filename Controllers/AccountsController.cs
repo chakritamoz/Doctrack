@@ -40,8 +40,8 @@ namespace Doctrack.Controllers
       byte[] passwordHash, passwordSalt;
       CreatePasswordHash(password, out passwordHash, out passwordSalt);
 
-      byte[] key;
-      var token = VerificationTokenGenerator.GenerateEmailVerificationToken(out key);
+      byte[] keyToken;
+      var token = VerificationTokenGenerator.GenerateEmailVerificationToken(out keyToken);
 
       await EmailService.SendVerificationEmailAsync(email, token);
 
@@ -55,7 +55,7 @@ namespace Doctrack.Controllers
         IsEmailConfirm = false,
         IsApproved = false,
         Token = token,
-        KeyToken = key
+        KeyToken = keyToken
       };
 
       _context.Accounts.Add(user);
@@ -72,11 +72,12 @@ namespace Doctrack.Controllers
       }
 
       var user = await _context.Accounts
-        .FirstOrDefaultAsync(u => u.token = token);
+        .FirstOrDefaultAsync(u => u.Token == token);
 
-      Console.WriteLine($"token: {token}");
-      if (VerificationTokenGenerator.ValidateToken(token, user.key)){
-        Console.WriteLine("Complete");
+      if (VerificationTokenGenerator.ValidateToken(token, user.KeyToken)){
+        user.IsEmailConfirm = true;
+        _context.Accounts.Update(user);
+        await _context.SaveChangesAsync();
       }
       else
       {
