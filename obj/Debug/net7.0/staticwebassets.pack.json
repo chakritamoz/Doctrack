@@ -5,6 +5,14 @@
       "PackagePath": "staticwebassets\\Doctrack.bundle.scp.css"
     },
     {
+      "Id": "D:\\Doctrack\\wwwroot\\asset\\Catrack_Logo-removebg.png",
+      "PackagePath": "staticwebassets\\asset\\Catrack_Logo-removebg.png"
+    },
+    {
+      "Id": "D:\\Doctrack\\wwwroot\\asset\\Catrack_Logo.png",
+      "PackagePath": "staticwebassets\\asset\\Catrack_Logo.png"
+    },
+    {
       "Id": "D:\\Doctrack\\wwwroot\\asset\\greeting-bg1.jpg",
       "PackagePath": "staticwebassets\\asset\\greeting-bg1.jpg"
     },
