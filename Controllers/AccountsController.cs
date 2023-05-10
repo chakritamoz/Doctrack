@@ -5,6 +5,9 @@ using Doctrack.Models;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
+using Doctrack.Authentication;
+using Doctrack.SendGrid;
+using Doctrack.Method;
 
 namespace Doctrack.Controllers
 {
@@ -17,15 +20,17 @@ namespace Doctrack.Controllers
       _context = context;
     }
 
+    [AuthenticationPrivilege]
     public IActionResult Register()
     {
       return View();
     }
 
     [HttpPost]
+    [AuthenticationPrivilege]
     public async Task<IActionResult> Register(string username, string password, string confirmPassword, string email)
     {
-      if (!InputFormIsValid(username, password, confirmPassword, email))
+      if (!RegisterFormIsValid(username, password, confirmPassword, email))
       {
         ViewData["username"] = username;
         ViewData["email"] = email;
@@ -35,6 +40,10 @@ namespace Doctrack.Controllers
       byte[] passwordHash, passwordSalt;
       CreatePasswordHash(password, out passwordHash, out passwordSalt);
 
+      byte[] keyToken;
+      var token = VerificationTokenGenerator.GenerateEmailVerificationToken(out keyToken);
+
+      await EmailService.SendVerificationEmailAsync(email, token);
 
       var user = new Account()
       {
@@ -44,7 +53,9 @@ namespace Doctrack.Controllers
         Email = email,
         Role_Id = 2,
         IsEmailConfirm = false,
-        IsApproved = false
+        IsApproved = false,
+        Token = token,
+        KeyToken = keyToken
       };
 
       _context.Accounts.Add(user);
@@ -52,12 +63,37 @@ namespace Doctrack.Controllers
       return RedirectToAction("Login");
     }
 
+    [AuthenticationPrivilege]
+    public async Task<IActionResult> VerifyEmail(string token)
+    {
+      if (_context.Accounts == null)
+      {
+        return NotFound();
+      }
+
+      var user = await _context.Accounts
+        .FirstOrDefaultAsync(u => u.Token == token);
+
+      if (VerificationTokenGenerator.ValidateToken(token, user.KeyToken)){
+        user.IsEmailConfirm = true;
+        _context.Accounts.Update(user);
+        await _context.SaveChangesAsync();
+      }
+      else
+      {
+        Console.WriteLine("Error more than 24 hr");
+      }
+      return RedirectToAction("Login");
+    }
+
+    [AuthenticationPrivilege]
     public IActionResult Login()
     {
       return View();
     }
 
     [HttpPost]
+    [AuthenticationPrivilege]
     public async Task<IActionResult> Login(string username, string password)
     {
       
@@ -66,12 +102,13 @@ namespace Doctrack.Controllers
         return RedirectToAction("Register");
       }
 
+      ViewData["username"] = username;
+
       var user =  await _context.Accounts
         .Include(u => u.Role)
         .FirstOrDefaultAsync(u => u.Username == username);
       if (user == null)
       {
-        ViewData["username"] = username;
         ViewData["userError"] = "Username is incorrect.";
         return View();
       }
@@ -88,17 +125,161 @@ namespace Doctrack.Controllers
       }
       else
       {
-        ViewData["username"] = username;
-        ViewData["userError"] = "Username is incorrect.";
         ViewData["passError"] = "Password is incorrect.";
         return View();
       }
     }
 
+    [AuthenticationFilter]
+    [AuthenticationPrivilege]
+    [AuthenticationProtect]
     public IActionResult Logout()
     {
       HttpContext.Session.Clear();
       return RedirectToAction("Index", "Documents");
+    }
+
+    [AuthenticationFilter]
+    [AuthenticationPrivilege]
+    [AuthenticationProtect]
+    public async Task<IActionResult> Management()
+    {
+      if (_context.Accounts == null)
+      {
+        return NotFound();
+      }
+
+      var users = await _context.Accounts
+        .Include(acc => acc.Role)
+        .ToListAsync();
+
+      if (users == null)
+      {
+        return NotFound();
+      }
+
+      return View(users);
+    }
+
+    [AuthenticationPrivilege]
+    public IActionResult ForgetPassword()
+    {
+      return View();
+    }
+
+    [HttpPost]
+    [AuthenticationPrivilege]
+    public async Task<IActionResult> ForgetPassword(string username, string newPassword, string confirmPassword)
+    {
+      ViewData["username"] = username;
+
+      var user = _context.Accounts
+          .FirstOrDefault(u => u.Username == username);
+      if (user == null)
+      {
+        ViewData["userError"] = "Username is incorrect.";
+        return View();
+      }
+
+      if (!ForgetFormIsValid(username, newPassword, confirmPassword))
+      {
+        return View();
+      }
+
+      byte[] passwordHash, passwordSalt;
+      CreatePasswordHash(newPassword, out passwordHash, out passwordSalt);
+
+      user.PasswordHash = passwordHash;
+      user.PasswordSalt = passwordSalt;
+
+      _context.Accounts.Update(user);
+      await _context.SaveChangesAsync();
+      return RedirectToAction("Login");
+    }
+    
+    [AuthenticationFilter]
+    [AuthenticationPrivilege]
+    [AuthenticationProtect]
+    public async Task<IActionResult> SearchManagement(string? queryStr = null)
+    {
+      if (_context.Accounts == null)
+      {
+        return NotFound();
+      }
+
+      var users = await _context.Accounts
+        .Include(acc => acc.Role)
+        .ToListAsync();
+
+      if (users == null)
+      {
+        return NotFound();
+      }
+
+      if (queryStr != null)
+      {
+        users = users.Where(
+          acc => acc.Username.Contains(queryStr)
+        ).ToList();
+      }
+      return PartialView("_ManagementTable", users);
+    }
+
+    [HttpPost]
+    [AuthenticationFilter]
+    [AuthenticationPrivilege]
+    [AuthenticationProtect]
+    public async Task<IActionResult> Approval(string id)
+    {
+      if (_context.Accounts == null)
+      {
+        return NotFound();
+      }
+
+      var users = await _context.Accounts.ToListAsync();
+      if (users == null)
+      {
+        return NotFound();
+      }
+
+      var user = users.FirstOrDefault(acc => acc.Username == id);
+      if (user == null)
+      {
+        return NotFound();
+      }
+
+      user.IsApproved = true;
+      _context.Accounts.Update(user);
+      await _context.SaveChangesAsync();
+      return Json(new { success = true });
+    }
+
+    [HttpPost]
+    [AuthenticationFilter]
+    [AuthenticationPrivilege]
+    [AuthenticationProtect]
+    public async Task<IActionResult> Delete(string id)
+    {
+      if (_context.Accounts == null || id == null)
+      {
+        return NotFound();
+      }
+
+      var users = await _context.Accounts.ToListAsync();
+      if (users == null)
+      {
+        return NotFound();
+      }
+
+      var user = users.FirstOrDefault(acc => acc.Username == id);
+      if (user == null)
+      {
+        return NotFound();
+      }
+
+      _context.Accounts.Remove(user);
+      await _context.SaveChangesAsync();
+      return Json(new { success = true });
     }
 
     private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
@@ -118,7 +299,7 @@ namespace Doctrack.Controllers
       }
     }
 
-    public bool InputFormIsValid(string username, string password, string confirmPassword, string email)
+    public bool RegisterFormIsValid(string username, string password, string confirmPassword, string email)
     {
       bool result = true;
       string patternUser = @"^[\w\d]{7,16}$";
@@ -199,6 +380,46 @@ namespace Doctrack.Controllers
         result = false;
       }
 
+      return result;
+    }
+
+    public bool ForgetFormIsValid(string username, string password, string confirmPassword)
+    {
+      bool result = true;
+      string patternPass = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z])([^\s]){8,16}$";
+      if (string.IsNullOrEmpty(username))
+      {
+        ViewData["userError"] = "Please enter username.";
+        result = false;
+      }
+
+      if (string.IsNullOrEmpty(password) || password.Length < 8 || password.Length > 16)
+      {
+        ViewData["passError"] = "8 or 16 characters long and it must be alphanumeric.";
+        result = false;
+      }
+      else
+      {
+        bool isPassMatch = Regex.IsMatch(password, $"^{patternPass}");
+        if (!isPassMatch)
+        {
+          ViewData["passError"] = "Password much contain atleast one Uppercase, Numeric and Special character.";
+          result = false;
+        }
+      } // Verify password
+
+      if (string.IsNullOrEmpty(confirmPassword))
+      {
+        ViewData["conPassError"] = "8 or 16 characters long and it must be alphanumeric.";
+        result = false;
+      } // Verify confirm password is null
+
+      if (password != confirmPassword)
+      {
+        ViewData["conPassError"]= "The two passwords don't match.";
+        result = false;
+      } // Verify pattern confirm password
+      
       return result;
     }
   }

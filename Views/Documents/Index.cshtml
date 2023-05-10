@@ -8,14 +8,15 @@
 <hr />
 
 <div class="flex-action">
+  <span class="wrapper-privilege">
     <a
       asp-action="Create" 
       class="text-decoration-none button button-primary"
       style="color:white;"
     >
-      <i class="bi bi-file-earmark-plus-fill"></i>
-      Document
+      <i class="bi bi-file-earmark-plus-fill"></i>&nbsp;Document
     </a>
+  </span>
   <div class="search-contrainer">
     <div class="search-box-document">
       <label for="search-docNo">Document No.</label>
@@ -33,7 +34,9 @@
       <label for="search-employee">Employee Name</label>
       <input id="search-employee" class="search-input" placeholder="Employee Name..." />
     </div>
-    <div id="search-document-btn"><i class="bi bi-search"></i>&nbsp;Search</div>
+    <div id="search-document-btn">
+      <i class="bi bi-search"></i>&nbsp;Search
+    </div>
   </div>
   <div class="search-expand-btn">
     <div class="line-separate"></div>
@@ -43,8 +46,17 @@
 </div>
 
 <!-- Render document table -->
-<div id="document-table">
-  @Html.Partial("_DocumentTable", Model)
+<div id="container-document">
+  <div class="container-tab">
+    <div id="tab-user" class="active"><p>User</p></div>
+    @if (ViewBag.isAdmin)
+    {
+      <div id="tab-all"><p>All</p></div>
+    }
+  </div>
+  <div id="document-table">
+    @Html.Partial("_DocumentTable", Model)
+  </div>
 </div>
 
 <!-- Modal -->
@@ -85,6 +97,6 @@
 </div>
 
 <script src="~/node_modules/jquery-touchswipe/jquery.touchSwipe.min.js" type="text/javascript"></script>
-<script src="~/js/partialDocument.js"></script>
 <script src="~/js/documentsIndex.js"></script>
+<script src="~/js/partialDocument.js"></script>
 <script src="~/js/documentsModal.js"></script>

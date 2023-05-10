@@ -7,8 +7,17 @@ h2 {
   color: white;
 }
 
+#container-document {
+  position: relative;
+  width: 100%;
+}
+
 #document-table {
   width: 100%;
+}
+
+#document-table th {
+  z-index: 2;
 }
 
 .container-wrapper {
@@ -199,6 +208,48 @@ h2 {
   transition: transform .3s, box-shadow .3s ease-out;
 }
 
+.container-tab {
+  position: absolute;
+  display: flex;
+  top: -30px;
+  color: white;
+  height: 4rem;
+  width: 120px;
+  font-weight: bold;
+}
+
+#tab-user,
+#tab-all {
+  display: flex;
+  justify-content: center;
+  border-radius: 1rem;
+  width: 50%;
+  transform: translateY(20%);
+  cursor: pointer;
+  transition: 
+    background-color .3s ease-out,
+    transform .1s ease-out;
+}
+
+#tab-user {
+  background-color: #324fae;
+}
+
+#tab-all {
+  background-color: #cd3931;
+}
+
+#tab-user:hover,
+#tab-all:hover {
+  transform: translateY(10%);
+}
+
+#tab-user.active,
+#tab-all.active {
+  transform: translateY(0);
+  background-color: #EF7C8E;
+}
+
 @media screen and (min-height: 660px){
   .container-wrapper {
     max-height: 310px;
@@ -234,6 +285,15 @@ h2 {
 
   .flex-container {
     width: 100%;
+  }
+
+  .flex-not-found {
+    display: flex;
+    margin-top: 10px;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 24px;
+    color: white;
   }
 
   .sub-content.expand {

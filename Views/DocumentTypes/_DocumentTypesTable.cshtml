@@ -1,6 +1,6 @@
 @model IEnumerable<DocumentType>
 
-@if(Model != null) {
+
   <table class="table">
     <thead>
       <tr>
@@ -12,6 +12,7 @@
       </tr>
     </thead>
     <tbody>
+    @if(Model.Count() > 0) {
       @foreach (var item in Model)
       {
         <tr>
@@ -20,19 +21,40 @@
           <td>@item.PeriodWarning</td>
           <td>@item.PeriodEnd</td>
           <td>
-            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a><span> |</span>
-            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            <span class="wrapper-privilege-action">
+            @if(ViewBag.isAdmin){
+              <a 
+                asp-action="Edit"
+                asp-route-id="@item.Id"
+              >Edit</a>
+              <span>&nbsp;|&nbsp;</span>
+              <a 
+                asp-action="Delete"
+                asp-route-id="@item.Id"
+              >Delete</a>
+            }else{
+              <a 
+                asp-action="Edit"
+                asp-route-id="@item.Id"
+                class="disabled-btn"
+              >Edit</a>
+              <span>&nbsp;|&nbsp;</span>
+              <a 
+                asp-action="Delete"
+                asp-route-id="@item.Id"
+                class="disabled-btn"
+              >Delete</a>
+            }
+            </span>
           </td>
         </tr>
       }
+    }else {
+      <tr class="not-found">
+        <td colspan="5">
+          Search Not Found...
+        </td>
+      </tr>
+    }
     </tbody>
   </table>
-}else {
-  <table class="table not-found">
-    <thead>
-    <tr>
-      <th>Search Not Found...</th>
-    </tr>
-    </thead>
-  </table>
-}

@@ -4,7 +4,7 @@ $('.main-row').swipe({
     $(this).parent().hasClass('active')? null: disableActive();
     currentDocId = $(this).attr('id');
     $(this).css('transform', 'translate(-200px,0px)');
-    $(`#btnBehide-${currentDocId}`).addClass('swipe');
+    $(`#btnBehide-${currentDocId.replace('/','\\/').replace('.','\\.')}`).addClass('swipe');
     isMove = true;
   },
   swipeRight: function(){
@@ -12,7 +12,7 @@ $('.main-row').swipe({
     $(this).parent().hasClass('active')? null: disableActive();
     currentDocId = $(this).attr('id');
     $(this).css('transform', 'translate(200px,0px)');
-    $(`#btnFront-${currentDocId}`).addClass('swipe');
+    $(`#btnFront-${currentDocId.replace('/','\\/').replace('.','\\.')}`).addClass('swipe');
     isMove = true;
   },
   swipeStatus: function(event,phase, direction, distance) {
@@ -21,8 +21,8 @@ $('.main-row').swipe({
       disableSwipe(currentDocId);
       if (distance < 5 && !isMove){
         currentDocId = $(this).attr('id');
-        const mainRowElement = $(`#${currentDocId}`).parent();
-        const subRowElement = $(`#sub-${currentDocId}`);
+        const mainRowElement = $(`#${currentDocId.replace('/','\\/').replace('.','\\.')}`).parent();
+        const subRowElement = $(`#sub-${currentDocId.replace('/','\\/').replace('.','\\.')}`);
         const rowFooterElement = subRowElement.next();
         if (mainRowElement.hasClass('active')) {
           disableActive();
@@ -36,11 +36,47 @@ $('.main-row').swipe({
           floatingBtn.removeAttribute('disabled');
         }
       }
-      $(`#btn-${currentDocId}`).removeClass('swipe');
+      $(`#btn-${currentDocId.replace('/','\\/').replace('.','\\.')}`).removeClass('swipe');
       $(this).removeAttr('style');
       isMove = false;
     }
   },
   threshold: 30,
   allowPageScroll: "vertical"
-  });
+});
+
+// Set date buddhist format
+var receiptDates = document.querySelectorAll('.receipt-date');
+var operationDates = document.querySelectorAll('.operation-date');
+var endDates = document.querySelectorAll('.end-date');
+var buddhistOptions = {
+  year: 'numeric',
+  month: '2-digit',
+  day: '2-digit',
+  calendar: 'buddhist',
+  // numberingSystem: 'thai'
+};
+
+var thaiBuddhistFormat = new Intl.DateTimeFormat('th-TH-u-ca-buddhist', buddhistOptions);
+receiptDates.forEach(div => {
+  receiptDate = div.getAttribute('data-receiptDate');
+  var [day, month, year] = receiptDate.split('/').map(Number);
+  date = new Date(year, month-1, day);
+  div.textContent = thaiBuddhistFormat.format(date);
+});
+
+operationDates.forEach(div => {
+  operationDate = div.getAttribute('data-operationDate');
+  if (operationDate == "") return;
+  var [day, month, year] = operationDate.split('/').map(Number);
+  date = new Date(year, month-1, day);
+  div.textContent = thaiBuddhistFormat.format(date);
+});
+
+endDates.forEach(div => {
+  endDate = div.getAttribute('data-endDate');
+  if (endDate == "") return;
+  var [day, month, year] = endDate.split('/').map(Number);
+  date = new Date(year, month-1, day);
+  div.textContent = thaiBuddhistFormat.format(date);
+});

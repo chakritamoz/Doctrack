@@ -17,6 +17,7 @@ namespace Doctrack.Controllers
 
     //GET: Employees/Index
     [AuthenticationFilter]
+    [AuthenticationPrivilege]
     public async Task<IActionResult> Index()
     {
       var employees = await _context.Employees
@@ -26,6 +27,7 @@ namespace Doctrack.Controllers
     }
 
     [AuthenticationFilter]
+    [AuthenticationPrivilege]
     public async Task<IActionResult> SearchEmployee(string queryStr)
     {
       if (_context.Employees == null)
@@ -46,6 +48,8 @@ namespace Doctrack.Controllers
 
     //GET: Employees/Create
     [AuthenticationFilter]
+    [AuthenticationPrivilege]
+    [AuthenticationProtect]
     public IActionResult Create()
     {
       ViewBag.JobsTitle = new SelectList(_context.Jobs, "Id", "Title");
@@ -57,6 +61,8 @@ namespace Doctrack.Controllers
     [HttpPost]
     [ValidateAntiForgeryToken]
     [AuthenticationFilter]
+    [AuthenticationPrivilege]
+    [AuthenticationProtect]
     public async Task<IActionResult> Create([Bind("Id, Rank_Id, Job_Id, FirstName, LastName, PhoneNumber")] Employee employee)
     {
       if (ModelState.IsValid)
@@ -74,6 +80,8 @@ namespace Doctrack.Controllers
 
     //GET: Employees/Edit/5
     [AuthenticationFilter]
+    [AuthenticationPrivilege]
+    [AuthenticationProtect]
     public async Task<IActionResult> Edit(int? id)
     {
       if (id == null || _context.Employees == null)
@@ -94,6 +102,8 @@ namespace Doctrack.Controllers
     [HttpPost]
     [ValidateAntiForgeryToken]
     [AuthenticationFilter]
+    [AuthenticationPrivilege]
+    [AuthenticationProtect]
     public async Task<IActionResult> Edit(int id, [Bind("Id, Rank_Id, Job_Id, FirstName, LastName", "PhoneNumber")] Employee employee)
     {
       if (_context.Employees == null)
@@ -126,6 +136,8 @@ namespace Doctrack.Controllers
 
     //GET: Employees/Delete/5
     [AuthenticationFilter]
+    [AuthenticationPrivilege]
+    [AuthenticationProtect]
     public async Task<IActionResult> Delete(int? id)
     {
       if (id == null || _context.Employees == null)
@@ -147,6 +159,8 @@ namespace Doctrack.Controllers
     [HttpPost]
     [ValidateAntiForgeryToken]
     [AuthenticationFilter]
+    [AuthenticationPrivilege]
+    [AuthenticationProtect]
     public async Task<IActionResult> Delete(int id)
     {
       if (_context.Employees == null)

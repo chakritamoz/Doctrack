@@ -12,12 +12,12 @@ var triggerEditEmp = false;
 var docActive = localStorage.getItem('docId');
 if (docActive) {
   currentDocId = docActive;
-  activeElement = $('#' + docActive).parent().addClass('active');
-  expandElement = $('#sub-' + docActive).addClass('expand');
-  footerElement = $('#sub-' + docActive).next().addClass('row-footer');
+  activeElement = $('#' + docActive.replace('/','\\/').replace('.','\\.')).parent().addClass('active');
+  expandElement = $('#sub-' + docActive.replace('/','\\/').replace('.','\\.')).addClass('expand');
+  footerElement = $('#sub-' + docActive.replace('/','\\/').replace('.','\\.')).next().addClass('row-footer');
   $('#fabCheckbox').attr('disabled', false);
   $('#fabCheckbox').prop('checked', true);
-  $('#' + docActive)
+  $('#' + docActive.replace('/','\\/').replace('.','\\.'))
     .animate({"opacity": ".9"}, 300)
     .animate({"opacity": "1"}, 300)
     .animate({"opacity": ".9"}, 300)
@@ -476,46 +476,14 @@ function cancelTrigger() {
   $('.sub-row').css('cursor', 'default');
 }
 
-// Set date buddhist format
-const receiptDates = document.querySelectorAll('.receipt-date');
-const operationDates = document.querySelectorAll('.operation-date');
-const endDates = document.querySelectorAll('.end-date');
-const buddhistOptions = {
-  year: 'numeric',
-  month: '2-digit',
-  day: '2-digit',
-  calendar: 'buddhist',
-  // numberingSystem: 'thai'
-};
-
-const thaiBuddhistFormat = new Intl.DateTimeFormat('th-TH-u-ca-buddhist', buddhistOptions);
-receiptDates.forEach(div => {
-  const receiptDate = div.getAttribute('data-receiptDate');
-  const [day, month, year] = receiptDate.split('/').map(Number);
-  const date = new Date(year, month-1, day);
-  div.textContent = thaiBuddhistFormat.format(date);
-});
-
-operationDates.forEach(div => {
-  const operationDate = div.getAttribute('data-operationDate');
-  if (operationDate == "") return;
-  const [day, month, year] = operationDate.split('/').map(Number);
-  const date = new Date(year, month-1, day);
-  div.textContent = thaiBuddhistFormat.format(date);
-});
-
-endDates.forEach(div => {
-  const endDate = div.getAttribute('data-endDate');
-  if (endDate == "") return;
-  const [day, month, year] = endDate.split('/').map(Number);
-  const date = new Date(year, month-1, day);
-  div.textContent = thaiBuddhistFormat.format(date);
-});
-
 function disableSwipe(docId) {
-  $(`#btnBehide-${docId}`).removeClass('swipe');
-  $(`#btnFront-${docId}`).removeClass('swipe');
-  $(`#${docId}`).removeAttr('style');
+  console.log("Disable Swipe");
+  if (docId){
+    $(`#btnBehide-${docId.replace('/','\\/').replace('.','\\.')}`).removeClass('swipe');
+    $(`#btnFront-${docId.replace('/','\\/').replace('.','\\.')}`).removeClass('swipe');
+    $(`#${docId.replace('/','\\/').replace('.','\\.')}`).removeAttr('style');
+  }
+  console.log("Complete Disable Swipe");
 }
 
 //Search function
@@ -531,6 +499,12 @@ $(document).on('click', '#search-document-btn', function() {
   var queryDocType = $('#search-docType').val();
   var queryDocTitle = $('#search-docTitle').val();
   var queryEmployee = $('#search-employee').val();
+  var tabType;
+  if ($('#tab-all').hasClass('active')){
+    tabType = "all";
+  }else{
+    tabType = "user";
+  }
   $.ajax({
     url: 'Documents/SearchDocument',
     type: 'GET',
@@ -538,7 +512,8 @@ $(document).on('click', '#search-document-btn', function() {
       'queryDocNo': queryDocNo,
       'queryDocType': queryDocType,
       'queryDocTitle': queryDocTitle,
-      'queryEmployee': queryEmployee
+      'queryEmployee': queryEmployee,
+      'tabType': tabType
     },
     success: function(data)
     {
@@ -556,3 +531,71 @@ $(document).on('click', '#search-document-btn', function() {
 $(document).on('click', '.search-expand-btn', function() {
   $('.search-contrainer').toggleClass('expand');
 });
+
+$(document).on('click', '#tab-user', function() {
+  if (!$('#tab-user').hasClass('active')){
+    $('#tab-user').toggleClass('active');
+    $('#tab-all').toggleClass('active');
+
+    var queryDocNo = $('#search-docNo').val();
+    var queryDocType = $('#search-docType').val();
+    var queryDocTitle = $('#search-docTitle').val();
+    var queryEmployee = $('#search-employee').val();
+    var tabType = "user";
+    $.ajax({
+      url: 'Documents/SearchDocument',
+      type: 'GET',
+      data: { 
+        'queryDocNo': queryDocNo,
+        'queryDocType': queryDocType,
+        'queryDocTitle': queryDocTitle,
+        'queryEmployee': queryEmployee,
+        'tabType': tabType
+      },
+      success: function(data)
+      {
+        $('.search-contrainer').toggleClass('expand');
+        $('#document-table').html(data);
+        $.getScript('./js/partialDocument.js', function(){
+          floatingBtn.setAttribute('disabled', true);
+          floatingBtn.checked = false;
+          currentDocId = null;
+        });
+      }
+    });
+  }
+})
+
+$(document).on('click', '#tab-all', function() {
+  if (!$('#tab-all').hasClass('active')){
+    $('#tab-all').toggleClass('active');
+    $('#tab-user').toggleClass('active');
+
+    var queryDocNo = $('#search-docNo').val();
+    var queryDocType = $('#search-docType').val();
+    var queryDocTitle = $('#search-docTitle').val();
+    var queryEmployee = $('#search-employee').val();
+    var tabType = "all";
+    $.ajax({
+      url: 'Documents/SearchDocument',
+      type: 'GET',
+      data: { 
+        'queryDocNo': queryDocNo,
+        'queryDocType': queryDocType,
+        'queryDocTitle': queryDocTitle,
+        'queryEmployee': queryEmployee,
+        'tabType': tabType
+      },
+      success: function(data)
+      {
+        $('.search-contrainer').toggleClass('expand');
+        $('#document-table').html(data);
+        $.getScript('./js/partialDocument.js', function(){
+          floatingBtn.setAttribute('disabled', true);
+          floatingBtn.checked = false;
+          currentDocId = null;
+        });
+      }
+    });
+  }
+})

@@ -17,6 +17,7 @@ namespace Doctrack.Controllers
 
     //GET: DocumentTypes/Index
     [AuthenticationFilter]
+    [AuthenticationPrivilege]
     public async Task<IActionResult> Index()
     {      
       var documentTypes = await _context.DocumentTypes.ToListAsync();
@@ -25,6 +26,7 @@ namespace Doctrack.Controllers
     }
 
     [AuthenticationFilter]
+    [AuthenticationPrivilege]
     public async Task<IActionResult> SearchDocType(string queryStr)
     {
       if (_context.DocumentTypes == null)
@@ -45,13 +47,17 @@ namespace Doctrack.Controllers
 
     //GET: DocumentTypes/Create
     [AuthenticationFilter]
-    public ActionResult Craete()
+    [AuthenticationPrivilege]
+    [AuthenticationProtect]
+    public ActionResult Create()
     {
       return View();
     }
 
     //POST: DocumentTypes/Create
     [AuthenticationFilter]
+    [AuthenticationPrivilege]
+    [AuthenticationProtect]
     public async Task<IActionResult> Create([Bind("Id, Title, Period")] DocumentType documentType)
     {
       if (ModelState.IsValid)
@@ -70,6 +76,8 @@ namespace Doctrack.Controllers
 
     //GET: DocumentTypes/Edit/5
     [AuthenticationFilter]
+    [AuthenticationPrivilege]
+    [AuthenticationProtect]
     public async Task<IActionResult> Edit(int? id)
     {
       if (id == null || _context.DocumentTypes == null)
@@ -90,6 +98,8 @@ namespace Doctrack.Controllers
     [HttpPost]
     [ValidateAntiForgeryToken]
     [AuthenticationFilter]
+    [AuthenticationPrivilege]
+    [AuthenticationProtect]
     public async Task<IActionResult> Edit(int id, [Bind("Id, Title, PeriodWarning, PeriodEnd")] DocumentType documentType)
     {
       if (_context.DocumentTypes == null)
@@ -122,6 +132,8 @@ namespace Doctrack.Controllers
 
     //GET: DocumentTypes/Delete/5
     [AuthenticationFilter]
+    [AuthenticationPrivilege]
+    [AuthenticationProtect]
     public async Task<IActionResult> Delete(int? id)
     {
       if (id == null || _context.DocumentTypes == null)
@@ -143,6 +155,8 @@ namespace Doctrack.Controllers
     [HttpPost]
     [ValidateAntiForgeryToken]
     [AuthenticationFilter]
+    [AuthenticationPrivilege]
+    [AuthenticationProtect]
     public async Task<IActionResult> Delete(int id)
     {
       if (_context.DocumentTypes == null)

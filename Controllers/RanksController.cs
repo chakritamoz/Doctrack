@@ -17,6 +17,7 @@ namespace Doctrack.Controllers
 
     //GET: Ranks/Index
     [AuthenticationFilter]
+    [AuthenticationPrivilege]
     public async Task<IActionResult> Index()
     {
       var ranks = await _context.Ranks.ToListAsync();
@@ -24,6 +25,7 @@ namespace Doctrack.Controllers
     }
 
     [AuthenticationFilter]
+    [AuthenticationPrivilege]
     public async Task<IActionResult> SearchRank(string queryStr)
     {
       if (_context.Ranks == null)
@@ -44,6 +46,8 @@ namespace Doctrack.Controllers
 
     //GET: Ranks/Create
     [AuthenticationFilter]
+    [AuthenticationPrivilege]
+    [AuthenticationProtect]
     public ActionResult Create()
     {
       return View();
@@ -53,6 +57,8 @@ namespace Doctrack.Controllers
     [HttpPost]
     [ValidateAntiForgeryToken]
     [AuthenticationFilter]
+    [AuthenticationPrivilege]
+    [AuthenticationProtect]
     public async Task<IActionResult> Create([Bind("Id, Title")] Rank rank)
     {
       if (ModelState.IsValid)
@@ -71,6 +77,8 @@ namespace Doctrack.Controllers
 
     //GET: Ranks/Edit/5
     [AuthenticationFilter]
+    [AuthenticationPrivilege]
+    [AuthenticationProtect]
     public async Task<IActionResult> Edit(int? id)
     {
       if (id == null || _context.Ranks == null)
@@ -90,6 +98,8 @@ namespace Doctrack.Controllers
     [HttpPost]
     [ValidateAntiForgeryToken]
     [AuthenticationFilter]
+    [AuthenticationPrivilege]
+    [AuthenticationProtect]
     public async Task<IActionResult> Edit(int id, [Bind("Id, Title")] Rank rank)
     {
       if (_context.Ranks == null)
@@ -132,6 +142,8 @@ namespace Doctrack.Controllers
 
     //GET: Ranks/Delete/5
     [AuthenticationFilter]
+    [AuthenticationPrivilege]
+    [AuthenticationProtect]
     public async Task<IActionResult> Delete(int? id)
     {
       if (id == null || _context.Ranks == null)
@@ -153,6 +165,8 @@ namespace Doctrack.Controllers
     [HttpPost]
     [ValidateAntiForgeryToken]
     [AuthenticationFilter]
+    [AuthenticationPrivilege]
+    [AuthenticationProtect]
     public async Task<IActionResult> Delete(int id)
     {
       if (_context.Ranks == null)

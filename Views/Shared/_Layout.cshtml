@@ -1,6 +1,6 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Doctrack</title>
@@ -13,66 +13,82 @@
     <link rel="stylesheet" href="~/node_modules/bootstrap-icons/font/bootstrap-icons.css" />
     <link rel="stylesheet" href="~/css/table.css" asp-append-version="true" />
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Documents" asp-action="Index">Doctrack</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="DocumentTypes" asp-action="Index">Document</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Employees" asp-action="Index">Employee</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Jobs" asp-action="Index">Job</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Ranks" asp-action="Index">Rank</a>
-                        </li>
-                        <div class="account-disp">
-                        @if (ViewBag.currentUser != null)
-                        {
-                          <span>Hello, @ViewBag.currentUser.ToUpper()</span>
-                          <li>
-                          <a asp-area="" asp-controller="Accounts" asp-action="Logout">
-                              Logout
-                          </a>
-                          </li>
-                        }
-                        else
-                        {
-                          <li class="nav-item">
-                          <a class="nav-link" asp-area="" asp-controller="Accounts" asp-action="Login">Login</a>
-                          </li>
-                        }
-                        </div>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+      <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light box-shadow mb-3">
+        <div class="container-fluid">
+          <a class="navbar-brand" asp-area="" asp-controller="Documents" asp-action="Index">Doctrack</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                  aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+            <ul class="navbar-nav flex-grow-1">
+              <li class="nav-item">
+                <a class="nav-link" asp-area="" asp-controller="DocumentTypes" asp-action="Index">Document</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" asp-area="" asp-controller="Employees" asp-action="Index">Employee</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" asp-area="" asp-controller="Jobs" asp-action="Index">Job</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" asp-area="" asp-controller="Ranks" asp-action="Index">Rank</a>
+              </li>
+              @if (ViewBag.isAdmin)
+              {
+                <li class="nav-item">
+                  <a 
+                    class="nav-link"
+                    asp-area="" 
+                    asp-controller="Accounts"
+                    asp-action="Management">Account
+                  </a>
+                </li>
+              }
+              <div class="account-disp">
+                @if (ViewBag.currentUser != null)
+                {
+                  <span>Hello, @ViewBag.currentUser.ToUpper()</span>
+                  <li>
+                    <a 
+                      asp-area=""
+                      asp-controller="Accounts"
+                      asp-action="Logout">Logout
+                    </a>
+                  </li>
+                }
+                else
+                {
+                  <li class="nav-item">
+                    <a 
+                      class="nav-link"
+                      asp-area=""
+                      asp-controller="Accounts"
+                      asp-action="Login">Login
+                    </a>
+                  </li>
+                }
+              </div>
+            </ul>
+          </div>
+        </div>
+      </nav>
     </header>
     <div class="container">
         <main role="main" class="pb-3">
-            @RenderBody()
+      @RenderBody()
         </main>
     </div>
-
     <footer class="border-top footer text-white">
         <div class="container">
-            &copy; 2023 - Doctrack - Sangha Estate</a>
+            &copy; 2023 - Doctrack - Sangha Estate
         </div>
     </footer>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
-</body>
+  </body>
 </html>

@@ -20,9 +20,10 @@ namespace Doctrack.Controllers
 
     //GET: Documents/Index
     [AuthenticationFilter]
+    [AuthenticationPrivilege]
     public async Task<IActionResult> Index()
     { 
-      ViewBag.currentUser = GetUsername();
+      var currentUser = HttpContext.Session.GetString("Username");
       var documents = await _context.Documents
         .Include(d => d.DocumentType)
         .Include(d => d.DocumentDetails)
@@ -31,6 +32,7 @@ namespace Doctrack.Controllers
           .ThenInclude(dd => dd.Job)
         .Include(d => d.DocumentDetails)
           .ThenInclude(dd => dd.Rank)
+        .Where(d => d.User == currentUser)
         .ToListAsync();
 
       var orderDocument = documents
@@ -41,9 +43,10 @@ namespace Doctrack.Controllers
     }
 
     [AuthenticationFilter]
-    public async Task<IActionResult> SearchDocument(string queryDocNo, string queryDocType, string queryDocTitle, string queryEmployee)
+    [AuthenticationPrivilege]
+    public async Task<IActionResult> SearchDocument(string queryDocNo, string queryDocType, string queryDocTitle, string queryEmployee, string tabType)
     {
-      ViewBag.currentUser = GetUsername();
+      var currentUser = HttpContext.Session.GetString("Username");
       if (_context.Documents == null)
       {
         return NotFound();
@@ -72,23 +75,30 @@ namespace Doctrack.Controllers
             .Contains(queryEmployee)
           )
         )
+        .Where(d => tabType == "all"
+          || d.User == currentUser
+        )
         .ToListAsync();
+
+      if (documents == null)
+      {
+        return PartialView("_DocumentTable", documents);
+      }
 
       var orderDocument = documents
         .OrderBy(d => d.EndDate)
         .ThenBy(d => d.DocType_Id).ToList();
 
 
-      return PartialView("_DocumentTable", documents);
+      return PartialView("_DocumentTable", orderDocument);
     }
 
     //GET: Documents/Create
     [AuthenticationFilter]
+    [AuthenticationPrivilege]
     public IActionResult Create()
     {
-      ViewBag.currentUser = GetUsername();
       ViewBag.DocTypesTitle = GetDocTypeSelectList();
-      ViewBag.User = HttpContext.Session.GetString("username");
       ViewBag.Today = DateTime.Now.ToString("dd/MM/yyyy");
       
       return View();
@@ -98,9 +108,9 @@ namespace Doctrack.Controllers
     [HttpPost]
     [ValidateAntiForgeryToken]
     [AuthenticationFilter]
+    [AuthenticationPrivilege]
     public async Task<IActionResult> Create(Document document,string receiptDate)
     {
-      ViewBag.currentUser = GetUsername();
       if (document.DocType_Id == 0)
       {
         ModelState.AddModelError("DocType_Id", "Please select document title");
@@ -110,7 +120,7 @@ namespace Doctrack.Controllers
       {
         var receiptArray = receiptDate.Split("/");
         var conReceiptDate = $"{receiptArray[2]}-{receiptArray[1]}-{receiptArray[0]}";
-        if (DateTime.TryParseExact(conReceiptDate, "yyyy-MM-dd", CultureInfo.InstalledUICulture,DateTimeStyles.None,out var parsedDate))
+        if (DateTime.TryParseExact(conReceiptDate, "yyyy-MM-dd", CultureInfo.DefaultThreadCurrentCulture,DateTimeStyles.None,out var parsedDate))
         {
           document.ReceiptDate = parsedDate;
           ModelState.Remove("ReceiptDate");
@@ -125,16 +135,15 @@ namespace Doctrack.Controllers
       }
 
       ViewBag.DocTypesTitle = GetDocTypeSelectList();
-      ViewBag.User = GetUsername();
       ViewBag.Today = DateTime.Now.ToString("dd/MM/yyyy");
       return View(document);
     }
 
     //GET: Documents/Edit/5
     [AuthenticationFilter]
+    [AuthenticationPrivilege]
     public async Task<IActionResult> Edit(string? id)
     {
-      ViewBag.currentUser = GetUsername();
       if (id == null || _context.Documents == null)
       {
         return NotFound();
@@ -173,12 +182,9 @@ namespace Doctrack.Controllers
     [HttpPost]
     [ValidateAntiForgeryToken]
     [AuthenticationFilter]
+    [AuthenticationPrivilege]
     public async Task<IActionResult> Edit(string id, string? newId, Document document, string receiptDate, string? opDate, string? endDate)
     {
-      Console.WriteLine($"receip date: {receiptDate}");
-      Console.WriteLine($"operation date: {opDate}");
-      Console.WriteLine($"end date: {endDate}");
-      ViewBag.currentUser = GetUsername();
       if (_context.Documents == null)
       {
         return NotFound();
@@ -188,7 +194,7 @@ namespace Doctrack.Controllers
       {
         var receiptArray = receiptDate.Split("/");
         var conReceiptDate = $"{receiptArray[2]}-{receiptArray[1]}-{receiptArray[0]}";
-        if (DateTime.TryParseExact(conReceiptDate, "yyyy-MM-dd", CultureInfo.InstalledUICulture,DateTimeStyles.None,out var parsedDate))
+        if (DateTime.TryParseExact(conReceiptDate, "yyyy-MM-dd", CultureInfo.DefaultThreadCurrentCulture,DateTimeStyles.None,out var parsedDate))
         {
           document.ReceiptDate = parsedDate;
           ModelState.Remove("ReceiptDate");
@@ -200,7 +206,7 @@ namespace Doctrack.Controllers
       {
         var opArray = opDate.Split("/");
         var conOPDate = $"{opArray[2]}-{opArray[1]}-{opArray[0]}";
-        if (DateTime.TryParseExact(conOPDate, "yyyy-MM-dd", CultureInfo.InstalledUICulture,DateTimeStyles.None,out var parsedDate))
+        if (DateTime.TryParseExact(conOPDate, "yyyy-MM-dd", CultureInfo.DefaultThreadCurrentCulture,DateTimeStyles.None,out var parsedDate))
         {
           document.OperationDate = parsedDate;
         }
@@ -211,7 +217,7 @@ namespace Doctrack.Controllers
       {
         var endArray = endDate.Split("/");
         var conEndDate = $"{endArray[2]}-{endArray[1]}-{endArray[0]}";
-        if (DateTime.TryParseExact(conEndDate, "yyyy-MM-dd", CultureInfo.InstalledUICulture,DateTimeStyles.None,out var parsedDate))
+        if (DateTime.TryParseExact(conEndDate, "yyyy-MM-dd", CultureInfo.DefaultThreadCurrentCulture,DateTimeStyles.None,out var parsedDate))
         {
           document.EndDate = parsedDate;
         }
@@ -273,20 +279,18 @@ namespace Doctrack.Controllers
             throw;
           }
         }
-
       }
 
       ViewBag.DocTypesTitle = GetDocTypeSelectList();
-      ViewBag.User = GetUsername();
       ViewBag.Today = DateTime.Now.ToString("dd/MM/yyyy");
       return View(document);
     }
 
     //POST: Documents/AddEmployee/5
     [AuthenticationFilter]
+    [AuthenticationPrivilege]
     public async Task<ActionResult> AddEmployee(string id, int jobId, int rankId, string firstName, string lastName, string? remark)
     {
-      ViewBag.currentUser = GetUsername();
       if (_context.DocumentDetails == null)
       {
         return NotFound();
@@ -342,7 +346,6 @@ namespace Doctrack.Controllers
     [AuthenticationFilter]
     public async Task<ActionResult> UpdateOP(string? id)
     {
-      ViewBag.currentUser = GetUsername();
       if (id == null || _context.Documents == null)
       {
         return NotFound();
@@ -376,9 +379,9 @@ namespace Doctrack.Controllers
     [HttpPost]
     [ValidateAntiForgeryToken]
     [AuthenticationFilter]
+    [AuthenticationPrivilege]
     public async Task<ActionResult> UpdateOP(string id, string Operation, DateTime OperationDate)
     {
-      ViewBag.currentUser = GetUsername();
       var existsModel = _context.Documents.Find(id);
       if (existsModel == null)
       {
@@ -394,9 +397,9 @@ namespace Doctrack.Controllers
 
     //GET: Document/GetAllJobs
     [AuthenticationFilter]
+    [AuthenticationPrivilege]
     public async Task<ActionResult> GetAllJobs()
     {
-      ViewBag.currentUser = GetUsername();
       if (_context.Jobs == null)
       {
         return NotFound();
@@ -412,9 +415,9 @@ namespace Doctrack.Controllers
 
     //GET: Document/GetAllRanks/5
     [AuthenticationFilter]
+    [AuthenticationPrivilege]
     public async Task<ActionResult> GetAllRanks(int? id)
     {
-      ViewBag.currentUser = GetUsername();
       if (id == null || _context.JobRankDetails == null)
       {
         return NotFound();
@@ -441,9 +444,9 @@ namespace Doctrack.Controllers
     [HttpPost]
     [ValidateAntiForgeryToken]
     [AuthenticationFilter]
+    [AuthenticationPrivilege]
     public async Task<ActionResult> DeleteEmployee(int id)
     {
-      ViewBag.currentUser = GetUsername();
       if (_context.DocumentDetails == null)
       {
         return Problem("Enitity set 'DoctrackContext.DocumentDetails' is null.");
@@ -462,9 +465,9 @@ namespace Doctrack.Controllers
 
     //GET: Documents/UpdateEmployee/5
     [AuthenticationFilter]
+    [AuthenticationPrivilege]
     public async Task<ActionResult> UpdateEmployee(int? id)
     {
-      ViewBag.currentUser = GetUsername();
       if (id == null || _context.DocumentDetails == null)
       {
         return NotFound();
@@ -488,9 +491,9 @@ namespace Doctrack.Controllers
     [HttpPost]
     [ValidateAntiForgeryToken]
     [AuthenticationFilter]
+    [AuthenticationPrivilege]
     public async Task<ActionResult> UpdateEmployee(int id, int jobId, int rankId, string? remark)
     {
-      ViewBag.currentUser = GetUsername();
       if (_context.DocumentDetails == null)
       {
         return NotFound();
@@ -501,7 +504,6 @@ namespace Doctrack.Controllers
       {
         return NotFound();
       }
-      Console.WriteLine("retrieve docd");
       documentDetail.Job_Id = jobId;
       documentDetail.Rank_Id = rankId;
       documentDetail.Remark = remark;
@@ -515,9 +517,9 @@ namespace Doctrack.Controllers
     [HttpPost]
     [ValidateAntiForgeryToken]
     [AuthenticationFilter]
+    [AuthenticationPrivilege]
     public async Task<ActionResult> UpdateEndDate(string id, DateTime EndDate)
     {
-      ViewBag.currentUser = GetUsername();
       var existsModel = _context.Documents.Find(id);
       if (existsModel == null)
       {
@@ -534,9 +536,9 @@ namespace Doctrack.Controllers
     [HttpPost]
     [ValidateAntiForgeryToken]
     [AuthenticationFilter]
+    [AuthenticationPrivilege]
     public async Task<IActionResult> Delete(string id)
     {
-      ViewBag.currentUser = GetUsername();
       if (_context.Documents == null)
       {
         return Problem("Enitity set 'DoctrackContext.Documents' is null.");
@@ -569,10 +571,6 @@ namespace Doctrack.Controllers
 
     public SelectList GetRankSelectList() {      
       return (new SelectList(_context.DocumentTypes, "Id", "Title"));
-    }
-
-    public string GetUsername() {
-      return HttpContext.Session.GetString("Username");;
     }
   }
 }

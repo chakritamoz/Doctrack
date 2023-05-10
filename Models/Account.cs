@@ -18,5 +18,7 @@ namespace Doctrack.Models
     public virtual Role Role { get; set; }
     public bool IsEmailConfirm { get; set; } = false;
     public bool IsApproved { get; set; } = false;
+    public string Token { get; set; }
+    public byte[] KeyToken { get; set; }
   }
 }

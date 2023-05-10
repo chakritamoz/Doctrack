@@ -47,6 +47,7 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 16px;
+  border-bottom: 1px solid #dee2e6;
 }
 
 .modal-body {
@@ -97,19 +98,9 @@
   cursor: pointer;
 }
 
-/* @media screen and (max-width: 1000px){
-  .modal-content {
-    width: 90%;
-    border-radius: 20px;
-  }
-  .modal-body {
-    padding: 0;
-  }
-  #modal-form input,
-  #modal-form label,
-  #modal-form select,
-  #modal-form p,
-  #modal-form span  {
-    width: 80%;
-  }
-} */
+.modal-footer .button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20%;
+}

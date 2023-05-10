@@ -1,0 +1,59 @@
+@model IEnumerable<Doctrack.Models.Account>
+
+@{
+  ViewData["Title"] = "Document Types List";
+}
+
+<h2>Account Management</h2>
+<hr />
+
+<div class="flex-action justify-content-end">
+  <div class="search-box">
+    <input id="search-box" placeholder="Search Title..." />
+    <div id="search-btn"><i class="bi bi-search"></i></div>
+  </div>
+</div>
+<div id="document-table">
+  @Html.Partial("_ManagementTable", Model)
+</div>
+
+<!-- Modal -->
+<div id="writableModal" class="modal-container">
+  @Html.AntiForgeryToken()
+  <div class="modal-content">
+    <div class="modal-title">
+      <div id="modal-title"></div>
+      <div><span class="close">&times;</span></div>
+    </div>
+    <div id="modal-body" class="modal-body">
+    </div>
+    <div class="modal-footer">
+      <div id="modal-close-button" class="button button-danger">Close</div>
+      <div id="modal-accept-button" class="button button-primary">Confirm</div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $('#search-box').keypress(function(event) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      document.getElementById('search-btn').click();
+    }
+  });
+
+  $('#search-btn').click(function() {
+  const queryStr = $('#search-box').val();
+    $.ajax({
+      url: '/Accounts/SearchManagement/',
+      type: 'GET',
+      data: { 'queryStr': queryStr },
+      success: function (data) { 
+        $('#document-table').html(data);
+      }
+    });
+  });
+</script>
+
+<script src="~/js/documentsModal.js"></script>
+<script src="~/js/accountManagement.js"></script>

@@ -3,17 +3,18 @@ using SendGrid.Helpers.Mail;
 
 namespace Doctrack.SendGrid
 {
-  internal class EmailService
+  public class EmailService
   {
-    public async Task Execute(string receipient)
+    public static async Task SendVerificationEmailAsync(string receipient, string token)
     {
       var apiKey = Environment.GetEnvironmentVariable("SendGridAPIKey", EnvironmentVariableTarget.User);
       var client = new SendGridClient(apiKey);
       var from = new EmailAddress("chakrit.artamoz@gmail.com");
-      var subject = "Sending with SendGrid is Fun";
       var to = new EmailAddress(receipient);
-      var plainTextContent = "and easy to do anywhere, even with C#";
-      var htmlContent = "<strong>and easy to do anywhere, even with C#</strong>";
+      var callbackUrl = $"http://localhost:5192/accounts/verifyEmail?token={token}";
+      var subject = "Verify your email address";
+      var plainTextContent = $"Please click on the following link to verify your email address: {callbackUrl}";
+      var htmlContent = $"Please click on the following link to verify your email address: <a href='{callbackUrl}'>{callbackUrl}</a>";
       var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
       var response = await client.SendEmailAsync(msg);
 
