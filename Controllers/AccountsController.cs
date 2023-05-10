@@ -6,6 +6,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using Doctrack.Authentication;
+using Doctrack.SendGrid;
 
 namespace Doctrack.Controllers
 {
@@ -38,6 +39,7 @@ namespace Doctrack.Controllers
       byte[] passwordHash, passwordSalt;
       CreatePasswordHash(password, out passwordHash, out passwordSalt);
 
+      await EmailService.SendVerificationEmailAsync(email);
 
       var user = new Account()
       {
