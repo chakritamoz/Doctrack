@@ -1,0 +1,4 @@
+{
+  "appService.defaultWebAppToDeploy": "/subscriptions/767b0a63-3e37-441f-8c20-2f72e2c85a8b/resourceGroups/DoctrackGroup/providers/Microsoft.Web/sites/sangha-doctrack",
+  "appService.deploySubpath": "bin\\Publish"
+}

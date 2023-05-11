@@ -1,0 +1,272 @@
+.container-cover-card {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.534);
+}
+
+.container-card {
+  position: relative;
+  background-image: url(../asset/greeting-bg2.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: hidden;
+  border-radius: 1rem;
+  width: 80%;
+  max-height: 540px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 10px 10px 10px rgb(53, 53, 53), 14px 14px 14px rgb(73, 71, 71);
+}
+
+.icon-inside {
+  position: relative;
+}
+
+.icon-inside .icon-prefix {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  height: 100%;
+}
+
+.icon-inside .icon-postfix {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  right: 10px;
+  height: 100%;
+}
+
+.icon-inside > input {
+  padding-left: 30px;
+  border-radius: 2rem;
+}
+
+.icon {
+  min-width: 40px;
+}
+
+.container-register,
+.container-login {
+  padding: 10px 30px;
+  width: 100%;
+}
+
+.container-greeting {
+  overflow: hidden;
+  position: relative;
+  padding: 50px;
+  width: 0;
+  height: 0;
+}
+
+.content-greeting {
+  overflow: hidden;
+  position: absolute;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.body-greeting {
+  text-align: left;
+}
+
+.poet-greeting {
+  width: 100%;
+  text-align: right;
+  padding-right: 10%;
+}
+
+.container-register h2,
+.container-login h2 {
+  font-size: 2rem;
+  color: black;
+}
+
+.container-register h2 {
+  margin: 20px;
+}
+
+.container-login h2 {
+  margin: 40px;
+}
+
+.container-login .container-button {
+  padding-top: 40px;
+}
+
+.container-greeting h2 {
+  margin: 20px;
+  color: black;
+}
+
+.container-greeting p {
+  color: black;
+}
+
+.poet {
+  font-size: 11px
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.card-title {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.container-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.container-button > p {
+  margin-top: 10px;
+  font-size: 11px;
+}
+
+.container-button > p > a {
+  color: #558fe5;
+}
+
+.container-button > p > a:hover {
+  color: #094eb7;
+}
+
+.container-button .button {
+  text-align: center;
+  border-radius: 2rem;
+  padding: 0;
+  border: 0;
+  width: 70%;
+  margin-top: 10px;
+  margin-left: 3px;
+}
+
+@media screen and (min-height: 740px) {
+  .container-card {
+    top: 45%;
+  }
+}
+
+@media screen and (min-height: 780px) {
+  .container-register {
+    padding: 0 40px;
+    max-height: max-content;
+    height: max-content;
+    width: 100%;
+  }
+
+  .container-login {
+    padding: 0 40px;
+    max-height: max-content;
+    height: max-content;
+    width: 100%;
+  }
+
+  .container-register h2,
+  .container-login h2 {
+    font-size: 3rem;
+  }
+
+}
+
+@media screen and (min-width: 700px) and (min-height: 500px) {
+  .container-card {
+    top: 50%;
+    width: 70%;
+  }
+}
+
+@media screen and (min-width: 750px) and (min-height: 1000px) {
+  .container-card {
+    top: 40%;
+    width: 70%;
+  }
+
+  .container-register,
+  .container-login {
+    padding: 0 100px;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .container-card {
+    width: 80%;
+    height: 100%;
+    display: flex;
+    background-color: rgb(251 221 221);
+    background-image: none;
+  }
+
+  .container-register,
+  .container-login {
+    width: 40%;
+    padding: 0 30px;
+    height: 100%;
+  }
+
+  .container-register h2 {
+    margin-bottom: 36px;
+  }
+
+  .container-login h2 {
+    margin-bottom: 60px;
+  }
+
+  .container-greeting {
+    height: 100%;
+    width: 60%;
+    background-image: url(../asset/greeting-bg2.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .content-greeting {
+    width: 60%;
+  }
+}
+
+@media screen and (min-width: 1000px) and (min-height: 800px) {
+  .container-card {
+    top: 45%;
+    width: 65%;
+    max-height: 540px;
+  }
+}
+
+@media screen and (min-width: 1400px) {
+  .container-card {
+    width: 60%;
+    top: 45%;
+    max-height: 600px;
+  }
+
+  .container-register {
+    padding: 10px 100px;
+  }
+
+  .container-login {
+    padding: 60px 100px;
+  }
+}
+
