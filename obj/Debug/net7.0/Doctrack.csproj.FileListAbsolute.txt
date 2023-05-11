@@ -913,3 +913,15 @@ C:\Doctrack\obj\Debug\net7.0\refint\Doctrack.dll
 C:\Doctrack\obj\Debug\net7.0\Doctrack.pdb
 C:\Doctrack\obj\Debug\net7.0\Doctrack.genruntimeconfig.cache
 C:\Doctrack\obj\Debug\net7.0\ref\Doctrack.dll
+D:\Doctrack\bin\Debug\net7.0\docs\docs\web.config
+D:\Doctrack\bin\Debug\net7.0\docs\web.config
+D:\Doctrack\bin\Debug\net7.0\docs\appsettings.Development.json
+D:\Doctrack\bin\Debug\net7.0\docs\appsettings.json
+D:\Doctrack\bin\Debug\net7.0\docs\docs\appsettings.Development.json
+D:\Doctrack\bin\Debug\net7.0\docs\docs\appsettings.json
+D:\Doctrack\bin\Debug\net7.0\docs\docs\Doctrack.deps.json
+D:\Doctrack\bin\Debug\net7.0\docs\docs\Doctrack.runtimeconfig.json
+D:\Doctrack\bin\Debug\net7.0\docs\docs\package-lock.json
+D:\Doctrack\bin\Debug\net7.0\docs\Doctrack.deps.json
+D:\Doctrack\bin\Debug\net7.0\docs\Doctrack.runtimeconfig.json
+D:\Doctrack\bin\Debug\net7.0\docs\package-lock.json

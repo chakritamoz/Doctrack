@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "zjaJxBiKT+Oek8vToijO87Y1OMJej1nl2Bt9YeBlGwo=",
+  "Hash": "bq5YMagEFnnXQXcwky+jQtOBSykStoS2xnOndsqvcJE=",
   "Source": "Doctrack",
   "BasePath": "_content/Doctrack",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "Doctrack\\wwwroot",
       "Source": "Doctrack",
-      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "C:\\Doctrack\\obj\\Debug\\net7.0\\scopedcss\\bundle\\Doctrack.styles.css",
+      "Identity": "D:\\Doctrack\\obj\\Debug\\net7.0\\scopedcss\\bundle\\Doctrack.styles.css",
       "SourceId": "Doctrack",
       "SourceType": "Computed",
-      "ContentRoot": "C:\\Doctrack\\obj\\Debug\\net7.0\\scopedcss\\bundle\\",
+      "ContentRoot": "D:\\Doctrack\\obj\\Debug\\net7.0\\scopedcss\\bundle\\",
       "BasePath": "_content/Doctrack",
       "RelativePath": "Doctrack.styles.css",
       "AssetKind": "All",
@@ -31,13 +31,13 @@
       "AssetTraitValue": "ApplicationBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Doctrack\\obj\\Debug\\net7.0\\scopedcss\\bundle\\Doctrack.styles.css"
+      "OriginalItemSpec": "D:\\Doctrack\\obj\\Debug\\net7.0\\scopedcss\\bundle\\Doctrack.styles.css"
     },
     {
-      "Identity": "C:\\Doctrack\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\Doctrack.bundle.scp.css",
+      "Identity": "D:\\Doctrack\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\Doctrack.bundle.scp.css",
       "SourceId": "Doctrack",
       "SourceType": "Computed",
-      "ContentRoot": "C:\\Doctrack\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\",
+      "ContentRoot": "D:\\Doctrack\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\",
       "BasePath": "_content/Doctrack",
       "RelativePath": "Doctrack.bundle.scp.css",
       "AssetKind": "All",
@@ -48,13 +48,13 @@
       "AssetTraitValue": "ProjectBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Doctrack\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\Doctrack.bundle.scp.css"
+      "OriginalItemSpec": "D:\\Doctrack\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\Doctrack.bundle.scp.css"
     },
     {
-      "Identity": "C:\\Doctrack\\wwwroot\\asset\\doctrack-logo.png",
+      "Identity": "D:\\Doctrack\\wwwroot\\asset\\doctrack-logo.png",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
       "RelativePath": "asset/doctrack-logo.png",
       "AssetKind": "All",
@@ -68,10 +68,10 @@
       "OriginalItemSpec": "wwwroot\\asset\\doctrack-logo.png"
     },
     {
-      "Identity": "C:\\Doctrack\\wwwroot\\asset\\greeting-bg1.jpg",
+      "Identity": "D:\\Doctrack\\wwwroot\\asset\\greeting-bg1.jpg",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
       "RelativePath": "asset/greeting-bg1.jpg",
       "AssetKind": "All",
@@ -85,10 +85,10 @@
       "OriginalItemSpec": "wwwroot\\asset\\greeting-bg1.jpg"
     },
     {
-      "Identity": "C:\\Doctrack\\wwwroot\\asset\\greeting-bg2.jpg",
+      "Identity": "D:\\Doctrack\\wwwroot\\asset\\greeting-bg2.jpg",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
       "RelativePath": "asset/greeting-bg2.jpg",
       "AssetKind": "All",
@@ -102,10 +102,10 @@
       "OriginalItemSpec": "wwwroot\\asset\\greeting-bg2.jpg"
     },
     {
-      "Identity": "C:\\Doctrack\\wwwroot\\css\\accountCard.css",
+      "Identity": "D:\\Doctrack\\wwwroot\\css\\accountCard.css",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
       "RelativePath": "css/accountCard.css",
       "AssetKind": "All",
@@ -119,10 +119,10 @@
       "OriginalItemSpec": "wwwroot\\css\\accountCard.css"
     },
     {
-      "Identity": "C:\\Doctrack\\wwwroot\\css\\floatingAction.css",
+      "Identity": "D:\\Doctrack\\wwwroot\\css\\floatingAction.css",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
       "RelativePath": "css/floatingAction.css",
       "AssetKind": "All",
@@ -136,10 +136,10 @@
       "OriginalItemSpec": "wwwroot\\css\\floatingAction.css"
     },
     {
-      "Identity": "C:\\Doctrack\\wwwroot\\css\\index.css",
+      "Identity": "D:\\Doctrack\\wwwroot\\css\\index.css",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
       "RelativePath": "css/index.css",
       "AssetKind": "All",
@@ -153,10 +153,10 @@
       "OriginalItemSpec": "wwwroot\\css\\index.css"
     },
     {
-      "Identity": "C:\\Doctrack\\wwwroot\\css\\modal.css",
+      "Identity": "D:\\Doctrack\\wwwroot\\css\\modal.css",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
       "RelativePath": "css/modal.css",
       "AssetKind": "All",
@@ -170,10 +170,10 @@
       "OriginalItemSpec": "wwwroot\\css\\modal.css"
     },
     {
-      "Identity": "C:\\Doctrack\\wwwroot\\css\\site.css",
+      "Identity": "D:\\Doctrack\\wwwroot\\css\\site.css",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
       "RelativePath": "css/site.css",
       "AssetKind": "All",
@@ -187,10 +187,10 @@
       "OriginalItemSpec": "wwwroot\\css\\site.css"
     },
     {
-      "Identity": "C:\\Doctrack\\wwwroot\\css\\table.css",
+      "Identity": "D:\\Doctrack\\wwwroot\\css\\table.css",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
       "RelativePath": "css/table.css",
       "AssetKind": "All",
@@ -204,10 +204,10 @@
       "OriginalItemSpec": "wwwroot\\css\\table.css"
     },
     {
-      "Identity": "C:\\Doctrack\\wwwroot\\favicon.ico",
+      "Identity": "D:\\Doctrack\\wwwroot\\favicon.ico",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
       "RelativePath": "favicon.ico",
       "AssetKind": "All",
@@ -221,10 +221,10 @@
       "OriginalItemSpec": "wwwroot\\favicon.ico"
     },
     {
-      "Identity": "C:\\Doctrack\\wwwroot\\js\\accountManagement.js",
+      "Identity": "D:\\Doctrack\\wwwroot\\js\\accountManagement.js",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
       "RelativePath": "js/accountManagement.js",
       "AssetKind": "All",
@@ -238,10 +238,10 @@
       "OriginalItemSpec": "wwwroot\\js\\accountManagement.js"
     },
     {
-      "Identity": "C:\\Doctrack\\wwwroot\\js\\documentsEdit.js",
+      "Identity": "D:\\Doctrack\\wwwroot\\js\\documentsEdit.js",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
       "RelativePath": "js/documentsEdit.js",
       "AssetKind": "All",
@@ -255,10 +255,10 @@
       "OriginalItemSpec": "wwwroot\\js\\documentsEdit.js"
     },
     {
-      "Identity": "C:\\Doctrack\\wwwroot\\js\\documentsIndex.js",
+      "Identity": "D:\\Doctrack\\wwwroot\\js\\documentsIndex.js",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
       "RelativePath": "js/documentsIndex.js",
       "AssetKind": "All",
@@ -272,10 +272,10 @@
       "OriginalItemSpec": "wwwroot\\js\\documentsIndex.js"
     },
     {
-      "Identity": "C:\\Doctrack\\wwwroot\\js\\documentsModal.js",
+      "Identity": "D:\\Doctrack\\wwwroot\\js\\documentsModal.js",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
       "RelativePath": "js/documentsModal.js",
       "AssetKind": "All",
@@ -289,10 +289,10 @@
       "OriginalItemSpec": "wwwroot\\js\\documentsModal.js"
     },
     {
-      "Identity": "C:\\Doctrack\\wwwroot\\js\\partialDocument.js",
+      "Identity": "D:\\Doctrack\\wwwroot\\js\\partialDocument.js",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
       "RelativePath": "js/partialDocument.js",
       "AssetKind": "All",
@@ -306,10 +306,10 @@
       "OriginalItemSpec": "wwwroot\\js\\partialDocument.js"
     },
     {
-      "Identity": "C:\\Doctrack\\wwwroot\\js\\site.js",
+      "Identity": "D:\\Doctrack\\wwwroot\\js\\site.js",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
       "RelativePath": "js/site.js",
       "AssetKind": "All",
@@ -323,10 +323,10 @@
       "OriginalItemSpec": "wwwroot\\js\\site.js"
     },
     {
-      "Identity": "C:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
+      "Identity": "D:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.css",
       "AssetKind": "All",
@@ -340,10 +340,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css"
     },
     {
-      "Identity": "C:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
+      "Identity": "D:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.css.map",
       "AssetKind": "All",
@@ -357,10 +357,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map"
     },
     {
-      "Identity": "C:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
+      "Identity": "D:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.css",
       "AssetKind": "All",
@@ -374,10 +374,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css"
     },
     {
-      "Identity": "C:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
+      "Identity": "D:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.css.map",
       "AssetKind": "All",
@@ -391,10 +391,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map"
     },
     {
-      "Identity": "C:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
+      "Identity": "D:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.min.css",
       "AssetKind": "All",
@@ -408,10 +408,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css"
     },
     {
-      "Identity": "C:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
+      "Identity": "D:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.min.css.map",
       "AssetKind": "All",
@@ -425,10 +425,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map"
     },
     {
-      "Identity": "C:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
+      "Identity": "D:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.rtl.css",
       "AssetKind": "All",
@@ -442,10 +442,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css"
     },
     {
-      "Identity": "C:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
+      "Identity": "D:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.rtl.css.map",
       "AssetKind": "All",
@@ -459,10 +459,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map"
     },
     {
-      "Identity": "C:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
+      "Identity": "D:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css",
       "AssetKind": "All",
@@ -476,10 +476,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css"
     },
     {
-      "Identity": "C:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
+      "Identity": "D:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css.map",
       "AssetKind": "All",
@@ -493,10 +493,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map"
     },
     {
-      "Identity": "C:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
+      "Identity": "D:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.min.css",
       "AssetKind": "All",
@@ -510,10 +510,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css"
     },
     {
-      "Identity": "C:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
+      "Identity": "D:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.min.css.map",
       "AssetKind": "All",
@@ -527,10 +527,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map"
     },
     {
-      "Identity": "C:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
+      "Identity": "D:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.css",
       "AssetKind": "All",
@@ -544,10 +544,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css"
     },
     {
-      "Identity": "C:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
+      "Identity": "D:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.css.map",
       "AssetKind": "All",
@@ -561,10 +561,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map"
     },
     {
-      "Identity": "C:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
+      "Identity": "D:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.min.css",
       "AssetKind": "All",
@@ -578,10 +578,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css"
     },
     {
-      "Identity": "C:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
+      "Identity": "D:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.min.css.map",
       "AssetKind": "All",
@@ -595,10 +595,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map"
     },
     {
-      "Identity": "C:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
+      "Identity": "D:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.css",
       "AssetKind": "All",
@@ -612,10 +612,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css"
     },
     {
-      "Identity": "C:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
+      "Identity": "D:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.css.map",
       "AssetKind": "All",
@@ -629,10 +629,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map"
     },
     {
-      "Identity": "C:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
+      "Identity": "D:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css",
       "AssetKind": "All",
@@ -646,10 +646,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css"
     },
     {
-      "Identity": "C:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
+      "Identity": "D:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css.map",
       "AssetKind": "All",
@@ -663,10 +663,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map"
     },
     {
-      "Identity": "C:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
+      "Identity": "D:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.rtl.css",
       "AssetKind": "All",
@@ -680,10 +680,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css"
     },
     {
-      "Identity": "C:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
+      "Identity": "D:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.rtl.css.map",
       "AssetKind": "All",
@@ -697,10 +697,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map"
     },
     {
-      "Identity": "C:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
+      "Identity": "D:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.rtl.min.css",
       "AssetKind": "All",
@@ -714,10 +714,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css"
     },
     {
-      "Identity": "C:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
+      "Identity": "D:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.rtl.min.css.map",
       "AssetKind": "All",
@@ -731,10 +731,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map"
     },
     {
-      "Identity": "C:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
+      "Identity": "D:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.css",
       "AssetKind": "All",
@@ -748,10 +748,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css"
     },
     {
-      "Identity": "C:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
+      "Identity": "D:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.css.map",
       "AssetKind": "All",
@@ -765,10 +765,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map"
     },
     {
-      "Identity": "C:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
+      "Identity": "D:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.min.css",
       "AssetKind": "All",
@@ -782,10 +782,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css"
     },
     {
-      "Identity": "C:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
+      "Identity": "D:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.min.css.map",
       "AssetKind": "All",
@@ -799,10 +799,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map"
     },
     {
-      "Identity": "C:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
+      "Identity": "D:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.css",
       "AssetKind": "All",
@@ -816,10 +816,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css"
     },
     {
-      "Identity": "C:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
+      "Identity": "D:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.css.map",
       "AssetKind": "All",
@@ -833,10 +833,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map"
     },
     {
-      "Identity": "C:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
+      "Identity": "D:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css",
       "AssetKind": "All",
@@ -850,10 +850,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css"
     },
     {
-      "Identity": "C:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
+      "Identity": "D:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css.map",
       "AssetKind": "All",
@@ -867,10 +867,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map"
     },
     {
-      "Identity": "C:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
+      "Identity": "D:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.bundle.js",
       "AssetKind": "All",
@@ -884,10 +884,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js"
     },
     {
-      "Identity": "C:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
+      "Identity": "D:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.bundle.js.map",
       "AssetKind": "All",
@@ -901,10 +901,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map"
     },
     {
-      "Identity": "C:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
+      "Identity": "D:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.bundle.min.js",
       "AssetKind": "All",
@@ -918,10 +918,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js"
     },
     {
-      "Identity": "C:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
+      "Identity": "D:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.bundle.min.js.map",
       "AssetKind": "All",
@@ -935,10 +935,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map"
     },
     {
-      "Identity": "C:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
+      "Identity": "D:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.esm.js",
       "AssetKind": "All",
@@ -952,10 +952,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js"
     },
     {
-      "Identity": "C:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
+      "Identity": "D:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.esm.js.map",
       "AssetKind": "All",
@@ -969,10 +969,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map"
     },
     {
-      "Identity": "C:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
+      "Identity": "D:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.esm.min.js",
       "AssetKind": "All",
@@ -986,10 +986,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js"
     },
     {
-      "Identity": "C:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
+      "Identity": "D:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.esm.min.js.map",
       "AssetKind": "All",
@@ -1003,10 +1003,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map"
     },
     {
-      "Identity": "C:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
+      "Identity": "D:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.js",
       "AssetKind": "All",
@@ -1020,10 +1020,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js"
     },
     {
-      "Identity": "C:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
+      "Identity": "D:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.js.map",
       "AssetKind": "All",
@@ -1037,10 +1037,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map"
     },
     {
-      "Identity": "C:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
+      "Identity": "D:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.min.js",
       "AssetKind": "All",
@@ -1054,10 +1054,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js"
     },
     {
-      "Identity": "C:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
+      "Identity": "D:\\Doctrack\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.min.js.map",
       "AssetKind": "All",
@@ -1071,10 +1071,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
     },
     {
-      "Identity": "C:\\Doctrack\\wwwroot\\lib\\bootstrap\\LICENSE",
+      "Identity": "D:\\Doctrack\\wwwroot\\lib\\bootstrap\\LICENSE",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
       "RelativePath": "lib/bootstrap/LICENSE",
       "AssetKind": "All",
@@ -1088,10 +1088,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\LICENSE"
     },
     {
-      "Identity": "C:\\Doctrack\\wwwroot\\lib\\jquery\\dist\\jquery.js",
+      "Identity": "D:\\Doctrack\\wwwroot\\lib\\jquery\\dist\\jquery.js",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
       "RelativePath": "lib/jquery/dist/jquery.js",
       "AssetKind": "All",
@@ -1105,10 +1105,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery\\dist\\jquery.js"
     },
     {
-      "Identity": "C:\\Doctrack\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
+      "Identity": "D:\\Doctrack\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
       "RelativePath": "lib/jquery/dist/jquery.min.js",
       "AssetKind": "All",
@@ -1122,10 +1122,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery\\dist\\jquery.min.js"
     },
     {
-      "Identity": "C:\\Doctrack\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
+      "Identity": "D:\\Doctrack\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
       "RelativePath": "lib/jquery/dist/jquery.min.map",
       "AssetKind": "All",
@@ -1139,10 +1139,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery\\dist\\jquery.min.map"
     },
     {
-      "Identity": "C:\\Doctrack\\wwwroot\\lib\\jquery\\LICENSE.txt",
+      "Identity": "D:\\Doctrack\\wwwroot\\lib\\jquery\\LICENSE.txt",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
       "RelativePath": "lib/jquery/LICENSE.txt",
       "AssetKind": "All",
@@ -1156,10 +1156,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery\\LICENSE.txt"
     },
     {
-      "Identity": "C:\\Doctrack\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
+      "Identity": "D:\\Doctrack\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
       "RelativePath": "lib/jquery-validation/dist/additional-methods.js",
       "AssetKind": "All",
@@ -1173,10 +1173,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js"
     },
     {
-      "Identity": "C:\\Doctrack\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
+      "Identity": "D:\\Doctrack\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
       "RelativePath": "lib/jquery-validation/dist/additional-methods.min.js",
       "AssetKind": "All",
@@ -1190,10 +1190,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js"
     },
     {
-      "Identity": "C:\\Doctrack\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
+      "Identity": "D:\\Doctrack\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
       "RelativePath": "lib/jquery-validation/dist/jquery.validate.js",
       "AssetKind": "All",
@@ -1207,10 +1207,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js"
     },
     {
-      "Identity": "C:\\Doctrack\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
+      "Identity": "D:\\Doctrack\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
       "RelativePath": "lib/jquery-validation/dist/jquery.validate.min.js",
       "AssetKind": "All",
@@ -1224,10 +1224,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js"
     },
     {
-      "Identity": "C:\\Doctrack\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
+      "Identity": "D:\\Doctrack\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
       "RelativePath": "lib/jquery-validation/LICENSE.md",
       "AssetKind": "All",
@@ -1241,10 +1241,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation\\LICENSE.md"
     },
     {
-      "Identity": "C:\\Doctrack\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
+      "Identity": "D:\\Doctrack\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
       "RelativePath": "lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js",
       "AssetKind": "All",
@@ -1258,10 +1258,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js"
     },
     {
-      "Identity": "C:\\Doctrack\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
+      "Identity": "D:\\Doctrack\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
       "RelativePath": "lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js",
       "AssetKind": "All",
@@ -1275,10 +1275,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js"
     },
     {
-      "Identity": "C:\\Doctrack\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
+      "Identity": "D:\\Doctrack\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
       "SourceId": "Doctrack",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Doctrack\\wwwroot\\",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
       "BasePath": "_content/Doctrack",
       "RelativePath": "lib/jquery-validation-unobtrusive/LICENSE.txt",
       "AssetKind": "All",

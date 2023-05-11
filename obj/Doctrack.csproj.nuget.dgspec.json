@@ -1,25 +1,26 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Doctrack\\Doctrack.csproj": {}
+    "D:\\Doctrack\\Doctrack.csproj": {}
   },
   "projects": {
-    "C:\\Doctrack\\Doctrack.csproj": {
+    "D:\\Doctrack\\Doctrack.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Doctrack\\Doctrack.csproj",
+        "projectUniqueName": "D:\\Doctrack\\Doctrack.csproj",
         "projectName": "Doctrack",
-        "projectPath": "C:\\Doctrack\\Doctrack.csproj",
-        "packagesPath": "C:\\Users\\chakr\\.nuget\\packages\\",
-        "outputPath": "C:\\Doctrack\\obj\\",
+        "projectPath": "D:\\Doctrack\\Doctrack.csproj",
+        "packagesPath": "C:\\Users\\chakrit.pok\\.nuget\\packages\\",
+        "outputPath": "D:\\Doctrack\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\chakr\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\chakrit.pok\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
+          "D:\\MyCustomActivities": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -80,7 +81,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "D:\\dotnet-sdk-7.0.100\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }
