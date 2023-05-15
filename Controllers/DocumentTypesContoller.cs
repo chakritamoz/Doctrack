@@ -58,6 +58,7 @@ namespace Doctrack.Controllers
     [AuthenticationFilter]
     [AuthenticationPrivilege]
     [AuthenticationProtect]
+    [HttpPost]
     public async Task<IActionResult> Create([Bind("Id, Title, Period")] DocumentType documentType)
     {
       if (ModelState.IsValid)

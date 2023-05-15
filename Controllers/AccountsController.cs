@@ -94,13 +94,24 @@ namespace Doctrack.Controllers
 
     [HttpPost]
     [AuthenticationPrivilege]
-    public async Task<IActionResult> Login(string username, string password)
+    public async Task<IActionResult> Login(string? username, string? password)
     {
       
       if (_context.Accounts == null)
       {
         return RedirectToAction("Register");
       }
+
+      if (username == null)
+      {
+        ViewData["userError"] = "Please enter username.";
+      }
+
+      if (password == null)
+      {
+        ViewData["passError"] = "Please enter password.";
+      }
+      
 
       ViewData["username"] = username;
 

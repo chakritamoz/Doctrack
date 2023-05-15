@@ -250,15 +250,15 @@
   .container-card {
     top: 45%;
     width: 65%;
-    max-height: 540px;
+    max-height: 340px;
   }
 }
 
 @media screen and (min-width: 1400px) {
   .container-card {
-    width: 60%;
+    width: 65%;
     top: 45%;
-    max-height: 600px;
+    max-height: 540px;
   }
 
   .container-register {

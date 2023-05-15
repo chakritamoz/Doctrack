@@ -7,6 +7,7 @@ using System.Text.Json;
 using Doctrack.Authentication;
 using Doctrack.SendGrid;
 using System.Globalization;
+using System.Web;
 
 namespace Doctrack.Controllers
 {
@@ -113,7 +114,14 @@ namespace Doctrack.Controllers
     {
       if (document.DocType_Id == 0)
       {
-        ModelState.AddModelError("DocType_Id", "Please select document title");
+        ModelState.AddModelError("DocType_Id", "Please select document title.");
+      }
+
+      var doc = await _context.Documents
+        .FirstOrDefaultAsync(d => d.Id == document.Id);
+      if (doc != null)
+      {
+        ModelState.AddModelError("Id", "Document No is already exists.");
       }
 
       if (receiptDate != null)
@@ -148,8 +156,8 @@ namespace Doctrack.Controllers
       {
         return NotFound();
       }
-      
-      var document = await _context.Documents.FindAsync(id);
+      string decodeId = HttpUtility.UrlDecode(id);
+      var document = await _context.Documents.FindAsync(decodeId);
       if (document == null)
       {
         return NotFound();
@@ -229,11 +237,13 @@ namespace Doctrack.Controllers
         {
           if (newId == null)
           {
+            document.Id = HttpUtility.UrlDecode(document.Id);
             _context.Update(document);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
           }
 
+          id = HttpUtility.UrlDecode(id);
           var existsDocument = await _context.Documents
             .Include(doc => doc.DocumentDetails)
             .FirstOrDefaultAsync(doc => doc.Id == id);

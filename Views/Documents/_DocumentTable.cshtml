@@ -3,7 +3,7 @@
 
 <div class="container-wrapper">
   <div class="flex-container">
-    <div class="flex-header">
+    <div class="flex-header stick-header">
       <div class="cell">Receipt Date</div>
       <div class="cell">Documents No.</div>
       <div class="cell">Doc.Type</div>
@@ -19,71 +19,73 @@
     <div id="sort-row">
       @foreach (var doc in Model)
       {
-        <div class="container-main-row">
-          <div id='btnFront-@doc.Id' class="container-btn front">
-            <a class="upop-doc-icon main-btn button-primary">
-              <i class="bi bi-send-check-fill"></i>
-            </a>
-            <a class="sub-doc-icon main-btn button-success">
-              <i class="bi bi-file-earmark-check-fill"></i>
-            </a>
+        <div class="container-cover-row">
+          <div class="container-main-row">
+            <div id='btnFront-@doc.Id' class="container-btn front">
+              <a class="upop-doc-icon main-btn button-primary">
+                <i class="bi bi-send-check-fill"></i>
+              </a>
+              <a class="sub-doc-icon main-btn button-success">
+                <i class="bi bi-file-earmark-check-fill"></i>
+              </a>
+            </div>
+            <div id="@doc.Id" class='flex-row main-row
+              @(doc.EndDate != null ?
+                "success" :
+                doc.OperationDate == null ?
+                "normal" :
+                DateTime.Now.Subtract(
+                  doc.OperationDate??DateTime.MinValue
+                ).TotalDays >= doc.DocumentType?.PeriodEnd ?
+                "late" :
+                DateTime.Now.Subtract(
+                  doc.OperationDate??DateTime.MinValue
+                ).TotalDays >= doc.DocumentType?.PeriodWarning ?
+                "warning" :
+                "normal"
+              )'>
+              <div class="cell receipt-date" data-receiptDate='@doc.ReceiptDate?.ToString("dd/MM/yyyy")'>@doc.ReceiptDate?.ToString("dd/MM/yyyy")</div>
+              <div class="cell">@doc.Id</div>
+              <div class="cell">@doc.DocumentType?.Title</div>
+              <div class="cell cell-title">@doc.Doc_Title</div>
+              <div class="cell">@doc.Operation</div>
+              <div class="cell operation-date" data-operationDate='@doc.OperationDate?.ToString("dd/MM/yyyy")'>@doc.OperationDate?.ToString("dd/MM/yyyy")</div>
+              <div class="cell">@doc.CommandOrder</div>
+              <div class="cell">@doc.RemarkAll</div>
+              <div class="cell end-date" data-endDate='@doc.EndDate?.ToString("dd/MM/yyyy")'>@doc.EndDate?.ToString("dd/MM/yyyy")</div>
+              <div class="cell">@doc.User.ToUpper()</div>
+            </div>
+            <div id="btnBehide-@doc.Id" class="container-btn behide">
+              <a class="edit-doc-icon main-btn button-warning">
+                <i class="bi bi-pencil-fill"></i>
+              </a>
+              <a class="del-doc-icon main-btn button-danger">
+                <i class="bi bi-trash-fill"></i>
+              </a>
+            </div>
           </div>
-          <div id="@doc.Id" class='flex-row main-row
-            @(doc.EndDate != null ?
-              "success" :
-              doc.OperationDate == null ?
-              "normal" :
-              DateTime.Now.Subtract(
-                doc.OperationDate??DateTime.MinValue
-              ).TotalDays >= doc.DocumentType?.PeriodEnd ?
-              "late" :
-              DateTime.Now.Subtract(
-                doc.OperationDate??DateTime.MinValue
-              ).TotalDays >= doc.DocumentType?.PeriodWarning ?
-              "warning" :
-              "normal"
-            )'>
-            <div class="cell receipt-date" data-receiptDate='@doc.ReceiptDate?.ToString("dd/MM/yyyy")'>@doc.ReceiptDate?.ToString("dd/MM/yyyy")</div>
-            <div class="cell">@doc.Id</div>
-            <div class="cell">@doc.DocumentType?.Title</div>
-            <div class="cell cell-title">@doc.Doc_Title</div>
-            <div class="cell">@doc.Operation</div>
-            <div class="cell operation-date" data-operationDate='@doc.OperationDate?.ToString("dd/MM/yyyy")'>@doc.OperationDate?.ToString("dd/MM/yyyy")</div>
-            <div class="cell">@doc.CommandOrder</div>
-            <div class="cell">@doc.RemarkAll</div>
-            <div class="cell end-date" data-endDate='@doc.EndDate?.ToString("dd/MM/yyyy")'>@doc.EndDate?.ToString("dd/MM/yyyy")</div>
-            <div class="cell">@doc.User.ToUpper()</div>
-          </div>
-          <div id="btnBehide-@doc.Id" class="container-btn behide">
-            <a class="edit-doc-icon main-btn button-warning">
-              <i class="bi bi-pencil-fill"></i>
-            </a>
-            <a class="del-doc-icon main-btn button-danger">
-              <i class="bi bi-trash-fill"></i>
-            </a>
-          </div>
-        </div>
-        <div id="sub-@doc.Id" class="flex-container sub-content">
-          <div class="flex-header sub-header">
-            <div class="cell">Job</div>
-            <div class="cell">Title</div>
-            <div class="cell">First Name</div>
-            <div class="cell">Last Name</div>
-            <div class="cell">Remark</div>
-          </div>
-          @if (doc.DocumentDetails?.Count() > 0)
-            {
-              @foreach (var docd in doc.DocumentDetails)
+          <div id="sub-@doc.Id" class="flex-container sub-content">
+            <div class="flex-header sub-header">
+              <div class="cell">Job</div>
+              <div class="cell">Title</div>
+              <div class="cell">First Name</div>
+              <div class="cell">Last Name</div>
+              <div class="cell">Remark</div>
+            </div>
+            @if (doc.DocumentDetails?.Count() > 0)
               {
-                <div id="@docd.Id" class="flex-row sub-row">
-                  <div class="cell">@docd.Job?.Title</div>
-                  <div class="cell">@docd.Rank?.Title</div>
-                  <div class="cell">@docd.Employee?.FirstName</div>
-                  <div class="cell">@docd.Employee?.LastName</div>
-                  <div class="cell">@docd.Remark</div>
-                </div>
-          }} @*End razor tag*@
-        </div>
+                @foreach (var docd in doc.DocumentDetails)
+                {
+                  <div id="@docd.Id" class="flex-row sub-row">
+                    <div class="cell">@docd.Job?.Title</div>
+                    <div class="cell">@docd.Rank?.Title</div>
+                    <div class="cell">@docd.Employee?.FirstName</div>
+                    <div class="cell">@docd.Employee?.LastName</div>
+                    <div class="cell">@docd.Remark</div>
+                  </div>
+            }} @*End razor tag*@
+          </div> @*Container main row*@
+        </div> @*Container cover row*@
       } @*End foreach Model.Documents*@
     </div>
     }else {

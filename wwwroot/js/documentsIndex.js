@@ -86,7 +86,7 @@ $(document).on('click', '.upop-doc-icon', () => {
 // when click edit icon
 // redirect to documents/edit/?id=5
 $(document).on('click', '.edit-doc-icon', function(){
-  window.location.href = '/Documents/Edit/' + currentDocId;
+  window.location.href = '/Documents/Edit/' + encodeURIComponent(currentDocId);
 }); // end click edit-doc-icon
 
 // when click submit icon
@@ -596,3 +596,17 @@ $(document).on('click', '#tab-all', function() {
     });
   }
 })
+
+window.addEventListener('scroll', function() {
+  var header = $('.stick-header');
+  var scrollTop = $(this.window).scrollTop();
+  var headerTop = header.offset().top;
+  if (headerTop === scrollTop) {
+    header.css('border-radius', '0 0 0 0');
+    header.css('transform', 'scaleX(1.04)');
+  } else {
+    header.css('transition','border-radius, .1s ease-out');
+    header.css('border-radius', '15px 15px 0 0');
+    header.css('transform', 'scaleX(1.00)')
+  }
+});
