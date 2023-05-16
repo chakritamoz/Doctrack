@@ -240,7 +240,8 @@ body {
 }
 
 h3,
-label {
+label,
+dl {
   color: white;
 }
 

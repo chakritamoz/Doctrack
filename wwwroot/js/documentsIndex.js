@@ -86,7 +86,8 @@ $(document).on('click', '.upop-doc-icon', () => {
 // when click edit icon
 // redirect to documents/edit/?id=5
 $(document).on('click', '.edit-doc-icon', function(){
-  window.location.href = '/Documents/Edit/' + encodeURIComponent(currentDocId);
+  // window.location.href = '/Documents/Edit/' + encodeURIComponent(currentDocId);
+  window.location.href = '/Documents/Edit/' + currentDocId.replace("/","_");
 }); // end click edit-doc-icon
 
 // when click submit icon

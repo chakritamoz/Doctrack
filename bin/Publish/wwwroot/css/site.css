@@ -239,6 +239,12 @@ body {
   color: #094eb7;
 }
 
+h3,
+label,
+dl {
+  color: white;
+}
+
 @media screen and (min-width: 800px) {
   .flex-action {
     flex-direction: row;

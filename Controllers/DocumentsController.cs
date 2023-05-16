@@ -156,8 +156,8 @@ namespace Doctrack.Controllers
       {
         return NotFound();
       }
-      string decodeId = HttpUtility.UrlDecode(id);
-      var document = await _context.Documents.FindAsync(decodeId);
+      id = id.Replace("_","/");
+      var document = await _context.Documents.FindAsync(id);
       if (document == null)
       {
         return NotFound();
@@ -237,13 +237,13 @@ namespace Doctrack.Controllers
         {
           if (newId == null)
           {
-            document.Id = HttpUtility.UrlDecode(document.Id);
+            document.Id = document.Id.Replace("_","/");
             _context.Update(document);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
           }
 
-          id = HttpUtility.UrlDecode(id);
+          id = id.Replace("_","/");
           var existsDocument = await _context.Documents
             .Include(doc => doc.DocumentDetails)
             .FirstOrDefaultAsync(doc => doc.Id == id);

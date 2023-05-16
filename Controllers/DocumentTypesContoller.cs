@@ -55,11 +55,11 @@ namespace Doctrack.Controllers
     }
 
     //POST: DocumentTypes/Create
+    [HttpPost]
     [AuthenticationFilter]
     [AuthenticationPrivilege]
     [AuthenticationProtect]
-    [HttpPost]
-    public async Task<IActionResult> Create([Bind("Id, Title, Period")] DocumentType documentType)
+    public async Task<IActionResult> Create([Bind("Id, Title, PeriodWarning, PeriodEnd")] DocumentType documentType)
     {
       if (ModelState.IsValid)
       {
@@ -171,7 +171,7 @@ namespace Doctrack.Controllers
         return NotFound();
       }
 
-      _context.Remove(id);
+      _context.DocumentTypes.Remove(documentType);
       await _context.SaveChangesAsync();
       return RedirectToAction(nameof(Index));
     }
