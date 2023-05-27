@@ -4,7 +4,7 @@
   ViewData["Title"] = "Ranks List";
 }
 
-<h2>Ranks</h2>
+<h2>Ranks Management</h2>
 <hr />
 
 <div class="flex-action">
@@ -14,13 +14,21 @@
         asp-action="Create"
         class="button button-primary"
         style="color:white"
-      >New Rank</a>
+      >
+        <i class="bi bi-person-vcard-fill"></i>
+        &nbsp;
+        Rank
+      </a>
     }else{
       <a
         asp-action="Create"
         class="button button-primary disabled-btn"
         style="color: white;"
-      >New Rank</a>
+      >
+        <i class="bi bi-person-vcard-fill"></i>
+        &nbsp;
+        Rank
+      </a>
     }
   </span>
   <div class="search-box">

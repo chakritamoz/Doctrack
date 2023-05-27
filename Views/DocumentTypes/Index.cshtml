@@ -4,7 +4,7 @@
   ViewData["Title"] = "Document Types List";
 }
 
-<h2>Document Types</h2>
+<h2>Documents Management</h2>
 <hr />
 
 <div class="flex-action">
@@ -12,16 +12,22 @@
     @if(ViewBag.isAdmin){
       <a 
         asp-action="Create"
-        class="button button-primary"
+        class='button button-primary'
         style="color:white"
-      >New Document
+      >
+        <i class="bi bi-files"></i>
+        &nbsp;
+        Document
       </a>
     }else{
       <a 
         asp-action="Create"
         class="button button-primary disabled-btn"
         style="color:white"
-      >New Document
+      >
+        <i class="bi bi-files"></i>
+        &nbsp;
+        Document
       </a>
     }
   </span>

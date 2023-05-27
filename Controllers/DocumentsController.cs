@@ -5,9 +5,9 @@ using Doctrack.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Text.Json;
 using Doctrack.Authentication;
-using Doctrack.SendGrid;
 using System.Globalization;
-using System.Web;
+using OfficeOpenXml;
+
 
 namespace Doctrack.Controllers
 {
@@ -564,6 +564,218 @@ namespace Doctrack.Controllers
       _context.Remove(document);
       await _context.SaveChangesAsync();
       return Json(new { success = true });
+    }
+
+    [AuthenticationFilter]
+    [AuthenticationPrivilege]
+    public async Task<ActionResult>  ExportExcel()
+    {
+      if (_context.Documents == null)
+      {
+        return Problem("Enitity set 'DoctrackContext.Documents' is null.");
+      }
+
+      // var currentUser = HttpContext.Session.GetString("Username");
+      var documents = await _context.Documents
+        .Include(d => d.DocumentType)
+        .Include(d => d.DocumentDetails)
+          .ThenInclude(dd => dd.Employee)
+        .Include(d => d.DocumentDetails)
+          .ThenInclude(dd => dd.Job)
+        .Include(d => d.DocumentDetails)
+          .ThenInclude(dd => dd.Rank)
+        // .Where(d => d.User == currentUser)
+        .ToListAsync();
+
+      // Create a new Excel package
+      using (var package = new ExcelPackage())
+      {
+        // Create a worksheet
+        var worksheet = package.Workbook.Worksheets.Add("Sheet1");
+
+        // Set the column headers
+        worksheet.Cells[1,1].Value = "Receipt Date";
+        worksheet.Cells[1,2].Value = "Document No.";
+        worksheet.Cells[1,3].Value = "Document Type";
+        worksheet.Cells[1,4].Value = "Document Title";
+        worksheet.Cells[1,5].Value = "Operation";
+        worksheet.Cells[1,6].Value = "Operation Date";
+        worksheet.Cells[1,7].Value = "Command Order";
+        worksheet.Cells[1,8].Value = "End Date";
+        worksheet.Cells[1,9].Value = "Document Remark";
+        worksheet.Cells[1,10].Value = "Job";
+        worksheet.Cells[1,11].Value = "Title";
+        worksheet.Cells[1,12].Value = "First Name";
+        worksheet.Cells[1,13].Value = "Last Name";
+        worksheet.Cells[1,14].Value = "Remark";
+        worksheet.Cells[1,15].Value = "User";
+
+        // Populate the data rows
+        var rowCount = 0;
+        foreach (var doc in documents)
+        {
+          if (doc.DocumentDetails.Count > 0)
+          {
+            foreach (var docd in doc.DocumentDetails)
+            {
+              worksheet.Cells[rowCount + 2, 1].Value = doc.ReceiptDate;
+              worksheet.Cells[rowCount + 2, 1].Style.Numberformat.Format = "dd/MM/yyyy";
+              worksheet.Cells[rowCount + 2, 2].Value = doc.Id;
+              worksheet.Cells[rowCount + 2, 3].Value = doc.DocumentType?.Title;
+              worksheet.Cells[rowCount + 2, 4].Value = doc.Doc_Title;
+              worksheet.Cells[rowCount + 2, 5].Value = doc.Operation;
+              worksheet.Cells[rowCount + 2, 6].Value = doc.OperationDate;
+              worksheet.Cells[rowCount + 2, 6].Style.Numberformat.Format = "dd/MM/yyyy";
+              worksheet.Cells[rowCount + 2, 7].Value = doc.CommandOrder;
+              worksheet.Cells[rowCount + 2, 8].Value = doc.EndDate;
+              worksheet.Cells[rowCount + 2, 8].Style.Numberformat.Format = "dd/MM/yyyy";
+              worksheet.Cells[rowCount + 2, 9].Value = doc.RemarkAll;
+              worksheet.Cells[rowCount + 2, 10].Value = docd.Job?.Title;
+              worksheet.Cells[rowCount + 2, 11].Value = docd.Rank?.Title;
+              worksheet.Cells[rowCount + 2, 12].Value = docd.Employee?.FirstName;
+              worksheet.Cells[rowCount + 2, 13].Value = docd.Employee?.LastName;
+              worksheet.Cells[rowCount + 2, 14].Value = docd.Remark;
+              worksheet.Cells[rowCount + 2, 15].Value = doc.User;
+              
+              rowCount++; // increament row
+            } // foreach document detail
+          } // if document detail more than 0
+          else
+          {
+            worksheet.Cells[rowCount + 2, 1].Value = doc.ReceiptDate;
+            worksheet.Cells[rowCount + 2, 1].Style.Numberformat.Format = "dd/MM/yyyy";
+            worksheet.Cells[rowCount + 2, 2].Value = doc.Id;
+            worksheet.Cells[rowCount + 2, 3].Value = doc.DocumentType?.Title;
+            worksheet.Cells[rowCount + 2, 4].Value = doc.Doc_Title;
+            worksheet.Cells[rowCount + 2, 5].Value = doc.Operation;
+            worksheet.Cells[rowCount + 2, 6].Value = doc.OperationDate;
+            worksheet.Cells[rowCount + 2, 6].Style.Numberformat.Format = "dd/MM/yyyy";
+            worksheet.Cells[rowCount + 2, 7].Value = doc.CommandOrder;
+            worksheet.Cells[rowCount + 2, 8].Value = doc.EndDate;
+            worksheet.Cells[rowCount + 2, 8].Style.Numberformat.Format = "dd/MM/yyyy";
+            worksheet.Cells[rowCount + 2, 9].Value = doc.RemarkAll;
+            worksheet.Cells[rowCount + 2, 10].Value = "";
+            worksheet.Cells[rowCount + 2, 11].Value = "";
+            worksheet.Cells[rowCount + 2, 12].Value = "";
+            worksheet.Cells[rowCount + 2, 13].Value = "";
+            worksheet.Cells[rowCount + 2, 14].Value = "";
+            worksheet.Cells[rowCount + 2, 15].Value = doc.User;
+
+            rowCount++; // increament row
+          }
+        }
+
+        // Auto-fit columns for better readability
+        worksheet.Cells.AutoFitColumns();
+
+        // Convert the Excel package to a byte array
+        var excelBytes = package.GetAsByteArray();
+
+        // Return the Excel file as a download
+        // return File(excelBytes, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "data.xlsx");
+        return File(excelBytes, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+      }
+    }
+
+    [AuthenticationFilter]
+    [AuthenticationPrivilege]
+    [HttpPost]
+    public async Task<IActionResult> ImportExcel(IFormFile file)
+    {
+      if (file != null && file.Length > 0)
+      {
+        var docTypes = _context.DocumentTypes.ToList();
+
+        using (var package = new ExcelPackage(file.OpenReadStream()))
+        {
+          // Read worksheet 1
+          var worksheet = package.Workbook.Worksheets[0];
+          int rowCount = worksheet.Dimension.Rows;
+
+          for (int row = 2; row <= rowCount; row++)
+          {
+            // Get document receipt date
+            var ReceiptDate = DateTime.ParseExact(
+              worksheet.Cells[row, 1].Value?.ToString(),
+              "dd/MM/yyyy",
+              System.Globalization.CultureInfo.DefaultThreadCurrentCulture
+            );
+
+            // Get document Id
+            var Id = worksheet.Cells[row, 2].Value?.ToString();
+            // if (doc != null) continue;
+
+            // Get document type id
+            var DocType_Id = docTypes.FirstOrDefault(
+              dt => dt.Title == worksheet.Cells[row, 3].Value?.ToString()
+            );
+            if (DocType_Id == null) continue;
+
+            // Get document title
+            var Doc_Title = worksheet.Cells[row, 4].Value?.ToString();
+
+            // Get document operation
+            var Operation = worksheet.Cells[row, 5].Value?.ToString();
+
+            // Get document operation date
+            var OperationDate = DateTime.ParseExact(
+              worksheet.Cells[row, 6].Value?.ToString(),
+              "dd/MM/yyyy",
+              System.Globalization.CultureInfo.DefaultThreadCurrentCulture
+            );
+
+            // Get document command order
+            var CommandOrder = worksheet.Cells[row, 7].Value?.ToString();
+
+            // Get document end date
+            var EndDate = DateTime.ParseExact(
+              worksheet.Cells[row, 8].Value?.ToString(),
+              "dd/MM/yyyy",
+              System.Globalization.CultureInfo.DefaultThreadCurrentCulture
+            );
+
+            // Get documnet remark all
+            var RemarkAll = worksheet.Cells[row, 9].Value?.ToString();
+
+            // Get document user
+            var User = HttpContext.Session.GetString("Username");
+
+            var doc = await _context.Documents.FindAsync(Id);
+            if (doc == null)
+            {
+              var newDocument = new Document()
+              {
+                Id = Id,
+                DocType_Id = Convert.ToInt32(DocType_Id),
+                Doc_Title = Doc_Title,
+                ReceiptDate = ReceiptDate,
+                EndDate = EndDate,
+                Operation = Operation,
+                OperationDate = OperationDate,
+                CommandOrder = CommandOrder,
+                RemarkAll = RemarkAll,
+                User = User,
+                DocumentDetails = new List<DocumentDetail>()
+              };
+            }
+            Console.WriteLine($"Receipt Date: {worksheet.Cells[row, 1].Value?.ToString()}");
+            Console.WriteLine($"Document No: {worksheet.Cells[row, 2].Value?.ToString()}");
+            Console.WriteLine($"Document Type: {worksheet.Cells[row, 3].Value?.ToString()}");
+            Console.WriteLine($"Document Title: {worksheet.Cells[row, 4].Value?.ToString()}");
+            Console.WriteLine($"Operation: {worksheet.Cells[row, 5].Value?.ToString()}");
+            Console.WriteLine($"Operation Date: {worksheet.Cells[row, 6].Value?.ToString()}");
+            Console.WriteLine($"Command Order: {worksheet.Cells[row, 7].Value?.ToString()}");
+            Console.WriteLine($"End Date: {worksheet.Cells[row, 8].Value?.ToString()}");
+            Console.WriteLine($"Document Remark: {worksheet.Cells[row, 9].Value?.ToString()}");
+            Console.WriteLine($"Job: {worksheet.Cells[row, 10].Value?.ToString()}");
+            Console.WriteLine($"Title: {worksheet.Cells[row, 11].Value?.ToString()}");
+            Console.WriteLine($"First Name: {worksheet.Cells[row, 12].Value?.ToString()}");
+            Console.WriteLine($"Last Name: {worksheet.Cells[row, 13].Value?.ToString()}");
+            Console.WriteLine($"Remark: {worksheet.Cells[row, 14].Value?.ToString()}");
+          }
+        }
+      }
+      return RedirectToAction("Index");
     }
 
     public bool DocumentExists(string id)

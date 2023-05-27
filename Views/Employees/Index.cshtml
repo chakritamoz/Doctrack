@@ -4,7 +4,7 @@
   ViewData["Title"] = "Employees List";
 }
 
-<h2>Employees</h2>
+<h2>Employees Management</h2>
 <hr />
 
 <div class="flex-action">
@@ -14,13 +14,21 @@
         asp-action="Create"
         class="button button-primary"
         style="color:white;"
-      >New Employee</a>
+      >
+        <i class="bi bi-people-fill"></i>
+        &nbsp;
+        Employee
+      </a>
     }else{
       <a
         asp-action="Create"
         class="button button-primary disabled-btn"
         style="color:white;"
-      >New Employee</a>
+      >
+        <i class="bi bi-people-fill"></i>
+        &nbsp;
+        Employee
+      </a>
     }
   </span>
   <div class="search-box">

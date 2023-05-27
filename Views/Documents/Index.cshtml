@@ -4,14 +4,28 @@
   ViewData["Title"] = "Documents List";
 }
 
-<h2>Documents</h2>
+<div class="container-header">
+  <h2>Documents</h2>
+  <div style="display: flex; justify-content: space-between; width: 13rem;">
+    <div id="ex-excel"class="ex-im-btn">
+      <i class="bi bi-download"></i>
+      &nbsp;
+      Export
+    </div>
+    <div id="im-excel" class="ex-im-btn">
+      <i class="bi bi-upload"></i>
+      &nbsp;
+      Import
+    </div>
+  </div>
+</div>
 <hr />
 
 <div class="flex-action">
   <span class="wrapper-privilege">
     <a
       asp-action="Create" 
-      class="text-decoration-none button button-primary"
+      class="text-decoration-none button"
       style="color:white;"
     >
       <i class="bi bi-file-earmark-plus-fill"></i>&nbsp;Document

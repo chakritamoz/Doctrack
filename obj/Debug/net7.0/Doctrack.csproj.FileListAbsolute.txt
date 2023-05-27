@@ -556,7 +556,6 @@ D:\Doctrack\bin\Debug\net7.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SN
 D:\Doctrack\bin\Debug\net7.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
 D:\Doctrack\bin\Debug\net7.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
 D:\Doctrack\bin\Debug\net7.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
-D:\Doctrack\bin\Debug\net7.0\runtimes\win\lib\net6.0\Microsoft.Win32.SystemEvents.dll
 D:\Doctrack\bin\Debug\net7.0\runtimes\alpine-arm\native\libe_sqlite3.so
 D:\Doctrack\bin\Debug\net7.0\runtimes\alpine-arm64\native\libe_sqlite3.so
 D:\Doctrack\bin\Debug\net7.0\runtimes\alpine-x64\native\libe_sqlite3.so
@@ -579,8 +578,6 @@ D:\Doctrack\bin\Debug\net7.0\runtimes\win-arm\native\e_sqlite3.dll
 D:\Doctrack\bin\Debug\net7.0\runtimes\win-arm64\native\e_sqlite3.dll
 D:\Doctrack\bin\Debug\net7.0\runtimes\win-x64\native\e_sqlite3.dll
 D:\Doctrack\bin\Debug\net7.0\runtimes\win-x86\native\e_sqlite3.dll
-D:\Doctrack\bin\Debug\net7.0\runtimes\unix\lib\net6.0\System.Drawing.Common.dll
-D:\Doctrack\bin\Debug\net7.0\runtimes\win\lib\net6.0\System.Drawing.Common.dll
 D:\Doctrack\bin\Debug\net7.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
 D:\Doctrack\bin\Debug\net7.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
 D:\Doctrack\bin\Debug\net7.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
@@ -913,3 +910,9 @@ C:\Doctrack\obj\Debug\net7.0\refint\Doctrack.dll
 C:\Doctrack\obj\Debug\net7.0\Doctrack.pdb
 C:\Doctrack\obj\Debug\net7.0\Doctrack.genruntimeconfig.cache
 C:\Doctrack\obj\Debug\net7.0\ref\Doctrack.dll
+D:\Doctrack\bin\Debug\net7.0\EPPlus.dll
+D:\Doctrack\bin\Debug\net7.0\EPPlus.Interfaces.dll
+D:\Doctrack\bin\Debug\net7.0\EPPlus.System.Drawing.dll
+D:\Doctrack\bin\Debug\net7.0\Microsoft.IO.RecyclableMemoryStream.dll
+D:\Doctrack\bin\Debug\net7.0\runtimes\win\lib\net7.0\Microsoft.Win32.SystemEvents.dll
+D:\Doctrack\bin\Debug\net7.0\runtimes\win\lib\net7.0\System.Drawing.Common.dll
