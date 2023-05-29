@@ -685,6 +685,10 @@ namespace Doctrack.Controllers
       if (file != null && file.Length > 0)
       {
         var docTypes = _context.DocumentTypes.ToList();
+        var jobs = _context.Jobs.ToList();
+        var ranks = _context.Ranks.ToList();
+        var emps = _context.Employees.ToList();
+        var docds = _context.DocumentDetails.ToList();
 
         using (var package = new ExcelPackage(file.OpenReadStream()))
         {
@@ -695,21 +699,16 @@ namespace Doctrack.Controllers
           for (int row = 2; row <= rowCount; row++)
           {
             // Get document receipt date
-            var ReceiptDate = DateTime.ParseExact(
-              worksheet.Cells[row, 1].Value?.ToString(),
-              "dd/MM/yyyy",
-              System.Globalization.CultureInfo.DefaultThreadCurrentCulture
-            );
+            var ReceiptDate = DateTime.Parse(worksheet.Cells[row, 1].Value?.ToString());
 
             // Get document Id
             var Id = worksheet.Cells[row, 2].Value?.ToString();
-            // if (doc != null) continue;
 
             // Get document type id
-            var DocType_Id = docTypes.FirstOrDefault(
+            var DocType = docTypes.FirstOrDefault(
               dt => dt.Title == worksheet.Cells[row, 3].Value?.ToString()
             );
-            if (DocType_Id == null) continue;
+            if (DocType == null) continue;
 
             // Get document title
             var Doc_Title = worksheet.Cells[row, 4].Value?.ToString();
@@ -717,22 +716,26 @@ namespace Doctrack.Controllers
             // Get document operation
             var Operation = worksheet.Cells[row, 5].Value?.ToString();
 
-            // Get document operation date
-            var OperationDate = DateTime.ParseExact(
-              worksheet.Cells[row, 6].Value?.ToString(),
-              "dd/MM/yyyy",
-              System.Globalization.CultureInfo.DefaultThreadCurrentCulture
-            );
+            DateTime? OperationDate = null;
+            if (worksheet.Cells[row, 6].Value?.ToString() != null)
+            {
+              // Get document operation date
+              OperationDate = DateTime.Parse(
+                worksheet.Cells[row, 6].Value?.ToString()
+              );
+            }
 
             // Get document command order
             var CommandOrder = worksheet.Cells[row, 7].Value?.ToString();
 
-            // Get document end date
-            var EndDate = DateTime.ParseExact(
-              worksheet.Cells[row, 8].Value?.ToString(),
-              "dd/MM/yyyy",
-              System.Globalization.CultureInfo.DefaultThreadCurrentCulture
-            );
+            DateTime? EndDate = null;
+            if (worksheet.Cells[row, 8].Value?.ToString() != null)
+            {
+              // Get document end date
+              EndDate = DateTime.Parse(
+                worksheet.Cells[row, 8].Value?.ToString()
+              );
+            }
 
             // Get documnet remark all
             var RemarkAll = worksheet.Cells[row, 9].Value?.ToString();
@@ -743,10 +746,10 @@ namespace Doctrack.Controllers
             var doc = await _context.Documents.FindAsync(Id);
             if (doc == null)
             {
-              var newDocument = new Document()
+              var newDoc = new Document()
               {
                 Id = Id,
-                DocType_Id = Convert.ToInt32(DocType_Id),
+                DocType_Id = DocType.Id,
                 Doc_Title = Doc_Title,
                 ReceiptDate = ReceiptDate,
                 EndDate = EndDate,
@@ -757,25 +760,76 @@ namespace Doctrack.Controllers
                 User = User,
                 DocumentDetails = new List<DocumentDetail>()
               };
+
+              _context.Documents.Add(newDoc);
+              await _context.SaveChangesAsync();
             }
-            Console.WriteLine($"Receipt Date: {worksheet.Cells[row, 1].Value?.ToString()}");
-            Console.WriteLine($"Document No: {worksheet.Cells[row, 2].Value?.ToString()}");
-            Console.WriteLine($"Document Type: {worksheet.Cells[row, 3].Value?.ToString()}");
-            Console.WriteLine($"Document Title: {worksheet.Cells[row, 4].Value?.ToString()}");
-            Console.WriteLine($"Operation: {worksheet.Cells[row, 5].Value?.ToString()}");
-            Console.WriteLine($"Operation Date: {worksheet.Cells[row, 6].Value?.ToString()}");
-            Console.WriteLine($"Command Order: {worksheet.Cells[row, 7].Value?.ToString()}");
-            Console.WriteLine($"End Date: {worksheet.Cells[row, 8].Value?.ToString()}");
-            Console.WriteLine($"Document Remark: {worksheet.Cells[row, 9].Value?.ToString()}");
-            Console.WriteLine($"Job: {worksheet.Cells[row, 10].Value?.ToString()}");
-            Console.WriteLine($"Title: {worksheet.Cells[row, 11].Value?.ToString()}");
-            Console.WriteLine($"First Name: {worksheet.Cells[row, 12].Value?.ToString()}");
-            Console.WriteLine($"Last Name: {worksheet.Cells[row, 13].Value?.ToString()}");
-            Console.WriteLine($"Remark: {worksheet.Cells[row, 14].Value?.ToString()}");
-          }
-        }
-      }
-      return RedirectToAction("Index");
+
+            var Job = jobs.FirstOrDefault(
+              j => j.Title == worksheet.Cells[row, 10].Value?.ToString()
+            );
+            if (Job == null) continue;
+
+            var Rank = ranks.FirstOrDefault(
+              r => r.Title == worksheet.Cells[row, 11].Value?.ToString()
+            );
+            if (Rank == null) continue;
+
+            // Get first name
+            var FirstName = worksheet.Cells[row, 12].Value?.ToString();
+            if (FirstName == null) continue;
+
+            // Get last name
+            var LastName = worksheet.Cells[row, 13].Value?.ToString();
+            if (LastName == null) continue;
+
+            var Remark = worksheet.Cells[row, 14].Value?.ToString();
+
+            // Get employee
+            var emp = await _context.Employees
+              .FirstOrDefaultAsync(emp => 
+                emp.FirstName == FirstName &&
+                emp.LastName == LastName
+            );
+            if (emp == null)
+            {
+              var newEmp = new Employee {
+                FirstName = FirstName,
+                LastName = LastName,
+                PhoneNumber = null,
+                DocumentDetails = new List<DocumentDetail>()
+              };
+
+              _context.Employees.Add(newEmp);
+              await _context.SaveChangesAsync();
+
+              emp = await _context.Employees
+              .FirstOrDefaultAsync(emp => 
+                emp.FirstName == FirstName &&
+                emp.LastName == LastName
+              );
+              if (emp == null) continue;
+            }
+
+            var docd = docds.FirstOrDefault(
+              dd => dd.Emp_Id == emp.Id
+            );
+            if (docd != null) continue;
+
+            var newDocd = new DocumentDetail {
+              Doc_Id = Id,
+              Job_Id = Job.Id,
+              Rank_Id = Rank.Id,
+              Emp_Id = emp.Id,
+              Remark = Remark
+            };
+
+            _context.DocumentDetails.Add(newDocd);
+            await _context.SaveChangesAsync();
+          } // For loop
+        } // Using
+      } // If file not null
+      return Json(new { success = true });
     }
 
     public bool DocumentExists(string id)

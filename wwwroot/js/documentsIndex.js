@@ -634,14 +634,14 @@ function selectFile() {
   fileInput.style.display = 'none';
   fileInput.addEventListener('change', function(event) {
     var selectedFile = event.target.files[0];
-    uplaodFile(selectedFile);
+    importFile(selectedFile);
   });
 
   document.body.appendChild(fileInput);
   fileInput.click();
 }
 
-function uplaodFile(file) {
+function importFile(file) {
   if (file) {
     var formData = new FormData();
     formData.append('file', file);
@@ -652,6 +652,7 @@ function uplaodFile(file) {
       processData: false,
       contentType: false,
       success: function(response) {
+        window.location.reload();
         // File imported successfully
         // console.log(response);
       },
