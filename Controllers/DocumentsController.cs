@@ -25,6 +25,9 @@ namespace Doctrack.Controllers
     public async Task<IActionResult> Index()
     { 
       var currentUser = HttpContext.Session.GetString("Username");
+
+      if (_context.Documents == null) return NotFound();
+
       var documents = await _context.Documents
         .Include(d => d.DocumentType)
         .Include(d => d.DocumentDetails)
