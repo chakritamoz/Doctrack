@@ -7,6 +7,9 @@ D:\Doctrack\bin\Publish\Doctrack.runtimeconfig.json
 D:\Doctrack\bin\Publish\Doctrack.pdb
 D:\Doctrack\bin\Publish\Azure.Core.dll
 D:\Doctrack\bin\Publish\Azure.Identity.dll
+D:\Doctrack\bin\Publish\EPPlus.dll
+D:\Doctrack\bin\Publish\EPPlus.Interfaces.dll
+D:\Doctrack\bin\Publish\EPPlus.System.Drawing.dll
 D:\Doctrack\bin\Publish\Humanizer.dll
 D:\Doctrack\bin\Publish\Microsoft.AspNetCore.Razor.Language.dll
 D:\Doctrack\bin\Publish\Microsoft.Bcl.AsyncInterfaces.dll
@@ -45,6 +48,7 @@ D:\Doctrack\bin\Publish\Microsoft.IdentityModel.Logging.dll
 D:\Doctrack\bin\Publish\Microsoft.IdentityModel.Protocols.dll
 D:\Doctrack\bin\Publish\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 D:\Doctrack\bin\Publish\Microsoft.IdentityModel.Tokens.dll
+D:\Doctrack\bin\Publish\Microsoft.IO.RecyclableMemoryStream.dll
 D:\Doctrack\bin\Publish\Microsoft.NET.StringTools.dll
 D:\Doctrack\bin\Publish\Microsoft.SqlServer.Server.dll
 D:\Doctrack\bin\Publish\Microsoft.VisualStudio.Web.CodeGeneration.dll
@@ -246,7 +250,7 @@ D:\Doctrack\bin\Publish\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
 D:\Doctrack\bin\Publish\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
 D:\Doctrack\bin\Publish\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
 D:\Doctrack\bin\Publish\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
-D:\Doctrack\bin\Publish\runtimes\win\lib\net6.0\Microsoft.Win32.SystemEvents.dll
+D:\Doctrack\bin\Publish\runtimes\win\lib\net7.0\Microsoft.Win32.SystemEvents.dll
 D:\Doctrack\bin\Publish\runtimes\alpine-arm\native\libe_sqlite3.so
 D:\Doctrack\bin\Publish\runtimes\alpine-arm64\native\libe_sqlite3.so
 D:\Doctrack\bin\Publish\runtimes\alpine-x64\native\libe_sqlite3.so
@@ -269,8 +273,7 @@ D:\Doctrack\bin\Publish\runtimes\win-arm\native\e_sqlite3.dll
 D:\Doctrack\bin\Publish\runtimes\win-arm64\native\e_sqlite3.dll
 D:\Doctrack\bin\Publish\runtimes\win-x64\native\e_sqlite3.dll
 D:\Doctrack\bin\Publish\runtimes\win-x86\native\e_sqlite3.dll
-D:\Doctrack\bin\Publish\runtimes\unix\lib\net6.0\System.Drawing.Common.dll
-D:\Doctrack\bin\Publish\runtimes\win\lib\net6.0\System.Drawing.Common.dll
+D:\Doctrack\bin\Publish\runtimes\win\lib\net7.0\System.Drawing.Common.dll
 D:\Doctrack\bin\Publish\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
 D:\Doctrack\bin\Publish\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
 D:\Doctrack\bin\Publish\runtimes\win\lib\net6.0\System.Windows.Extensions.dll

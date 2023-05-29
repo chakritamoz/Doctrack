@@ -152,6 +152,7 @@ body {
   justify-content: center;
   align-items: center;
   z-index: 2;
+  font-weight: bold;
 }
 
 .search-box {
@@ -240,6 +241,7 @@ body {
 }
 
 h3,
+h4,
 label,
 dl {
   color: white;

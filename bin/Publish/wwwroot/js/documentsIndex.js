@@ -227,8 +227,8 @@ $(document).on("click", '.sub-row',function() {
       success: function(result) {
         $('#selectJob').val(result.documentDetail.Job_Id);
         $('#selectRank').val(result.documentDetail.Rank_Id);
-        $('#firstName').val(result.documentDetail.Employee.LastName);
-        $('#lastName').val(result.documentDetail.Employee.FirstName);
+        $('#firstName').val(result.documentDetail.Employee.FirstName);
+        $('#lastName').val(result.documentDetail.Employee.LastName);
         $('#remark').val(result.documentDetail.Remark);
       }
     });
@@ -370,7 +370,6 @@ $(document).on('click', '#modal-delete-button', () => {
     },
     success: function(result) {
       if (result.success) {
-        localStorage.setItem('docId',currentDocId);
         location.reload();
       } else {
         alert('An error occurred while deleting the document.');
@@ -596,7 +595,74 @@ $(document).on('click', '#tab-all', function() {
       }
     });
   }
+});
+
+// Export Excel
+$(document).on('click', '#ex-excel', function() {
+  $.ajax({
+    url: 'Documents/ExportExcel',
+    type: 'GET',
+    xhrFields: {
+        responseType: 'blob' // Set the response type to 'blob'
+    },
+    success: function (data) {
+        var a = document.createElement('a');
+        var url = window.URL.createObjectURL(data);
+        a.href = url;
+        a.download = 'document_tracking.xlsx';
+        a.style.display = 'none';
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+    },
+    error: function (xhr, status, error) {
+        // Handle the error
+        console.log(error);
+    }
+  });
+});
+
+// Import Excel
+$(document).on('click', '#im-excel', function() {
+  selectFile();
 })
+
+function selectFile() {
+  var fileInput = document.createElement('input');
+  fileInput.type = 'file';
+  fileInput.accept = '.xlsx, .xls';
+  fileInput.style.display = 'none';
+  fileInput.addEventListener('change', function(event) {
+    var selectedFile = event.target.files[0];
+    importFile(selectedFile);
+  });
+
+  document.body.appendChild(fileInput);
+  fileInput.click();
+}
+
+function importFile(file) {
+  if (file) {
+    var formData = new FormData();
+    formData.append('file', file);
+    $.ajax({
+      url: '/Documents/ImportExcel',
+      type: 'POST',
+      data: formData,
+      processData: false,
+      contentType: false,
+      success: function(response) {
+        window.location.reload();
+        // File imported successfully
+        // console.log(response);
+      },
+      error: function(xhr, status, error) {
+        // Error occurred during file import
+        console.error('Error', error);
+      }
+    });
+  }
+}
 
 window.addEventListener('scroll', function() {
   var header = $('.stick-header');
