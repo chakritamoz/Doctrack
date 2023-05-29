@@ -7,6 +7,7 @@ namespace Doctrack.SendGrid
   {
     public static async Task SendVerificationEmailAsync(string receipient, string token)
     {
+      // var apiKey = "";
       var apiKey = Environment.GetEnvironmentVariable("SendGridAPIKey", EnvironmentVariableTarget.User);
       var client = new SendGridClient(apiKey);
       var from = new EmailAddress("chakrit.artamoz@gmail.com");

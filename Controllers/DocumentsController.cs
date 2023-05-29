@@ -702,7 +702,7 @@ namespace Doctrack.Controllers
           for (int row = 2; row <= rowCount; row++)
           {
             // Get document receipt date
-            var ReceiptDate = DateTime.Parse(worksheet.Cells[row, 1].Value?.ToString());
+            DateTime ReceiptDate = DateTime.FromOADate(Convert.ToInt32(worksheet.Cells[row, 1].Value?.ToString()));
 
             // Get document Id
             var Id = worksheet.Cells[row, 2].Value?.ToString();
@@ -723,9 +723,7 @@ namespace Doctrack.Controllers
             if (worksheet.Cells[row, 6].Value?.ToString() != null)
             {
               // Get document operation date
-              OperationDate = DateTime.Parse(
-                worksheet.Cells[row, 6].Value?.ToString()
-              );
+              OperationDate = DateTime.FromOADate(Convert.ToInt32(worksheet.Cells[row, 6].Value?.ToString()));
             }
 
             // Get document command order
@@ -735,9 +733,7 @@ namespace Doctrack.Controllers
             if (worksheet.Cells[row, 8].Value?.ToString() != null)
             {
               // Get document end date
-              EndDate = DateTime.Parse(
-                worksheet.Cells[row, 8].Value?.ToString()
-              );
+              EndDate = DateTime.FromOADate(Convert.ToInt32(worksheet.Cells[row, 8].Value?.ToString()));
             }
 
             // Get documnet remark all
