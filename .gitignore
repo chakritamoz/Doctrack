@@ -4,4 +4,4 @@
 # to generate your .gitignore file.
 
 # database
-Doctrack.db-*
+Doctrack.db*
