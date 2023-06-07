@@ -840,14 +840,6 @@ namespace Doctrack.Controllers
       return (new SelectList(_context.DocumentTypes, "Id", "Title"));
     }
 
-    public SelectList GetJobSelectList() {
-      return (new SelectList(_context.DocumentTypes, "Id", "Title"));
-    }
-
-    public SelectList GetRankSelectList() {      
-      return (new SelectList(_context.DocumentTypes, "Id", "Title"));
-    }
-
     public DateTime ConvertExcelDate(string excelValue) {
       if (double.TryParse(excelValue, out double numVal))
       {

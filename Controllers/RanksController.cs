@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Doctrack.Models;
 using Doctrack.Data;
 using Doctrack.Authentication;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Doctrack.Controllers
 {
@@ -180,14 +181,39 @@ namespace Doctrack.Controllers
         return NotFound();
       }
 
-      _context.Remove(id);
+      _context.Ranks.Remove(rank);
       await _context.SaveChangesAsync();
       return RedirectToAction(nameof(Index));
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    [AuthenticationFilter]
+    [AuthenticationPrivilege]
+    [AuthenticationProtect]
+    public async Task<IActionResult> BindJobRank()
+    {
+      if (_context.Ranks == null) return NotFound();
+      if (_context.Jobs == null) return NotFound();
+      if (_context.JobRankDetails == null) return NotFound();
+
+      ViewBag.JobTitle = GetJobsSelectList();
+      ViewBag.RankTitle = GetRanksSelectList();
+
+      return View();
     }
 
     public bool rankExists(int id)
     {
       return (_context.Ranks?.Any(r => r.Id == id)).GetValueOrDefault();
+    }
+
+    public SelectList GetJobsSelectList() {
+      return (new SelectList(_context.Jobs, "Id", "Title"));
+    }
+
+    public SelectList GetRanksSelectList() {      
+      return (new SelectList(_context.Ranks, "Id", "Title"));
     }
   }
 }
