@@ -63,7 +63,6 @@ namespace Doctrack.Controllers
       return RedirectToAction("Login");
     }
 
-    [AuthenticationPrivilege]
     public async Task<IActionResult> VerifyEmail(string token)
     {
       if (_context.Accounts == null)
@@ -172,15 +171,13 @@ namespace Doctrack.Controllers
       return View(users);
     }
 
-    [AuthenticationPrivilege]
     public IActionResult ForgetPassword()
     {
       return View();
     }
 
     [HttpPost]
-    [AuthenticationPrivilege]
-    public async Task<IActionResult> ForgetPassword(string username, string newPassword, string confirmPassword)
+    public async Task<IActionResult> ForgetPassword(string username)
     {
       ViewData["username"] = username;
 
@@ -192,13 +189,55 @@ namespace Doctrack.Controllers
         return View();
       }
 
-      if (!ForgetFormIsValid(username, newPassword, confirmPassword))
+      byte[] keyToken;
+      var token = VerificationTokenGenerator.GenerateEmailVerificationToken(out keyToken);
+
+      await EmailService.SendConfirmResetAsync(user.Username, user.Email, token);
+      user.Token = token;
+      user.KeyToken = keyToken;
+
+      ViewData["userError"] = "Please confirm reset password in email.";
+
+      _context.Accounts.Update(user);
+      await _context.SaveChangesAsync();
+      return View();
+    }
+
+    public async Task<IActionResult> ResetPassword(string username, string token)
+    {
+      if (_context.Accounts == null) return NotFound();
+
+      var user = await _context.Accounts
+        .FirstOrDefaultAsync(ac => ac.Username == username);
+
+      if (!VerificationTokenGenerator.ValidateToken(token, user.KeyToken))
+      {
+        return NotFound();
+      }
+
+      ViewData["username"] = username;
+      ViewData["token"] = token;
+      return View();
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> ResetPassword(string username,string token, string password, string confirmPassword)
+    {
+      var user = _context.Accounts
+          .FirstOrDefault(u => u.Username == username);
+      if (user == null)
+      {
+        ViewData["userError"] = "Username is incorrect.";
+        return View();
+      }
+
+      if (!ForgetFormIsValid(username, password, confirmPassword))
       {
         return View();
       }
 
       byte[] passwordHash, passwordSalt;
-      CreatePasswordHash(newPassword, out passwordHash, out passwordSalt);
+      CreatePasswordHash(password, out passwordHash, out passwordSalt);
 
       user.PasswordHash = passwordHash;
       user.PasswordSalt = passwordSalt;
@@ -207,6 +246,36 @@ namespace Doctrack.Controllers
       await _context.SaveChangesAsync();
       return RedirectToAction("Login");
     }
+
+    // [HttpPost]
+    // [AuthenticationPrivilege]
+    // public async Task<IActionResult> ForgetPassword(string username, string newPassword, string confirmPassword)
+    // {
+    //   ViewData["username"] = username;
+
+    //   var user = _context.Accounts
+    //       .FirstOrDefault(u => u.Username == username);
+    //   if (user == null)
+    //   {
+    //     ViewData["userError"] = "Username is incorrect.";
+    //     return View();
+    //   }
+
+    //   if (!ForgetFormIsValid(username, newPassword, confirmPassword))
+    //   {
+    //     return View();
+    //   }
+
+    //   byte[] passwordHash, passwordSalt;
+    //   CreatePasswordHash(newPassword, out passwordHash, out passwordSalt);
+
+    //   user.PasswordHash = passwordHash;
+    //   user.PasswordSalt = passwordSalt;
+
+    //   _context.Accounts.Update(user);
+    //   await _context.SaveChangesAsync();
+    //   return RedirectToAction("Login");
+    // }
     
     [AuthenticationFilter]
     [AuthenticationPrivilege]
@@ -314,7 +383,8 @@ namespace Doctrack.Controllers
     {
       bool result = true;
       string patternUser = @"^[\w\d]{7,16}$";
-      string patternPass = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z])([^\s]){8,16}$";
+      // string patternPass = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z])([^\s]){8,16}$";
+      string patternPass = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)([^\s]){8,16}$";
       string patternEmail = @"^[\w\.-_]+@[\w]+.[\w]+";
 
       if (string.IsNullOrEmpty(username))
@@ -397,7 +467,8 @@ namespace Doctrack.Controllers
     public bool ForgetFormIsValid(string username, string password, string confirmPassword)
     {
       bool result = true;
-      string patternPass = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z])([^\s]){8,16}$";
+      // string patternPass = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z])([^\s]){8,16}$";
+      string patternPass = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)([^\s]){8,16}$";
       if (string.IsNullOrEmpty(username))
       {
         ViewData["userError"] = "Please enter username.";

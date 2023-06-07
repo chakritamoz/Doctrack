@@ -37,7 +37,7 @@
               <li class="nav-item">
                 <a class="nav-link" asp-area="" asp-controller="Ranks" asp-action="Index">Rank</a>
               </li>
-              @if (ViewBag.isAdmin)
+              @if (ViewBag.isAdmin != null && ViewBag.isAdmin)
               {
                 <li class="nav-item">
                   <a 
