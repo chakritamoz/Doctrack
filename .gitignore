@@ -5,3 +5,5 @@
 
 # database
 Doctrack.db
+Doctrack.db-shm
+Doctrack.db-wal
