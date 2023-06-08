@@ -94,13 +94,14 @@ h2 {
   z-index: 1;
 }
 
-/* .container-main-row:nth-last-child(2) {
-  border-radius: 0 0 15px 15px;
-} */
-
 .container-cover-row:last-child
 .container-main-row
 .flex-row {
+  border-radius: 0 0 15px 15px;
+}
+
+.container-cover-row:last-child
+.container-main-row {
   border-radius: 0 0 15px 15px;
 }
 
