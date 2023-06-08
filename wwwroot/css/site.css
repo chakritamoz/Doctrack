@@ -310,6 +310,12 @@ dl {
   }
 }
 
+@media screen and (min-width: 992px){
+  .container {
+    max-width: 1100px;
+  }
+}
+
 @media screen and (min-width: 1100px) {
   .search-contrainer {
     flex-wrap: nowrap;
@@ -323,5 +329,17 @@ dl {
 
   #search-document-btn {
     margin: 0.5rem 0;
+  }
+}
+
+@media screen and (min-width: 1200px){
+  .container {
+    max-width: 1140px;
+  }
+}
+
+@media screen and (min-width: 1400px){
+  .container {
+    max-width: 1320px;
   }
 }
