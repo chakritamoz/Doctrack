@@ -186,12 +186,10 @@ namespace Doctrack.Controllers
       return RedirectToAction(nameof(Index));
     }
 
-    [HttpPost]
-    [ValidateAntiForgeryToken]
     [AuthenticationFilter]
     [AuthenticationPrivilege]
     [AuthenticationProtect]
-    public async Task<IActionResult> BindJobRank()
+    public async Task<IActionResult> BindJob()
     {
       if (_context.Ranks == null) return NotFound();
       if (_context.Jobs == null) return NotFound();
@@ -200,6 +198,49 @@ namespace Doctrack.Controllers
       ViewBag.JobTitle = GetJobsSelectList();
       ViewBag.RankTitle = GetRanksSelectList();
 
+      return View();
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    [AuthenticationFilter]
+    [AuthenticationPrivilege]
+    [AuthenticationProtect]
+    public async Task<IActionResult> BindJob([Bind("Job_Id, Rank_Id")] JobRankDetail jobRankDetail)
+    {
+      if (_context.Ranks == null) return NotFound();
+      if (_context.Jobs == null) return NotFound();
+      if (_context.JobRankDetails == null) return NotFound();
+
+      ViewBag.JobTitle = GetJobsSelectList();
+      ViewBag.RankTitle = GetRanksSelectList();
+      
+      var job = await _context.Jobs.FindAsync(jobRankDetail.Job_Id);
+      if (job == null)
+      {
+        ViewBag.JobError = "Job is invalid";
+        return View();
+      }
+
+      var rank = await _context.Ranks.FindAsync(jobRankDetail.Rank_Id);
+      if (rank == null)
+      {
+        ViewBag.RankError = "Rank is invalid";
+        return View();
+      }
+
+      var jobRank = await _context.JobRankDetails
+        .FirstOrDefaultAsync(jr => 
+          jr.Job_Id == jobRankDetail.Job_Id &&
+          jr.Rank_Id == jobRankDetail.Rank_Id
+        );
+      if (jobRank != null)
+      {
+        ViewBag.ErrBinding = $"Job: {job.Title} and Rank: {rank.Title} already are binding together.";
+        return View();
+      }
+
+      ViewBag.ComBinding = "Successfully bind between Job and Rank";
       return View();
     }
 

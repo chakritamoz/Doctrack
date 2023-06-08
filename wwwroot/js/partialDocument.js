@@ -4,6 +4,7 @@ $('.main-row').swipe({
     $(this).parent().hasClass('active')? null: disableActive();
     currentDocId = $(this).attr('id');
     $(this).css('transform', 'translate(-200px,0px)');
+    $(this).css('border-radius', 'unset');
     $(`#btnBehide-${currentDocId.replace('/','\\/').replace('.','\\.')}`).addClass('swipe');
     isMove = true;
   },
@@ -12,6 +13,7 @@ $('.main-row').swipe({
     $(this).parent().hasClass('active')? null: disableActive();
     currentDocId = $(this).attr('id');
     $(this).css('transform', 'translate(200px,0px)');
+    $(this).css('border-radius', 'unset');
     $(`#btnFront-${currentDocId.replace('/','\\/').replace('.','\\.')}`).addClass('swipe');
     isMove = true;
   },

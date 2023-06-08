@@ -1,0 +1,48 @@
+@model Doctrack.Models.JobRankDetail;
+
+@{
+  ViewData["Title"] = "Binding Job";
+}
+
+<h2>Binding</h2>
+<h3>Job and Rank</h3>
+<hr />
+
+<form asp-action="BindJob";">
+  <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+  <div class="form-group">
+    <label asp-for="Job_Id" class="control-label">Job</label>
+    <select asp-for="Job_Id" class="form-control">
+      <option value=0>Select Job Title</option>
+      @foreach (var item in @ViewBag.JobTitle)
+      {
+        <option value=@item.Value>@item.Text</option>
+      }
+    </select>
+    <span style="color:#cd0013; font-weight: bold;">@ViewBag?.JobError</span>
+  </div>
+  <div class="form-group">
+    <label asp-for="Rank_Id" class="control-label">Rank</label>
+    <select asp-for="Rank_Id" class="form-control">
+      <option value=0>Select Rank Title</option>
+      @foreach (var item in @ViewBag.RankTitle)
+      {
+        <option value=@item.Value>@item.Text</option>
+      }
+    </select>
+    <span style="color:#cd0013; font-weight: bold;">@ViewBag?.RankError</span>
+  </div>
+  <span style="color:#cd0013; font-weight: bold;">@ViewBag?.ErrBinding</span>
+  <span style="color:#2cff59; font-weight: bold;">@ViewBag?.ComBinding</span>
+  <div class="form-group">
+    <input type="submit" value="Save" class="btn btn-primary" />
+  </div>
+</form>
+
+<div>
+  <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
