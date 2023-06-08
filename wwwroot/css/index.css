@@ -94,13 +94,14 @@ h2 {
   z-index: 1;
 }
 
-/* .container-main-row:nth-last-child(2) {
-  border-radius: 0 0 15px 15px;
-} */
-
 .container-cover-row:last-child
 .container-main-row
 .flex-row {
+  border-radius: 0 0 15px 15px;
+}
+
+.container-cover-row:last-child
+.container-main-row {
   border-radius: 0 0 15px 15px;
 }
 
@@ -305,20 +306,6 @@ h2 {
   background-color: #2e6962;
 }
 
-span.wrapper-privilege a {
-  width: 10rem;
-  height: 3rem;
-  border-radius: 1rem;
-  background-color: #094eb7;
-}
-
-span.wrapper-privilege a:hover {
-  background-color: #094fb7ab;
-}
-
-.wrapper-privilege i {
-  font-size: 1.5rem;
-}
 
 @media screen and (min-height: 660px){
   .container-wrapper {
