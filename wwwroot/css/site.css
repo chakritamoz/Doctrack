@@ -27,6 +27,8 @@ nav .navbar-brand {
 .account-disp {
   display: flex;
   width: 100%;
+  -webkit-justify-content: end;
+  -ms-justify-content: end;
   justify-content: end;
   align-items: center;
   padding-right: 30px;

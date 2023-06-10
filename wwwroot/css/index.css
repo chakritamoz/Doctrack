@@ -10,6 +10,7 @@ h2 {
 #container-document {
   position: relative;
   width: 100%;
+  margin: 3rem 0 10rem 0;
 }
 
 #document-table {
@@ -68,6 +69,12 @@ h2 {
   transition: transform .3s, box-shadow .3s ease-out;
 }
 
+.main-row {
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+}
+
 .main-row.normal {
   background-color: #B6E2D3;
 }
@@ -113,6 +120,11 @@ h2 {
 .container-cover-row:last-child
 .container-main-row.active
 .flex-row {
+  border-radius: 0 0 0 0;
+}
+
+.container-cover-row:last-child
+.container-main-row.active {
   border-radius: 0 0 0 0;
 }
 

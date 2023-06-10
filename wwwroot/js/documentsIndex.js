@@ -8,6 +8,9 @@ var isMove = false;
 var triggerReload = false;
 var triggerDelEmp = false;
 var triggerEditEmp = false;
+var page = 0;
+
+initialBuddhist();
 
 var docActive = localStorage.getItem('docId');
 if (docActive) {
@@ -503,24 +506,28 @@ $(document).on('click', '#search-document-btn', function() {
     tabType = "user";
   }
   $.ajax({
-    url: 'Documents/SearchDocument',
+    url: 'Documents/Index',
     type: 'GET',
     data: { 
       'queryDocNo': queryDocNo,
       'queryDocType': queryDocType,
       'queryDocTitle': queryDocTitle,
       'queryEmployee': queryEmployee,
-      'tabType': tabType
+      'tabType': tabType,
+      'isClick': true
     },
     success: function(data)
     {
       $('.search-contrainer').toggleClass('expand');
-      $('#document-table').html(data);
-      $.getScript('./js/partialDocument.js', function(){
-        floatingBtn.setAttribute('disabled', true);
-        floatingBtn.checked = false;
-        currentDocId = null;
-      });
+      $('#sort-row').html(data);
+      // var sortRow =document.getElementById('sort-row');
+      // sortRow.insertAdjacentHTML('beforeEnd', data);
+      initialBuddhist();
+      // $.getScript('./js/partialDocument.js', function(){
+      //   floatingBtn.setAttribute('disabled', true);
+      //   floatingBtn.checked = false;
+      //   currentDocId = null;
+      // });
     }
   });
 })
@@ -675,5 +682,13 @@ window.addEventListener('scroll', function() {
     header.css('transition','border-radius, .1s ease-out');
     header.css('border-radius', '15px 15px 0 0');
     header.css('transform', 'scaleX(1.00)')
+  }
+
+  var loadSkip = page * 20;
+  if (isScrollAtBottom() && isLoadData)
+  {
+    console.log(`page: ${page}`);
+    console.log(`loadSkip: ${loadSkip}`);
+    page++;
   }
 });

@@ -22,40 +22,13 @@ namespace Doctrack.Controllers
     //GET: Documents/Index
     [AuthenticationFilter]
     [AuthenticationPrivilege]
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index(string? queryDocNo, string? queryDocType, string? queryDocTitle, string? queryEmployee, string? tabType, bool? isClick)
     { 
       var currentUser = HttpContext.Session.GetString("Username");
 
       if (_context.Documents == null) return NotFound();
 
-      var documents = await _context.Documents
-        .Include(d => d.DocumentType)
-        .Include(d => d.DocumentDetails)
-          .ThenInclude(dd => dd.Employee)
-        .Include(d => d.DocumentDetails)
-          .ThenInclude(dd => dd.Job)
-        .Include(d => d.DocumentDetails)
-          .ThenInclude(dd => dd.Rank)
-        .Where(d => d.User == currentUser)
-        .ToListAsync();
-
-      var orderDocument = documents
-        .OrderBy(d => d.EndDate)
-        .ThenBy(d => d.DocType_Id).ToList();
-
-      return View(orderDocument);
-    }
-
-    [AuthenticationFilter]
-    [AuthenticationPrivilege]
-    public async Task<IActionResult> SearchDocument(string queryDocNo, string queryDocType, string queryDocTitle, string queryEmployee, string tabType)
-    {
-      var currentUser = HttpContext.Session.GetString("Username");
-      if (_context.Documents == null)
-      {
-        return NotFound();
-      }
-
+      // Retrieve data
       var documents = await _context.Documents
         .Include(d => d.DocumentType)
         .Include(d => d.DocumentDetails)
@@ -84,17 +57,30 @@ namespace Doctrack.Controllers
         )
         .ToListAsync();
 
-      if (documents == null)
-      {
+      // Order by data
+      documents = documents
+        .OrderByDescending(d =>
+            d.EndDate == null &&
+            (DateTime.Now - d.OperationDate) >= 
+            TimeSpan.FromDays(Convert.ToDouble(d.DocumentType.PeriodEnd))
+        )
+        .ThenByDescending(d =>
+            d.EndDate == null &&
+            (DateTime.Now - d.OperationDate) >= 
+            TimeSpan.FromDays(Convert.ToDouble(d.DocumentType.PeriodWarning))
+        )
+        .ThenBy(d => d.EndDate)
+        .ThenByDescending(d => d.ReceiptDate)
+        .ThenBy(d => d.DocumentType.Title)
+        .ThenBy(d => d.Id)
+        .Take(20)
+        .ToList();
+
+      if (isClick ?? false) {
         return PartialView("_DocumentTable", documents);
       }
 
-      var orderDocument = documents
-        .OrderBy(d => d.EndDate)
-        .ThenBy(d => d.DocType_Id).ToList();
-
-
-      return PartialView("_DocumentTable", orderDocument);
+      return View(documents);
     }
 
     //GET: Documents/Create
