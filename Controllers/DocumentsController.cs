@@ -22,11 +22,12 @@ namespace Doctrack.Controllers
     //GET: Documents/Index
     [AuthenticationFilter]
     [AuthenticationPrivilege]
-    public async Task<IActionResult> Index(string? queryDocNo, string? queryDocType, string? queryDocTitle, string? queryEmployee, string? tabType, bool? isSearch)
+    public async Task<IActionResult> Index(string? queryDocNo, string? queryDocType, string? queryDocTitle, string? queryEmployee, string? tabType, int loadSkip, bool? isSearch)
     { 
       var currentUser = HttpContext.Session.GetString("Username");
-
       if (_context.Documents == null) return NotFound();
+
+      int pageSize = 20;
 
       // Retrieve data
       var documents = await _context.Documents
@@ -57,7 +58,7 @@ namespace Doctrack.Controllers
         )
         .ToListAsync();
 
-      // Order by data
+      // Order base on operation warning
       documents = documents
         .OrderByDescending(d =>
             d.EndDate == null &&
@@ -73,7 +74,8 @@ namespace Doctrack.Controllers
         .ThenByDescending(d => d.ReceiptDate)
         .ThenBy(d => d.DocumentType.Title)
         .ThenBy(d => d.Id)
-        .Take(20)
+        .Skip(loadSkip)
+        .Take(pageSize)
         .ToList();
 
       if (isSearch ?? false) {
@@ -726,7 +728,8 @@ namespace Doctrack.Controllers
             var RemarkAll = worksheet.Cells[row, 9].Value?.ToString();
 
             // Get document user
-            var User = HttpContext.Session.GetString("Username");
+            // var User = HttpContext.Session.GetString("Username");
+            var User = worksheet.Cells[row, 15].Value?.ToString();
 
             var doc = await _context.Documents.FindAsync(Id);
             if (doc == null)

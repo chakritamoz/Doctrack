@@ -8,7 +8,15 @@ var isMove = false;
 var triggerReload = false;
 var triggerDelEmp = false;
 var triggerEditEmp = false;
-var page = 0;
+
+//Store Search Criteria
+var queryDocNo;
+var queryDocType;
+var queryDocTitle;
+var queryEmployee;
+var tabType;
+var isEndOfData = false
+var page = 1;
 
 initialBuddhist();
 
@@ -495,16 +503,18 @@ $(document).on('keypress', '#search-docNo, #search-docType, #search-docTitle, #s
 });
 
 $(document).on('click', '#search-document-btn', function() {
-  var queryDocNo = $('#search-docNo').val();
-  var queryDocType = $('#search-docType').val();
-  var queryDocTitle = $('#search-docTitle').val();
-  var queryEmployee = $('#search-employee').val();
-  var tabType;
+  queryDocNo = $('#search-docNo').val();
+  queryDocType = $('#search-docType').val();
+  queryDocTitle = $('#search-docTitle').val();
+  queryEmployee = $('#search-employee').val();
+  tabType;
   if ($('#tab-all').hasClass('active')){
     tabType = "all";
   }else{
     tabType = "user";
   }
+  isEndOfData = false;
+  page = 1;
   $.ajax({
     url: 'Documents/Index',
     type: 'GET',
@@ -520,14 +530,10 @@ $(document).on('click', '#search-document-btn', function() {
     {
       $('.search-contrainer').toggleClass('expand');
       $('#sort-row').html(data);
-      // var sortRow =document.getElementById('sort-row');
-      // sortRow.insertAdjacentHTML('beforeEnd', data);
       initialBuddhist();
-      // $.getScript('./js/partialDocument.js', function(){
-      //   floatingBtn.setAttribute('disabled', true);
-      //   floatingBtn.checked = false;
-      //   currentDocId = null;
-      // });
+      floatingBtn.setAttribute('disabled', true);
+      floatingBtn.checked = false;
+      currentDocId = null;
     }
   });
 })
@@ -538,69 +544,19 @@ $(document).on('click', '.search-expand-btn', function() {
 
 $(document).on('click', '#tab-user', function() {
   if (!$('#tab-user').hasClass('active')){
-    $('#tab-user').toggleClass('active');
-    $('#tab-all').toggleClass('active');
+    $('#tab-user').addClass('active');
+    $('#tab-all').removeClass('active');
 
-    var queryDocNo = $('#search-docNo').val();
-    var queryDocType = $('#search-docType').val();
-    var queryDocTitle = $('#search-docTitle').val();
-    var queryEmployee = $('#search-employee').val();
-    var tabType = "user";
-    $.ajax({
-      url: 'Documents/SearchDocument',
-      type: 'GET',
-      data: { 
-        'queryDocNo': queryDocNo,
-        'queryDocType': queryDocType,
-        'queryDocTitle': queryDocTitle,
-        'queryEmployee': queryEmployee,
-        'tabType': tabType
-      },
-      success: function(data)
-      {
-        $('.search-contrainer').toggleClass('expand');
-        $('#document-table').html(data);
-        $.getScript('./js/partialDocument.js', function(){
-          floatingBtn.setAttribute('disabled', true);
-          floatingBtn.checked = false;
-          currentDocId = null;
-        });
-      }
-    });
+    document.getElementById('search-document-btn').click();
   }
-})
+});
 
 $(document).on('click', '#tab-all', function() {
   if (!$('#tab-all').hasClass('active')){
-    $('#tab-all').toggleClass('active');
-    $('#tab-user').toggleClass('active');
+    $('#tab-all').addClass('active');
+    $('#tab-user').removeClass('active');
 
-    var queryDocNo = $('#search-docNo').val();
-    var queryDocType = $('#search-docType').val();
-    var queryDocTitle = $('#search-docTitle').val();
-    var queryEmployee = $('#search-employee').val();
-    var tabType = "all";
-    $.ajax({
-      url: 'Documents/SearchDocument',
-      type: 'GET',
-      data: { 
-        'queryDocNo': queryDocNo,
-        'queryDocType': queryDocType,
-        'queryDocTitle': queryDocTitle,
-        'queryEmployee': queryEmployee,
-        'tabType': tabType
-      },
-      success: function(data)
-      {
-        $('.search-contrainer').toggleClass('expand');
-        $('#document-table').html(data);
-        $.getScript('./js/partialDocument.js', function(){
-          floatingBtn.setAttribute('disabled', true);
-          floatingBtn.checked = false;
-          currentDocId = null;
-        });
-      }
-    });
+    document.getElementById('search-document-btn').click();
   }
 });
 
@@ -685,10 +641,36 @@ window.addEventListener('scroll', function() {
   }
 
   var loadSkip = page * 20;
-  if (isScrollAtBottom() && isLoadData)
+  if (isScrollAtBottom() && isLoadData && !isEndOfData )
   {
-    console.log(`page: ${page}`);
-    console.log(`loadSkip: ${loadSkip}`);
-    page++;
+    $.ajax({
+      url: 'Documents/Index',
+      type: 'GET',
+      data: { 
+        'queryDocNo': queryDocNo,
+        'queryDocType': queryDocType,
+        'queryDocTitle': queryDocTitle,
+        'queryEmployee': queryEmployee,
+        'tabType': tabType,
+        'loadSkip': loadSkip,
+        'isSearch': true
+      },
+      success: function(data)
+      {
+        if (!data.includes("Search Not Found")) {
+          $('.search-contrainer').toggleClass('expand');
+          var sortRow =document.getElementById('sort-row');
+          sortRow.insertAdjacentHTML('beforeEnd', data);
+          initialBuddhist();
+          floatingBtn.setAttribute('disabled', true);
+          floatingBtn.checked = false;
+          currentDocId = null;
+          page++;
+        }else {
+          isEndOfData = true;
+        }
+      },
+    });
+
   }
 });
