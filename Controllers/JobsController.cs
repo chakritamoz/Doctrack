@@ -17,29 +17,20 @@ namespace Doctrack.Controllers
     //GET: Jobs/Index
     [AuthenticationFilter]
     [AuthenticationPrivilege]
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index(string? queryStr, bool? isSearch)
     {
-      var jobs = await _context.Jobs.ToListAsync();
+      var jobs = await _context.Jobs
+      .Where(j => string.IsNullOrEmpty(queryStr)
+        || j.Title.Contains(queryStr)
+      )
+      .ToListAsync();
+
+      if (isSearch ?? false)
+      {
+        return PartialView("_JobsTable", jobs);
+      }
 
       return View(jobs);
-    }
-
-    [AuthenticationFilter]
-    [AuthenticationPrivilege]
-    public async Task<IActionResult> SearchJob(string queryStr)
-    {
-      if (_context.Jobs == null)
-      {
-        return NotFound();
-      }
-
-      var jobs = await _context.Jobs.ToListAsync();
-      if (!String.IsNullOrEmpty(queryStr))
-      {
-        jobs = jobs.Where(job => job.Title.Contains(queryStr)).ToList();
-      }
-
-      return PartialView("_JobsTable", jobs);
     }
 
     //GET: Jobs/Create

@@ -18,32 +18,20 @@ namespace Doctrack.Controllers
     //GET: Employees/Index
     [AuthenticationFilter]
     [AuthenticationPrivilege]
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index(string? queryStr, bool? isSearch)
     {
       var employees = await _context.Employees
+        .Where(emp => string.IsNullOrEmpty(queryStr)
+          || (emp.FirstName + " " + emp.LastName).Contains(queryStr)
+        )
         .ToListAsync();
 
+      if (isSearch ?? false)
+      {
+        return PartialView("_EmployeeTable", employees);
+      }
+
       return View(employees);
-    }
-
-    [AuthenticationFilter]
-    [AuthenticationPrivilege]
-    public async Task<IActionResult> SearchEmployee(string queryStr)
-    {
-      if (_context.Employees == null)
-      {
-        return NotFound();
-      }
-
-      var employees = await _context.Employees.ToListAsync();
-      if (!String.IsNullOrEmpty(queryStr))
-      {
-        employees = employees
-          .Where(emp => $"{emp.FirstName} {emp.LastName}".Contains(queryStr))
-          .ToList();
-      }
-      
-      return PartialView("_EmployeeTable", employees);
     }
 
     //GET: Employees/Create

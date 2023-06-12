@@ -152,7 +152,7 @@ namespace Doctrack.Controllers
     [AuthenticationFilter]
     [AuthenticationPrivilege]
     [AuthenticationProtect]
-    public async Task<IActionResult> Management()
+    public async Task<IActionResult> Management(string? queryStr, bool? isSearch)
     {
       if (_context.Accounts == null)
       {
@@ -161,11 +161,14 @@ namespace Doctrack.Controllers
 
       var users = await _context.Accounts
         .Include(acc => acc.Role)
+        .Where(acc => string.IsNullOrEmpty(queryStr)
+          || acc.Username.Contains(queryStr)
+        )
         .ToListAsync();
 
-      if (users == null)
+      if(isSearch ?? false) 
       {
-        return NotFound();
+        return PartialView("_ManagementTable", users);
       }
 
       return View(users);
@@ -276,34 +279,6 @@ namespace Doctrack.Controllers
     //   await _context.SaveChangesAsync();
     //   return RedirectToAction("Login");
     // }
-    
-    [AuthenticationFilter]
-    [AuthenticationPrivilege]
-    [AuthenticationProtect]
-    public async Task<IActionResult> SearchManagement(string? queryStr = null)
-    {
-      if (_context.Accounts == null)
-      {
-        return NotFound();
-      }
-
-      var users = await _context.Accounts
-        .Include(acc => acc.Role)
-        .ToListAsync();
-
-      if (users == null)
-      {
-        return NotFound();
-      }
-
-      if (queryStr != null)
-      {
-        users = users.Where(
-          acc => acc.Username.Contains(queryStr)
-        ).ToList();
-      }
-      return PartialView("_ManagementTable", users);
-    }
 
     [HttpPost]
     [AuthenticationFilter]

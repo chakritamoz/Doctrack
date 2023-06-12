@@ -514,7 +514,7 @@ $(document).on('click', '#search-document-btn', function() {
       'queryDocTitle': queryDocTitle,
       'queryEmployee': queryEmployee,
       'tabType': tabType,
-      'isClick': true
+      'isSearch': true
     },
     success: function(data)
     {

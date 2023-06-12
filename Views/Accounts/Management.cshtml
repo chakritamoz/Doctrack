@@ -45,9 +45,12 @@
   $('#search-btn').click(function() {
   const queryStr = $('#search-box').val();
     $.ajax({
-      url: '/Accounts/SearchManagement/',
+      url: '/Accounts/Management/',
       type: 'GET',
-      data: { 'queryStr': queryStr },
+      data: { 
+        'queryStr': queryStr,
+        'isSearch': true
+      },
       success: function (data) { 
         $('#document-table').html(data);
       }

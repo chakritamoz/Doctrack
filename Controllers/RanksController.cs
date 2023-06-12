@@ -19,30 +19,20 @@ namespace Doctrack.Controllers
     //GET: Ranks/Index
     [AuthenticationFilter]
     [AuthenticationPrivilege]
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index(string? queryStr, bool? isSearch)
     {
-      var ranks = await _context.Ranks.ToListAsync();
+      var ranks = await _context.Ranks
+      .Where(r => string.IsNullOrEmpty(queryStr)
+        || r.Title.Contains(queryStr)
+      )
+      .ToListAsync();
+
+      if (isSearch ?? false)
+      {
+        return PartialView("_RanksTable", ranks);
+      }
+
       return View(ranks);
-    }
-
-    [AuthenticationFilter]
-    [AuthenticationPrivilege]
-    public async Task<IActionResult> SearchRank(string queryStr)
-    {
-      if (_context.Ranks == null)
-      {
-        return NotFound();
-      }
-
-      var ranks = await _context.Ranks.ToListAsync();
-      if (!String.IsNullOrEmpty(queryStr))
-      {
-        ranks = ranks
-          .Where(rank => rank.Title.Contains(queryStr))
-          .ToList();
-      }
-
-      return PartialView("_RanksTable", ranks);
     }
 
     //GET: Ranks/Create

@@ -1,56 +1,55 @@
 @model IEnumerable<Job>
 
-
-  <table class="table">
-    <thead>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Title</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+  @if(Model.Count() > 0) {
+    @foreach (var item in Model)
+    {
       <tr>
-        <th>Id</th>
-        <th>Title</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-    @if(Model.Count() > 0) {
-      @foreach (var item in Model)
-      {
-        <tr>
-          <td>@item.Id</td>
-          <td>@item.Title</td>
-          <td>
-            <span class="wrapper-privilege-action">
-              @if (ViewBag.isAdmin){
-                <a 
-                  asp-action="Edit"
-                  asp-route-id="@item.Id"
-                >Edit</a>
-                <span>&nbsp;|&nbsp;</span>
-                <a
-                  asp-action="Delete"
-                  asp-route-id="@item.Id"
-                >Delete</a>
-              }else{
-                <a
-                  asp-action="Edit"
-                  asp-route-id="@item.Id"
-                  class="disabled-btn"
-                >Edit</a>
-                <span>&nbsp;|&nbsp;</span>
-                <a
-                  asp-action="Delete"
-                  asp-route-id="@item.Id"
-                  class="disabled-btn"
-                >Delete</a>
-              }
-            </span>
-          </td>
-        </tr>
-      }
-    }else {
-      <tr class="not-found">
-        <td colspan="3">
-          Search Not Found...
+        <td>@item.Id</td>
+        <td>@item.Title</td>
+        <td>
+          <span class="wrapper-privilege-action">
+            @if (ViewBag.isAdmin){
+              <a 
+                asp-action="Edit"
+                asp-route-id="@item.Id"
+              >Edit</a>
+              <span>&nbsp;|&nbsp;</span>
+              <a
+                asp-action="Delete"
+                asp-route-id="@item.Id"
+              >Delete</a>
+            }else{
+              <a
+                asp-action="Edit"
+                asp-route-id="@item.Id"
+                class="disabled-btn"
+              >Edit</a>
+              <span>&nbsp;|&nbsp;</span>
+              <a
+                asp-action="Delete"
+                asp-route-id="@item.Id"
+                class="disabled-btn"
+              >Delete</a>
+            }
+          </span>
         </td>
       </tr>
     }
-    </tbody>
-  </table>
+  }else {
+    <tr class="not-found">
+      <td colspan="3">
+        Search Not Found...
+      </td>
+    </tr>
+  }
+  </tbody>
+</table>

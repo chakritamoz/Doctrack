@@ -22,7 +22,7 @@ namespace Doctrack.Controllers
     //GET: Documents/Index
     [AuthenticationFilter]
     [AuthenticationPrivilege]
-    public async Task<IActionResult> Index(string? queryDocNo, string? queryDocType, string? queryDocTitle, string? queryEmployee, string? tabType, bool? isClick)
+    public async Task<IActionResult> Index(string? queryDocNo, string? queryDocType, string? queryDocTitle, string? queryEmployee, string? tabType, bool? isSearch)
     { 
       var currentUser = HttpContext.Session.GetString("Username");
 
@@ -76,7 +76,7 @@ namespace Doctrack.Controllers
         .Take(20)
         .ToList();
 
-      if (isClick ?? false) {
+      if (isSearch ?? false) {
         return PartialView("_DocumentTable", documents);
       }
 

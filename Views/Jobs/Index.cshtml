@@ -52,9 +52,12 @@
   $('#search-btn').click(function() {
     const queryStr = $('#search-box').val();
     $.ajax({
-      url: 'Jobs/SearchJob',
+      url: 'Jobs/Index/',
       type: 'GET',
-      data: { 'queryStr': queryStr },
+      data: {
+        'queryStr': queryStr,
+        'isSearch': true
+      },
       success: function(data) {
         $('#document-table').html(data);
       }

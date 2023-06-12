@@ -18,31 +18,20 @@ namespace Doctrack.Controllers
     //GET: DocumentTypes/Index
     [AuthenticationFilter]
     [AuthenticationPrivilege]
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index(string? queryStr, bool? isSearch)
     {      
-      var documentTypes = await _context.DocumentTypes.ToListAsync();
+      var documentTypes = await _context.DocumentTypes
+        .Where(dt => string.IsNullOrEmpty(queryStr)
+          || dt.Title.Contains(queryStr)
+        )
+        .ToListAsync();
+
+      if (isSearch ?? false)
+      {
+        return PartialView("_DocumentTypesTable", documentTypes);
+      }
 
       return View(documentTypes);
-    }
-
-    [AuthenticationFilter]
-    [AuthenticationPrivilege]
-    public async Task<IActionResult> SearchDocType(string queryStr)
-    {
-      if (_context.DocumentTypes == null)
-      {
-        return NotFound();
-      }
-      var documentTypes = await _context.DocumentTypes.ToListAsync();
-
-      if (!String.IsNullOrEmpty(queryStr))
-      {
-        documentTypes = documentTypes
-        .Where(docType => docType.Title.Contains(queryStr))
-        .ToList();
-      }
-
-      return PartialView("_DocumentTypesTable", documentTypes);
     }
 
     //GET: DocumentTypes/Create
