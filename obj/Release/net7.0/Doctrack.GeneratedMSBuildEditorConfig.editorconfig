@@ -32,6 +32,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudHNcUmVnaXN0ZXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/Doctrack/Views/Accounts/ResetPassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudHNcUmVzZXRQYXNzd29yZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Doctrack/Views/Accounts/_ManagementTable.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudHNcX01hbmFnZW1lbnRUYWJsZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -110,6 +114,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/Doctrack/Views/Jobs/_JobsTable.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSm9ic1xfSm9ic1RhYmxlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Doctrack/Views/Ranks/BindJob.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmFua3NcQmluZEpvYi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Doctrack/Views/Ranks/Create.cshtml]

@@ -60,7 +60,9 @@ namespace Doctrack.Controllers
 
       // Order base on operation warning
       documents = documents
-        .OrderByDescending(d =>
+        .OrderByDescending(d => d.EndDate == null)
+        .ThenByDescending(d => d.EndDate)
+        .ThenByDescending(d =>
             d.EndDate == null &&
             (DateTime.Now - d.OperationDate) >= 
             TimeSpan.FromDays(Convert.ToDouble(d.DocumentType.PeriodEnd))
@@ -70,7 +72,6 @@ namespace Doctrack.Controllers
             (DateTime.Now - d.OperationDate) >= 
             TimeSpan.FromDays(Convert.ToDouble(d.DocumentType.PeriodWarning))
         )
-        .ThenBy(d => d.EndDate)
         .ThenByDescending(d => d.ReceiptDate)
         .ThenBy(d => d.DocumentType.Title)
         .ThenBy(d => d.Id)

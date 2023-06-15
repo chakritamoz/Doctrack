@@ -30,12 +30,12 @@ $(document).on('mouseup', '.main-row', function(event) {
             left: 0,
             behavior: "smooth"}
           );
-          // Status true for load dynamic data 
-          // when scroll is on bottom of page
-          setTimeout(function() {
-            isLoadData = true;
-          }, 1000);
         }
+        // Status true for load dynamic data 
+        // when scroll is on bottom of page
+        setTimeout(function() {
+          isLoadData = true;
+        }, 1000);
       }else {
         // Status false for block load dynamic data 
         // when scroll is on bottom of page

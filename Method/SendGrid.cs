@@ -37,7 +37,6 @@ namespace Doctrack.SendGrid
       var from = new EmailAddress("chakrit.artamoz@gmail.com");
       var to = new EmailAddress(receipient);
       var callbackUrl = $"https://sangha-doctrack.azurewebsites.net/accounts/ResetPassword?username={username}&token={token}";
-      // var callbackUrl = $"http://localhost:5192/accounts/ResetPassword?username={username}&token={token}";
       var subject = "Reset Doctrack Password";
       var plainTextContent = $"Please click on the following link to reset your password: {callbackUrl}";
       var htmlContent = $"Please click on the following link to reset your password: <a href='{callbackUrl}'>{callbackUrl}</a>";

@@ -44,6 +44,11 @@
   height: 100%;
 }
 
+input::-ms-reveal,
+input::-ms-clear {
+  display: none;
+}
+
 .icon-inside > input {
   padding-left: 30px;
   border-radius: 2rem;
