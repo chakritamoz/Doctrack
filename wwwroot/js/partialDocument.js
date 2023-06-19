@@ -24,7 +24,7 @@ $(document).on('mouseup', '.main-row', function(event) {
         disableActive();
         floatingBtn.setAttribute('disabled', true);
         floatingBtn.checked = false;
-        if(isScrollAtBottom()) {
+        if(isWinScrollAtBottom()) {
           window.scrollBy({
             top: -100,
             left: 0,
@@ -69,11 +69,11 @@ $(document).on('mouseup', '.main-row', function(event) {
   }
 });
 
-function isScrollAtBottom() {
+function isWinScrollAtBottom() {
   var scrollPosition = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
   var windowHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
   var documentHeight = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
-
+  
   return (scrollPosition + windowHeight) >= documentHeight;
 }
   
@@ -114,52 +114,3 @@ function initialBuddhist() {
     div.textContent = thaiBuddhistFormat.format(date);
   });
 }
-
-// $('.main-row').swipe({
-//     swipeLeft: function(){
-//       disableSwipe(currentDocId);
-//       $(this).parent().hasClass('active')? null: disableActive();
-//       currentDocId = $(this).attr('id');
-//       $(this).css('transform', 'translate(-200px,0px)');
-//       $(this).css('border-radius', 'unset');
-//       $(`#btnBehide-${currentDocId.replace('/','\\/').replace('.','\\.')}`).addClass('swipe');
-//       isMove = true;
-//     },
-//     swipeRight: function(){
-//       disableSwipe(currentDocId);
-//       $(this).parent().hasClass('active')? null: disableActive();
-//       currentDocId = $(this).attr('id');
-//       $(this).css('transform', 'translate(200px,0px)');
-//       $(this).css('border-radius', 'unset');
-//       $(`#btnFront-${currentDocId.replace('/','\\/').replace('.','\\.')}`).addClass('swipe');
-//       isMove = true;
-//     },
-//     swipeStatus: function(event,phase, direction, distance) {
-//       if (phase == 'cancel')
-//       {
-//         disableSwipe(currentDocId);
-//         if (distance < 5 && !isMove){
-//           currentDocId = $(this).attr('id');
-//           const mainRowElement = $(`#${currentDocId.replace('/','\\/').replace('.','\\.')}`).parent();
-//           const subRowElement = $(`#sub-${currentDocId.replace('/','\\/').replace('.','\\.')}`);
-//           const rowFooterElement = subRowElement.next();
-//           if (mainRowElement.hasClass('active')) {
-//             disableActive();
-//             floatingBtn.setAttribute('disabled', true);
-//             floatingBtn.checked = false;
-//           }else {
-//             disableActive();
-//             activeElement = mainRowElement.addClass('active');
-//             expandElement = subRowElement.addClass('expand');
-//             footerElement = rowFooterElement.addClass('row-footer');
-//             floatingBtn.removeAttribute('disabled');
-//           }
-//         }
-//         $(`#btn-${currentDocId.replace('/','\\/').replace('.','\\.')}`).removeClass('swipe');
-//         $(this).removeAttr('style');
-//         isMove = false;
-//       }
-//     },
-//     threshold: 30,
-//     allowPageScroll: "vertical"
-// });

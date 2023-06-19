@@ -2,6 +2,7 @@ const floatingBtn = document.getElementById("fabCheckbox");
 var activeElement;
 var expandElement;
 var footerElement;
+var eleOverflow;
 
 var currentDocId;
 var isMove = false;
@@ -106,7 +107,7 @@ $(document).on('click', '.edit-doc-icon', function(){
 // set modal title and modal body
 // set modal accept btn id
 $(document).on('click', '.sub-doc-icon', () => {
-  cancelTrigger();
+  cancelTrigger();  
   modalAcceptBtn.id = 'modal-sub-button';
   modal.classList.toggle('display');
   const modalBody = $('<form id="modal-form" autocomplete="off"></form>');
@@ -627,6 +628,24 @@ function importFile(file) {
   }
 }
 
+$(document).ready(function() {
+  eleOverflow = $('.container-wrapper').css("overflow");
+
+  $('.container-wrapper').scroll(function() {
+    var scrollTop = $('.container-wrapper').scrollTop();
+    var pageYOffset = $('.container-wrapper').offset().top;
+    var scrollHeight = $('.container-wrapper').prop('scrollHeight');
+    console.log(`scrollTop: ${scrollTop}`);
+    console.log(`pageYOffset: ${pageYOffset}`);
+    console.log(`scrollHeight: ${scrollHeight}`);
+    console.log(`total scroll+offset = ${scrollTop + pageYOffset}`)
+  })
+})
+
+$(window).on('resize', function() {
+  eleOverflow = $('.container-wrapper').css("overflow");
+})
+
 window.addEventListener('scroll', function() {
   var header = $('.stick-header');
   var scrollTop = $(this.window).scrollTop();
@@ -639,10 +658,8 @@ window.addEventListener('scroll', function() {
     header.css('border-radius', '15px 15px 0 0');
     header.css('transform', 'scaleX(1.00)')
   }
-
   var loadSkip = page * 20;
-  if (isScrollAtBottom() && isLoadData && !isEndOfData )
-  {
+  if (eleOverflow == 'visible' && isWinScrollAtBottom() && isLoadData && !isEndOfData) {
     $.ajax({
       url: 'Documents/Index',
       type: 'GET',
@@ -655,8 +672,7 @@ window.addEventListener('scroll', function() {
         'loadSkip': loadSkip,
         'isSearch': true
       },
-      success: function(data)
-      {
+      success: function(data) {
         if (!data.includes("Search Not Found")) {
           $('.search-contrainer').toggleClass('expand');
           var sortRow =document.getElementById('sort-row');
@@ -671,6 +687,5 @@ window.addEventListener('scroll', function() {
         }
       },
     });
-
-  }
+  } // End if scroll window
 });

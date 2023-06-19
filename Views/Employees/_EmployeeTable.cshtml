@@ -71,3 +71,14 @@
   }
   </tbody>
 </table>
+
+@{
+  var alertMessage = TempData["clrEmpDocDet"];
+}
+
+@if (alertMessage != null)
+{
+  <script>
+    alert("@alertMessage");
+  </script>
+}

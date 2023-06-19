@@ -167,6 +167,39 @@ namespace Doctrack.Controllers
       return RedirectToAction(nameof(Index));
     }
 
+    [HttpPost]
+    [AuthenticationFilter]
+    [AuthenticationPrivilege]
+    [AuthenticationProtect]
+    public async Task<IActionResult> ClearEmployees()
+    {
+      if (_context.Employees == null)
+      {
+        return NotFound();
+      }
+
+      var employees = await _context.Employees
+        .Include(emp => emp.DocumentDetails)
+        .Where(emp => emp.DocumentDetails == null || emp.DocumentDetails.Count() == 0)
+        .ToListAsync();
+
+      if (employees.Count() > 0)
+      {
+        foreach(var employee in employees)
+        {
+          _context.Remove(employee);
+        }
+        await _context.SaveChangesAsync();
+        TempData["clrEmpDocDet"] = "Completely clear employees";
+        employees = await _context.Employees.ToListAsync();
+        return PartialView("_EmployeeTable", employees);
+      }
+
+      TempData["clrEmpDocDet"] = "There is no employees list to delete.";
+      employees = await _context.Employees.ToListAsync();
+      return PartialView("_EmployeeTable", employees);
+    }
+
     public bool EmployeeExists(int id)
     {
       return (_context.Employees?.Any(e => e.Id == id)).GetValueOrDefault();

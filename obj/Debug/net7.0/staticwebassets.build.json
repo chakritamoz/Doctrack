@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "bq5YMagEFnnXQXcwky+jQtOBSykStoS2xnOndsqvcJE=",
+  "Hash": "MHBjAuzyYJs8hIGGqJmdWH+gjV2nd7qImh/GHhBtxIo=",
   "Source": "Doctrack",
   "BasePath": "_content/Doctrack",
   "Mode": "Default",
@@ -287,6 +287,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\documentsModal.js"
+    },
+    {
+      "Identity": "D:\\Doctrack\\wwwroot\\js\\employeesIndex.js",
+      "SourceId": "Doctrack",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
+      "BasePath": "_content/Doctrack",
+      "RelativePath": "js/employeesIndex.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\employeesIndex.js"
     },
     {
       "Identity": "D:\\Doctrack\\wwwroot\\js\\partialDocument.js",

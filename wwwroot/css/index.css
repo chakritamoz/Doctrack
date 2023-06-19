@@ -301,7 +301,7 @@ h2 {
   align-items: center;
 }
 
-.ex-im-btn {
+.ex-btn {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -314,7 +314,7 @@ h2 {
   cursor: pointer;
 }
 
-.ex-im-btn:hover {
+.ex-btn:hover {
   background-color: #2e6962;
 }
 

@@ -61,6 +61,10 @@
       "PackagePath": "staticwebassets\\js\\documentsModal.js"
     },
     {
+      "Id": "D:\\Doctrack\\wwwroot\\js\\employeesIndex.js",
+      "PackagePath": "staticwebassets\\js\\employeesIndex.js"
+    },
+    {
       "Id": "D:\\Doctrack\\wwwroot\\js\\partialDocument.js",
       "PackagePath": "staticwebassets\\js\\partialDocument.js"
     },

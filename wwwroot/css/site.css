@@ -237,8 +237,16 @@ div.wrapper-privilege a {
   margin-right: 10px;
 }
 
+div.wrapper-privilege a.delete-btn {
+  background-color: #d1230c;
+}
+
 div.wrapper-privilege a:hover {
   background-color: #094fb7ab;
+}
+
+div.wrapper-privilege a.delete-btn:hover {
+  background-color: #e96a59;
 }
 
 .wrapper-privilege i {
