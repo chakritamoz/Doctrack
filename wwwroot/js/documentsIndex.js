@@ -630,20 +630,57 @@ function importFile(file) {
 
 $(document).ready(function() {
   eleOverflow = $('.container-wrapper').css("overflow");
-
-  $('.container-wrapper').scroll(function() {
-    var scrollTop = $('.container-wrapper').scrollTop();
-    var pageYOffset = $('.container-wrapper').offset().top;
-    var scrollHeight = $('.container-wrapper').prop('scrollHeight');
-    console.log(`scrollTop: ${scrollTop}`);
-    console.log(`pageYOffset: ${pageYOffset}`);
-    console.log(`scrollHeight: ${scrollHeight}`);
-    console.log(`total scroll+offset = ${scrollTop + pageYOffset}`)
-  })
 })
 
 $(window).on('resize', function() {
   eleOverflow = $('.container-wrapper').css("overflow");
+})
+
+function isContScrollAtBottom() {
+  var scrollTop = $('.container-wrapper').scrollTop();
+  var pageYOffset = $('.container-wrapper').offset().top;
+  var scrollHeight = $('.container-wrapper').prop('scrollHeight');
+
+  return (scrollTop + pageYOffset) >= scrollHeight;
+}
+
+$('.container-wrapper').scroll(function() {
+  var loadSkip = page * 20;
+  if (eleOverflow === 'scroll' && isContScrollAtBottom() && isLoadData && !isEndOfData) {
+    isLoadData = false;
+    $.ajax({
+      url: 'Documents/Index',
+      type: 'GET',
+      data: { 
+        'queryDocNo': queryDocNo,
+        'queryDocType': queryDocType,
+        'queryDocTitle': queryDocTitle,
+        'queryEmployee': queryEmployee,
+        'tabType': tabType,
+        'loadSkip': loadSkip,
+        'isSearch': true
+      },
+      success: function(data) {
+        if (!data.includes("Search Not Found")) {
+          $('.search-contrainer').toggleClass('expand');
+          var sortRow =document.getElementById('sort-row');
+          sortRow.insertAdjacentHTML('beforeEnd', data);
+          initialBuddhist();
+          floatingBtn.setAttribute('disabled', true);
+          floatingBtn.checked = false;
+          currentDocId = null;
+          page++;
+
+          setTimeout(function() {
+            isLoadData = true;
+          }, 1000);
+        }else {
+          isEndOfData = true;
+          isLoadData = true;
+        }
+      },
+    });
+  }
 })
 
 window.addEventListener('scroll', function() {
@@ -659,7 +696,7 @@ window.addEventListener('scroll', function() {
     header.css('transform', 'scaleX(1.00)')
   }
   var loadSkip = page * 20;
-  if (eleOverflow == 'visible' && isWinScrollAtBottom() && isLoadData && !isEndOfData) {
+  if (eleOverflow === 'visible' && isWinScrollAtBottom() && isLoadData && !isEndOfData) {
     $.ajax({
       url: 'Documents/Index',
       type: 'GET',
