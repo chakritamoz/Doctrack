@@ -29,6 +29,10 @@
       "PackagePath": "staticwebassets\\css\\index.css"
     },
     {
+      "Id": "D:\\Doctrack\\wwwroot\\css\\loading.css",
+      "PackagePath": "staticwebassets\\css\\loading.css"
+    },
+    {
       "Id": "D:\\Doctrack\\wwwroot\\css\\modal.css",
       "PackagePath": "staticwebassets\\css\\modal.css"
     },

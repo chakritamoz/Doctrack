@@ -563,6 +563,7 @@ $(document).on('click', '#tab-all', function() {
 
 // Export Excel
 $(document).on('click', '#ex-excel', function() {
+  showLoadingScreen();
   $.ajax({
     url: 'Documents/ExportExcel',
     type: 'GET',
@@ -570,18 +571,19 @@ $(document).on('click', '#ex-excel', function() {
         responseType: 'blob' // Set the response type to 'blob'
     },
     success: function (data) {
-        var a = document.createElement('a');
-        var url = window.URL.createObjectURL(data);
-        a.href = url;
-        a.download = 'document_tracking.xlsx';
-        a.style.display = 'none';
-        document.body.appendChild(a);
-        a.click();
-        window.URL.revokeObjectURL(url);
+      hideLoadingScreen();
+      var a = document.createElement('a');
+      var url = window.URL.createObjectURL(data);
+      a.href = url;
+      a.download = 'document_tracking.xlsx';
+      a.style.display = 'none';
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
     },
     error: function (xhr, status, error) {
-        // Handle the error
-        console.log(error);
+      // Handle the error
+      console.log(error);
     }
   });
 });
@@ -607,6 +609,7 @@ function selectFile() {
 
 function importFile(file) {
   if (file) {
+    showLoadingScreen();
     var formData = new FormData();
     formData.append('file', file);
     $.ajax({
@@ -616,6 +619,7 @@ function importFile(file) {
       processData: false,
       contentType: false,
       success: function(response) {
+        hideLoadingScreen();
         window.location.reload();
         // File imported successfully
         // console.log(response);

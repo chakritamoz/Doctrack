@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "MHBjAuzyYJs8hIGGqJmdWH+gjV2nd7qImh/GHhBtxIo=",
+  "Hash": "9juMI0582qei0Hwwqbew4yQqYE5hb9AQuvvjMZ7iGJY=",
   "Source": "Doctrack",
   "BasePath": "_content/Doctrack",
   "Mode": "Default",
@@ -151,6 +151,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\index.css"
+    },
+    {
+      "Identity": "D:\\Doctrack\\wwwroot\\css\\loading.css",
+      "SourceId": "Doctrack",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Doctrack\\wwwroot\\",
+      "BasePath": "_content/Doctrack",
+      "RelativePath": "css/loading.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\loading.css"
     },
     {
       "Identity": "D:\\Doctrack\\wwwroot\\css\\modal.css",

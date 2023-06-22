@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="~/css/floatingAction.css" asp-append-version="true"/>
     <link rel="stylesheet" href="~/node_modules/bootstrap-icons/font/bootstrap-icons.css" />
     <link rel="stylesheet" href="~/css/table.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/loading.css" asp-append-version="true">
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
   </head>
   <body>
@@ -81,6 +82,9 @@
         <main role="main" class="pb-3">
       @RenderBody()
         </main>
+    </div>
+    <div class="loading-container">
+        @Html.Partial("_Loading")
     </div>
     <footer class="border-top footer text-white">
         <div class="container">

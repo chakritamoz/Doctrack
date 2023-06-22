@@ -173,6 +173,10 @@ namespace Doctrack.Controllers
     [AuthenticationProtect]
     public async Task<IActionResult> ClearEmployees()
     {
+      bool hasDelete = false;
+      Microsoft.AspNetCore.Mvc.PartialViewResult html = new Microsoft.AspNetCore.Mvc.PartialViewResult();
+      var result = new { hasDelete, htmlString = ""};
+
       if (_context.Employees == null)
       {
         return NotFound();
@@ -180,24 +184,37 @@ namespace Doctrack.Controllers
 
       var employees = await _context.Employees
         .Include(emp => emp.DocumentDetails)
-        .Where(emp => emp.DocumentDetails == null || emp.DocumentDetails.Count() == 0)
         .ToListAsync();
 
-      if (employees.Count() > 0)
+      html = PartialView("_EmployeeTable", employees);
+
+      if (employees == null)
       {
-        foreach(var employee in employees)
+        result =  new { hasDelete, htmlString = html.ToString() };
+        return Json(result);
+      }
+
+      var empNonDocd = employees.Where(emp => 
+        emp.DocumentDetails == null ||
+        emp.DocumentDetails.Count() == 0
+      ).ToList();
+
+      if (empNonDocd.Count() > 0)
+      {
+        foreach(var employee in empNonDocd)
         {
           _context.Remove(employee);
         }
         await _context.SaveChangesAsync();
-        TempData["clrEmpDocDet"] = "Completely clear employees";
+        hasDelete = true;
         employees = await _context.Employees.ToListAsync();
-        return PartialView("_EmployeeTable", employees);
+        html = PartialView("_EmployeeTable", employees);
+        result = new { hasDelete, htmlString = html.ToString() };
+        return Json(result);
       }
 
-      TempData["clrEmpDocDet"] = "There is no employees list to delete.";
-      employees = await _context.Employees.ToListAsync();
-      return PartialView("_EmployeeTable", employees);
+      result = new { hasDelete, htmlString = html.ToString() };
+      return Json(result);
     }
 
     public bool EmployeeExists(int id)

@@ -2,3 +2,11 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
+
+function showLoadingScreen() {
+  $('.loading-container').css('display', 'block');
+}
+
+function hideLoadingScreen() {
+  $('.loading-container').css('display', 'none');
+}
