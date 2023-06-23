@@ -114,3 +114,11 @@ function initialBuddhist() {
     div.textContent = thaiBuddhistFormat.format(date);
   });
 }
+
+function disableActive() {
+  if (activeElement || expandElement || footerElement){
+    activeElement.removeClass('active');
+    expandElement.removeClass('expand');
+    footerElement.removeClass('row-footer');
+  }
+}

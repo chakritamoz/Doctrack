@@ -22,12 +22,10 @@ namespace Doctrack.Controllers
     //GET: Documents/Index
     [AuthenticationFilter]
     [AuthenticationPrivilege]
-    public async Task<IActionResult> Index(string? queryDocNo, string? queryDocType, string? queryDocTitle, string? queryEmployee, string? tabType, int loadSkip, bool? isSearch)
+    public async Task<IActionResult> Index(string? queryDocNo, string? queryDocType, string? queryDocTitle, string? queryEmployee, string? tabType, int loadSkip, bool? isSearch, int pageSize = 20)
     { 
       var currentUser = HttpContext.Session.GetString("Username");
       if (_context.Documents == null) return NotFound();
-
-      int pageSize = 20;
 
       // Retrieve data
       var documents = await _context.Documents
@@ -382,7 +380,7 @@ namespace Doctrack.Controllers
     [ValidateAntiForgeryToken]
     [AuthenticationFilter]
     [AuthenticationPrivilege]
-    public async Task<ActionResult> UpdateOP(string id, string Operation, DateTime OperationDate)
+    public async Task<ActionResult> UpdateOP(string id, string Operation, DateTime OperationDate, string? queryDocNo, string? queryDocType, string? queryDocTitle, string? queryEmployee, string? tabType, bool? isSearch, int pageSize)
     {
       var existsModel = _context.Documents.Find(id);
       if (existsModel == null)
@@ -394,7 +392,7 @@ namespace Doctrack.Controllers
       
       _context.Update(existsModel);
       await _context.SaveChangesAsync();
-      return Json(new { success = true });
+      return RedirectToAction("Index", new {queryDocNo, queryDocType, queryDocTitle, queryEmployee, tabType, isSearch, pageSize});
     }
 
     //GET: Document/GetAllJobs
@@ -447,7 +445,7 @@ namespace Doctrack.Controllers
     [ValidateAntiForgeryToken]
     [AuthenticationFilter]
     [AuthenticationPrivilege]
-    public async Task<ActionResult> DeleteEmployee(int id)
+    public async Task<ActionResult> DeleteEmployee(int id, string? queryDocNo, string? queryDocType, string? queryDocTitle, string? queryEmployee, string? tabType, bool? isSearch, int pageSize)
     {
       if (_context.DocumentDetails == null)
       {
@@ -462,7 +460,10 @@ namespace Doctrack.Controllers
 
       _context.DocumentDetails.Remove(documentDetail);
       await _context.SaveChangesAsync();
-      return Json( new { success = true });
+
+      var documentDetails = await _context.DocumentDetails.ToListAsync();
+
+      return RedirectToAction("Index", new {queryDocNo, queryDocType, queryDocTitle, queryEmployee, tabType, isSearch, pageSize});
     }
 
     //GET: Documents/UpdateEmployee/5
@@ -494,7 +495,7 @@ namespace Doctrack.Controllers
     [ValidateAntiForgeryToken]
     [AuthenticationFilter]
     [AuthenticationPrivilege]
-    public async Task<ActionResult> UpdateEmployee(int id, int jobId, int rankId, string? remark)
+    public async Task<ActionResult> UpdateEmployee(int id, int jobId, int rankId, string? remark, string? queryDocNo, string? queryDocType, string? queryDocTitle, string? queryEmployee, string? tabType, bool? isSearch, int pageSize)
     {
       if (_context.DocumentDetails == null)
       {
@@ -512,7 +513,7 @@ namespace Doctrack.Controllers
 
       _context.DocumentDetails.Update(documentDetail);
       await _context.SaveChangesAsync();
-      return Json( new { success = true });
+      return RedirectToAction("Index", new {queryDocNo, queryDocType, queryDocTitle, queryEmployee, tabType, isSearch, pageSize});
     }
 
     //POST: Documents/UpdateEndDate/5
@@ -520,7 +521,7 @@ namespace Doctrack.Controllers
     [ValidateAntiForgeryToken]
     [AuthenticationFilter]
     [AuthenticationPrivilege]
-    public async Task<ActionResult> UpdateEndDate(string id, DateTime EndDate)
+    public async Task<ActionResult> UpdateEndDate(string id, DateTime EndDate, string? queryDocNo, string? queryDocType, string? queryDocTitle, string? queryEmployee, string? tabType, bool? isSearch, int pageSize)
     {
       var existsModel = _context.Documents.Find(id);
       if (existsModel == null)
@@ -531,7 +532,7 @@ namespace Doctrack.Controllers
       
       _context.Update(existsModel);
       await _context.SaveChangesAsync();
-      return Json(new { success = true });
+      return RedirectToAction("Index", new {queryDocNo, queryDocType, queryDocTitle, queryEmployee, tabType, isSearch, pageSize});
     }
 
     //POST: Documents/Delete/5
@@ -539,7 +540,7 @@ namespace Doctrack.Controllers
     [ValidateAntiForgeryToken]
     [AuthenticationFilter]
     [AuthenticationPrivilege]
-    public async Task<IActionResult> Delete(string id)
+    public async Task<IActionResult> Delete(string id, string? queryDocNo, string? queryDocType, string? queryDocTitle, string? queryEmployee, string? tabType, bool? isSearch, int pageSize)
     {
       if (_context.Documents == null)
       {
@@ -555,7 +556,7 @@ namespace Doctrack.Controllers
 
       _context.Remove(document);
       await _context.SaveChangesAsync();
-      return Json(new { success = true });
+      return RedirectToAction("Index", new {queryDocNo, queryDocType, queryDocTitle, queryEmployee, tabType, isSearch, pageSize});
     }
 
     [AuthenticationFilter]

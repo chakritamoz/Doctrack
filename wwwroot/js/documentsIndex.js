@@ -1,4 +1,5 @@
 const floatingBtn = document.getElementById("fabCheckbox");
+//use in partial document
 var activeElement;
 var expandElement;
 var footerElement;
@@ -20,30 +21,6 @@ var isEndOfData = false
 var page = 1;
 
 initialBuddhist();
-
-var docActive = localStorage.getItem('docId');
-if (docActive) {
-  currentDocId = docActive;
-  activeElement = $('#' + docActive.replace('/','\\/').replace('.','\\.')).parent().addClass('active');
-  expandElement = $('#sub-' + docActive.replace('/','\\/').replace('.','\\.')).addClass('expand');
-  footerElement = $('#sub-' + docActive.replace('/','\\/').replace('.','\\.')).next().addClass('row-footer');
-  $('#fabCheckbox').attr('disabled', false);
-  $('#fabCheckbox').prop('checked', true);
-  $('#' + docActive.replace('/','\\/').replace('.','\\.'))
-    .animate({"opacity": ".9"}, 300)
-    .animate({"opacity": "1"}, 300)
-    .animate({"opacity": ".9"}, 300)
-    .animate({"opacity": "1"}, 300);
-  localStorage.clear();
-}
-
-function disableActive() {
-  if (activeElement || expandElement || footerElement){
-    activeElement.removeClass('active');
-    expandElement.removeClass('expand');
-    footerElement.removeClass('row-footer');
-  }
-}
 
 // when click delete icon
 // toggle modal
@@ -140,8 +117,9 @@ $(document).on('click', '.sub-doc-icon', () => {
 $(document).on('click', '#add-emp-icon', () => {
   cancelTrigger();
   modalAcceptBtn.id = 'modal-addEmp-button';
-  $('#modal-close-button').addClass('modal-closeAddEmp-button');
-  $('.close').addClass('modal-closeAddEmp-button');
+  $('#writableModal').addClass('reloadEmp')
+  $('#modal-close-button').addClass('reloadEmp');
+  $('.close').addClass('reloadEmp');
   modal.classList.toggle('display');
   const modalBody = $('<form id="modal-form" autocomplete="off"></form>');
   $('#modal-title').html('<div>Add employee to document</div>');
@@ -188,13 +166,20 @@ $(document).on("click", '#edit-emp-icon', function() {
   }
 });
 
-$('.main-row').click(() => {
-  localStorage.clear();
-});
-
 $(document).on("click", '.sub-row',function() {
   if (triggerDelEmp) {
     var docdId = $(this).attr('id');
+    queryDocNo = $('#search-docNo').val();
+    queryDocType = $('#search-docType').val();
+    queryDocTitle = $('#search-docTitle').val();
+    queryEmployee = $('#search-employee').val();
+    tabType;
+    if ($('#tab-all').hasClass('active')){
+      tabType = "all";
+    }else{
+      tabType = "user";
+    }
+    var pageSize = page * 20;
     var token = $('input[name="__RequestVerificationToken"]').val();
     $.ajax({
       url: 'Documents/DeleteEmployee/',
@@ -202,20 +187,26 @@ $(document).on("click", '.sub-row',function() {
       headers: { 'RequestVerificationToken': token },
       data: {
         'id': docdId,
+        'queryDocNo': queryDocNo,
+        'queryDocType': queryDocType,
+        'queryDocTitle': queryDocTitle,
+        'queryEmployee': queryEmployee,
+        'tabType': tabType,
+        'isSearch': true,
+        'pageSize': pageSize,
         '__RequestVerificationToken': token
       },
-      success: function(result) {
-        if (result.success) {
-          localStorage.setItem('docId',currentDocId);
-          location.reload();
-        } else {
-          alert('An error occurred while deleting the employee from document.');
+      success: function(data) {
+        $('#sort-row').html(data);
+        initialBuddhist();
+        if ($('#edit-emp-icon').hasClass('select') || $('#del-emp-icon').hasClass('select')) {
+          $('.sub-row').css('cursor', 'pointer');
+          reExpandElement(currentDocId);
         }
       }
     });
   }
   if (triggerEditEmp) {
-    var docdId = $(this).attr('id');
     modalAcceptBtn.id = 'modal-editEmp-button';
     modal.classList.toggle('display');
     const modalBody = $('<form id="modal-form" autocomplete="off"></form>');
@@ -275,9 +266,38 @@ $(document).on('click', '#modal-addEmp-button', () => {
   }
 });
 
-$(document).on('click', '.modal-closeAddEmp-button', () => {
-  localStorage.setItem('docId',currentDocId);
-  triggerReload ? location.reload() : null;
+$(document).on('click', '.reloadEmp', function(event) {
+  if (triggerReload && (event.target.id == "modal-span-close" || event.target.id == "modal-close-button" || event.target.id == "writableModal")) {
+    queryDocNo = $('#search-docNo').val();
+    queryDocType = $('#search-docType').val();
+    queryDocTitle = $('#search-docTitle').val();
+    queryEmployee = $('#search-employee').val();
+    tabType;
+    if ($('#tab-all').hasClass('active')){
+      tabType = "all";
+    }else{
+      tabType = "user";
+    }
+    var pageSize = page * 20;
+    $.ajax({
+      url: 'Documents/Index/',
+      type: 'GET',
+      data: {
+        'queryDocNo': queryDocNo,
+        'queryDocType': queryDocType,
+        'queryDocTitle': queryDocTitle,
+        'queryEmployee': queryEmployee,
+        'tabType': tabType,
+        'isSearch': true,
+        'pageSize': pageSize
+      },
+      success: function(data) {
+        $('#sort-row').html(data);
+        initialBuddhist();
+        reExpandElement(currentDocId);
+      }
+    });
+  }
 });
 
 // when click confirm update op button on modal
@@ -290,6 +310,17 @@ $(document).on('click', '#modal-upop-button', () => {
     var jsMonth = dateSplit[1];
     var jsYear = dateSplit[2];
     var conJSDate = jsMonth + "/" + jsDay + "/" + jsYear;
+    queryDocNo = $('#search-docNo').val();
+    queryDocType = $('#search-docType').val();
+    queryDocTitle = $('#search-docTitle').val();
+    queryEmployee = $('#search-employee').val();
+    tabType;
+    if ($('#tab-all').hasClass('active')){
+      tabType = "all";
+    }else{
+      tabType = "user";
+    }
+    var pageSize = page * 20;
     $.ajax({
       url: 'Documents/UpdateOP/',
       type: 'POST',
@@ -298,15 +329,20 @@ $(document).on('click', '#modal-upop-button', () => {
         'id': currentDocId,
         'operation': $('#oplocate').val(),
         'operationDate': conJSDate,
+        'queryDocNo': queryDocNo,
+        'queryDocType': queryDocType,
+        'queryDocTitle': queryDocTitle,
+        'queryEmployee': queryEmployee,
+        'tabType': tabType,
+        'isSearch': true,
+        'pageSize': pageSize,
         '__RequestVerificationToken': token
       },
-      success: function(result) {
-        if (result.success) {
-          localStorage.setItem('docId',currentDocId);
-          location.reload();
-        } else {
-          alert('An error occurred while deleting the document.');
-        }
+      success: function(data) {
+        $('#sort-row').html(data);
+        initialBuddhist();
+        reExpandElement(currentDocId);
+        modal.classList.remove("display");
       }
     });
   }
@@ -314,6 +350,17 @@ $(document).on('click', '#modal-upop-button', () => {
 
 $(document).on('click', '#modal-editEmp-button', () => {
   if (validateForm()) {
+    queryDocNo = $('#search-docNo').val();
+    queryDocType = $('#search-docType').val();
+    queryDocTitle = $('#search-docTitle').val();
+    queryEmployee = $('#search-employee').val();
+    tabType;
+    if ($('#tab-all').hasClass('active')){
+      tabType = "all";
+    }else{
+      tabType = "user";
+    }
+    var pageSize = page * 20;
     var token = $('input[name="__RequestVerificationToken"]').val();
     $.ajax({
       url: 'Documents/UpdateEmployee/',
@@ -324,15 +371,23 @@ $(document).on('click', '#modal-editEmp-button', () => {
         'jobId': $('#selectJob').val(),
         'rankId': $('#selectRank').val(),
         'remark': $('#remark').val(),
+        'queryDocNo': queryDocNo,
+        'queryDocType': queryDocType,
+        'queryDocTitle': queryDocTitle,
+        'queryEmployee': queryEmployee,
+        'tabType': tabType,
+        'isSearch': true,
+        'pageSize': pageSize,
         '__RequestVerificationToken': token
       },
-      success: function(result) {
-        if (result.success) {
-          localStorage.setItem('docId',currentDocId);
-          location.reload();
-        } else {
-          alert('An error occurred while deleting the document.');
+      success: function(data) {
+        $('#sort-row').html(data);
+        initialBuddhist();
+        if ($('#edit-emp-icon').hasClass('select') || $('#del-emp-icon').hasClass('select')) {
+          $('.sub-row').css('cursor', 'pointer');
+          reExpandElement(currentDocId);
         }
+        modal.classList.remove("display");
       }
     });
   }
@@ -347,6 +402,17 @@ $(document).on('click', '#modal-sub-button', () => {
     var jsMonth = dateSplit[1];
     var jsYear = dateSplit[2];
     var conJSDate = jsMonth + "/" + jsDay + "/" + jsYear;
+    queryDocNo = $('#search-docNo').val();
+    queryDocType = $('#search-docType').val();
+    queryDocTitle = $('#search-docTitle').val();
+    queryEmployee = $('#search-employee').val();
+    tabType;
+    if ($('#tab-all').hasClass('active')){
+      tabType = "all";
+    }else{
+      tabType = "user";
+    }
+    var pageSize = page * 20;
     $.ajax({
       url: 'Documents/UpdateEndDate/',
       type: 'POST',
@@ -354,15 +420,20 @@ $(document).on('click', '#modal-sub-button', () => {
       data: {
         'id': currentDocId,
         'endDate': conJSDate,
+        'queryDocNo': queryDocNo,
+        'queryDocType': queryDocType,
+        'queryDocTitle': queryDocTitle,
+        'queryEmployee': queryEmployee,
+        'tabType': tabType,
+        'isSearch': true,
+        'pageSize': pageSize,
         '__RequestVerificationToken': token
       },
-      success: function(result) {
-        if (result.success) {
-          localStorage.setItem('docId',currentDocId);
-          location.reload();
-        } else {
-          alert('An error occurred while deleting the document.');
-        }
+      success: function(data) {
+        $('#sort-row').html(data);
+        initialBuddhist();
+        reExpandElement(currentDocId);
+        modal.classList.remove("display");
       }
     });
   }
@@ -371,21 +442,37 @@ $(document).on('click', '#modal-sub-button', () => {
 // when click confirm delete button on modal
 // send method post to update data
 $(document).on('click', '#modal-delete-button', () => {
+  queryDocNo = $('#search-docNo').val();
+  queryDocType = $('#search-docType').val();
+  queryDocTitle = $('#search-docTitle').val();
+  queryEmployee = $('#search-employee').val();
+  tabType;
+  if ($('#tab-all').hasClass('active')){
+    tabType = "all";
+  }else{
+    tabType = "user";
+  }
+  var pageSize = page * 20;
   var token = $('input[name="__RequestVerificationToken"]').val();
   $.ajax({
     url: '/Documents/Delete/',
     type: 'POST',
     headers: { 'RequestVerificationToken': token },
     data: { 
-      'id': currentDocId, 
+      'id': currentDocId,
+      'queryDocNo': queryDocNo,
+      'queryDocType': queryDocType,
+      'queryDocTitle': queryDocTitle,
+      'queryEmployee': queryEmployee,
+      'tabType': tabType,
+      'isSearch': true,
+      'pageSize': pageSize,
       '__RequestVerificationToken': token 
     },
-    success: function(result) {
-      if (result.success) {
-        location.reload();
-      } else {
-        alert('An error occurred while deleting the document.');
-      }
+    success: function(data) {
+      $('#sort-row').html(data);
+      initialBuddhist();
+      modal.classList.remove("display");
     }
   });
 }); // end click #modal-delete-button
@@ -730,3 +817,21 @@ window.addEventListener('scroll', function() {
     });
   } // End if scroll window
 });
+
+function reExpandElement(id) {
+  activeElement = $(
+    '#' + id
+    .replace('/','\\/')
+    .replace('.','\\.')
+  ).parent().addClass('active');
+  expandElement = $(
+    '#sub-' + id
+    .replace('/','\\/')
+    .replace('.','\\.')
+  ).addClass('expand');
+  footerElement = $(
+    '#sub-' + id
+    .replace('/','\\/')
+    .replace('.','\\.')
+  ).next().addClass('row-footer');
+}

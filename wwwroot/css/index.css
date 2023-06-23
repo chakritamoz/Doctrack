@@ -69,6 +69,11 @@ h2 {
   transition: transform .3s, box-shadow .3s ease-out;
 }
 
+#del-emp-icon.select,
+#edit-emp-icon.select{
+  cursor: pointer;
+}
+
 .main-row {
   -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* IE 10 and IE 11 */
