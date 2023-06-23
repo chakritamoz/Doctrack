@@ -2,12 +2,12 @@ const annoModal = document.getElementById("annoModal");
 const annoModalBody = document.getElementById("anno-modal-body");
 
 $(document).on('click', '#clear-emp-btn', () => {
-  modal.classList.toggle('display');
+  modal.classList.add('display');
 });
 
 $(document).on('click', '#modal-accept-button', function() {
   showLoadingScreen();
-  modal.classList.toggle('display');
+  modal.classList.remove('display');
   $.ajax({
     url: 'Employees/ClearEmployees',
     type: 'POST',
@@ -16,10 +16,10 @@ $(document).on('click', '#modal-accept-button', function() {
       $('#document-table').html(data.html);
       if (data.hasDelete) {
         annoModalBody.innerHTML = "Completely clear employee is non document.";
-        annoModal.classList.toggle('display');
+        annoModal.classList.add('display');
       }else {
         annoModalBody.innerHTML = "Don't have any employees are non document was clear.";
-        annoModal.classList.toggle('display');
+        annoModal.classList.add('display');
       }
     }
   })
@@ -28,14 +28,14 @@ $(document).on('click', '#modal-accept-button', function() {
 window.onclick = function(event) {
   if (event.target == annoModal)
   {
-    annoModal.classList.toggle('display');
+    annoModal.classList.remove('display');
   }
 }
 
 $(document).on('click', '#anno-span-close', function() {
-  annoModal.classList.toggle('display');
+  annoModal.classList.remove('display');
 });
 
 $(document).on('click', '#anno-modal-button', function() {
-  annoModal.classList.toggle('display');
+  annoModal.classList.remove('display');
 });

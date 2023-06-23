@@ -23,13 +23,13 @@ var page = 1;
 initialBuddhist();
 
 // when click delete icon
-// toggle modal
+// display modal
 // set modal title and modal body
 // set modal accept btn id
 $(document).on('click', '.del-doc-icon', () => {
   cancelTrigger();
   modalAcceptBtn.id = 'modal-delete-button';
-  modal.classList.toggle("display");
+  modal.classList.add("display");
   const modalBody = $('<form id="modal-form-del" autocomplete="off"></form>');
   $('#modal-title').html('<div>Confirm delete document<div>');
   $('#modal-body').html(modalBody);
@@ -38,13 +38,13 @@ $(document).on('click', '.del-doc-icon', () => {
 }); // end click del-doc-icon
 
 // when click update operation icon
-// toggle modal
+// display modal
 // set modal title and modal body
 // set modal accept btn id
 $(document).on('click', '.upop-doc-icon', () => {
   cancelTrigger();
   modalAcceptBtn.id = 'modal-upop-button';
-  modal.classList.toggle('display');
+  modal.classList.add('display');
   const modalBody = $('<form id="modal-form" autocomplete="off"></form>');
   $.ajax({
     url: 'Documents/UpdateOP/',
@@ -80,13 +80,13 @@ $(document).on('click', '.edit-doc-icon', function(){
 }); // end click edit-doc-icon
 
 // when click submit icon
-// toggle modal
+// display modal
 // set modal title and modal body
 // set modal accept btn id
 $(document).on('click', '.sub-doc-icon', () => {
   cancelTrigger();  
   modalAcceptBtn.id = 'modal-sub-button';
-  modal.classList.toggle('display');
+  modal.classList.add('display');
   const modalBody = $('<form id="modal-form" autocomplete="off"></form>');
   $.ajax({
     url: 'Documents/UpdateOP/',
@@ -111,7 +111,7 @@ $(document).on('click', '.sub-doc-icon', () => {
 }); // end click sub-doc-icon
 
 // when click add employee icon
-// toggle modal
+// display modal
 // set modal title and modal body
 // set modal accept btn id
 $(document).on('click', '#add-emp-icon', () => {
@@ -120,7 +120,7 @@ $(document).on('click', '#add-emp-icon', () => {
   $('#writableModal').addClass('reloadEmp')
   $('#modal-close-button').addClass('reloadEmp');
   $('.close').addClass('reloadEmp');
-  modal.classList.toggle('display');
+  modal.classList.add('display');
   const modalBody = $('<form id="modal-form" autocomplete="off"></form>');
   $('#modal-title').html('<div>Add employee to document</div>');
   $('#modal-body').html(modalBody);
@@ -167,8 +167,8 @@ $(document).on("click", '#edit-emp-icon', function() {
 });
 
 $(document).on("click", '.sub-row',function() {
+  var docdId = $(this).attr('id');
   if (triggerDelEmp) {
-    var docdId = $(this).attr('id');
     queryDocNo = $('#search-docNo').val();
     queryDocType = $('#search-docType').val();
     queryDocTitle = $('#search-docTitle').val();
@@ -208,7 +208,7 @@ $(document).on("click", '.sub-row',function() {
   }
   if (triggerEditEmp) {
     modalAcceptBtn.id = 'modal-editEmp-button';
-    modal.classList.toggle('display');
+    modal.classList.add('display');
     const modalBody = $('<form id="modal-form" autocomplete="off"></form>');
     $('#modal-title').html('<div>Edit employee in document</div>');
     $('#modal-body').html(modalBody);
@@ -616,11 +616,12 @@ $(document).on('click', '#search-document-btn', function() {
     },
     success: function(data)
     {
-      $('.search-contrainer').toggleClass('expand');
+      $('.search-contrainer').removeClass('expand');
       $('#sort-row').html(data);
       initialBuddhist();
       floatingBtn.setAttribute('disabled', true);
       floatingBtn.checked = false;
+      cancelTrigger();
       currentDocId = null;
     }
   });
@@ -753,7 +754,6 @@ $('.container-wrapper').scroll(function() {
       },
       success: function(data) {
         if (!data.includes("Search Not Found")) {
-          $('.search-contrainer').toggleClass('expand');
           var sortRow =document.getElementById('sort-row');
           sortRow.insertAdjacentHTML('beforeEnd', data);
           initialBuddhist();
@@ -802,7 +802,6 @@ window.addEventListener('scroll', function() {
       },
       success: function(data) {
         if (!data.includes("Search Not Found")) {
-          $('.search-contrainer').toggleClass('expand');
           var sortRow =document.getElementById('sort-row');
           sortRow.insertAdjacentHTML('beforeEnd', data);
           initialBuddhist();
@@ -835,3 +834,45 @@ function reExpandElement(id) {
     .replace('.','\\.')
   ).next().addClass('row-footer');
 }
+
+const annoModal = document.getElementById("annoModal");
+const annoModalBody = document.getElementById("anno-modal-body");
+
+$(document).on('click', '#clear-docd-btn', () => {
+  modal.classList.add('display');
+});
+
+// // $(document).on('click', '#modal-accept-button', function() {
+// //   showLoadingScreen();
+// //   modal.classList.add('display');
+// //   $.ajax({
+// //     url: 'Employees/ClearEmployees',
+// //     type: 'POST',
+// //     success: function(data) {
+// //       hideLoadingScreen();
+// //       $('#document-table').html(data.html);
+// //       if (data.hasDelete) {
+// //         annoModalBody.innerHTML = "Completely clear employee is non document.";
+// //         annoModal.classList.add('display');
+// //       }else {
+// //         annoModalBody.innerHTML = "Don't have any employees are non document was clear.";
+// //         annoModal.classList.add('display');
+// //       }
+// //     }
+// //   })
+// // });
+
+window.onclick = function(event) {
+  if (event.target == annoModal)
+  {
+    annoModal.classList.remove('display');
+  }
+}
+
+$(document).on('click', '#anno-span-close', function() {
+  annoModal.classList.remove('display');
+});
+
+$(document).on('click', '#anno-modal-button', function() {
+  annoModal.classList.remove('display');
+});
