@@ -1,9 +1,9 @@
 const threshold = 30;
-var touchStartX = 0;
-var touchEndX = 0;
-var distance = 0;
-var subHeight = 0;
-var isLoadData = true;
+let touchStartX = 0;
+let touchEndX = 0;
+let distance = 0;
+let subHeight = 0;
+let isLoadData = true;
 
 $(document).on('mousedown', '.main-row', function(event) {
   touchStartX = event.clientX;
@@ -17,8 +17,18 @@ $(document).on('mouseup', '.main-row', function(event) {
   if (Math.abs(distance) < threshold) {
     if (!isMove){
       currentDocId = $(this).attr('id');
-      const mainRowElement = $(`#${currentDocId.replace('/','\\/').replace('.','\\.')}`).parent();
-      const subRowElement = $(`#sub-${currentDocId.replace('/','\\/').replace('.','\\.')}`);
+      const mainRowElement = $(`#${currentDocId
+        .replace('/','\\/')
+        .replace('.','\\.')
+        .replace('(','\\(')
+        .replace(')','\\)')
+      }`).parent();
+      const subRowElement = $(`#sub-${currentDocId
+        .replace('/','\\/')
+        .replace('.','\\.')
+        .replace('(','\\(')
+        .replace(')','\\)')
+      }`);
       const rowFooterElement = subRowElement.next();
       if (mainRowElement.hasClass('active')) {
         disableActive();
@@ -47,7 +57,12 @@ $(document).on('mouseup', '.main-row', function(event) {
         floatingBtn.removeAttribute('disabled');
       }
     }
-    $(`#btn-${currentDocId.replace('/','\\/').replace('.','\\.')}`).removeClass('swipe');
+    $(`#btn-${currentDocId
+        .replace('/','\\/')
+        .replace('.','\\.')
+        .replace('(','\\(')
+        .replace(')','\\)')
+    }`).removeClass('swipe');
     $(this).removeAttr('style');
     isMove = false;
   }
@@ -56,7 +71,12 @@ $(document).on('mouseup', '.main-row', function(event) {
       currentDocId = $(this).attr('id');
       $(this).css('transform', 'translate(200px,0px)');
       $(this).css('border-radius', 'unset');
-      $(`#btnFront-${currentDocId.replace('/','\\/').replace('.','\\.')}`).addClass('swipe');
+      $(`#btnFront-${currentDocId
+        .replace('/','\\/')
+        .replace('.','\\.')
+        .replace('(','\\(')
+        .replace(')','\\)')
+      }`).addClass('swipe');
       isMove = true;
   }
   else {
@@ -64,25 +84,30 @@ $(document).on('mouseup', '.main-row', function(event) {
       currentDocId = $(this).attr('id');
       $(this).css('transform', 'translate(-200px,0px)');
       $(this).css('border-radius', 'unset');
-      $(`#btnBehide-${currentDocId.replace('/','\\/').replace('.','\\.')}`).addClass('swipe');
+      $(`#btnBehide-${currentDocId
+        .replace('/','\\/')
+        .replace('.','\\.')
+        .replace('(','\\(')
+        .replace(')','\\)')
+      }`).addClass('swipe');
       isMove = true;
   }
 });
 
 function isWinScrollAtBottom() {
-  var scrollPosition = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
-  var windowHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-  var documentHeight = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
+  const scrollPosition = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+  const windowHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+  const documentHeight = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
   
   return (scrollPosition + windowHeight) >= documentHeight;
 }
   
 function initialBuddhist() {
   // Set date buddhist format
-  var receiptDates = document.querySelectorAll('.receipt-date');
-  var operationDates = document.querySelectorAll('.operation-date');
-  var endDates = document.querySelectorAll('.end-date');
-  var buddhistOptions = {
+  const receiptDates = document.querySelectorAll('.receipt-date');
+  const operationDates = document.querySelectorAll('.operation-date');
+  const endDates = document.querySelectorAll('.end-date');
+  const buddhistOptions = {
     year: 'numeric',
     month: '2-digit',
     day: '2-digit',
@@ -90,10 +115,10 @@ function initialBuddhist() {
     // numberingSystem: 'thai'
   };
   
-  var thaiBuddhistFormat = new Intl.DateTimeFormat('th-TH-u-ca-buddhist', buddhistOptions);
+  const thaiBuddhistFormat = new Intl.DateTimeFormat('th-TH-u-ca-buddhist', buddhistOptions);
   receiptDates.forEach(div => {
     receiptDate = div.getAttribute('data-receiptDate');
-    var [day, month, year] = receiptDate.split('/').map(Number);
+    const [day, month, year] = receiptDate.split('/').map(Number);
     date = new Date(year, month-1, day);
     div.textContent = thaiBuddhistFormat.format(date);
   });
@@ -101,7 +126,7 @@ function initialBuddhist() {
   operationDates.forEach(div => {
     operationDate = div.getAttribute('data-operationDate');
     if (operationDate == "") return;
-    var [day, month, year] = operationDate.split('/').map(Number);
+    const [day, month, year] = operationDate.split('/').map(Number);
     date = new Date(year, month-1, day);
     div.textContent = thaiBuddhistFormat.format(date);
   });
@@ -109,7 +134,7 @@ function initialBuddhist() {
   endDates.forEach(div => {
     endDate = div.getAttribute('data-endDate');
     if (endDate == "") return;
-    var [day, month, year] = endDate.split('/').map(Number);
+    const [day, month, year] = endDate.split('/').map(Number);
     date = new Date(year, month-1, day);
     div.textContent = thaiBuddhistFormat.format(date);
   });

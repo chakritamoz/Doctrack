@@ -1,24 +1,24 @@
 const floatingBtn = document.getElementById("fabCheckbox");
 //use in partial document
-var activeElement;
-var expandElement;
-var footerElement;
-var eleOverflow;
+let activeElement;
+let expandElement;
+let footerElement;
+let eleOverflow;
 
-var currentDocId;
-var isMove = false;
-var triggerReload = false;
-var triggerDelEmp = false;
-var triggerEditEmp = false;
+let currentDocId;
+let isMove = false;
+let triggerReload = false;
+let triggerDelEmp = false;
+let triggerEditEmp = false;
 
 //Store Search Criteria
-var queryDocNo;
-var queryDocType;
-var queryDocTitle;
-var queryEmployee;
-var tabType;
-var isEndOfData = false
-var page = 1;
+let queryDocNo;
+let queryDocType;
+let queryDocTitle;
+let queryEmployee;
+let tabType;
+let isEndOfData = false
+let page = 1;
 
 initialBuddhist();
 
@@ -60,13 +60,13 @@ $(document).on('click', '.upop-doc-icon', () => {
       $('#modal-form').append('<input id="opdate" /><br />')
       $('#modal-form').append('<span class="text-danger dateError"></span>')
       $('#oplocate').val(result.operation);
-      var date = result.operationDate != null
+      const date = result.operationDate != null
         ?new Date(result.operationDate)
         :new Date(Date.now());
-      var day = date.getDate().toString().padStart(2, '0');
-      var month = (date.getMonth()+1).toString().padStart(2, '0');
-      var year = date.getFullYear();
-      var myDate = day + "/" + month + "/" + year
+      const day = date.getDate().toString().padStart(2, '0');
+      const month = (date.getMonth()+1).toString().padStart(2, '0');
+      const year = date.getFullYear();
+      const myDate = day + "/" + month + "/" + year
       $('#opdate').val(myDate);
     }
   })
@@ -98,13 +98,13 @@ $(document).on('click', '.sub-doc-icon', () => {
       $('#modal-form').append('<label for="endDoc">End date</label><br />');
       $('#modal-form').append('<input id="endDoc"/><br />');
       $('#modal-form').append('<span class="text-danger dateError"></span>');
-      var date = result.endDate != null
+      const date = result.endDate != null
         ?new Date(result.endDate)
         :new Date(Date.now());
-      var day = date.getDate().toString().padStart(2, '0');
-      var month = (date.getMonth()+1).toString().padStart(2, '0');
-      var year = date.getFullYear();
-      var myDate = day + "/" + month + "/" + year
+      const day = date.getDate().toString().padStart(2, '0');
+      const month = (date.getMonth()+1).toString().padStart(2, '0');
+      const year = date.getFullYear();
+      const myDate = day + "/" + month + "/" + year
       $('#endDoc').val(myDate);
     }
   })
@@ -167,7 +167,7 @@ $(document).on("click", '#edit-emp-icon', function() {
 });
 
 $(document).on("click", '.sub-row',function() {
-  var docdId = $(this).attr('id');
+  const docdId = $(this).attr('id');
   if (triggerDelEmp) {
     queryDocNo = $('#search-docNo').val();
     queryDocType = $('#search-docType').val();
@@ -179,8 +179,8 @@ $(document).on("click", '.sub-row',function() {
     }else{
       tabType = "user";
     }
-    var pageSize = page * 20;
-    var token = $('input[name="__RequestVerificationToken"]').val();
+    const pageSize = page * 20;
+    const token = $('input[name="__RequestVerificationToken"]').val();
     $.ajax({
       url: 'Documents/DeleteEmployee/',
       type: 'POST',
@@ -243,7 +243,7 @@ $(document).on("click", '.sub-row',function() {
 // send method post to update data
 $(document).on('click', '#modal-addEmp-button', () => {
   if (validateForm()) {
-    var token = $('input[name="__RequestVerificationToken"]').val();
+    const token = $('input[name="__RequestVerificationToken"]').val();
     $.ajax({
       url: 'Documents/AddEmployee/',
       type: 'POST',
@@ -278,7 +278,7 @@ $(document).on('click', '.reloadEmp', function(event) {
     }else{
       tabType = "user";
     }
-    var pageSize = page * 20;
+    const pageSize = page * 20;
     $.ajax({
       url: 'Documents/Index/',
       type: 'GET',
@@ -304,12 +304,12 @@ $(document).on('click', '.reloadEmp', function(event) {
 // send method post to update data
 $(document).on('click', '#modal-upop-button', () => {
   if (validateForm()){
-    var token = $('input[name="__RequestVerificationToken"]').val();
-    var dateSplit = $('#opdate').val().split('/');
-    var jsDay = dateSplit[0];
-    var jsMonth = dateSplit[1];
-    var jsYear = dateSplit[2];
-    var conJSDate = jsMonth + "/" + jsDay + "/" + jsYear;
+    const token = $('input[name="__RequestVerificationToken"]').val();
+    const dateSplit = $('#opdate').val().split('/');
+    const jsDay = dateSplit[0];
+    const jsMonth = dateSplit[1];
+    const jsYear = dateSplit[2];
+    const conJSDate = jsMonth + "/" + jsDay + "/" + jsYear;
     queryDocNo = $('#search-docNo').val();
     queryDocType = $('#search-docType').val();
     queryDocTitle = $('#search-docTitle').val();
@@ -320,7 +320,7 @@ $(document).on('click', '#modal-upop-button', () => {
     }else{
       tabType = "user";
     }
-    var pageSize = page * 20;
+    const pageSize = page * 20;
     $.ajax({
       url: 'Documents/UpdateOP/',
       type: 'POST',
@@ -360,8 +360,8 @@ $(document).on('click', '#modal-editEmp-button', () => {
     }else{
       tabType = "user";
     }
-    var pageSize = page * 20;
-    var token = $('input[name="__RequestVerificationToken"]').val();
+    const pageSize = page * 20;
+    const token = $('input[name="__RequestVerificationToken"]').val();
     $.ajax({
       url: 'Documents/UpdateEmployee/',
       type: 'POST',
@@ -396,12 +396,12 @@ $(document).on('click', '#modal-editEmp-button', () => {
 // send method post to update data
 $(document).on('click', '#modal-sub-button', () => {
   if(validateForm()){
-    var token = $('input[name="__RequestVerificationToken"]').val();
-    var dateSplit = $('#endDoc').val().split('/');
-    var jsDay = dateSplit[0];
-    var jsMonth = dateSplit[1];
-    var jsYear = dateSplit[2];
-    var conJSDate = jsMonth + "/" + jsDay + "/" + jsYear;
+    const token = $('input[name="__RequestVerificationToken"]').val();
+    const dateSplit = $('#endDoc').val().split('/');
+    const jsDay = dateSplit[0];
+    const jsMonth = dateSplit[1];
+    const jsYear = dateSplit[2];
+    const conJSDate = jsMonth + "/" + jsDay + "/" + jsYear;
     queryDocNo = $('#search-docNo').val();
     queryDocType = $('#search-docType').val();
     queryDocTitle = $('#search-docTitle').val();
@@ -412,7 +412,7 @@ $(document).on('click', '#modal-sub-button', () => {
     }else{
       tabType = "user";
     }
-    var pageSize = page * 20;
+    const pageSize = page * 20;
     $.ajax({
       url: 'Documents/UpdateEndDate/',
       type: 'POST',
@@ -452,8 +452,8 @@ $(document).on('click', '#modal-delete-button', () => {
   }else{
     tabType = "user";
   }
-  var pageSize = page * 20;
-  var token = $('input[name="__RequestVerificationToken"]').val();
+  const pageSize = page * 20;
+  const token = $('input[name="__RequestVerificationToken"]').val();
   $.ajax({
     url: '/Documents/Delete/',
     type: 'POST',
@@ -497,11 +497,11 @@ $(document).on('change', '#selectJob', function() {
 
 // validate Operation edit form
 function validateForm() {
-  var datePattern = /^(0?[1-9]|[12][0-9]|3[01])[\/](0?[1-9]|[1][012])[\/]\d{4}$/;
-  var isValid = true;
+  const datePattern = /^(0?[1-9]|[12][0-9]|3[01])[\/](0?[1-9]|[1][012])[\/]\d{4}$/;
+  let isValid = true;
 
   $('#modal-form input').each(function() {
-    var spanElement = $(this).next().next();
+    const spanElement = $(this).next().next();
 
     if ($(this).val() == '' && !$(this).has("#remark")) {
       if (spanElement.length && spanElement.prop('tagName').toLowerCase() === 'span') {
@@ -513,7 +513,7 @@ function validateForm() {
     }
 
     if ($(this).attr('id') == 'opdate' || $(this).attr('id') == 'endDoc') {
-      var dateValue = $(this).val();
+      const dateValue = $(this).val();
       if (!datePattern.test(dateValue)) {
         $('.dateError').html('Format much be dd/mm/yyyy.<br />');
         isValid = false;
@@ -576,9 +576,24 @@ function cancelTrigger() {
 
 function disableSwipe(docId) {
   if (docId){
-    $(`#btnBehide-${docId.replace('/','\\/').replace('.','\\.')}`).removeClass('swipe');
-    $(`#btnFront-${docId.replace('/','\\/').replace('.','\\.')}`).removeClass('swipe');
-    $(`#${docId.replace('/','\\/').replace('.','\\.')}`).removeAttr('style');
+    $(`#btnBehide-${docId
+      .replace('/','\\/')
+      .replace('.','\\.')
+      .replace('(','\\(')
+      .replace(')','\\)')
+    }`).removeClass('swipe');
+    $(`#btnFront-${docId
+      .replace('/','\\/')
+      .replace('.','\\.')
+      .replace('(','\\(')
+      .replace(')','\\)')
+    }`).removeClass('swipe');
+    $(`#${docId
+      .replace('/','\\/')
+      .replace('.','\\.')
+      .replace('(','\\(')
+      .replace(')','\\)')
+    }`).removeAttr('style');
   }
 }
 
@@ -660,8 +675,8 @@ $(document).on('click', '#ex-excel', function() {
     },
     success: function (data) {
       hideLoadingScreen();
-      var a = document.createElement('a');
-      var url = window.URL.createObjectURL(data);
+      const a = document.createElement('a');
+      const url = window.URL.createObjectURL(data);
       a.href = url;
       a.download = 'document_tracking.xlsx';
       a.style.display = 'none';
@@ -682,12 +697,12 @@ $(document).on('click', '#im-excel', function() {
 })
 
 function selectFile() {
-  var fileInput = document.createElement('input');
+  const fileInput = document.createElement('input');
   fileInput.type = 'file';
   fileInput.accept = '.xlsx, .xls';
   fileInput.style.display = 'none';
   fileInput.addEventListener('change', function(event) {
-    var selectedFile = event.target.files[0];
+    const selectedFile = event.target.files[0];
     importFile(selectedFile);
   });
 
@@ -698,7 +713,7 @@ function selectFile() {
 function importFile(file) {
   if (file) {
     showLoadingScreen();
-    var formData = new FormData();
+    const formData = new FormData();
     formData.append('file', file);
     $.ajax({
       url: '/Documents/ImportExcel',
@@ -729,15 +744,15 @@ $(window).on('resize', function() {
 })
 
 function isContScrollAtBottom() {
-  var scrollTop = $('.container-wrapper').scrollTop();
-  var pageYOffset = $('.container-wrapper').offset().top;
-  var scrollHeight = $('.container-wrapper').prop('scrollHeight');
+  const scrollTop = $('.container-wrapper').scrollTop();
+  const pageYOffset = $('.container-wrapper').offset().top;
+  const scrollHeight = $('.container-wrapper').prop('scrollHeight');
 
   return (scrollTop + pageYOffset) >= scrollHeight;
 }
 
 $('.container-wrapper').scroll(function() {
-  var loadSkip = page * 20;
+  const loadSkip = page * 20;
   if (eleOverflow === 'scroll' && isContScrollAtBottom() && isLoadData && !isEndOfData) {
     isLoadData = false;
     $.ajax({
@@ -754,7 +769,7 @@ $('.container-wrapper').scroll(function() {
       },
       success: function(data) {
         if (!data.includes("Search Not Found")) {
-          var sortRow =document.getElementById('sort-row');
+          const sortRow =document.getElementById('sort-row');
           sortRow.insertAdjacentHTML('beforeEnd', data);
           initialBuddhist();
           floatingBtn.setAttribute('disabled', true);
@@ -775,9 +790,9 @@ $('.container-wrapper').scroll(function() {
 })
 
 window.addEventListener('scroll', function() {
-  var header = $('.stick-header');
-  var scrollTop = $(this.window).scrollTop();
-  var headerTop = header.offset().top;
+  const header = $('.stick-header');
+  const scrollTop = $(this.window).scrollTop();
+  const headerTop = header.offset().top;
   if (headerTop === scrollTop) {
     header.css('border-radius', '0 0 0 0');
     header.css('transform', 'scaleX(1.04)');
@@ -786,7 +801,7 @@ window.addEventListener('scroll', function() {
     header.css('border-radius', '15px 15px 0 0');
     header.css('transform', 'scaleX(1.00)')
   }
-  var loadSkip = page * 20;
+  const loadSkip = page * 20;
   if (eleOverflow === 'visible' && isWinScrollAtBottom() && isLoadData && !isEndOfData) {
     $.ajax({
       url: 'Documents/Index',
@@ -802,7 +817,7 @@ window.addEventListener('scroll', function() {
       },
       success: function(data) {
         if (!data.includes("Search Not Found")) {
-          var sortRow =document.getElementById('sort-row');
+          const sortRow =document.getElementById('sort-row');
           sortRow.insertAdjacentHTML('beforeEnd', data);
           initialBuddhist();
           floatingBtn.setAttribute('disabled', true);
@@ -822,16 +837,22 @@ function reExpandElement(id) {
     '#' + id
     .replace('/','\\/')
     .replace('.','\\.')
+    .replace('(','\\(')
+    .replace(')','\\)')
   ).parent().addClass('active');
   expandElement = $(
     '#sub-' + id
     .replace('/','\\/')
     .replace('.','\\.')
+    .replace('(','\\(')
+    .replace(')','\\)')
   ).addClass('expand');
   footerElement = $(
     '#sub-' + id
     .replace('/','\\/')
     .replace('.','\\.')
+    .replace('(','\\(')
+    .replace(')','\\)')
   ).next().addClass('row-footer');
 }
 
@@ -841,26 +862,6 @@ const annoModalBody = document.getElementById("anno-modal-body");
 $(document).on('click', '#clear-docd-btn', () => {
   modal.classList.add('display');
 });
-
-// // $(document).on('click', '#modal-accept-button', function() {
-// //   showLoadingScreen();
-// //   modal.classList.add('display');
-// //   $.ajax({
-// //     url: 'Employees/ClearEmployees',
-// //     type: 'POST',
-// //     success: function(data) {
-// //       hideLoadingScreen();
-// //       $('#document-table').html(data.html);
-// //       if (data.hasDelete) {
-// //         annoModalBody.innerHTML = "Completely clear employee is non document.";
-// //         annoModal.classList.add('display');
-// //       }else {
-// //         annoModalBody.innerHTML = "Don't have any employees are non document was clear.";
-// //         annoModal.classList.add('display');
-// //       }
-// //     }
-// //   })
-// // });
 
 window.onclick = function(event) {
   if (event.target == annoModal)

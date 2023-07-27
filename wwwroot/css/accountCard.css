@@ -216,8 +216,8 @@ input::-ms-clear {
 
 @media screen and (min-width: 1000px) {
   .container-card {
-    width: 80%;
-    height: 100%;
+    width: 70%;
+    height: 70%;
     display: flex;
     background-color: rgb(251 221 221);
     background-image: none;
@@ -255,7 +255,7 @@ input::-ms-clear {
   .container-card {
     top: 45%;
     width: 65%;
-    max-height: 340px;
+    max-height: 450px;
   }
 }
 

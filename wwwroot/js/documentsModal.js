@@ -12,6 +12,7 @@ $(document).on('click', '#modal-close-button', function() {
 })
 
 window.onclick = function(event) {
+  console.log(event)
   if (event.target == modal)
   {
     modal.classList.remove("display");

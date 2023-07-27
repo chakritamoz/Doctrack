@@ -95,6 +95,7 @@ namespace Doctrack.Controllers
     [AuthenticationPrivilege]
     public async Task<IActionResult> Login(string? username, string? password)
     {
+      bool flagError = false;
       
       if (_context.Accounts == null)
       {
@@ -103,16 +104,23 @@ namespace Doctrack.Controllers
 
       if (username == null)
       {
+        flagError = true;
         ViewData["userError"] = "Please enter username.";
       }
 
+      ViewData["username"] = username;
+      
       if (password == null)
       {
+        flagError = true;
         ViewData["passError"] = "Please enter password.";
       }
       
+      if (flagError)
+      {
+        return View();
+      }
 
-      ViewData["username"] = username;
 
       var user =  await _context.Accounts
         .Include(u => u.Role)

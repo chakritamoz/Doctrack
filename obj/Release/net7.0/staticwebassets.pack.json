@@ -29,6 +29,10 @@
       "PackagePath": "staticwebassets\\css\\index.css"
     },
     {
+      "Id": "D:\\Doctrack\\wwwroot\\css\\loading.css",
+      "PackagePath": "staticwebassets\\css\\loading.css"
+    },
+    {
       "Id": "D:\\Doctrack\\wwwroot\\css\\modal.css",
       "PackagePath": "staticwebassets\\css\\modal.css"
     },
@@ -59,6 +63,10 @@
     {
       "Id": "D:\\Doctrack\\wwwroot\\js\\documentsModal.js",
       "PackagePath": "staticwebassets\\js\\documentsModal.js"
+    },
+    {
+      "Id": "D:\\Doctrack\\wwwroot\\js\\employeesIndex.js",
+      "PackagePath": "staticwebassets\\js\\employeesIndex.js"
     },
     {
       "Id": "D:\\Doctrack\\wwwroot\\js\\partialDocument.js",

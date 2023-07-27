@@ -46,12 +46,19 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 16px;
+  padding-bottom: 16px;
   border-bottom: 1px solid #dee2e6;
 }
 
 .modal-body {
-  display: block;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+#modal-form {
+  width: 100%;
 }
 
 #modal-form span {
@@ -68,13 +75,17 @@
 #modal-form input,
 #modal-form label,
 #modal-form select,
-#modal-form p,
 #modal-form span {
   position: relative;
   width: 50%;
   left: 50%;
   transform: translateX(-50%);
   margin-bottom: 5px;
+  color: rgb(0, 0, 0);
+}
+
+#modal-body p:last-child {
+  margin-bottom: 0 !important;
 }
 
 #modal-form-del {
@@ -103,4 +114,10 @@
   justify-content: center;
   align-items: center;
   width: 20%;
+}
+
+@media screen and (min-width: 1100px) {
+  .modal-content {
+    width: 38%;
+  }
 }

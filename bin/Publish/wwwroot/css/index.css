@@ -69,6 +69,11 @@ h2 {
   transition: transform .3s, box-shadow .3s ease-out;
 }
 
+#del-emp-icon.select,
+#edit-emp-icon.select{
+  cursor: pointer;
+}
+
 .main-row {
   -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* IE 10 and IE 11 */
@@ -301,7 +306,7 @@ h2 {
   align-items: center;
 }
 
-.ex-im-btn {
+.ex-btn {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -314,7 +319,7 @@ h2 {
   cursor: pointer;
 }
 
-.ex-im-btn:hover {
+.ex-btn:hover {
   background-color: #2e6962;
 }
 
